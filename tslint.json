@@ -120,13 +120,13 @@
     "directive-selector": [
       true,
       "attribute",
-      "app",
+      "cart",
       "camelCase"
     ],
     "component-selector": [
       true,
       "element",
-      "app",
+      "cart",
       "kebab-case"
     ],
     "no-output-on-prefix": true,

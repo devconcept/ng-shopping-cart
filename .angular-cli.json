@@ -6,7 +6,7 @@
   "apps": [
     {
       "root": "demo",
-      "outDir": "dist",
+      "outDir": "demo-dist",
       "assets": [
         "assets",
         "favicon.ico"
@@ -17,7 +17,7 @@
       "test": "test.ts",
       "tsconfig": "tsconfig.app.json",
       "testTsconfig": "tsconfig.spec.json",
-      "prefix": "app",
+      "prefix": "cart",
       "styles": [
         "styles.scss"
       ],
@@ -55,6 +55,7 @@
   },
   "defaults": {
     "styleExt": "scss",
-    "component": {}
+    "component": {
+    }
   }
 }

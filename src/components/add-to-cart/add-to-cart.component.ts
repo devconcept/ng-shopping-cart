@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 
 @Component({
-  selector: 'app-add-to-cart-demo',
+  selector: 'add-to-cart', // tslint:disable-line component-selector
   templateUrl: './add-to-cart.component.html',
   styleUrls: ['./add-to-cart.component.scss']
 })
