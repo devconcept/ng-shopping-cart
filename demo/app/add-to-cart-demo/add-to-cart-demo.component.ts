@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { AddToCartType } from '../../../src/types/add-to-cart-type';
 
 @Component({
   selector: 'cart-add-demo',
@@ -6,10 +7,19 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./add-to-cart-demo.component.scss']
 })
 export class AddToCartDemoComponent implements OnInit {
+  editor = 'button';
+  editorTypes: AddToCartType[] = ['button', 'text', 'number', 'dropdown'];
+  position = 'left';
+  positions: string[] = ['left', 'right', 'above', 'below'];
 
-  constructor() { }
+  constructor() {
+  }
 
   ngOnInit() {
+  }
+
+  addToCart() {
+    console.log('clicked');
   }
 
 }

@@ -1,0 +1,11 @@
+@import "variables";
+
+input, select {
+  border: solid 1px $control-border-color;
+  border-radius: 3px;
+  padding: 3px 5px;
+}
+
+select option {
+  min-height: 1em;
+}

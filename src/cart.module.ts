@@ -5,10 +5,12 @@ import { NgModule } from '@angular/core';
 import { AddToCartComponent } from './components/add-to-cart/add-to-cart.component';
 import { CartCheckoutComponent } from './components/cart-checkout/cart-checkout.component';
 import { CartSummaryComponent } from './components/cart-summary/cart-summary.component';
-
+import { DefaultCartService } from './services/default-cart-service';
+import { AddToCartEditorComponent } from './components/add-to-cart-editor/add-to-cart-editor.component';
 
 @NgModule({
   declarations: [
+    AddToCartEditorComponent,
     AddToCartComponent,
     CartCheckoutComponent,
     CartSummaryComponent,
@@ -17,11 +19,12 @@ import { CartSummaryComponent } from './components/cart-summary/cart-summary.com
     BrowserModule,
   ],
   exports: [
+    AddToCartEditorComponent,
     AddToCartComponent,
     CartCheckoutComponent,
     CartSummaryComponent,
   ],
-  providers: [],
+  providers: [DefaultCartService],
 })
 export class CartModule {
 }

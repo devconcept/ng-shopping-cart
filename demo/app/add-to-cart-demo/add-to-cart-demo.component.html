@@ -1,3 +1,17 @@
-<p>
-  <add-to-cart></add-to-cart>
-</p>
+<div class="panel">
+  <div class="settings">
+    <div class="input-group">
+      <label for="addToCartType">Type:</label>
+      <select id="addToCartType" [(ngModel)]="editor">
+        <option *ngFor="let editor of editorTypes" [value]="editor">{{editor|titlecase}}</option>
+      </select>
+    </div>
+    <div class="input-group">
+      <label for="addToCartPosition">Position:</label>
+      <select id="addToCartPosition" [(ngModel)]="position">
+        <option *ngFor="let position of positions" [value]="position">{{position|titlecase}}</option>
+      </select>
+    </div>
+  </div>
+  <add-to-cart (add)="addToCart()" [type]="editor" [position]="position"></add-to-cart>
+</div>

@@ -1,0 +1,36 @@
+.cart-container {
+  &::before, &::after {
+    display: table;
+    content: ' ';
+  }
+
+  &::after {
+    clear: both;
+  }
+
+  .cart-inline-item {
+    float: left;
+    margin: 0 5px;
+  }
+
+  .cart-inline-item:first-of-type {
+    margin-left: 0;
+  }
+
+  .cart-inline-item:last-of-type {
+    margin-right: 0;
+  }
+
+  .cart-block-item {
+    display: block;
+    margin: 5px 0;
+  }
+
+  .cart-block-item:first-of-type {
+    margin-top: 0;
+  }
+
+  .cart-block-item:last-of-type {
+    margin-bottom: 0;
+  }
+}

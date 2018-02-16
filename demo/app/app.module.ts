@@ -6,6 +6,8 @@ import { AppComponent } from './app.component';
 import { AddToCartDemoComponent } from './add-to-cart-demo/add-to-cart-demo.component';
 import { CartCheckoutDemoComponent } from './cart-checkout-demo/cart-checkout-demo.component';
 import { CartSummaryDemoComponent } from './cart-summary-demo/cart-summary-demo.component';
+import { CommonModule } from '@angular/common';
+import { FormsModule } from '@angular/forms';
 
 
 @NgModule({
@@ -17,6 +19,8 @@ import { CartSummaryDemoComponent } from './cart-summary-demo/cart-summary-demo.
   ],
   imports: [
     BrowserModule,
+    CommonModule,
+    FormsModule,
     CartModule,
   ],
   providers: [],

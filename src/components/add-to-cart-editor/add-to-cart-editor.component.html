@@ -1,0 +1,9 @@
+<ng-container *ngIf="type === 'dropdown'">
+  <select>
+    <option *ngFor="let item of dropdown" [value]="item.value">{{item.label}}</option>
+  </select>
+</ng-container>
+<ng-container *ngIf="type === 'number' || type === 'text'">
+  <input [type]="type">
+</ng-container>
+

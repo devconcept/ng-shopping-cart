@@ -1,3 +1,15 @@
-<p>
-  add-to-cart works!
-</p>
+<div class="cart-container">
+  <div [ngClass]="{'cart-inline-item': position === 'left', 'cart-block-item': position === 'above'}"
+       *ngIf="(position === 'left' || position === 'above') && type !== 'button'">
+    <add-to-cart-editor [type]="type" [dropdown]="dropdown"></add-to-cart-editor>
+  </div>
+  <div [ngClass]="{'cart-inline-item': position === 'left' || position === 'right', 'cart-block-item': position === 'above' || position === 'below'}">
+    <button type="button" [ngClass]="buttonClass" (click)="addClick($event)">
+      {{label}}
+    </button>
+  </div>
+  <div [ngClass]="{'cart-inline-item': position === 'right', 'cart-block-item': position === 'below'}"
+       *ngIf="(position === 'right' || position === 'below') && type !== 'button'">
+    <add-to-cart-editor [type]="type" [dropdown]="dropdown"></add-to-cart-editor>
+  </div>
+</div>
