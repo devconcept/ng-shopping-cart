@@ -1,4 +1,10 @@
-.cart-container {
+.add-to-cart {
+  display: inline-block;
+
+  .cart-button-container {
+    text-align: center;
+  }
+
   &::before, &::after {
     display: table;
     content: ' ';

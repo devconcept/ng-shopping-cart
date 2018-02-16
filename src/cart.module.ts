@@ -7,6 +7,7 @@ import { CartCheckoutComponent } from './components/cart-checkout/cart-checkout.
 import { CartSummaryComponent } from './components/cart-summary/cart-summary.component';
 import { DefaultCartService } from './services/default-cart-service';
 import { AddToCartEditorComponent } from './components/add-to-cart-editor/add-to-cart-editor.component';
+import { CartService } from './services/cart-service';
 
 @NgModule({
   declarations: [
@@ -24,7 +25,7 @@ import { AddToCartEditorComponent } from './components/add-to-cart-editor/add-to
     CartCheckoutComponent,
     CartSummaryComponent,
   ],
-  providers: [DefaultCartService],
+  providers: [{ provide: CartService, useClass: DefaultCartService }],
 })
 export class CartModule {
 }

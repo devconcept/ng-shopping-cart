@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { AddToCartType } from '../../../src/types/add-to-cart-type';
+import { AddToCartType } from '../../../src/types';
+import { AddToCartPosition } from '../../../src';
 
 @Component({
   selector: 'cart-add-demo',
@@ -10,7 +11,7 @@ export class AddToCartDemoComponent implements OnInit {
   editor = 'button';
   editorTypes: AddToCartType[] = ['button', 'text', 'number', 'dropdown'];
   position = 'left';
-  positions: string[] = ['left', 'right', 'above', 'below'];
+  positions: AddToCartPosition[] = ['left', 'right', 'top', 'bottom'];
 
   constructor() {
   }
@@ -18,8 +19,8 @@ export class AddToCartDemoComponent implements OnInit {
   ngOnInit() {
   }
 
-  addToCart() {
-    console.log('clicked');
+  addToCart(item) {
+    console.log('clicked', item);
   }
 
 }

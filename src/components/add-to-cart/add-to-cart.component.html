@@ -1,15 +1,16 @@
-<div class="cart-container">
-  <div [ngClass]="{'cart-inline-item': position === 'left', 'cart-block-item': position === 'above'}"
-       *ngIf="(position === 'left' || position === 'above') && type !== 'button'">
-    <add-to-cart-editor [type]="type" [dropdown]="dropdown"></add-to-cart-editor>
+<div class="add-to-cart">
+  <div [ngClass]="{'cart-inline-item left': position === 'left', 'cart-block-item top': position === 'top'}"
+       *ngIf="(position === 'left' || position === 'top') && type !== 'button'">
+    <add-to-cart-editor [type]="type" [dropdown]="dropdown" [(value)]="quantity"></add-to-cart-editor>
   </div>
-  <div [ngClass]="{'cart-inline-item': position === 'left' || position === 'right', 'cart-block-item': position === 'above' || position === 'below'}">
-    <button type="button" [ngClass]="buttonClass" (click)="addClick($event)">
+  <div class="cart-button-container"
+       [ngClass]="{'cart-inline-item': position === 'left' || position === 'right', 'cart-block-item': position === 'above' || position === 'below'}">
+    <button type="button" [ngClass]="buttonClass" (click)="addToCart($event)">
       {{label}}
     </button>
   </div>
-  <div [ngClass]="{'cart-inline-item': position === 'right', 'cart-block-item': position === 'below'}"
-       *ngIf="(position === 'right' || position === 'below') && type !== 'button'">
-    <add-to-cart-editor [type]="type" [dropdown]="dropdown"></add-to-cart-editor>
+  <div [ngClass]="{'cart-inline-item right': position === 'right', 'cart-block-item bottom': position === 'bottom'}"
+       *ngIf="(position === 'right' || position === 'bottom') && type !== 'button'">
+    <add-to-cart-editor [type]="type" [dropdown]="dropdown" [(value)]="quantity"></add-to-cart-editor>
   </div>
 </div>

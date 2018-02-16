@@ -1,19 +1,19 @@
 import { CartItem } from '../classes/cart-item';
 
 export abstract class CartService {
-  abstract getItem(id: any): CartItem;
+  public abstract getItem(id: any): CartItem;
 
-  abstract getItems(): CartItem[];
+  public abstract getItems(): CartItem[];
 
-  abstract transform(item: any): CartItem;
+  protected abstract transform(item: any): CartItem;
 
-  abstract addItem(item: any): CartItem;
+  public abstract addItem(item: any): CartItem;
 
-  abstract removeItem(id: any): void;
+  public abstract removeItem(id: any): void;
 
-  abstract itemCount(): number;
+  public abstract itemCount(): number;
 
-  abstract cost(): number;
+  public abstract cost(): number;
 
-  abstract totalCost(): number;
+  public abstract totalCost(): number;
 }

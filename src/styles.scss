@@ -1,7 +1,26 @@
-.add-to-cart {
-  color: #ffffff;
-  border: solid 1px lightgray;
+$input-border: #d3d3d3;
+$input-radius: 3px;
+$button-border: #d3d3d3;
+$add-to-cart-text: #ffffff;
+$add-to-cart-color: #4caf50;
+$add-to-cart-radius: 3px;
+
+.add-to-cart-button {
+  color: $add-to-cart-text;
+  border: solid 1px $button-border;
   padding: 6px;
-  border-radius: 3px;
-  background-color: #4caf50;
+  border-radius: $add-to-cart-radius;
+  background-color: $add-to-cart-color;
+}
+
+.add-to-cart-input {
+  padding: 6px;
+  border-radius: $input-radius;
+  border: solid 1px $input-border;
+}
+
+.add-to-cart-select {
+  padding: 6px;
+  border-radius: $input-radius;
+  border: solid 1px $input-border;
 }
