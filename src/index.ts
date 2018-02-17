@@ -2,6 +2,7 @@ import { AddToCartComponent } from './components/add-to-cart/add-to-cart.compone
 import { CartCheckoutComponent } from './components/cart-checkout/cart-checkout.component';
 import { CartSummaryComponent } from './components/cart-summary/cart-summary.component';
 import { AddToCartType, AddToCartPosition } from './types';
+import { CartModule } from './cart.module';
 
 export {
   AddToCartComponent,
@@ -9,5 +10,6 @@ export {
   CartSummaryComponent,
   AddToCartType,
   AddToCartPosition,
+  CartModule,
 };
 
