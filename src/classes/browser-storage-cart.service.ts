@@ -52,8 +52,27 @@ export class BrowserStorageCartService extends CartService {
     return this.readStorage().reduce((curr, i) => (curr + i.price * i.quantity), 0);
   }
 
-  totalCost(): number {
-    return this.cost();
+  clear(): void {
+    this.writeStorage([]);
   }
 
+  getShipping(): number {
+    return parseFloat(this.storage.getItem(this.storageKey + 'Shipping'));
+  }
+
+  setShipping(shipping: number): void {
+    this.storage.setItem(this.storageKey + 'Shipping', shipping.toString());
+  }
+
+  getTax(): number {
+    return parseFloat(this.storage.getItem(this.storageKey + 'Tax'));
+  }
+
+  setTax(tax: number): void {
+    this.storage.setItem(this.storageKey + 'Tax', tax.toString());
+  }
+
+  isEmpty(): boolean {
+    return this.readStorage().length === 0;
+  }
 }

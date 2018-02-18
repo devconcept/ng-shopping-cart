@@ -5,8 +5,8 @@ import { Injectable } from '@angular/core';
 @Injectable()
 export class MemoryCartService extends CartService {
   private _items: CartItem[] = [];
-  tax = 0;
-  shipping = 0;
+  private _tax = 0;
+  private _shipping = 0;
 
   public getItem(id: any): CartItem {
     return this._items.find(i => i.id === id);
@@ -44,7 +44,27 @@ export class MemoryCartService extends CartService {
     return this._items.reduce((curr, i) => (curr + i.price * i.quantity), 0);
   }
 
-  public totalCost(): number {
-    return this.cost() + this.tax + this.shipping;
+  public clear() {
+    this._items = [];
+  }
+
+  getShipping(): number {
+    return this._shipping;
+  }
+
+  setShipping(shipping: number): void {
+    this._shipping = shipping;
+  }
+
+  getTax(): number {
+    return this._tax;
+  }
+
+  setTax(tax: number): void {
+    this._tax = tax;
+  }
+
+  isEmpty(): boolean {
+    return this._items.length === 0;
   }
 }
