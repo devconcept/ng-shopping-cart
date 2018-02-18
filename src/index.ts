@@ -3,6 +3,8 @@ import { CartCheckoutComponent } from './components/cart-checkout/cart-checkout.
 import { CartSummaryComponent } from './components/cart-summary/cart-summary.component';
 import { AddToCartType, AddToCartPosition } from './types';
 import { CartModule } from './cart.module';
+import { CartService } from './services/cart.service';
+import { MemoryCartService } from './services/memory-cart.service';
 
 export {
   AddToCartComponent,
@@ -11,5 +13,7 @@ export {
   AddToCartType,
   AddToCartPosition,
   CartModule,
+  CartService,
+  MemoryCartService,
 };
 

@@ -5,9 +5,9 @@ import { NgModule } from '@angular/core';
 import { AddToCartComponent } from './components/add-to-cart/add-to-cart.component';
 import { CartCheckoutComponent } from './components/cart-checkout/cart-checkout.component';
 import { CartSummaryComponent } from './components/cart-summary/cart-summary.component';
-import { DefaultCartService } from './services/default-cart-service';
+import { MemoryCartService } from './services/memory-cart.service';
 import { AddToCartEditorComponent } from './components/add-to-cart-editor/add-to-cart-editor.component';
-import { CartService } from './services/cart-service';
+import { CartService } from './services/cart.service';
 
 @NgModule({
   declarations: [
@@ -25,7 +25,7 @@ import { CartService } from './services/cart-service';
     CartCheckoutComponent,
     CartSummaryComponent,
   ],
-  providers: [{ provide: CartService, useClass: DefaultCartService }],
+  providers: [{ provide: CartService, useClass: MemoryCartService }],
 })
 export class CartModule {
 }

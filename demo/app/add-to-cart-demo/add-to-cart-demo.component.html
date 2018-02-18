@@ -1,6 +1,17 @@
 <div class="panel">
   <div class="settings">
     <div class="input-group">
+      <label for="addToCartContents">Label:</label>
+      <select id="addToCartContents" [(ngModel)]="contents">
+        <option value="text">Text</option>
+        <option value="html">Html</option>
+      </select>
+    </div>
+    <div class="input-group" *ngIf="contents === 'text'">
+      <label for="addToCartLabel">Label:</label>
+      <input id="addToCartLabel" [(ngModel)]="label" type="text">
+    </div>
+    <div class="input-group">
       <label for="addToCartType">Type:</label>
       <select id="addToCartType" [(ngModel)]="editor">
         <option *ngFor="let editor of editorTypes" [value]="editor">{{editor|titlecase}}</option>
@@ -12,6 +23,25 @@
         <option *ngFor="let position of positions" [value]="position">{{position|titlecase}}</option>
       </select>
     </div>
+    <div class="input-group">
+      <label for="addToCartQuantity">Quantity:</label>
+      <input id="addToCartQuantity" [(ngModel)]="quantity" type="text">
+    </div>
   </div>
-  <add-to-cart (add)="addToCart($event)" [type]="editor" [position]="position"></add-to-cart>
+  <ng-container *ngIf="contents === 'text'">
+    <add-to-cart
+      (add)="addToCart($event)" [id]="cartItem.key" [name]="cartItem.description" [price]="cartItem.cost"
+      [type]="editor" [position]="position" [(quantity)]="quantity" [data]="cartItem.origin"
+      [label]="label || 'Add to cart'">
+    </add-to-cart>
+  </ng-container>
+  <ng-container *ngIf="contents === 'html'">
+    <add-to-cart
+      (add)="addToCart($event)" [id]="cartItem.key" [name]="cartItem.description" [price]="cartItem.cost"
+      [type]="editor" [position]="position" [(quantity)]="quantity" [data]="cartItem.origin">
+      <button type="button" class="custom-button">
+        Click to add
+      </button>
+    </add-to-cart>
+  </ng-container>
 </div>

@@ -5,9 +5,7 @@ export abstract class CartService {
 
   public abstract getItems(): CartItem[];
 
-  protected abstract transform(item: any): CartItem;
-
-  public abstract addItem(item: any): CartItem;
+  public abstract addItem(item: CartItem): void;
 
   public abstract removeItem(id: any): void;
 

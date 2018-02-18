@@ -14,7 +14,7 @@ export class AddToCartEditorComponent {
   @Output() valueChange = new EventEmitter<number>();
 
   changeValue(value: any) {
-    const val = parseFloat(value)
+    const val = parseFloat(value);
     this.valueChange.emit(Number.isNaN(val) ? 0 : val);
   }
 }
