@@ -20,16 +20,17 @@ export class MemoryCartService extends CartService {
     return this._items.length;
   }
 
-  public addItem(item: any): CartItem {
-    const newItem = item;
-    const foundIdx = this._items.findIndex(i => i.id === newItem.id);
+  public addItem(id: any, name: string, price: number, quantity: number, data: any): CartItem {
+    const foundIdx = this._items.findIndex(i => i.id === id);
+    let item;
+    item = new CartItem(id, name, price, quantity, data);
     if (foundIdx === -1) {
-      this._items.push(newItem);
+      this._items.push(item);
     } else {
-      this._items[foundIdx] = newItem;
+      this._items[foundIdx] = item;
     }
 
-    return newItem;
+    return item;
   }
 
   public removeItem(id: any): void {

@@ -3,51 +3,53 @@ import { CartItem } from './cart-item';
 
 export class BrowserStorageCartService extends CartService {
   protected storage: Storage;
-  protected storageKey: 'ngShoppingCart';
+  protected storageKey: 'NgShoppingCart';
 
-  private readData(): CartItem[] {
+  private readStorage(): CartItem[] {
     return JSON.parse(this.storage.getItem(this.storageKey));
   }
 
-  private writeData(data: CartItem[]): void {
-    this.storage.setItem(this.storageKey, JSON.stringify(data));
+  private writeStorage(items: CartItem[]): void {
+    this.storage.setItem(this.storageKey, JSON.stringify(items));
   }
 
   getItem(id: any): CartItem {
-    const data = this.readData();
-    return data.find(i => i.id === id);
+    const items = this.readStorage();
+    return items.find(i => i.id === id);
   }
 
   getItems(): CartItem[] {
-    return this.readData();
+    return this.readStorage();
   }
 
-  addItem(item: CartItem): void {
-    const data = this.readData();
-    const idx = data.findIndex(i => i.id === item.id);
+  addItem(id: any, name: string, price: number, quantity: number, data: any): CartItem {
+    const items = this.readStorage();
+    const idx = items.findIndex(i => i.id === id);
+    const item = new CartItem(id, name, price, quantity, data);
     if (idx !== -1) {
-      data[idx] = item;
+      items[idx] = item;
     } else {
-      data.push(item);
+      items.push(item);
     }
-    this.writeData(data);
+    this.writeStorage(items);
+    return item;
   }
 
   removeItem(id: any): void {
-    const data = this.readData();
-    const idx = data.findIndex(i => i.id === id);
+    const items = this.readStorage();
+    const idx = items.findIndex(i => i.id === id);
     if (idx !== -1) {
-      data.splice(idx, 1);
-      this.writeData(data);
+      items.splice(idx, 1);
+      this.writeStorage(items);
     }
   }
 
   itemCount(): number {
-    return this.readData().length;
+    return this.readStorage().length;
   }
 
   cost(): number {
-    return this.readData().reduce((curr, i) => (curr + i.price * i.quantity), 0);
+    return this.readStorage().reduce((curr, i) => (curr + i.price * i.quantity), 0);
   }
 
   totalCost(): number {

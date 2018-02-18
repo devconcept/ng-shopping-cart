@@ -64,8 +64,7 @@ export class AddToCartComponent implements OnChanges {
   addToCart(evt) {
     evt.stopPropagation();
     const quantity = parseFloat(this._quantity.toString());
-    const item = new CartItem(this.id, this.name, this.price, quantity, this.data);
-    this.cartService.addItem(item);
+    const item = this.cartService.addItem(this.id, this.name, this.price, quantity, this.data);
     this.add.emit(item);
   }
 
