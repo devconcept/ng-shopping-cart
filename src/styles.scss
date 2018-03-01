@@ -1,9 +1,5 @@
-$input-border: #d3d3d3;
-$input-radius: 3px;
-$button-border: #d3d3d3;
-$add-to-cart-text: #ffffff;
-$add-to-cart-color: #4caf50;
-$add-to-cart-radius: 3px;
+@import "variables";
+@import "mixins";
 
 /* Add to cart */
 .add-to-cart-button {
@@ -29,15 +25,8 @@ $add-to-cart-radius: 3px;
 /* Cart summary*/
 .cart-summary {
   display: inline-block;
-
-  &:before, &:after {
-    content: ' ';
-    display: table;
-  }
-
-  &:after {
-    clear: both;
-  }
+  @include contain-margins();
+  @include clearfix();
 
   .cart-summary-icon {
     float: left;

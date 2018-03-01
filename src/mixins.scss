@@ -1,0 +1,12 @@
+@mixin contain-margins() {
+  &:before, &:after {
+    content: ' ';
+    display: table;
+  }
+}
+
+@mixin clearfix() {
+  &:after {
+    clear: both;
+  }
+}
