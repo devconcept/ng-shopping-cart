@@ -5,6 +5,7 @@ $add-to-cart-text: #ffffff;
 $add-to-cart-color: #4caf50;
 $add-to-cart-radius: 3px;
 
+/* Add to cart */
 .add-to-cart-button {
   color: $add-to-cart-text;
   border: solid 1px $button-border;
@@ -23,4 +24,28 @@ $add-to-cart-radius: 3px;
   padding: 6px;
   border-radius: $input-radius;
   border: solid 1px $input-border;
+}
+
+/* Cart summary*/
+.cart-summary {
+  display: inline-block;
+
+  &:before, &:after {
+    content: ' ';
+    display: table;
+  }
+
+  &:after {
+    clear: both;
+  }
+
+  .cart-summary-icon {
+    float: left;
+    width: 32px;
+  }
+
+  .cart-summary-contents {
+    padding-left: 5px;
+    float: left;
+  }
 }

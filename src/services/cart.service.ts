@@ -1,6 +1,11 @@
 import { CartItem } from '../classes/cart-item';
+import { EventEmitter } from '@angular/core';
 
 export abstract class CartService {
+  public onItemAdded: EventEmitter<CartItem> = new EventEmitter<CartItem>();
+  public onItemRemoved: EventEmitter<CartItem> = new EventEmitter<CartItem>();
+  public onItemsChanged: EventEmitter<number> = new EventEmitter<number>();
+
   public abstract getItem(id: any): CartItem;
 
   public abstract getItems(): CartItem[];

@@ -32,6 +32,8 @@ export class BrowserStorageCartService extends CartService {
       items.push(item);
     }
     this.writeStorage(items);
+    this.onItemAdded.emit(item);
+    this.onItemsChanged.emit(items.length);
     return item;
   }
 
@@ -39,8 +41,10 @@ export class BrowserStorageCartService extends CartService {
     const items = this.readStorage();
     const idx = items.findIndex(i => i.id === id);
     if (idx !== -1) {
-      items.splice(idx, 1);
+      const removed = items.splice(idx, 1);
       this.writeStorage(items);
+      this.onItemRemoved.emit(removed[0]);
+      this.onItemsChanged.emit(items.length);
     }
   }
 

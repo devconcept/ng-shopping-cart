@@ -29,14 +29,17 @@ export class MemoryCartService extends CartService {
     } else {
       this._items[foundIdx] = item;
     }
-
+    this.onItemAdded.emit(item);
+    this.onItemsChanged.emit(this._items.length);
     return item;
   }
 
   public removeItem(id: any): void {
     const idx = this._items.findIndex(i => i.id === id);
     if (idx !== -1) {
-      this._items.splice(idx, 1);
+      const removed = this._items.splice(idx, 1);
+      this.onItemRemoved.emit(removed[0]);
+      this.onItemsChanged.emit(this._items.length);
     }
   }
 
