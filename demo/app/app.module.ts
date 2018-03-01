@@ -8,6 +8,7 @@ import { CartCheckoutDemoComponent } from './cart-checkout-demo/cart-checkout-de
 import { CartSummaryDemoComponent } from './cart-summary-demo/cart-summary-demo.component';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
+import { CartViewDemoComponent } from './cart-view-demo/cart-view-demo.component';
 
 @NgModule({
   declarations: [
@@ -15,6 +16,7 @@ import { FormsModule } from '@angular/forms';
     AddToCartDemoComponent,
     CartCheckoutDemoComponent,
     CartSummaryDemoComponent,
+    CartViewDemoComponent,
   ],
   imports: [
     BrowserModule,

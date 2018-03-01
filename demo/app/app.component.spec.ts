@@ -7,6 +7,8 @@ import { FormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 import { AddToCartComponent, CartCheckoutComponent, CartService, CartSummaryComponent, MemoryCartService } from '../../src';
 import { AddToCartEditorComponent } from '../../src/components/add-to-cart-editor/add-to-cart-editor.component';
+import { CartViewDemoComponent } from './cart-view-demo/cart-view-demo.component';
+import { CartViewComponent } from '../../src/components/cart-view/cart-view.component';
 describe('AppComponent', () => {
   beforeEach(async(() => {
     TestBed.configureTestingModule({
@@ -19,6 +21,8 @@ describe('AppComponent', () => {
         CartSummaryComponent,
         CartCheckoutDemoComponent,
         CartCheckoutComponent,
+        CartViewDemoComponent,
+        CartViewComponent
       ],
       imports: [
         CommonModule,

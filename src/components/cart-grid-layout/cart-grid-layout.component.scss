@@ -1,0 +1,11 @@
+@import "../../mixins";
+
+.cart-grid-layout {
+  @include contain-margins();
+  @include clearfix();
+
+  & > .layout-item-container {
+    float: left;
+    position: relative;
+  }
+}
