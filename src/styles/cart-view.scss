@@ -1,0 +1,9 @@
+@import 'variables';
+
+.cart-view-empty {
+  color: $cart-view-empty-text;
+  background-color: $cart-view-empty-color;
+  text-align: center;
+  padding: 32px;
+  padding: 2rem;
+}
