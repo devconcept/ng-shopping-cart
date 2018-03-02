@@ -1,3 +1,8 @@
-<p>
-  cart-view works!
-</p>
+<ng-container *ngIf="!items || !items.length" class="cart-view-empty">
+  Your cart is empty
+</ng-container>
+<ng-container *ngIf="items && items.length">
+  <cart-list-layout [items]="items">
+  </cart-list-layout>
+</ng-container>
+

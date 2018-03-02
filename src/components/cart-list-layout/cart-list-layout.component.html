@@ -1,3 +1,30 @@
-<p>
-  cart-list-layout works!
-</p>
+<div class="cart-list-layout">
+  <div class="cart-list-header">
+    <div class="cart-list-header-item cart-list-name-header">
+      Name
+    </div>
+    <div class="cart-list-header-item cart-list-quantity-header">
+      Quantity
+    </div>
+    <div class="cart-list-header-item cart-list-price-header">
+      Price
+    </div>
+    <div class="cart-list-header-item cart-list-total-header">
+      Total
+    </div>
+  </div>
+  <div *ngFor="let cartItem of items" class="cart-layout-container">
+    <div class="cart-list-item cart-list-name-item">
+      {{cartItem.name}}
+    </div>
+    <div class="cart-list-item cart-list-quantity-item">
+      {{cartItem.quantity}}
+    </div>
+    <div class="cart-list-item cart-list-currency-item">
+      {{cartItem.price | currency}}
+    </div>
+    <div class="cart-list-item cart-list-total-item">
+      {{cartItem.price * cartItem.quantity | currency}}
+    </div>
+  </div>
+</div>

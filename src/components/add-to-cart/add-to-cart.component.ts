@@ -7,7 +7,6 @@ import { CartItem } from '../../classes/cart-item';
 @Component({
   selector: 'add-to-cart', // tslint:disable-line component-selector
   templateUrl: './add-to-cart.component.html',
-  styleUrls: ['./add-to-cart.component.scss']
 })
 export class AddToCartComponent implements OnChanges {
   private _quantity = 1;

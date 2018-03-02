@@ -5,7 +5,6 @@ import {AddToCartType} from '../../types';
 @Component({
   selector: 'add-to-cart-editor', // tslint:disable-line component-selector
   templateUrl: './add-to-cart-editor.component.html',
-  styleUrls: ['./add-to-cart-editor.component.scss']
 })
 export class AddToCartEditorComponent {
   @Input() type: AddToCartType;

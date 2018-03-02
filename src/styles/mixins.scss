@@ -10,3 +10,8 @@
     clear: both;
   }
 }
+
+@mixin make-row() {
+  @include contain-margins();
+  @include clearfix()
+}

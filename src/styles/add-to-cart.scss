@@ -1,5 +1,4 @@
 @import "variables";
-@import "mixins";
 
 /* Add to cart */
 .add-to-cart-button {
@@ -20,21 +19,4 @@
   padding: 6px;
   border-radius: $input-radius;
   border: solid 1px $input-border;
-}
-
-/* Cart summary*/
-.cart-summary {
-  display: inline-block;
-  @include contain-margins();
-  @include clearfix();
-
-  .cart-summary-icon {
-    float: left;
-    width: 32px;
-  }
-
-  .cart-summary-contents {
-    padding-left: 5px;
-    float: left;
-  }
 }
