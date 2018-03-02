@@ -52,6 +52,10 @@ export class BrowserStorageCartService extends CartService {
     return this.readStorage().length;
   }
 
+  entries(): number {
+    return this.readStorage().reduce((curr, i) => (curr + i.quantity), 0);
+  }
+
   cost(): number {
     return this.readStorage().reduce((curr, i) => (curr + i.price * i.quantity), 0);
   }
@@ -68,11 +72,12 @@ export class BrowserStorageCartService extends CartService {
     this.storage.setItem(this.storageKey + 'Shipping', shipping.toString());
   }
 
-  getTax(): number {
-    return parseFloat(this.storage.getItem(this.storageKey + 'Tax'));
+  getTaxRate(): number {
+    const value = this.storage.getItem(this.storageKey + 'Tax');
+    return value ? parseFloat(value) : 0;
   }
 
-  setTax(tax: number): void {
+  setTaxRate(tax: number): void {
     this.storage.setItem(this.storageKey + 'Tax', tax.toString());
   }
 

@@ -16,19 +16,25 @@ export abstract class CartService {
 
   public abstract itemCount(): number;
 
+  public abstract entries(): number;
+
   public abstract cost(): number;
 
   public abstract clear(): void;
+
+  public abstract isEmpty(): boolean;
 
   public abstract getShipping(): number;
 
   public abstract setShipping(shipping: number): void;
 
-  public abstract getTax(): number;
+  public abstract getTaxRate(): number;
 
-  public abstract setTax(tax: number): void;
+  public abstract setTaxRate(tax: number): void;
 
-  public abstract isEmpty(): boolean;
+  getTax(): number {
+    return this.cost() / 100 * this.getTaxRate();
+  }
 
   public totalCost(): number {
     return this.cost() + this.getTax() + this.getShipping();

@@ -5,7 +5,6 @@ import { AddToCartComponent } from './components/add-to-cart/add-to-cart.compone
 import { AddToCartEditorComponent } from './components/add-to-cart-editor/add-to-cart-editor.component';
 import { CartCheckoutComponent } from './components/cart-checkout/cart-checkout.component';
 import { CartSummaryComponent } from './components/cart-summary/cart-summary.component';
-import { CartListLayoutComponent } from './components/cart-list-layout/cart-list-layout.component';
 import { CartGridLayoutComponent } from './components/cart-grid-layout/cart-grid-layout.component';
 import { CartViewComponent } from './components/cart-view/cart-view.component';
 import { MemoryCartService } from './services/memory-cart.service';
@@ -17,7 +16,6 @@ import { CartService } from './services/cart.service';
     AddToCartComponent,
     CartCheckoutComponent,
     CartSummaryComponent,
-    CartListLayoutComponent,
     CartGridLayoutComponent,
     CartViewComponent,
   ],
@@ -29,7 +27,6 @@ import { CartService } from './services/cart.service';
     AddToCartComponent,
     CartCheckoutComponent,
     CartSummaryComponent,
-    CartListLayoutComponent,
     CartGridLayoutComponent,
     CartViewComponent,
   ],

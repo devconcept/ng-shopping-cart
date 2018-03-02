@@ -5,7 +5,7 @@ import { Injectable } from '@angular/core';
 @Injectable()
 export class MemoryCartService extends CartService {
   private _items: CartItem[] = [];
-  private _tax = 0;
+  private _taxRate = 0;
   private _shipping = 0;
 
   public getItem(id: any): CartItem {
@@ -18,6 +18,10 @@ export class MemoryCartService extends CartService {
 
   public itemCount(): number {
     return this._items.length;
+  }
+
+  entries(): number {
+    return this._items.reduce((curr, i) => (curr + i.quantity), 0);
   }
 
   public addItem(id: any, name: string, price: number, quantity: number, data: any): CartItem {
@@ -59,12 +63,12 @@ export class MemoryCartService extends CartService {
     this._shipping = shipping;
   }
 
-  getTax(): number {
-    return this._tax;
+  getTaxRate(): number {
+    return this._taxRate;
   }
 
-  setTax(tax: number): void {
-    this._tax = tax;
+  setTaxRate(taxRate: number): void {
+    this._taxRate = taxRate;
   }
 
   isEmpty(): boolean {

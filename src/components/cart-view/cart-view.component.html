@@ -1,8 +1,70 @@
-<div *ngIf="!items || !items.length" class="cart-view-empty">
+<div *ngIf="empty" class="cart-view-empty">
   Your cart is empty
 </div>
-<div *ngIf="items && items.length" class="cart-view" [ngClass]="display">
-  <cart-list-layout [items]="items">
-  </cart-list-layout>
+<div *ngIf="!empty" class="cart-view" [ngClass]="display">
+  <div class="cart-list-view">
+    <div class="cart-list-header">
+      <div class="cart-list-header-item cart-list-name-header">
+        Name
+      </div>
+      <div class="cart-list-header-item cart-list-quantity-header">
+        Quantity
+      </div>
+      <div class="cart-list-header-item cart-list-price-header">
+        Price
+      </div>
+      <div class="cart-list-header-item cart-list-total-header">
+        Total
+      </div>
+    </div>
+    <div *ngFor="let cartItem of items" class="cart-list-row">
+      <div class="cart-list-item cart-list-name-item">
+        {{cartItem.name}}
+      </div>
+      <div class="cart-list-item cart-list-quantity-item">
+        <button type="button" class="cart-increase-button" (click)="increase(cartItem)">
+          +
+        </button>
+        {{cartItem.quantity}}
+        <button type="button" class="cart-decrease-button" (click)="decrease(cartItem)"
+                [disabled]="cartItem.quantity <= 1">
+          -
+        </button>
+      </div>
+      <div class="cart-list-item cart-list-currency-item">
+        {{cartItem.price | currency}}
+      </div>
+      <div class="cart-list-item cart-list-total-item">
+        {{cartItem.price * cartItem.quantity | currency}}
+      </div>
+    </div>
+    <div class="cart-list-footer">
+      <div class="cart-list-summary">
+        <div class="cart-empty-summary"></div>
+        <div class="cart-empty-summary"></div>
+        <div class="cart-empty-summary"></div>
+        <div class="cart-tax-summary">
+          Tax: ({{taxRate}}%) {{tax | currency}}
+        </div>
+      </div>
+      <div class="cart-list-summary">
+        <div class="cart-empty-summary"></div>
+        <div class="cart-empty-summary"></div>
+        <div class="cart-empty-summary"></div>
+        <div class="cart-shipping-summary">
+          Shipping: {{shipping | currency}}
+        </div>
+      </div>
+      <div class="cart-list-summary">
+        <div class="cart-empty-summary"></div>
+        <div class="cart-empty-summary"></div>
+        <div class="cart-empty-summary"></div>
+        <div class="cart-total-summary">
+          Total: {{cost | currency}}
+        </div>
+      </div>
+    </div>
+  </div>
+
 </div>
 
