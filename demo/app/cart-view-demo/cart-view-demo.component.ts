@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { CartViewDisplay } from '../../../src/types';
 
 @Component({
   selector: 'cart-view-demo',
@@ -6,4 +7,5 @@ import { Component } from '@angular/core';
   styleUrls: ['./cart-view-demo.component.scss']
 })
 export class CartViewDemoComponent {
+  display: CartViewDisplay = 'fixed';
 }

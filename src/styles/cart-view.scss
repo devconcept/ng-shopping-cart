@@ -1,5 +1,13 @@
 @import 'variables';
 
+.cart-view {
+  width: 100%;
+
+  &.responsive {
+    overflow-x: auto;
+  }
+}
+
 .cart-view-empty {
   color: $cart-view-empty-text;
   background-color: $cart-view-empty-color;

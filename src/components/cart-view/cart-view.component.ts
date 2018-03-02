@@ -1,6 +1,7 @@
-import { Component, OnInit, OnDestroy } from '@angular/core';
+import { Component, OnInit, OnDestroy, Input } from '@angular/core';
 import { CartItem } from '../../classes/cart-item';
 import { CartService } from '../../services/cart.service';
+import { CartViewDisplay } from '../../types';
 
 @Component({
   selector: 'cart-view',
@@ -9,7 +10,7 @@ import { CartService } from '../../services/cart.service';
 export class CartViewComponent implements OnInit, OnDestroy {
   private serviceSubscription: any;
   items: CartItem[];
-
+  @Input() display: CartViewDisplay = 'fixed';
 
   constructor(private cartService: CartService) {
 

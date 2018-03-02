@@ -1,10 +1,8 @@
-<ng-container *ngIf="!items || !items.length">
-  <div class="cart-view-empty">
-    Your cart is empty
-  </div>
-</ng-container>
-<ng-container *ngIf="items && items.length">
+<div *ngIf="!items || !items.length" class="cart-view-empty">
+  Your cart is empty
+</div>
+<div *ngIf="items && items.length" class="cart-view" [ngClass]="display">
   <cart-list-layout [items]="items">
   </cart-list-layout>
-</ng-container>
+</div>
 
