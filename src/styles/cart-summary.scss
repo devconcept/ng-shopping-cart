@@ -1,6 +1,5 @@
 @import "mixins";
 
-/* Cart summary*/
 .cart-summary {
   display: inline-block;
   @include make-row();
