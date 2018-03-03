@@ -1,10 +1,10 @@
 @import "mixins";
 
-.cart-grid-layout {
+.cart-showcase {
   @include contain-margins();
   @include clearfix();
 
-  & > .layout-item-container {
+  & > .showcase-item-container {
     float: left;
     position: relative;
   }

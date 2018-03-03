@@ -1,20 +1,20 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { CartGridLayoutComponent } from './cart-grid-layout.component';
+import { ShowcaseItemComponent } from './cart-showcase-item.component';
 
-describe('CartGridLayoutComponent', () => {
-  let component: CartGridLayoutComponent;
-  let fixture: ComponentFixture<CartGridLayoutComponent>;
+describe('DefaultShowcaseItemComponent', () => {
+  let component: ShowcaseItemComponent;
+  let fixture: ComponentFixture<ShowcaseItemComponent>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ CartGridLayoutComponent ]
+      declarations: [ ShowcaseItemComponent ]
     })
     .compileComponents();
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(CartGridLayoutComponent);
+    fixture = TestBed.createComponent(ShowcaseItemComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

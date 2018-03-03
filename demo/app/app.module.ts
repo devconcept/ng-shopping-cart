@@ -27,7 +27,7 @@ import { CartShowcaseDemoComponent } from './cart-showcase-demo/cart-showcase-de
     CartModule,
   ],
   providers: [],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
 })
 export class AppModule {
 }

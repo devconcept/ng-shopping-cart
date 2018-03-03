@@ -1,3 +1,5 @@
-<cart-grid-layout>
-  foo
-</cart-grid-layout>
+<div class="cart-showcase">
+  <div class="showcase-item-container" *ngFor="let carItem of items">
+    <ng-container *cartShowcaseOutlet="itemComponent;item:carItem"></ng-container>
+  </div>
+</div>

@@ -5,11 +5,12 @@ import { AddToCartComponent } from './components/add-to-cart/add-to-cart.compone
 import { AddToCartEditorComponent } from './components/add-to-cart-editor/add-to-cart-editor.component';
 import { CartCheckoutComponent } from './components/cart-checkout/cart-checkout.component';
 import { CartSummaryComponent } from './components/cart-summary/cart-summary.component';
-import { CartGridLayoutComponent } from './components/cart-grid-layout/cart-grid-layout.component';
 import { CartViewComponent } from './components/cart-view/cart-view.component';
 import { MemoryCartService } from './services/memory-cart.service';
 import { CartService } from './services/cart.service';
 import { CartShowcaseComponent } from './components/cart-showcase/cart-showcase.component';
+import {ShowcaseOutletDirective} from './directives/showcase-outlet';
+import { CartShowcaseItemComponent } from './components/cart-showcase-item/cart-showcase-item.component';
 
 @NgModule({
   declarations: [
@@ -17,9 +18,10 @@ import { CartShowcaseComponent } from './components/cart-showcase/cart-showcase.
     AddToCartComponent,
     CartCheckoutComponent,
     CartSummaryComponent,
-    CartGridLayoutComponent,
     CartShowcaseComponent,
     CartViewComponent,
+    ShowcaseOutletDirective,
+    CartShowcaseItemComponent,
   ],
   imports: [
     BrowserModule,
@@ -29,11 +31,12 @@ import { CartShowcaseComponent } from './components/cart-showcase/cart-showcase.
     AddToCartComponent,
     CartCheckoutComponent,
     CartSummaryComponent,
-    CartGridLayoutComponent,
     CartShowcaseComponent,
     CartViewComponent,
+    CartShowcaseItemComponent
   ],
   providers: [{ provide: CartService, useClass: MemoryCartService }],
+  entryComponents: [CartShowcaseItemComponent],
 })
 export class CartModule {
 }
