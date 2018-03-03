@@ -17,13 +17,13 @@
         <option *ngFor="let editor of editorTypes" [value]="editor">{{editor|titlecase}}</option>
       </select>
     </div>
-    <div class="input-group">
+    <div class="input-group" *ngIf="editor !== 'button'">
       <label for="addToCartPosition">Position:</label>
       <select id="addToCartPosition" [(ngModel)]="position">
         <option *ngFor="let position of positions" [value]="position">{{position|titlecase}}</option>
       </select>
     </div>
-    <div class="input-group">
+    <div class="input-group" *ngIf="editor === 'button'">
       <label for="addToCartQuantity">Quantity:</label>
       <input id="addToCartQuantity" [(ngModel)]="quantity" type="text">
     </div>

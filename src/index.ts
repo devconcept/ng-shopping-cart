@@ -6,6 +6,7 @@ import { AddToCartType, AddToCartPosition } from './types';
 import { CartModule } from './cart.module';
 import { CartService } from './services/cart.service';
 import { MemoryCartService } from './services/memory-cart.service';
+import { CartShowcaseComponent } from './components/cart-showcase/cart-showcase.component';
 
 
 
@@ -14,6 +15,7 @@ export {
   CartCheckoutComponent,
   CartSummaryComponent,
   CartGridLayoutComponent,
+  CartShowcaseComponent,
   AddToCartType,
   AddToCartPosition,
   CartModule,

@@ -9,6 +9,7 @@ import { CartGridLayoutComponent } from './components/cart-grid-layout/cart-grid
 import { CartViewComponent } from './components/cart-view/cart-view.component';
 import { MemoryCartService } from './services/memory-cart.service';
 import { CartService } from './services/cart.service';
+import { CartShowcaseComponent } from './components/cart-showcase/cart-showcase.component';
 
 @NgModule({
   declarations: [
@@ -17,6 +18,7 @@ import { CartService } from './services/cart.service';
     CartCheckoutComponent,
     CartSummaryComponent,
     CartGridLayoutComponent,
+    CartShowcaseComponent,
     CartViewComponent,
   ],
   imports: [
@@ -28,6 +30,7 @@ import { CartService } from './services/cart.service';
     CartCheckoutComponent,
     CartSummaryComponent,
     CartGridLayoutComponent,
+    CartShowcaseComponent,
     CartViewComponent,
   ],
   providers: [{ provide: CartService, useClass: MemoryCartService }],

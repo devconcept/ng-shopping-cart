@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { AddToCartType, AddToCartPosition, CartService, MemoryCartService } from '../../../src';
+import { AddToCartType, AddToCartPosition, CartService } from '../../../src';
 
 @Component({
   selector: 'cart-add-demo',
@@ -9,7 +9,7 @@ import { AddToCartType, AddToCartPosition, CartService, MemoryCartService } from
 export class AddToCartDemoComponent {
   cartItem = { key: 1, label: 'Test', cost: 14.5, description: 'Test description', origin: 'Singapore' };
   quantity = 1;
-  contents: 'text' | 'html' = 'html';
+  contents: 'text' | 'html' = 'text';
   label = 'Add to cart';
   editor = 'button';
   editorTypes: AddToCartType[] = ['button', 'text', 'number', 'dropdown'];

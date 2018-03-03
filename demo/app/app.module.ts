@@ -9,6 +9,7 @@ import { CartSummaryDemoComponent } from './cart-summary-demo/cart-summary-demo.
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { CartViewDemoComponent } from './cart-view-demo/cart-view-demo.component';
+import { CartShowcaseDemoComponent } from './cart-showcase-demo/cart-showcase-demo.component';
 
 @NgModule({
   declarations: [
@@ -17,6 +18,7 @@ import { CartViewDemoComponent } from './cart-view-demo/cart-view-demo.component
     CartCheckoutDemoComponent,
     CartSummaryDemoComponent,
     CartViewDemoComponent,
+    CartShowcaseDemoComponent,
   ],
   imports: [
     BrowserModule,

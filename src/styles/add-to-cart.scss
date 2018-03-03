@@ -1,21 +1,31 @@
 @import "variables";
 
-.add-to-cart-button {
-  color: $add-to-cart-text;
-  border: solid 1px $button-border;
-  padding: 6px;
-  border-radius: $add-to-cart-radius;
-  background-color: $add-to-cart-color;
-}
+.add-to-cart {
+  .cart-inline-item {
+    display: inline-block;
+  }
 
-.add-to-cart-input {
-  padding: 6px;
-  border-radius: $input-radius;
-  border: solid 1px $input-border;
-}
+  .cart-block-item {
+    display: block;
+  }
 
-.add-to-cart-select {
-  padding: 6px;
-  border-radius: $input-radius;
-  border: solid 1px $input-border;
+  .add-to-cart-button {
+    color: $add-to-cart-text;
+    border: solid 1px $button-border;
+    padding: 6px;
+    border-radius: $add-to-cart-radius;
+    background-color: $add-to-cart-color;
+  }
+
+  .add-to-cart-input {
+    padding: 6px;
+    border-radius: $input-radius;
+    border: solid 1px $input-border;
+  }
+
+  .add-to-cart-select {
+    padding: 6px;
+    border-radius: $input-radius;
+    border: solid 1px $input-border;
+  }
 }
