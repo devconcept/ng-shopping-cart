@@ -9,7 +9,7 @@ export class MemoryCartService extends CartService {
   private _shipping = 0;
 
   public getItem(id: any): CartItem {
-    return this._items.find(i => i.id === id);
+    return this._items.find(i => i.getId() === id);
   }
 
   public getItems(): CartItem[] {
@@ -21,13 +21,11 @@ export class MemoryCartService extends CartService {
   }
 
   entries(): number {
-    return this._items.reduce((curr, i) => (curr + i.quantity), 0);
+    return this._items.reduce((curr, i) => (curr + i.getQuantity()), 0);
   }
 
-  public addItem(id: any, name: string, price: number, quantity: number, data: any): CartItem {
-    const foundIdx = this._items.findIndex(i => i.id === id);
-    let item;
-    item = new CartItem(id, name, price, quantity, data);
+  public addItem(item: CartItem): void {
+    const foundIdx = this._items.findIndex(i => i.getId() === item.getId());
     if (foundIdx === -1) {
       this._items.push(item);
     } else {
@@ -35,11 +33,10 @@ export class MemoryCartService extends CartService {
     }
     this.onItemAdded.emit(item);
     this.onItemsChanged.emit(this._items.length);
-    return item;
   }
 
   public removeItem(id: any): void {
-    const idx = this._items.findIndex(i => i.id === id);
+    const idx = this._items.findIndex(i => i.getId() === id);
     if (idx !== -1) {
       const removed = this._items.splice(idx, 1);
       this.onItemRemoved.emit(removed[0]);
@@ -48,7 +45,7 @@ export class MemoryCartService extends CartService {
   }
 
   public cost(): number {
-    return this._items.reduce((curr, i) => (curr + i.price * i.quantity), 0);
+    return this._items.reduce((curr, i) => (curr + i.getPrice() * i.getQuantity()), 0);
   }
 
   public clear() {

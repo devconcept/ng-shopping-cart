@@ -13,16 +13,13 @@ export class AddToCartComponent implements OnChanges {
   private _editorQuantity = 1;
 
   labelSet = false;
-  @Input() id: any;
-  @Input() name: string;
-  @Input() price: number;
-  @Input() data: any;
+  @Input() item: CartItem;
   @Input() label = 'Add to cart';
   @Input() buttonClass = 'add-to-cart-button';
   @Output() quantityChange = new EventEmitter<number>();
   @Input() type: AddToCartType = 'button';
   @Input() position: AddToCartPosition = 'left';
-  @Output() add = new EventEmitter();
+  @Output() add = new EventEmitter<CartItem>();
   @Input() dropdown: DropdownValue[] = [{ label: '1 item', value: 1 }, { label: '2 item', value: 2 }, { label: '5 items', value: 5 }];
 
   @Input() get quantity(): number {
@@ -62,9 +59,12 @@ export class AddToCartComponent implements OnChanges {
 
   addToCart(evt) {
     evt.stopPropagation();
-    const quantity = parseFloat(this._quantity.toString());
-    const item = this.cartService.addItem(this.id, this.name, this.price, quantity, this.data);
-    this.add.emit(item);
+    if (this.item) {
+      const quantity = parseFloat(this._quantity.toString());
+      this.item.setQuantity(quantity);
+      const item = this.cartService.addItem(this.item);
+      this.add.emit(this.item);
+    }
   }
 
 }

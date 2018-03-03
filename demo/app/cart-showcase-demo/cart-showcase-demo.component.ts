@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { CartItem } from '../../../src/classes/cart-item';
+import DefaultCartItem from '../../../src/classes/default-cart-item';
 
 @Component({
   selector: 'cart-showcase-demo',
@@ -8,8 +9,8 @@ import { CartItem } from '../../../src/classes/cart-item';
 })
 export class CartShowcaseDemoComponent {
   items: CartItem[] = [
-    new CartItem(1, 'foooo', 10, 1, '/photo.png'),
-    new CartItem(2, 'bar', 20.5, 1, '/photo2.png'),
+    new DefaultCartItem(1, 'foooo', 10, '/photo.png', 1),
+    new DefaultCartItem(2, 'bar', 20.5, '/photo2.png', 1),
   ];
 
   constructor() {

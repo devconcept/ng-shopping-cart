@@ -19,23 +19,23 @@
     </div>
     <div *ngFor="let cartItem of items" class="cart-list-row">
       <div class="cart-list-item cart-list-name-item">
-        {{cartItem.name}}
+        {{cartItem.getName()}}
       </div>
       <div class="cart-list-item cart-list-quantity-item">
         <button type="button" class="cart-increase-button" (click)="increase(cartItem)">
           +
         </button>
-        {{cartItem.quantity}}
+        {{cartItem.getQuantity()}}
         <button type="button" class="cart-decrease-button" (click)="decrease(cartItem)"
-                [disabled]="cartItem.quantity <= 1">
+                [disabled]="cartItem.getQuantity() <= 1">
           -
         </button>
       </div>
       <div class="cart-list-item cart-list-currency-item">
-        {{cartItem.price | currency}}
+        {{cartItem.getPrice() | currency}}
       </div>
       <div class="cart-list-item cart-list-total-item">
-        {{cartItem.price * cartItem.quantity | currency}}
+        {{cartItem.getPrice() * cartItem.getQuantity() | currency}}
       </div>
     </div>
     <div class="cart-list-footer">

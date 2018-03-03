@@ -1,5 +1,7 @@
 import { Component } from '@angular/core';
 import { AddToCartType, AddToCartPosition, CartService } from '../../../src';
+import { DemoCartItem } from './demo-cart-item';
+import { CartItem } from '../../../src/classes/cart-item';
 
 @Component({
   selector: 'cart-add-demo',
@@ -7,7 +9,7 @@ import { AddToCartType, AddToCartPosition, CartService } from '../../../src';
   styleUrls: ['./add-to-cart-demo.component.scss']
 })
 export class AddToCartDemoComponent {
-  cartItem = { key: 1, label: 'Test', cost: 14.5, description: 'Test description', origin: 'Singapore' };
+  cartItem: DemoCartItem;
   quantity = 1;
   contents: 'text' | 'html' = 'text';
   label = 'Add to cart';
@@ -17,6 +19,12 @@ export class AddToCartDemoComponent {
   positions: AddToCartPosition[] = ['left', 'right', 'top', 'bottom'];
 
   constructor(private cartService: CartService) {
+    this.cartItem = new DemoCartItem();
+    this.cartItem.identifier = '1';
+    this.cartItem.label = 'Test';
+    this.cartItem.cost = 14.5;
+    this.cartItem.description = 'Test description';
+    this.cartItem.origin = 'Singapore';
   }
 
   addToCart(item) {

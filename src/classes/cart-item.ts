@@ -1,22 +1,27 @@
-export class CartItem {
-  public id: any;
-  public name: string;
-  public price: number;
-  public quantity: number;
-  public image: string;
-  public data: any;
+export abstract class CartItem {
 
-  constructor(id = 0, name = '', price = 0, quantity = 1, image = '', data = {}) {
-    this.id = id;
-    this.name = name;
-    this.price = price;
-    this.quantity = quantity;
-    this.image = image;
-    this.data = data;
-  }
+  abstract getId(): any;
 
-  total() {
-    return this.price * this.quantity;
+  abstract setId(id: any): void;
+
+  abstract getName(): string;
+
+  abstract setName(name: string): void;
+
+  abstract getPrice(): number;
+
+  abstract setPrice(price: number): void;
+
+  abstract getQuantity(): number;
+
+  abstract setQuantity(quantity: number): void;
+
+  abstract getImage(): string;
+
+  abstract setImage(imageUrl: string): void;
+
+  public total() {
+    return this.getPrice() * this.getQuantity();
   }
 
 }

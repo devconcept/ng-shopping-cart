@@ -30,15 +30,15 @@
   </div>
   <ng-container *ngIf="contents === 'text'">
     <add-to-cart
-      (add)="addToCart($event)" [id]="cartItem.key" [name]="cartItem.description" [price]="cartItem.cost"
-      [type]="editor" [position]="position" [(quantity)]="quantity" [data]="cartItem.origin"
+      (add)="addToCart($event)" [item]="cartItem"
+      [type]="editor" [position]="position" [(quantity)]="quantity"
       [label]="label || 'Add to cart'">
     </add-to-cart>
   </ng-container>
   <ng-container *ngIf="contents === 'html'">
     <add-to-cart
-      (add)="addToCart($event)" [id]="cartItem.key" [name]="cartItem.description" [price]="cartItem.cost"
-      [type]="editor" [position]="position" [(quantity)]="quantity" [data]="cartItem.origin">
+      (add)="addToCart($event)" [item]="cartItem"
+      [type]="editor" [position]="position" [(quantity)]="quantity">
       <button type="button" class="custom-button">
         Click to add
       </button>

@@ -15,17 +15,16 @@ export class BrowserStorageCartService extends CartService {
 
   getItem(id: any): CartItem {
     const items = this.readStorage();
-    return items.find(i => i.id === id);
+    return items.find(i => i.getId() === id);
   }
 
   getItems(): CartItem[] {
     return this.readStorage();
   }
 
-  addItem(id: any, name: string, price: number, quantity: number, data: any): CartItem {
+  addItem(item: CartItem): void {
     const items = this.readStorage();
-    const idx = items.findIndex(i => i.id === id);
-    const item = new CartItem(id, name, price, quantity, data);
+    const idx = items.findIndex(i => i.getId() === item.getId());
     if (idx !== -1) {
       items[idx] = item;
     } else {
@@ -34,12 +33,11 @@ export class BrowserStorageCartService extends CartService {
     this.writeStorage(items);
     this.onItemAdded.emit(item);
     this.onItemsChanged.emit(items.length);
-    return item;
   }
 
   removeItem(id: any): void {
     const items = this.readStorage();
-    const idx = items.findIndex(i => i.id === id);
+    const idx = items.findIndex(i => i.getId() === id);
     if (idx !== -1) {
       const removed = items.splice(idx, 1);
       this.writeStorage(items);
@@ -53,11 +51,11 @@ export class BrowserStorageCartService extends CartService {
   }
 
   entries(): number {
-    return this.readStorage().reduce((curr, i) => (curr + i.quantity), 0);
+    return this.readStorage().reduce((curr, i) => (curr + i.getQuantity()), 0);
   }
 
   cost(): number {
-    return this.readStorage().reduce((curr, i) => (curr + i.price * i.quantity), 0);
+    return this.readStorage().reduce((curr, i) => (curr + i.getPrice() * i.getQuantity()), 0);
   }
 
   clear(): void {
