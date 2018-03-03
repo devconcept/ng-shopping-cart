@@ -1,3 +1,10 @@
-<p>
-  {{item.name}}
-</p>
+<div class="showcase-item default-showcase-item" [ngStyle]="{'background-image': 'url(' + item.image + ')'}">
+  <div class="default-showcase-item-description">
+    <div class="default-showcase-item-name">
+      {{item.name}}
+    </div>
+    <div class="default-showcase-item-price">
+      {{item.price | currency}}
+    </div>
+  </div>
+</div>

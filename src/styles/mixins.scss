@@ -15,3 +15,8 @@
   @include contain-margins();
   @include clearfix()
 }
+
+@mixin rem-fallback($prop, $rems) {
+  #{$prop}: #{$rems * 14}px;
+  #{$prop}: #{$rems}rem;
+}

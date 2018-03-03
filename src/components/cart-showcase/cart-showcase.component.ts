@@ -1,6 +1,5 @@
 import { Component, Input } from '@angular/core';
 import { CartItem } from '../../classes/cart-item';
-import { ShowcaseItem } from '../../interfaces/showcase-item';
 import { CartShowcaseItemComponent } from '../../components/cart-showcase-item/cart-showcase-item.component';
 
 @Component({
@@ -10,4 +9,5 @@ import { CartShowcaseItemComponent } from '../../components/cart-showcase-item/c
 export class CartShowcaseComponent {
   @Input() items: CartItem[];
   @Input() itemComponent: any = CartShowcaseItemComponent;
+  @Input() columns = 4;
 }

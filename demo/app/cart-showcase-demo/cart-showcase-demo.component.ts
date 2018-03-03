@@ -7,7 +7,10 @@ import { CartItem } from '../../../src/classes/cart-item';
   styleUrls: ['./cart-showcase-demo.component.scss']
 })
 export class CartShowcaseDemoComponent {
-  items: CartItem[] = [new CartItem(1, 'foooo'), new CartItem(2, 'bar')];
+  items: CartItem[] = [
+    new CartItem(1, 'foooo', 10, 1, '/photo.png'),
+    new CartItem(2, 'bar', 20.5, 1, '/photo2.png'),
+  ];
 
   constructor() {
   }

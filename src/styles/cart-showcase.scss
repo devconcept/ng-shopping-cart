@@ -7,5 +7,39 @@
   & > .showcase-item-container {
     float: left;
     position: relative;
+    height: 0;
+    margin: 0;
+    padding: 25% 0 0;
+    width: 25%;
+
+    .default-showcase-item {
+      position: absolute;
+      left: 0;
+      right: 0;
+      top: 0;
+      bottom: 0;
+      background-color: transparent;
+      background-position: center;
+      background-repeat: no-repeat;
+      background-size: contain;
+
+      .default-showcase-item-description {
+        padding: 10px;
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        background-color: rgba(0,0,0, 0.6);
+        color: white;
+
+        .default-showcase-item-name {
+          margin: 0;
+          @include rem-fallback('font-size', 2);
+          @include rem-fallback('margin-top', 1);
+          @include rem-fallback('margin-bottom', 1);
+          font-weight: bold;
+        }
+      }
+    }
   }
 }

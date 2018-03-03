@@ -1,4 +1,5 @@
 @import 'variables';
+@import 'mixins';
 
 .cart-view {
   width: 100%;
@@ -15,8 +16,7 @@
         display: table-cell;
         text-align: right;
         border-bottom: solid 1px #dee2e6;
-        padding: 12px;
-        padding: 0.75rem;
+        @include rem-fallback('padding', 0.75);
         white-space: normal;
 
         &.cart-list-name-header {
@@ -31,8 +31,7 @@
       & > .cart-list-item {
         display: table-cell;
         text-align: right;
-        padding: 12px;
-        padding: 0.75rem;
+        @include rem-fallback('padding', 0.75);
         vertical-align: middle;
         border-top: solid 1px #dee2e6;
         white-space: nowrap;
@@ -65,8 +64,7 @@
         .cart-empty-summary, .cart-tax-summary, .cart-shipping-summary, .cart-total-summary {
           display: table-cell;
           text-align: right;
-          padding: 0 12px;
-          padding: 0 0.75rem;
+          @include rem-fallback('padding', 0.75);
         }
       }
     }
@@ -86,6 +84,5 @@
   color: $cart-view-empty-text;
   background-color: $cart-view-empty-color;
   text-align: center;
-  padding: 32px;
-  padding: 2rem;
+  @include rem-fallback('padding', 2);
 }
