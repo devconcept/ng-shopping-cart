@@ -24,7 +24,7 @@ export class AddToCartDemoComponent {
     this.cartItem.label = 'Test';
     this.cartItem.cost = 14.5;
     this.cartItem.description = 'Test description';
-    this.cartItem.origin = 'Singapore';
+    this.cartItem.country = 'US';
   }
 
   addToCart(item) {

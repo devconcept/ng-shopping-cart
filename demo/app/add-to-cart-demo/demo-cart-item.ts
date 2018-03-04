@@ -6,7 +6,7 @@ export class DemoCartItem extends CartItem {
   public cost: number;
   public amount: number;
   public description: string;
-  public origin: string;
+  public country: string;
   public photo: string;
 
   getId(): any {
