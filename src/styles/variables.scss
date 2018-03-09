@@ -10,3 +10,11 @@ $add-to-cart-radius: 3px;
 /* Cart view */
 $cart-view-empty-color: #efefef;
 $cart-view-empty-text: #000000;
+
+$breakpoints: (
+  xs: 0,
+  s: 576px,
+  m: 768px,
+  l: 992px,
+  xl: 1200px
+);

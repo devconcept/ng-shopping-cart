@@ -1,3 +1,4 @@
+@import "variables";
 @import "mixins";
 
 .cart-showcase {
@@ -9,8 +10,17 @@
     position: relative;
     height: 0;
     margin: 0;
-    padding: 25% 0 0;
-    width: 25%;
+
+    @each $name, $value in $breakpoints {
+      @media (min-width: $value) {
+        @for $i from 1 through 12 {
+          &.showcase-container-#{$name}-#{$i} {
+            width: percentage($i / 12);
+            padding: percentage($i / 12) 0 0;
+          }
+        }
+      }
+    }
 
     .default-showcase-item {
       position: absolute;
@@ -29,7 +39,7 @@
         bottom: 0;
         left: 0;
         right: 0;
-        background-color: rgba(0,0,0, 0.6);
+        background-color: rgba(0, 0, 0, 0.6);
         color: white;
 
         .default-showcase-item-name {

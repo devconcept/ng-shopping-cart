@@ -22,7 +22,8 @@ export class AddToCartComponent implements OnChanges {
   @Output() add = new EventEmitter<CartItem>();
   @Input() dropdown: DropdownValue[] = [{ label: '1 item', value: 1 }, { label: '2 item', value: 2 }, { label: '5 items', value: 5 }];
 
-  @Input() get quantity(): number {
+  @Input()
+  get quantity(): number {
     return this._quantity;
   }
 

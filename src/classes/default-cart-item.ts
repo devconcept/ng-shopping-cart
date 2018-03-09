@@ -9,35 +9,23 @@ export default class DefaultCartItem extends CartItem {
 
   constructor(id: any = 0, name: string = '', price: number = 0, image: string = '', quantity: number = 0) {
     super();
-    this.setId(id);
-    this.setName(name);
-    this.setPrice(price);
-    this.setImage(image);
-    this.setQuantity(quantity);
+    this._id = id;
+    this._name = name;
+    this._price = price;
+    this._image = image;
+    this._quantity = quantity;
   }
 
   getId(): any {
     return this._id;
   }
 
-  setId(id: any): void {
-    this._id = id;
-  }
-
   getName(): string {
     return this._name;
   }
 
-  setName(name: string): void {
-    this._name = name;
-  }
-
   getPrice(): number {
     return this._price;
-  }
-
-  setPrice(price: number): void {
-    this._price = price;
   }
 
   getQuantity(): number {
@@ -50,10 +38,6 @@ export default class DefaultCartItem extends CartItem {
 
   getImage(): string {
     return this._image;
-  }
-
-  setImage(imageUrl: string): void {
-    this._image = imageUrl;
   }
 
 }

@@ -1,3 +1,11 @@
-<p>
-  cart-checkout works!
-</p>
+<ng-container *ngIf="service === 'log' || service === 'http'">
+  <button class="checkout-button" *ngIf="!labelSet" (click)="checkout()">
+    {{label}}
+  </button>
+  <ng-container *ngIf="labelSet">
+      <span (click)="checkout()">
+        <ng-content>
+        </ng-content>
+      </span>
+  </ng-container>
+</ng-container>

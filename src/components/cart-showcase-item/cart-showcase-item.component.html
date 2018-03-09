@@ -1,4 +1,4 @@
-<div class="showcase-item default-showcase-item" [ngStyle]="{'background-image': 'url(' + item.image + ')'}">
+<div class="showcase-item default-showcase-item" [ngStyle]="{'background-image': 'url(' + item.getImage() + ')'}">
   <div class="default-showcase-item-description">
     <div class="default-showcase-item-name">
       {{item.getName()}}
