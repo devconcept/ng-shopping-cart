@@ -43,7 +43,7 @@ export class AddToCartComponent implements OnChanges {
     this.quantityChange.emit(this._quantity);
   }
 
-  constructor(private cartService: CartService) {
+  constructor(private cartService: CartService<any>) {
   }
 
   ngOnChanges(changes: SimpleChanges): void {
@@ -63,7 +63,7 @@ export class AddToCartComponent implements OnChanges {
     if (this.item) {
       const quantity = parseFloat(this._quantity.toString());
       this.item.setQuantity(quantity);
-      const item = this.cartService.addItem(this.item);
+      this.cartService.addItem(this.item);
       this.add.emit(this.item);
     }
   }

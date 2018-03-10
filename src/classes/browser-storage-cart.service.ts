@@ -1,28 +1,28 @@
 import { CartService } from '../';
 import { CartItem } from './cart-item';
 
-export class BrowserStorageCartService extends CartService {
+export class BrowserStorageCartService<T extends CartItem> extends CartService<T> {
   protected storage: Storage;
   protected storageKey: 'NgShoppingCart';
 
-  private readStorage(): CartItem[] {
+  private readStorage(): T[] {
     return JSON.parse(this.storage.getItem(this.storageKey));
   }
 
-  private writeStorage(items: CartItem[]): void {
+  private writeStorage(items: T[]): void {
     this.storage.setItem(this.storageKey, JSON.stringify(items));
   }
 
-  getItem(id: any): CartItem {
+  getItem(id: any): T {
     const items = this.readStorage();
     return items.find(i => i.getId() === id);
   }
 
-  getItems(): CartItem[] {
+  getItems(): T[] {
     return this.readStorage();
   }
 
-  addItem(item: CartItem): void {
+  addItem(item: T): void {
     const items = this.readStorage();
     const idx = items.findIndex(i => i.getId() === item.getId());
     if (idx !== -1) {

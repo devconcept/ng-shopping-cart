@@ -3,16 +3,16 @@ import { CartItem } from '../classes/cart-item';
 import { Injectable } from '@angular/core';
 
 @Injectable()
-export class MemoryCartService extends CartService {
-  private _items: CartItem[] = [];
+export class MemoryCartService<T extends CartItem> extends CartService<T> {
+  private _items: T[] = [];
   private _taxRate = 0;
   private _shipping = 0;
 
-  public getItem(id: any): CartItem {
+  public getItem(id: any): T {
     return this._items.find(i => i.getId() === id);
   }
 
-  public getItems(): CartItem[] {
+  public getItems(): T[] {
     return this._items.slice(0);
   }
 
@@ -24,7 +24,7 @@ export class MemoryCartService extends CartService {
     return this._items.reduce((curr, i) => (curr + i.getQuantity()), 0);
   }
 
-  public addItem(item: CartItem): void {
+  public addItem(item: T): void {
     const foundIdx = this._items.findIndex(i => i.getId() === item.getId());
     if (foundIdx === -1) {
       this._items.push(item);

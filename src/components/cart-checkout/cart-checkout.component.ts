@@ -12,7 +12,7 @@ export class CartCheckoutComponent implements OnChanges {
   @Input() service: CheckoutType = 'log';
   @Input() settings: any;
 
-  constructor(private cartService: CartService) {
+  constructor(private cartService: CartService<any>) {
 
   }
 

@@ -11,7 +11,7 @@ export class CartSummaryComponent implements OnInit, OnDestroy {
   totalCost = 0;
   itemMapping: { [k: string]: string } = { '=0': 'No items', '=1': 'One item', 'other': '# items' };
 
-  constructor(private cartService: CartService) {
+  constructor(private cartService: CartService<any>) {
 
   }
 

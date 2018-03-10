@@ -17,7 +17,7 @@ export class CartViewComponent implements OnInit, OnDestroy {
   shipping = 0;
   cost = 0;
 
-  constructor(private cartService: CartService) {
+  constructor(private cartService: CartService<any>) {
     this.update();
   }
 

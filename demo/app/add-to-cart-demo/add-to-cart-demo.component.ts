@@ -18,7 +18,7 @@ export class AddToCartDemoComponent {
   position = 'left';
   positions: AddToCartPosition[] = ['left', 'right', 'top', 'bottom'];
 
-  constructor(private cartService: CartService) {
+  constructor(private cartService: CartService<DemoCartItem>) {
     this.cartItem = new DemoCartItem();
     this.cartItem.identifier = '1';
     this.cartItem.label = 'Test';
