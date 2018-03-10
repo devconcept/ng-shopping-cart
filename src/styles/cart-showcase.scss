@@ -15,8 +15,20 @@
       @media (min-width: $value) {
         @for $i from 1 through 12 {
           &.showcase-container-#{$name}-#{$i} {
-            width: percentage($i / 12);
-            padding: percentage($i / 12) 0 0;
+            width: percentage($i / $columns);
+            padding: percentage($i / $columns) 0 0;
+            $used: ();
+            @for $r from 1 through $ratios {
+              @for $ir from 1 through $ratios {
+                $ratio: $r/$ir;
+                @if (index($used, $ratio) == null) {
+                  $used: append($used, $ratio);
+                  &.showcase-ratio-#{$r}-#{$ir} {
+                    padding: percentage($i / $columns * ($ir/$r)) 0 0;
+                  }
+                }
+              }
+            }
           }
         }
       }
@@ -24,30 +36,52 @@
 
     .default-showcase-item {
       position: absolute;
-      left: 0;
-      right: 0;
-      top: 0;
-      bottom: 0;
+      @include rem-fallback('left', 0.5);
+      @include rem-fallback('right', 0.5);
+      @include rem-fallback('top', 0.5);
+      @include rem-fallback('bottom', 0.5);
       background-color: transparent;
       background-position: center;
       background-repeat: no-repeat;
       background-size: contain;
 
       .default-showcase-item-description {
-        padding: 10px;
+        @include rem-fallback('padding', 1);
         position: absolute;
         bottom: 0;
         left: 0;
         right: 0;
         background-color: rgba(0, 0, 0, 0.6);
         color: white;
+        max-height: 50%;
+        @include rem-fallback('min-height', 3);
 
         .default-showcase-item-name {
-          margin: 0;
           @include rem-fallback('font-size', 2);
-          @include rem-fallback('margin-top', 1);
-          @include rem-fallback('margin-bottom', 1);
           font-weight: bold;
+          position: absolute;
+          transform: translateY(-50%);
+          top: 50%;
+          @include rem-fallback('left', 1);
+        }
+
+        .default-showcase-item-price {
+          font-weight: bold;
+          position: absolute;
+          transform: translateY(-50%);
+          top: 50%;
+          @include rem-fallback('right', 1);
+        }
+      }
+    }
+
+    @for $r from 2 through length($ratios) {
+      &.showcase-ratio-#{$r}-1 {
+        .default-showcase-item {
+          .default-showcase-item-description {
+            max-height: if($r > 3, 20%, 30%);
+            @include rem-fallback('padding', if($r > 2, 0, 1));
+          }
         }
       }
     }

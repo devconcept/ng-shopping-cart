@@ -1,1 +1,13 @@
-<cart-showcase [items]="items"></cart-showcase>
+
+<div class="panel">
+  <div class="settings">
+    <div class="input-group">
+      <label for="showCaseRatio">Aspect ratio:</label>
+      <select id="showCaseRatio" [(ngModel)]="aspectRatio">
+        <option *ngFor="let ratio of ratios" [value]="ratio">{{ratio}}</option>
+      </select>
+    </div>
+  </div>
+  <cart-showcase [items]="items" [aspectRatio]="aspectRatio"></cart-showcase>
+</div>
+

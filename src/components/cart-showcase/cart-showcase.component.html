@@ -1,6 +1,6 @@
 <div class="cart-showcase">
   <div class="showcase-item-container" *ngFor="let carItem of items"
-       [ngClass]="[xsClass, smClass, mdClass, lgClass, xlClass]">
+       [ngClass]="[xsClass, sClass, mClass, lClass, xlClass, ratioClass]">
     <ng-container *cartShowcaseOutlet="itemComponent;item:carItem"></ng-container>
   </div>
 </div>
