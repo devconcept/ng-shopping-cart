@@ -13,7 +13,7 @@
 
     @each $name, $value in $breakpoints {
       @media (min-width: $value) {
-        @for $i from 1 through 12 {
+        @for $i from 1 through $columns {
           &.showcase-container-#{$name}-#{$i} {
             width: percentage($i / $columns);
             padding: percentage($i / $columns) 0 0;
