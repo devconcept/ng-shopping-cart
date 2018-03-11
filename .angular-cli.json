@@ -27,6 +27,27 @@
         "dev": "environments/environment.ts",
         "prod": "environments/environment.prod.ts"
       }
+    },
+    {
+      "root": "src",
+      "outDir": "src-dist",
+      "assets": [],
+      "index": "",
+      "main": "index.ts",
+      "polyfills": "../demo/polyfills.ts",
+      "test": "test.ts",
+      "tsconfig": "tsconfig.app.json",
+      "testTsconfig": "tsconfig.spec.json",
+      "prefix": "cart",
+      "styles": [
+        "styles/index.scss"
+      ],
+      "scripts": [],
+      "environmentSource": "../demo/environments/environment.ts",
+      "environments": {
+        "dev": "environments/environment.ts",
+        "prod": "environments/environment.prod.ts"
+      }
     }
   ],
   "e2e": {

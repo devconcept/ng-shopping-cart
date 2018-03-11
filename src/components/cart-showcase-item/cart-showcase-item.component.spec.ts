@@ -1,6 +1,7 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { CartShowcaseItemComponent } from './cart-showcase-item.component';
+import DefaultCartItem from '../../classes/default-cart-item';
 
 describe('DefaultShowcaseItemComponent', () => {
   let component: CartShowcaseItemComponent;
@@ -16,6 +17,7 @@ describe('DefaultShowcaseItemComponent', () => {
   beforeEach(() => {
     fixture = TestBed.createComponent(CartShowcaseItemComponent);
     component = fixture.componentInstance;
+    component.item = new DefaultCartItem();
     fixture.detectChanges();
   });
 

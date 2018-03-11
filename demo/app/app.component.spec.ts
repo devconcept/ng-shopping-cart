@@ -5,10 +5,15 @@ import { CartSummaryDemoComponent } from './cart-summary-demo/cart-summary-demo.
 import { CartCheckoutDemoComponent } from './cart-checkout-demo/cart-checkout-demo.component';
 import { FormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
-import { AddToCartComponent, CartCheckoutComponent, CartService, CartSummaryComponent, MemoryCartService } from '../../src';
+import {
+  AddToCartComponent, CartCheckoutComponent, CartService, CartShowcaseComponent, CartSummaryComponent,
+  MemoryCartService
+} from '../../src';
 import { AddToCartEditorComponent } from '../../src/components/add-to-cart-editor/add-to-cart-editor.component';
 import { CartViewDemoComponent } from './cart-view-demo/cart-view-demo.component';
 import { CartViewComponent } from '../../src/components/cart-view/cart-view.component';
+import { CartShowcaseDemoComponent } from './cart-showcase-demo/cart-showcase-demo.component';
+import { ShowcaseOutletDirective } from '../../src/directives/showcase-outlet';
 describe('AppComponent', () => {
   beforeEach(async(() => {
     TestBed.configureTestingModule({
@@ -22,7 +27,10 @@ describe('AppComponent', () => {
         CartCheckoutDemoComponent,
         CartCheckoutComponent,
         CartViewDemoComponent,
-        CartViewComponent
+        CartViewComponent,
+        CartShowcaseDemoComponent,
+        CartShowcaseComponent,
+        ShowcaseOutletDirective,
       ],
       imports: [
         CommonModule,
