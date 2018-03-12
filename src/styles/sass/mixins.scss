@@ -1,3 +1,5 @@
+@import "variables";
+
 @mixin contain-margins() {
   &:before, &:after {
     content: ' ';
@@ -19,4 +21,12 @@
 @mixin rem-fallback($prop, $rems) {
   #{$prop}: #{$rems * 14}px;
   #{$prop}: #{$rems}rem;
+}
+
+@mixin make-button() {
+  color: $add-to-cart-text;
+  border: solid 1px $button-border;
+  padding: 6px;
+  border-radius: $add-to-cart-radius;
+  background-color: $add-to-cart-color;
 }

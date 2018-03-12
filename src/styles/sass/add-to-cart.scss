@@ -1,4 +1,5 @@
 @import "variables";
+@import "mixins";
 
 .add-to-cart {
   .cart-inline-item {
@@ -10,11 +11,7 @@
   }
 
   .add-to-cart-button {
-    color: $add-to-cart-text;
-    border: solid 1px $button-border;
-    padding: 6px;
-    border-radius: $add-to-cart-radius;
-    background-color: $add-to-cart-color;
+    @include make-button();
   }
 
   .add-to-cart-input {
