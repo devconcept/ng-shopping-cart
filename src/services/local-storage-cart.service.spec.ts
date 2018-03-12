@@ -1,11 +1,12 @@
-import { MemoryCartService } from './memory-cart.service';
 import { DefaultCartItem } from '../classes/default-cart-item';
+import { LocalStorageCartService } from './local-storage-cart.service';
 
-describe('MemoryCartService', () => {
-  let service: MemoryCartService<DefaultCartItem>;
+describe('LocalStorageCartService', () => {
+  let service: LocalStorageCartService<DefaultCartItem>;
 
   beforeEach(() => {
-    service = new MemoryCartService<DefaultCartItem>();
+    service = new LocalStorageCartService<DefaultCartItem>();
+    localStorage.removeItem('NgShoppingCart');
   });
 
   it('should count items', () => {

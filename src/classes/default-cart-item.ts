@@ -1,43 +1,47 @@
 import { CartItem } from './cart-item';
 
-export default class DefaultCartItem extends CartItem {
-  private _id: any;
-  private _name: string;
-  private _price: number;
-  private _image: string;
-  private _quantity: number;
+export class DefaultCartItem extends CartItem {
+  public id: any;
+  public name: string;
+  public price: number;
+  public image: string;
+  public quantity: number;
 
-  constructor(id: any = 0, name: string = '', price: number = 0, image: string = '', quantity: number = 0) {
+  constructor(id: any = 0, name: string = '', price: number = 0, image: string = '', quantity: number = 1) {
     super();
-    this._id = id;
-    this._name = name;
-    this._price = price;
-    this._image = image;
-    this._quantity = quantity;
+    this.id = id;
+    this.name = name;
+    this.price = price;
+    this.image = image;
+    this.quantity = quantity;
   }
 
   getId(): any {
-    return this._id;
+    return this.id;
   }
 
   getName(): string {
-    return this._name;
+    return this.name;
   }
 
   getPrice(): number {
-    return this._price;
-  }
-
-  getQuantity(): number {
-    return this._quantity;
+    return this.price;
   }
 
   setQuantity(quantity: number): void {
-    this._quantity = quantity;
+    this.quantity = quantity;
+  }
+
+  getQuantity(): number {
+    return this.quantity;
   }
 
   getImage(): string {
-    return this._image;
+    return this.image;
   }
 
+  fromJSON(obj: any): any {
+    const { id, name, price, image, quantity } = obj;
+    return new DefaultCartItem(id, name, price, image, quantity);
+  }
 }

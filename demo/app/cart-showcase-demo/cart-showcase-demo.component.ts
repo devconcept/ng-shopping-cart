@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { CartItem } from '../../../src/classes/cart-item';
-import DefaultCartItem from '../../../src/classes/default-cart-item';
+import { DefaultCartItem } from '../../../src/classes/default-cart-item';
 
 @Component({
   selector: 'cart-showcase-demo',
