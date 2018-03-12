@@ -1,11 +1,11 @@
-import { CartService } from '../';
+import { CartService } from '../services/cart.service';
 import { CartItem } from './cart-item';
 
 export abstract class BrowserStorageCartService<T extends CartItem> extends CartService<T> {
   protected storage: Storage;
   protected storageKey = 'NgShoppingCart';
 
-  private readStorage(): T[] {
+  protected readStorage(): T[] {
     const storageContents = this.storage.getItem(this.storageKey);
     if (!storageContents) {
       return [];
@@ -13,7 +13,7 @@ export abstract class BrowserStorageCartService<T extends CartItem> extends Cart
     return JSON.parse(storageContents).map(i => (new this.itemClass().fromJSON(i)));
   }
 
-  private writeStorage(items: T[]): void {
+  protected writeStorage(items: T[]): void {
     this.storage.setItem(this.storageKey, JSON.stringify(items));
   }
 
@@ -67,7 +67,8 @@ export abstract class BrowserStorageCartService<T extends CartItem> extends Cart
   }
 
   getShipping(): number {
-    return parseFloat(this.storage.getItem(this.storageKey + 'Shipping'));
+    const value = this.storage.getItem(this.storageKey + 'Shipping');
+    return value ? parseFloat(value) : 0;
   }
 
   setShipping(shipping: number): void {

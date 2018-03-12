@@ -1,7 +1,6 @@
 import { Component } from '@angular/core';
 import { AddToCartType, AddToCartPosition, CartService } from '../../../src';
-import { DemoCartItem } from './demo-cart-item';
-import { CartItem } from '../../../src/classes/cart-item';
+import { DemoCartItem } from '../demo-cart-item';
 
 @Component({
   selector: 'cart-add-demo',
@@ -25,6 +24,7 @@ export class AddToCartDemoComponent {
     this.cartItem.cost = 14.5;
     this.cartItem.description = 'Test description';
     this.cartItem.country = 'US';
+    this.cartItem.photo = '/assets/laptop.jpg';
   }
 
   addToCart(item) {

@@ -1,7 +1,7 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 
-import { CartModule } from '../../src';
+import { CartModule, CartService, SessionStorageCartService } from '../../src';
 import { AppComponent } from './app.component';
 import { AddToCartDemoComponent } from './add-to-cart-demo/add-to-cart-demo.component';
 import { CartCheckoutDemoComponent } from './cart-checkout-demo/cart-checkout-demo.component';
@@ -26,7 +26,7 @@ import { CartShowcaseDemoComponent } from './cart-showcase-demo/cart-showcase-de
     FormsModule,
     CartModule,
   ],
-  providers: [],
+  providers: [{ provide: CartService, useClass: SessionStorageCartService }],
   bootstrap: [AppComponent],
 })
 export class AppModule {

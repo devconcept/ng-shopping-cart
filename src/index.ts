@@ -7,6 +7,8 @@ import { CartService } from './services/cart.service';
 import { MemoryCartService } from './services/memory-cart.service';
 import { CartShowcaseComponent } from './components/cart-showcase/cart-showcase.component';
 import { CartShowcaseItemComponent } from './components/cart-showcase-item/cart-showcase-item.component';
+import { LocalStorageCartService } from './services/local-storage-cart.service';
+import { SessionStorageCartService } from './services/session-storage-cart.service';
 
 export {
   AddToCartComponent,
@@ -19,5 +21,7 @@ export {
   CartModule,
   CartService,
   MemoryCartService,
+  LocalStorageCartService,
+  SessionStorageCartService,
 };
 

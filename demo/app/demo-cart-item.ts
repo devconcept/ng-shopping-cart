@@ -1,4 +1,4 @@
-import { CartItem } from '../../../src/classes/cart-item';
+import { CartItem } from '../../src/classes/cart-item';
 
 export class DemoCartItem extends CartItem {
   public identifier: string;
@@ -13,24 +13,12 @@ export class DemoCartItem extends CartItem {
     return this.identifier;
   }
 
-  setId(id: any): void {
-    this.identifier = id;
-  }
-
   getName(): string {
     return this.label;
   }
 
-  setName(name: string): void {
-    this.label = name;
-  }
-
   getPrice(): number {
     return this.cost;
-  }
-
-  setPrice(price: number): void {
-    this.cost = price;
   }
 
   getQuantity(): number {
@@ -45,8 +33,17 @@ export class DemoCartItem extends CartItem {
     return this.photo;
   }
 
-  setImage(imageUrl: string): void {
-    this.photo = imageUrl;
+  fromJSON(obj: any): any {
+    const { identifier, label, cost, amount, description, country, photo } = obj;
+    const item = new DemoCartItem();
+    item.identifier = identifier;
+    item.label = label;
+    item.cost = cost;
+    item.amount = amount;
+    item.description = description;
+    item.country = country;
+    item.photo = photo;
+    return item;
   }
 
 }
