@@ -4,12 +4,12 @@
   "license": "MIT",
   "scripts": {
     "ng": "ng",
-    "start": "ng serve",
-    "build": "ng build --prod",
-    "testdemo": "ng test",
-    "test": "ng test --app=1",
+    "start": "ng serve --app=1",
+    "build": "ng build --prod --app=1",
+    "testdemo": "ng test --app=1",
+    "test": "ng test",
     "lint": "ng lint",
-    "e2e": "ng e2e",
+    "e2e": "ng e2e --app=1",
     "packagr": "ng-packagr -p ng-package.json"
   },
   "private": true,

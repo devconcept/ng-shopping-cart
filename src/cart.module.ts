@@ -8,12 +8,13 @@ import { CartSummaryComponent } from './components/cart-summary/cart-summary.com
 import { CartViewComponent } from './components/cart-view/cart-view.component';
 import { CartService } from './services/cart.service';
 import { CartShowcaseComponent } from './components/cart-showcase/cart-showcase.component';
-import {ShowcaseOutletDirective} from './directives/showcase-outlet';
+import { ShowcaseOutletDirective } from './directives/showcase-outlet';
 import { CartShowcaseItemComponent } from './components/cart-showcase-item/cart-showcase-item.component';
 import { LocalStorageCartService } from './services/local-storage-cart.service';
 import { DefaultCartItem } from './classes/default-cart-item';
 import { CommonModule } from '@angular/common';
 import { HttpModule } from '@angular/http';
+import { CartServiceFactory } from './services/cart-service.factory';
 
 @NgModule({
   declarations: [
@@ -39,7 +40,7 @@ import { HttpModule } from '@angular/http';
     CartViewComponent,
     CartShowcaseItemComponent
   ],
-  providers: [{ provide: CartService, useFactory: () => new LocalStorageCartService<DefaultCartItem>(DefaultCartItem) }],
+  providers: [{ provide: CartService, useFactory: CartServiceFactory }],
   entryComponents: [CartShowcaseItemComponent],
 })
 export class CartModule {
