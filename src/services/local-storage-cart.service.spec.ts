@@ -5,7 +5,7 @@ describe('LocalStorageCartService', () => {
   let service: LocalStorageCartService<DefaultCartItem>;
 
   beforeEach(() => {
-    service = new LocalStorageCartService<DefaultCartItem>();
+    service = new LocalStorageCartService<DefaultCartItem>(DefaultCartItem);
     localStorage.removeItem('NgShoppingCart');
   });
 

@@ -5,7 +5,7 @@ describe('SessionStorageCartService', () => {
   let service: SessionStorageCartService<DefaultCartItem>;
 
   beforeEach(() => {
-    service = new SessionStorageCartService<DefaultCartItem>();
+    service = new SessionStorageCartService<DefaultCartItem>(DefaultCartItem);
   });
 
   it('should be empty', () => {
