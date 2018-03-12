@@ -40,7 +40,7 @@
       "testTsconfig": "tsconfig.spec.json",
       "prefix": "cart",
       "styles": [
-        "styles/index.scss"
+        "styles/sass/index.scss"
       ],
       "scripts": [],
       "environmentSource": "../demo/environments/environment.ts",

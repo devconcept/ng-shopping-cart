@@ -12,6 +12,8 @@ import {ShowcaseOutletDirective} from './directives/showcase-outlet';
 import { CartShowcaseItemComponent } from './components/cart-showcase-item/cart-showcase-item.component';
 import { LocalStorageCartService } from './services/local-storage-cart.service';
 import { DefaultCartItem } from './classes/default-cart-item';
+import { CommonModule } from '@angular/common';
+import { HttpModule } from '@angular/http';
 
 @NgModule({
   declarations: [
@@ -26,6 +28,7 @@ import { DefaultCartItem } from './classes/default-cart-item';
   ],
   imports: [
     BrowserModule,
+    HttpModule,
   ],
   exports: [
     AddToCartEditorComponent,
