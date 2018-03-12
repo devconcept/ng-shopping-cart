@@ -1,9 +1,15 @@
 import { CartService } from '../services/cart.service';
 import { CartItem } from './cart-item';
+import { SerializableCartService } from '../interfaces/serializable-cart.service';
 
-export abstract class BrowserStorageCartService<T extends CartItem> extends CartService<T> {
+export abstract class BrowserStorageCartService<T extends CartItem> extends CartService<T> implements SerializableCartService {
+  itemClass: any;
   protected storage: Storage;
-  protected storageKey = 'NgShoppingCart';
+
+  constructor(itemClass: T, protected storageKey) {
+    super();
+    this.itemClass = itemClass;
+  }
 
   protected readStorage(): T[] {
     const storageContents = this.storage.getItem(this.storageKey);

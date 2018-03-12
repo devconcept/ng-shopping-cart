@@ -4,8 +4,8 @@ import { BrowserStorageCartService } from '../classes/browser-storage-cart.servi
 
 @Injectable()
 export class LocalStorageCartService<T extends CartItem> extends BrowserStorageCartService<T> {
-  constructor() {
-    super();
+  constructor(itemClass: any, storageKey = 'NgShoppingCart') {
+    super(itemClass, storageKey);
     this.storage = window.localStorage;
   }
 }

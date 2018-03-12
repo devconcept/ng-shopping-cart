@@ -10,6 +10,7 @@ import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { CartViewDemoComponent } from './cart-view-demo/cart-view-demo.component';
 import { CartShowcaseDemoComponent } from './cart-showcase-demo/cart-showcase-demo.component';
+import { DemoCartItem } from './demo-cart-item';
 
 @NgModule({
   declarations: [
@@ -26,7 +27,7 @@ import { CartShowcaseDemoComponent } from './cart-showcase-demo/cart-showcase-de
     FormsModule,
     CartModule,
   ],
-  providers: [{ provide: CartService, useClass: SessionStorageCartService }],
+  providers: [{ provide: CartService, useFactory: () => new SessionStorageCartService<DemoCartItem>(DemoCartItem) }],
   bootstrap: [AppComponent],
 })
 export class AppModule {

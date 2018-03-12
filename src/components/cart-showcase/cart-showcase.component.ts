@@ -1,7 +1,6 @@
 import { Component, Input, OnChanges, SimpleChanges } from '@angular/core';
 import { CartItem } from '../../classes/cart-item';
 import { CartShowcaseItemComponent } from '../../components/cart-showcase-item/cart-showcase-item.component';
-import { ShowcaseAspectRatio } from '../../types';
 
 @Component({
   selector: 'cart-showcase',
@@ -21,7 +20,7 @@ export class CartShowcaseComponent implements OnChanges {
   @Input() columnsExtraLarge = 4;
   @Input() items: CartItem[];
   @Input() itemComponent: any = CartShowcaseItemComponent;
-  @Input() aspectRatio: ShowcaseAspectRatio = '1:1';
+  @Input() aspectRatio = '1:1';
 
   private getColumnSize(value) {
     return Math.floor(12 / value);

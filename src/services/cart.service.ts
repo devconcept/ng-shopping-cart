@@ -3,7 +3,7 @@ import { EventEmitter } from '@angular/core';
 import { DefaultCartItem } from '../classes/default-cart-item';
 
 export abstract class CartService<T extends CartItem> {
-  public itemClass: any = DefaultCartItem;
+
   public onItemAdded: EventEmitter<T> = new EventEmitter<T>();
   public onItemRemoved: EventEmitter<T> = new EventEmitter<T>();
   public onItemsChanged: EventEmitter<number> = new EventEmitter<number>();

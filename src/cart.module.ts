@@ -6,11 +6,12 @@ import { AddToCartEditorComponent } from './components/add-to-cart-editor/add-to
 import { CartCheckoutComponent } from './components/cart-checkout/cart-checkout.component';
 import { CartSummaryComponent } from './components/cart-summary/cart-summary.component';
 import { CartViewComponent } from './components/cart-view/cart-view.component';
-import { MemoryCartService } from './services/memory-cart.service';
 import { CartService } from './services/cart.service';
 import { CartShowcaseComponent } from './components/cart-showcase/cart-showcase.component';
 import {ShowcaseOutletDirective} from './directives/showcase-outlet';
 import { CartShowcaseItemComponent } from './components/cart-showcase-item/cart-showcase-item.component';
+import { LocalStorageCartService } from './services/local-storage-cart.service';
+import { DefaultCartItem } from './classes/default-cart-item';
 
 @NgModule({
   declarations: [
@@ -35,7 +36,7 @@ import { CartShowcaseItemComponent } from './components/cart-showcase-item/cart-
     CartViewComponent,
     CartShowcaseItemComponent
   ],
-  providers: [{ provide: CartService, useClass: MemoryCartService }],
+  providers: [{ provide: CartService, useFactory: () => new LocalStorageCartService<DefaultCartItem>(DefaultCartItem) }],
   entryComponents: [CartShowcaseItemComponent],
 })
 export class CartModule {

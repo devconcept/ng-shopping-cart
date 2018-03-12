@@ -1,7 +1,7 @@
 import { AddToCartComponent } from './components/add-to-cart/add-to-cart.component';
 import { CartCheckoutComponent } from './components/cart-checkout/cart-checkout.component';
 import { CartSummaryComponent } from './components/cart-summary/cart-summary.component';
-import { AddToCartType, AddToCartPosition } from './types';
+import { AddToCartType, AddToCartPosition, CartViewDisplay, CheckoutType } from './types';
 import { CartModule } from './cart.module';
 import { CartService } from './services/cart.service';
 import { MemoryCartService } from './services/memory-cart.service';
@@ -11,17 +11,23 @@ import { LocalStorageCartService } from './services/local-storage-cart.service';
 import { SessionStorageCartService } from './services/session-storage-cart.service';
 
 export {
+  /* Components */
   AddToCartComponent,
   CartCheckoutComponent,
   CartSummaryComponent,
   CartShowcaseComponent,
   CartShowcaseItemComponent,
-  AddToCartType,
-  AddToCartPosition,
+  /* Module */
   CartModule,
+  /* Services */
   CartService,
   MemoryCartService,
   LocalStorageCartService,
   SessionStorageCartService,
+  /* Types */
+  AddToCartType,
+  AddToCartPosition,
+  CartViewDisplay,
+  CheckoutType
 };
 
