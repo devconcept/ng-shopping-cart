@@ -1,6 +1,6 @@
 import { CartItem } from './cart-item';
 import { SerializableCartService } from '../interfaces/serializable-cart.service';
-import { MemoryCartService } from '../';
+import { MemoryCartService } from '../services/memory-cart.service';
 
 export abstract class BrowserStorageCartService<T extends CartItem> extends MemoryCartService<T> implements SerializableCartService {
   itemClass: any;
