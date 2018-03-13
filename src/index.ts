@@ -9,6 +9,11 @@ import { CartShowcaseComponent } from './components/cart-showcase/cart-showcase.
 import { CartShowcaseItemComponent } from './components/cart-showcase-item/cart-showcase-item.component';
 import { LocalStorageCartService } from './services/local-storage-cart.service';
 import { SessionStorageCartService } from './services/session-storage-cart.service';
+import { CheckoutHttpSettings } from './interfaces/checkout-http-settings';
+import { CheckoutPaypalSettings } from './interfaces/checkout-paypal-settings';
+import { DropdownValue } from './interfaces/dropdown-value';
+import { SerializableCartService } from './interfaces/serializable-cart.service';
+import { ShowcaseItem } from './interfaces/showcase-item';
 
 export {
   /* Components */
@@ -28,6 +33,12 @@ export {
   AddToCartType,
   AddToCartPosition,
   CartViewDisplay,
-  CheckoutType
+  CheckoutType,
+  /* Interfaces*/
+  CheckoutHttpSettings,
+  CheckoutPaypalSettings,
+  DropdownValue,
+  SerializableCartService,
+  ShowcaseItem,
 };
 
