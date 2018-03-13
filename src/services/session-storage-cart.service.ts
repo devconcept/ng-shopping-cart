@@ -7,5 +7,6 @@ export class SessionStorageCartService<T extends CartItem> extends BrowserStorag
   constructor(itemClass: any, storageKey = 'NgShoppingCart') {
     super(itemClass, storageKey);
     this.storage = window.sessionStorage;
+    this.restore();
   }
 }

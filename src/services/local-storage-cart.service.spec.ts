@@ -5,8 +5,10 @@ describe('LocalStorageCartService', () => {
   let service: LocalStorageCartService<DefaultCartItem>;
 
   beforeEach(() => {
-    service = new LocalStorageCartService<DefaultCartItem>(DefaultCartItem);
     localStorage.removeItem('NgShoppingCart');
+    localStorage.removeItem('NgShoppingCartTaxRate');
+    localStorage.removeItem('NgShoppingShipping');
+    service = new LocalStorageCartService<DefaultCartItem>(DefaultCartItem);
   });
 
   it('should count items', () => {

@@ -8,7 +8,6 @@ export abstract class BrowserStorageCartService<T extends CartItem> extends Memo
 
   constructor(itemClass: T, protected storageKey) {
     super();
-    this.restore();
     this.itemClass = itemClass;
   }
 

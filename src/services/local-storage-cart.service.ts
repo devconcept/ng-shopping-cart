@@ -7,5 +7,6 @@ export class LocalStorageCartService<T extends CartItem> extends BrowserStorageC
   constructor(itemClass: any, storageKey = 'NgShoppingCart') {
     super(itemClass, storageKey);
     this.storage = window.localStorage;
+    this.restore();
   }
 }
