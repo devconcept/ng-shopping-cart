@@ -10,10 +10,7 @@ import { CartService } from './services/cart.service';
 import { CartShowcaseComponent } from './components/cart-showcase/cart-showcase.component';
 import { ShowcaseOutletDirective } from './directives/showcase-outlet';
 import { CartShowcaseItemComponent } from './components/cart-showcase-item/cart-showcase-item.component';
-import { LocalStorageCartService } from './services/local-storage-cart.service';
-import { DefaultCartItem } from './classes/default-cart-item';
-import { CommonModule } from '@angular/common';
-import { HttpModule } from '@angular/http';
+import { HttpClientModule } from '@angular/common/http';
 import { CartServiceFactory } from './services/cart-service.factory';
 
 @NgModule({
@@ -29,7 +26,7 @@ import { CartServiceFactory } from './services/cart-service.factory';
   ],
   imports: [
     BrowserModule,
-    HttpModule,
+    HttpClientModule,
   ],
   exports: [
     AddToCartEditorComponent,

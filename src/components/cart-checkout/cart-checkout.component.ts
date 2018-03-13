@@ -1,9 +1,9 @@
 import { Component, EventEmitter, Input, OnChanges, OnDestroy, OnInit, Output, SimpleChanges } from '@angular/core';
 import { CheckoutSettings, CheckoutType } from '../../types';
 import { CartService } from '../../services/cart.service';
-import { Http, Request } from '@angular/http';
+import { HttpClient, HttpRequest } from '@angular/common/http';
 import { CheckoutPaypalSettings } from '../../interfaces/checkout-paypal-settings';
-import { RequestArgs } from '@angular/http/src/interfaces';
+import { CheckoutHttpSettings } from '../../interfaces/checkout-http-settings';
 
 @Component({
   selector: 'cart-checkout',
@@ -16,7 +16,7 @@ export class CartCheckoutComponent implements OnChanges, OnInit, OnDestroy {
   cost = 0;
   taxRate = 0;
   shipping = 0;
-  httpSettings: RequestArgs;
+  httpSettings: CheckoutHttpSettings;
   paypalSettings: CheckoutPaypalSettings;
   @Input() label = 'Checkout';
   @Input() service: CheckoutType = 'log';
@@ -24,7 +24,7 @@ export class CartCheckoutComponent implements OnChanges, OnInit, OnDestroy {
   @Output() checkout = new EventEmitter<any>();
   @Output() error = new EventEmitter<any>();
 
-  constructor(private cartService: CartService<any>, private http: Http) {
+  constructor(private cartService: CartService<any>, private httpClient: HttpClient) {
 
   }
 
@@ -51,8 +51,10 @@ export class CartCheckoutComponent implements OnChanges, OnInit, OnDestroy {
         if (!this.settings) {
           throw new Error('Missing settings configuration');
         }
-        this.http
-          .request(new Request(this.httpSettings))
+        const { url, method, options } = this.httpSettings;
+        const opts = {...options, body: this.cartService.getItems()};
+        this.httpClient
+          .request(new HttpRequest(method, url, opts))
           .toPromise()
           .then(response => {
             this.checkout.emit(response);
@@ -68,13 +70,11 @@ export class CartCheckoutComponent implements OnChanges, OnInit, OnDestroy {
     if (changes['label']) {
       this.labelSet = true;
     }
-    if (changes['settings'] && changes['settings'].currentValue) {
-      const settingsValue = changes['settings'].currentValue;
-      if (settingsValue.itemName) {
-        this.paypalSettings = settingsValue;
-      } else {
-        this.httpSettings = settingsValue;
-      }
+    if (changes['settings'] && changes['settings'].currentValue && changes['settings'].currentValue.itemName) {
+      this.paypalSettings = changes['settings'].currentValue;
+    }
+    if (changes['settings'] && changes['settings'].currentValue && changes['settings'].currentValue.url) {
+      this.httpSettings = changes['settings'].currentValue;
     }
   }
 

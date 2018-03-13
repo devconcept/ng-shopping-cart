@@ -2,6 +2,7 @@ import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { CartCheckoutComponent } from './cart-checkout.component';
 import { CartService, MemoryCartService } from '../../';
+import { HttpClientModule } from '@angular/common/http';
 
 describe('CartCheckoutComponent', () => {
   let component: CartCheckoutComponent;
@@ -9,12 +10,13 @@ describe('CartCheckoutComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ CartCheckoutComponent ],
+      declarations: [CartCheckoutComponent],
+      imports: [HttpClientModule],
       providers: [
         { provide: CartService, useClass: MemoryCartService }
       ]
     })
-    .compileComponents();
+      .compileComponents();
   }));
 
   beforeEach(() => {
