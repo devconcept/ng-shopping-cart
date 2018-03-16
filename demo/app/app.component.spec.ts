@@ -6,7 +6,7 @@ import { CartCheckoutDemoComponent } from './cart-checkout-demo/cart-checkout-de
 import { FormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 import {
-  AddToCartComponent, CartCheckoutComponent, CartService, CartShowcaseComponent, CartSummaryComponent,
+  AddToCartComponent, CartCheckoutComponent, CartModule, CartService, CartShowcaseComponent, CartSummaryComponent,
   MemoryCartService
 } from '../../src';
 import { AddToCartEditorComponent } from '../../src/components/add-to-cart-editor/add-to-cart-editor.component';
@@ -14,32 +14,31 @@ import { CartViewDemoComponent } from './cart-view-demo/cart-view-demo.component
 import { CartViewComponent } from '../../src/components/cart-view/cart-view.component';
 import { CartShowcaseDemoComponent } from './cart-showcase-demo/cart-showcase-demo.component';
 import { ShowcaseOutletDirective } from '../../src/directives/showcase-outlet';
+import { BrowserDynamicTestingModule } from '@angular/platform-browser-dynamic/testing';
+import { CartShowcaseItemComponent } from '../../src/components/cart-showcase-item/cart-showcase-item.component';
+
 describe('AppComponent', () => {
   beforeEach(async(() => {
-    TestBed.configureTestingModule({
-      declarations: [
-        AppComponent,
-        AddToCartDemoComponent,
-        AddToCartComponent,
-        AddToCartEditorComponent,
-        CartSummaryDemoComponent,
-        CartSummaryComponent,
-        CartCheckoutDemoComponent,
-        CartCheckoutComponent,
-        CartViewDemoComponent,
-        CartViewComponent,
-        CartShowcaseDemoComponent,
-        CartShowcaseComponent,
-        ShowcaseOutletDirective,
-      ],
-      imports: [
-        CommonModule,
-        FormsModule,
-      ],
-      providers: [
-        { provide: CartService, useClass: MemoryCartService }
-      ]
-    }).compileComponents();
+    TestBed
+      .configureTestingModule({
+        declarations: [
+          AppComponent,
+          AddToCartDemoComponent,
+          CartSummaryDemoComponent,
+          CartCheckoutDemoComponent,
+          CartViewDemoComponent,
+          CartShowcaseDemoComponent,
+        ],
+        imports: [
+          CommonModule,
+          FormsModule,
+          CartModule,
+        ],
+        providers: [
+          { provide: CartService, useClass: MemoryCartService }
+        ]
+      })
+      .compileComponents();
   }));
   it('should create the app', async(() => {
     const fixture = TestBed.createComponent(AppComponent);

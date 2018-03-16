@@ -1,7 +1,7 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 
-import { CartModule, CartService, SessionStorageCartService } from '../../src';
+import { CartModule} from '../../src';
 import { AppComponent } from './app.component';
 import { AddToCartDemoComponent } from './add-to-cart-demo/add-to-cart-demo.component';
 import { CartCheckoutDemoComponent } from './cart-checkout-demo/cart-checkout-demo.component';
@@ -25,9 +25,12 @@ import { DemoCartItem } from './demo-cart-item';
     BrowserModule,
     CommonModule,
     FormsModule,
-    CartModule,
+    CartModule.forRoot({
+      itemType: DemoCartItem,
+      serviceType: 'sessionStorage',
+      serviceOptions: { storageKey: 'NgCartDemo' },
+    }),
   ],
-  providers: [{ provide: CartService, useFactory: () => new SessionStorageCartService<DemoCartItem>(DemoCartItem) }],
   bootstrap: [AppComponent],
 })
 export class AppModule {

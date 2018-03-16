@@ -16,7 +16,7 @@ export class CartSummaryComponent implements OnInit, OnDestroy {
   }
 
   private updateComponent() {
-    this.totalItems = this.cartService.entries();
+    this.totalItems = this.cartService.itemCount();
     this.totalCost = this.cartService.totalCost();
   }
 

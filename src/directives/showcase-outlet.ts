@@ -1,7 +1,6 @@
 import {
-  ComponentFactoryResolver,
-  ComponentRef, Directive, Injector, Input, NgModuleFactory, NgModuleRef, OnChanges, OnDestroy, SimpleChanges, Type,
-  ViewContainerRef
+  ComponentFactoryResolver, ComponentRef, Directive, Injector, Input, NgModuleFactory, NgModuleRef, OnChanges, OnDestroy, SimpleChanges,
+  Type, ViewContainerRef
 } from '@angular/core';
 import { ShowcaseItem } from '../interfaces/showcase-item';
 import { CartItem } from '../classes/cart-item';

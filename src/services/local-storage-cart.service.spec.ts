@@ -1,5 +1,6 @@
 import { DefaultCartItem } from '../classes/default-cart-item';
 import { LocalStorageCartService } from './local-storage-cart.service';
+import { ItemClassService } from './item-class.service';
 
 describe('LocalStorageCartService', () => {
   let service: LocalStorageCartService<DefaultCartItem>;
@@ -8,7 +9,9 @@ describe('LocalStorageCartService', () => {
     localStorage.removeItem('NgShoppingCart');
     localStorage.removeItem('NgShoppingCartTaxRate');
     localStorage.removeItem('NgShoppingShipping');
-    service = new LocalStorageCartService<DefaultCartItem>(DefaultCartItem);
+    service = new LocalStorageCartService<DefaultCartItem>(new ItemClassService<DefaultCartItem>(DefaultCartItem), {
+      storageKey: 'TestNgCartLocal'
+    });
   });
 
   it('should count items', () => {

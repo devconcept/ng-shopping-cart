@@ -3,8 +3,7 @@ import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { CartShowcaseDemoComponent } from './cart-showcase-demo.component';
 import { FormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
-import { CartShowcaseComponent, CartShowcaseItemComponent } from '../../../src';
-import { ShowcaseOutletDirective } from '../../../src/directives/showcase-outlet';
+import { CartModule } from '../../../src';
 
 describe('CartShowcaseDemoComponent', () => {
   let component: CartShowcaseDemoComponent;
@@ -12,10 +11,11 @@ describe('CartShowcaseDemoComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ CartShowcaseDemoComponent, CartShowcaseComponent, ShowcaseOutletDirective ],
+      declarations: [ CartShowcaseDemoComponent ],
       imports: [
         CommonModule,
         FormsModule,
+        CartModule,
       ],
     })
     .compileComponents();

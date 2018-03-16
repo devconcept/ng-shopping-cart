@@ -1,6 +1,5 @@
 import { CartItem } from '../classes/cart-item';
 import { EventEmitter } from '@angular/core';
-import { DefaultCartItem } from '../classes/default-cart-item';
 
 export abstract class CartService<T extends CartItem> {
 

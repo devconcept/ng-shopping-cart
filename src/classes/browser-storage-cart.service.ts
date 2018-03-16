@@ -1,14 +1,15 @@
 import { CartItem } from './cart-item';
-import { SerializableCartService } from '../interfaces/serializable-cart.service';
 import { MemoryCartService } from '../services/memory-cart.service';
+import { ItemClassService } from '../services/item-class.service';
+import { BrowserStorageServiceOptions } from '../interfaces/browser-storage-service-options';
 
-export abstract class BrowserStorageCartService<T extends CartItem> extends MemoryCartService<T> implements SerializableCartService {
-  itemClass: any;
+export abstract class BrowserStorageCartService<T extends CartItem> extends MemoryCartService<T> {
   protected storage: Storage;
+  protected storageKey: string;
 
-  constructor(itemClass: T, protected storageKey) {
+  constructor(private itemClassService: ItemClassService<T>, options: BrowserStorageServiceOptions) {
     super();
-    this.itemClass = itemClass;
+    this.storageKey = options ? options.storageKey : 'NgShoppingCart';
   }
 
   protected readStorage(): T[] {
@@ -16,7 +17,7 @@ export abstract class BrowserStorageCartService<T extends CartItem> extends Memo
     if (!storageContents) {
       return [];
     }
-    return JSON.parse(storageContents).map(i => (new this.itemClass().fromJSON(i)));
+    return JSON.parse(storageContents).map(i => (this.itemClassService.instantiate().fromJSON(i)));
   }
 
   protected writeStorage(items: T[]): void {
