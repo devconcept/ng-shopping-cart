@@ -1,13 +1,14 @@
 import { Inject, Injectable } from '@angular/core';
 import { CartItem } from '../classes/cart-item';
 import { BrowserStorageCartService } from '../classes/browser-storage-cart.service';
-import { BrowserStorageServiceOptions } from '../interfaces/browser-storage-service-options';
-import { ITEM_CLASS } from './item-class.token';
+import { BrowserStorageServiceConfiguration } from '../interfaces/browser-storage-service-options';
+import { CART_ITEM_CLASS } from './item-class.token';
+import { CART_SERVICE_CONFIGURATION } from './service-configuration.token';
 
 @Injectable()
 export class LocalStorageCartService<T extends CartItem> extends BrowserStorageCartService<T> {
-  constructor(@Inject(ITEM_CLASS) itemClass, options: BrowserStorageServiceOptions = null) {
-    super(itemClass, options);
+  constructor(@Inject(CART_ITEM_CLASS) itemClass, @Inject(CART_SERVICE_CONFIGURATION) configuration: BrowserStorageServiceConfiguration) {
+    super(itemClass, configuration);
     this.storage = window.localStorage;
     this.restore();
   }

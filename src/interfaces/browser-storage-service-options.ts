@@ -1,4 +1,4 @@
-export interface BrowserStorageServiceOptions {
+export interface BrowserStorageServiceConfiguration {
   storageKey?: string;
   clearOnError?: boolean;
 }

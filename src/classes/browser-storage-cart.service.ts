@@ -1,6 +1,6 @@
 import { CartItem } from './cart-item';
 import { MemoryCartService } from '../services/memory-cart.service';
-import { BrowserStorageServiceOptions } from '../interfaces/browser-storage-service-options';
+import { BrowserStorageServiceConfiguration } from '../interfaces/browser-storage-service-options';
 
 export abstract class BrowserStorageCartService<T extends CartItem> extends MemoryCartService<T> {
   protected itemClass: any;
@@ -8,10 +8,10 @@ export abstract class BrowserStorageCartService<T extends CartItem> extends Memo
   protected storageKey: string;
   protected clearOnError: boolean;
 
-  constructor(itemClass: CartItem, options: BrowserStorageServiceOptions,) {
+  constructor(itemClass: CartItem, configuration: BrowserStorageServiceConfiguration) {
     super();
-    this.storageKey = options && options.storageKey ? options.storageKey : 'NgShoppingCart';
-    this.clearOnError = options && options.clearOnError !== undefined ? options.clearOnError : true;
+    this.storageKey = configuration && configuration.storageKey ? configuration.storageKey : 'NgShoppingCart';
+    this.clearOnError = configuration && configuration.clearOnError !== undefined ? configuration.clearOnError : true;
     this.itemClass = itemClass;
   }
 
