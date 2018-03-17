@@ -39,8 +39,9 @@ export class CartViewComponent implements OnInit, OnDestroy {
     if (item.getQuantity() > 1) {
       item.setQuantity(item.getQuantity() - 1);
       this.cartService.addItem(item);
+    } else {
+      this.cartService.removeItem(item.getId());
     }
-
   }
 
   ngOnInit(): void {

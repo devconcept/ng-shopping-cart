@@ -26,8 +26,7 @@
           +
         </button>
         {{cartItem.getQuantity()}}
-        <button type="button" class="cart-decrease-button" (click)="decrease(cartItem)"
-                [disabled]="cartItem.getQuantity() <= 1">
+        <button type="button" class="cart-decrease-button" (click)="decrease(cartItem)">
           -
         </button>
       </div>
