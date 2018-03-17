@@ -9,16 +9,16 @@ export class DemoCartItem extends CartItem {
   public country: string;
   public photo: string;
 
-  constructor(itemData: any) {
+  constructor(itemData: any = {}) {
     super();
     const { identifier, label, cost, amount, description, country, photo } = itemData;
-    this.identifier = identifier;
-    this.label = label;
-    this.cost = cost;
-    this.amount = amount;
-    this.description = description;
-    this.country = country;
-    this.photo = photo;
+    this.identifier = identifier || 0;
+    this.label = label || '';
+    this.cost = cost || 0;
+    this.amount = amount || 1;
+    this.description = description || '';
+    this.country = country || '';
+    this.photo = photo || '';
   }
 
   getId(): any {

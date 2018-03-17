@@ -8,14 +8,14 @@ export class DefaultCartItem extends CartItem {
   public quantity: number;
   public data: any;
 
-  constructor(itemData: any) {
+  constructor(itemData: any = {}) {
     super();
-    this.id = itemData.id;
-    this.name = itemData.name;
-    this.price = itemData.price;
-    this.image = itemData.image;
-    this.quantity = itemData.quantity;
-    this.data = itemData.data;
+    this.id = itemData.id || 0;
+    this.name = itemData.name || '';
+    this.price = itemData.price || 0;
+    this.image = itemData.image || '';
+    this.quantity = itemData.quantity || 1;
+    this.data = itemData.data || {};
   }
 
   getId(): any {
