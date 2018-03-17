@@ -10,8 +10,7 @@
     "test": "ng test",
     "lint": "ng lint",
     "e2e": "ng e2e --app=1",
-    "packagr": "ng-packagr -p ng-package.json",
-    "compodoc": "./node_modules/.bin/compodoc -p src/tsconfig.app.json"
+    "packagr": "ng-packagr -p ng-package.json"
   },
   "private": true,
   "dependencies": {

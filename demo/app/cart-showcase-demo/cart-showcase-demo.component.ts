@@ -11,12 +11,12 @@ export class CartShowcaseDemoComponent {
   ratios: string[] = [];
   aspectRatio = '1:1';
   items: CartItem[] = [
-    new DefaultCartItem(1, 'Item1', 10, '/assets/laptop.jpg', 1),
-    new DefaultCartItem(2, 'Item2', 20.5, '/assets/laptop.jpg', 1),
-    new DefaultCartItem(3, 'Item3', 45.5, '/assets/laptop.jpg', 1),
-    new DefaultCartItem(4, 'Item4', 33.99, '/assets/laptop.jpg', 1),
-    new DefaultCartItem(5, 'Item5', 67.99, '/assets/laptop.jpg', 1),
-    new DefaultCartItem(6, 'Item6', 100, '/assets/laptop.jpg', 1),
+    new DefaultCartItem({id: 1, name: 'Item1', price: 10, image: '/assets/laptop.jpg', quantity: 1}),
+    new DefaultCartItem({id: 2, name: 'Item1', price: 10, image: '/assets/laptop.jpg', quantity: 1}),
+    new DefaultCartItem({id: 3, name: 'Item1', price: 10, image: '/assets/laptop.jpg', quantity: 1}),
+    new DefaultCartItem({id: 4, name: 'Item1', price: 10, image: '/assets/laptop.jpg', quantity: 1}),
+    new DefaultCartItem({id: 5, name: 'Item1', price: 10, image: '/assets/laptop.jpg', quantity: 1}),
+    new DefaultCartItem({id: 6, name: 'Item1', price: 10, image: '/assets/laptop.jpg', quantity: 1}),
   ];
 
   constructor() {

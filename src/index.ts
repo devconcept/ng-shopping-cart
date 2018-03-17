@@ -13,7 +13,6 @@ import { CheckoutHttpSettings } from './interfaces/checkout-http-settings';
 import { CheckoutPaypalSettings } from './interfaces/checkout-paypal-settings';
 import { DropdownValue } from './interfaces/dropdown-value';
 import { ShowcaseItem } from './interfaces/showcase-item';
-import { ItemClassService } from './services/item-class.service';
 
 export {
   /* Components */
@@ -26,7 +25,6 @@ export {
   CartModule,
   /* Services */
   CartService,
-  ItemClassService,
   MemoryCartService,
   LocalStorageCartService,
   SessionStorageCartService,

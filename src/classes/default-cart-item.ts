@@ -6,14 +6,16 @@ export class DefaultCartItem extends CartItem {
   public price: number;
   public image: string;
   public quantity: number;
+  public data: any;
 
-  constructor(id: any = 0, name: string = '', price: number = 0, image: string = '', quantity: number = 1) {
+  constructor(itemData: any) {
     super();
-    this.id = id;
-    this.name = name;
-    this.price = price;
-    this.image = image;
-    this.quantity = quantity;
+    this.id = itemData.id;
+    this.name = itemData.name;
+    this.price = itemData.price;
+    this.image = itemData.image;
+    this.quantity = itemData.quantity;
+    this.data = itemData.data;
   }
 
   getId(): any {
@@ -38,10 +40,5 @@ export class DefaultCartItem extends CartItem {
 
   getImage(): string {
     return this.image;
-  }
-
-  fromJSON(obj: any): any {
-    const { id, name, price, image, quantity } = obj;
-    return new DefaultCartItem(id, name, price, image, quantity);
   }
 }

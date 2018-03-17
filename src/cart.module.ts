@@ -13,24 +13,20 @@ import { ShowcaseOutletDirective } from './directives/showcase-outlet';
 import { CartShowcaseItemComponent } from './components/cart-showcase-item/cart-showcase-item.component';
 import { CartModuleOptions } from './interfaces/cart-module-options';
 import { DefaultCartItem } from './classes/default-cart-item';
-import { ItemClassService } from './services/item-class.service';
 import { MemoryCartService } from './services/memory-cart.service';
 import { LocalStorageCartService } from './services/local-storage-cart.service';
 import { SessionStorageCartService } from './services/session-storage-cart.service';
 import { CartItem } from './classes/cart-item';
 import { CartServiceFactoryOptions } from './interfaces/cart-service-factory-options';
-
-function itemClassFactory<T extends CartItem>(itemClass: new () => T) {
-  return () => (new ItemClassService<T>(itemClass));
-}
+import { ITEM_CLASS } from './services/item-class.token';
 
 function cartServiceFactory<T extends CartItem>(options: CartServiceFactoryOptions) {
-  return (itemClassService: ItemClassService<T>) => {
+  return function(itemClass: CartItem)  {
     switch (options.serviceType) {
       case 'localStorage':
-        return new LocalStorageCartService<T>(itemClassService, options.serviceOptions);
+        return new LocalStorageCartService<T>(itemClass, options.serviceOptions);
       case 'sessionStorage':
-        return new SessionStorageCartService<T>(itemClassService, options.serviceOptions);
+        return new SessionStorageCartService<T>(itemClass, options.serviceOptions);
       default:
         return new MemoryCartService<T>();
     }
@@ -61,20 +57,6 @@ function cartServiceFactory<T extends CartItem>(options: CartServiceFactoryOptio
     CartViewComponent,
     CartShowcaseItemComponent
   ],
-  providers: [
-    {
-      provide: ItemClassService,
-      useFactory: itemClassFactory(DefaultCartItem)
-    },
-    {
-      provide: CartService,
-      useFactory: cartServiceFactory({
-        serviceType: 'localStorage',
-        serviceOptions: { storageKey: 'NgShoppingCart' },
-      }),
-      deps: [ItemClassService]
-    }
-  ],
   entryComponents: [CartShowcaseItemComponent],
 })
 export class CartModule {
@@ -88,13 +70,13 @@ export class CartModule {
       ngModule: CartModule,
       providers: [
         {
-          provide: ItemClassService,
-          useFactory: itemClassFactory(options.itemType || DefaultCartItem)
+          provide: ITEM_CLASS,
+          useValue: options.itemType || DefaultCartItem
         },
         {
           provide: CartService,
           useFactory: cartServiceFactory({ serviceType, serviceOptions }),
-          deps: [ItemClassService]
+          deps: [ITEM_CLASS]
         }
       ],
     };

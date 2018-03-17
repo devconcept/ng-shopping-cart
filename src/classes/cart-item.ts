@@ -11,8 +11,6 @@ export abstract class CartItem {
 
   abstract getImage(): string;
 
-  public abstract fromJSON(obj: any): any;
-
   public total() {
     return this.getPrice() * this.getQuantity();
   }

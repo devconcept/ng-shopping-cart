@@ -33,11 +33,20 @@ export abstract class CartService<T extends CartItem> {
 
   public abstract setTaxRate(tax: number): void;
 
-  getTax(): number {
+  public getTax(): number {
     return this.cost() / 100 * this.getTaxRate();
   }
 
   public totalCost(): number {
     return this.cost() + this.getTax() + this.getShipping();
+  }
+
+  public toObject() {
+    return {
+      taxRate: this.getTaxRate(),
+      tax: this.getTax(),
+      shipping: this.getShipping(),
+      items: this.getItems()
+    };
   }
 }

@@ -9,6 +9,18 @@ export class DemoCartItem extends CartItem {
   public country: string;
   public photo: string;
 
+  constructor(itemData: any) {
+    super();
+    const { identifier, label, cost, amount, description, country, photo } = itemData;
+    this.identifier = identifier;
+    this.label = label;
+    this.cost = cost;
+    this.amount = amount;
+    this.description = description;
+    this.country = country;
+    this.photo = photo;
+  }
+
   getId(): any {
     return this.identifier;
   }
@@ -31,19 +43,6 @@ export class DemoCartItem extends CartItem {
 
   getImage(): string {
     return this.photo;
-  }
-
-  fromJSON(obj: any): any {
-    const { identifier, label, cost, amount, description, country, photo } = obj;
-    const item = new DemoCartItem();
-    item.identifier = identifier;
-    item.label = label;
-    item.cost = cost;
-    item.amount = amount;
-    item.description = description;
-    item.country = country;
-    item.photo = photo;
-    return item;
   }
 
 }

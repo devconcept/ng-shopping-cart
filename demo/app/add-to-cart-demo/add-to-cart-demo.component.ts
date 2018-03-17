@@ -18,13 +18,14 @@ export class AddToCartDemoComponent {
   positions: AddToCartPosition[] = ['left', 'right', 'top', 'bottom'];
 
   constructor(private cartService: CartService<DemoCartItem>) {
-    this.cartItem = new DemoCartItem();
-    this.cartItem.identifier = '1';
-    this.cartItem.label = 'Test';
-    this.cartItem.cost = 14.5;
-    this.cartItem.description = 'Test description';
-    this.cartItem.country = 'US';
-    this.cartItem.photo = '/assets/laptop.jpg';
+    this.cartItem = new DemoCartItem({
+      identifier: '1',
+      label: 'Test',
+      cost: 14.5,
+      description: 'Test description',
+      country: 'US',
+      photo: '/assets/laptop.jpg'
+    });
   }
 
   addToCart(item) {

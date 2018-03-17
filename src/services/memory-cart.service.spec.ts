@@ -16,7 +16,7 @@ describe('MemoryCartService', () => {
   });
 
   it('should add items', () => {
-    const item = new DefaultCartItem(1, 'Test item', 10, '', 10);
+    const item = new DefaultCartItem({ id: 1, name: 'Test item', price: 10, photo: '', quantity: 10 });
     service.addItem(item);
     expect(service.itemCount()).toBe(1);
     expect(service.getItems()[0].id).toBe(1);
@@ -24,13 +24,13 @@ describe('MemoryCartService', () => {
   });
 
   it('should get items', () => {
-    const item = new DefaultCartItem(1, 'Test item', 10, '', 10);
+    const item = new DefaultCartItem({ id: 1, name: 'Test item', price: 10, photo: '', quantity: 10 });
     service.addItem(item);
     expect(service.itemCount()).toBe(1);
   });
 
   it('should remove items', () => {
-    const item = new DefaultCartItem(1, 'Test item', 10, '', 10);
+    const item = new DefaultCartItem({ id: 1, name: 'Test item', price: 10, photo: '', quantity: 10 });
     service.addItem(item);
     expect(service.itemCount()).toBe(1);
     expect(service.isEmpty()).toBe(false);
@@ -40,26 +40,26 @@ describe('MemoryCartService', () => {
   });
 
   it('should count single items', () => {
-    const item = new DefaultCartItem(1, 'Test item', 10, '', 10);
+    const item = new DefaultCartItem({ id: 1, name: 'Test item', price: 10, photo: '', quantity: 10 });
     service.addItem(item);
     expect(service.entries()).toBe(10);
   });
 
   it('should compute the items cost', () => {
-    const item = new DefaultCartItem(1, 'Test item', 10, '', 10);
+    const item = new DefaultCartItem({ id: 1, name: 'Test item', price: 10, photo: '', quantity: 10 });
     service.addItem(item);
     expect(service.cost()).toBe(100);
   });
 
   it('should set the tax rate', () => {
-    const item = new DefaultCartItem(1, 'Test item', 10, '', 10);
+    const item = new DefaultCartItem({ id: 1, name: 'Test item', price: 10, photo: '', quantity: 10 });
     service.addItem(item);
     service.setTaxRate(10);
     expect(service.getTaxRate()).toBe(10);
   });
 
   it('should set shipping cost', () => {
-    const item = new DefaultCartItem(1, 'Test item', 10, '', 10);
+    const item = new DefaultCartItem({ id: 1, name: 'Test item', price: 10, photo: '', quantity: 10 });
     service.addItem(item);
     service.setShipping(10);
     expect(service.getShipping()).toBe(10);
