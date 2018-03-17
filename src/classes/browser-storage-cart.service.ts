@@ -6,10 +6,12 @@ export abstract class BrowserStorageCartService<T extends CartItem> extends Memo
   protected itemClass: any;
   protected storage: Storage;
   protected storageKey: string;
+  protected clearOnError: boolean;
 
-  constructor(itemClass: CartItem, options: BrowserStorageServiceOptions, ) {
+  constructor(itemClass: CartItem, options: BrowserStorageServiceOptions,) {
     super();
-    this.storageKey = options ? options.storageKey : 'NgShoppingCart';
+    this.storageKey = options && options.storageKey ? options.storageKey : 'NgShoppingCart';
+    this.clearOnError = options && options.clearOnError !== undefined ? options.clearOnError : true;
     this.itemClass = itemClass;
   }
 
@@ -18,12 +20,20 @@ export abstract class BrowserStorageCartService<T extends CartItem> extends Memo
     if (!storageContents) {
       return [];
     }
-    return JSON.parse(storageContents).map(i => {
-      if (this.itemClass.fromJSON) {
-        return this.itemClass.fromJSON(i);
-      }
-      return new this.itemClass(i);
-    });
+    let contents = [];
+    try {
+      contents = JSON.parse(storageContents).map(i => {
+        if (this.itemClass.fromJSON) {
+          return this.itemClass.fromJSON(i);
+        }
+        return new this.itemClass(i);
+      });
+    } catch (e) {
+      this.writeStorage([]);
+      this.storage.setItem(this.storageKey + 'Shipping', '0');
+      this.storage.setItem(this.storageKey + 'TaxRate', '0');
+    }
+    return contents;
   }
 
   protected writeStorage(items: T[]): void {

@@ -44,7 +44,6 @@ export abstract class CartService<T extends CartItem> {
   public toObject() {
     return {
       taxRate: this.getTaxRate(),
-      tax: this.getTax(),
       shipping: this.getShipping(),
       items: this.getItems()
     };

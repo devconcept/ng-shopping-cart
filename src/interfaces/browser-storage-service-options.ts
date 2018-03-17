@@ -1,3 +1,4 @@
 export interface BrowserStorageServiceOptions {
-  storageKey: string;
+  storageKey?: string;
+  clearOnError?: boolean;
 }
