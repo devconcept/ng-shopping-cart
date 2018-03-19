@@ -28,7 +28,7 @@ import { DemoCartItem } from './demo-cart-item';
     CartModule.forRoot({
       itemType: DemoCartItem,
       serviceType: 'sessionStorage',
-      serviceOptions: { storageKey: 'NgCartDemo' },
+      serviceOptions: { storageKey: 'NgCartDemo', clearOnError: true },
     }),
   ],
   bootstrap: [AppComponent],

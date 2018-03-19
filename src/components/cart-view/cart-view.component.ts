@@ -10,6 +10,7 @@ import { CartViewDisplay } from '../../types';
 export class CartViewComponent implements OnInit, OnDestroy {
   private serviceSubscription: any;
   @Input() display: CartViewDisplay = 'fixed';
+  @Input() images = true;
   empty = true;
   items: CartItem[];
   taxRate = 0;

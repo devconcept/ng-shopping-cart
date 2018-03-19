@@ -2,43 +2,49 @@
   Your cart is empty
 </div>
 <div *ngIf="!empty" class="cart-view" [ngClass]="display">
-  <div class="cart-list-view">
+  <div class="cart-list-view" [ngClass]="{'no-images': !images}">
     <div class="cart-list-header">
-      <div class="cart-list-header-item cart-list-name-header">
+      <div class="cart-list-header-value cart-list-image-header">
+      </div>
+      <div class="cart-list-header-value cart-list-name-header">
         Name
       </div>
-      <div class="cart-list-header-item cart-list-quantity-header">
+      <div class="cart-list-header-value cart-list-quantity-header">
         Quantity
       </div>
-      <div class="cart-list-header-item cart-list-price-header">
+      <div class="cart-list-header-value cart-list-price-header">
         Price
       </div>
-      <div class="cart-list-header-item cart-list-total-header">
+      <div class="cart-list-header-value cart-list-total-header">
         Total
       </div>
     </div>
-    <div *ngFor="let cartItem of items" class="cart-list-row">
-      <div class="cart-list-item cart-list-name-item">
+    <div *ngFor="let cartItem of items" class="cart-list-item">
+      <div class="cart-list-value cart-list-image-value"
+           [ngStyle]="{'background-image': 'url(' + cartItem.getImage() + ')'}">
+      </div>
+      <div class="cart-list-value cart-list-name-value">
         {{cartItem.getName()}}
       </div>
-      <div class="cart-list-item cart-list-quantity-item">
+      <div class="cart-list-value cart-list-quantity-value">
         <button type="button" class="cart-increase-button" (click)="increase(cartItem)">
           +
         </button>
-        {{cartItem.getQuantity()}}
+        <span class="cart-list-quantity-content">{{cartItem.getQuantity()}}</span>
         <button type="button" class="cart-decrease-button" (click)="decrease(cartItem)">
           -
         </button>
       </div>
-      <div class="cart-list-item cart-list-currency-item">
+      <div class="cart-list-value cart-list-price-value">
         {{cartItem.getPrice() | currency}}
       </div>
-      <div class="cart-list-item cart-list-total-item">
+      <div class="cart-list-value cart-list-total-value">
         {{cartItem.getPrice() * cartItem.getQuantity() | currency}}
       </div>
     </div>
     <div class="cart-list-footer">
       <div class="cart-list-summary">
+        <div class="cart-empty-summary"></div>
         <div class="cart-empty-summary"></div>
         <div class="cart-empty-summary"></div>
         <div class="cart-empty-summary"></div>
@@ -50,11 +56,13 @@
         <div class="cart-empty-summary"></div>
         <div class="cart-empty-summary"></div>
         <div class="cart-empty-summary"></div>
+        <div class="cart-empty-summary"></div>
         <div class="cart-shipping-summary">
           Shipping: {{shipping | currency}}
         </div>
       </div>
       <div class="cart-list-summary">
+        <div class="cart-empty-summary"></div>
         <div class="cart-empty-summary"></div>
         <div class="cart-empty-summary"></div>
         <div class="cart-empty-summary"></div>
