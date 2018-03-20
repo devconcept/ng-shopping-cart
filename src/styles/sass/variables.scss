@@ -10,8 +10,12 @@ $add-to-cart-radius: 3px;
 /* Cart view */
 $cart-view-empty-color: #efefef;
 $cart-view-empty-text: #000000;
+$cart-view-empty-font: italic normal normal 1rem/1.2 "Times New Roman", sans serif;
+$cart-view-empty-border: none 0 transparent;
+$cart-view-empty-padding: 2;
 $cart-view-responsive-price-bg: #3f51b5;
 $cart-view-responsive-price: #ffffff;
+$cart-view-image-size: 100px;
 
 
 /* Grid system */

@@ -40,9 +40,7 @@
       @include rem-fallback('right', 0.5);
       @include rem-fallback('top', 0.5);
       @include rem-fallback('bottom', 0.5);
-      background-color: transparent;
-      background-position: center;
-      background-repeat: no-repeat;
+      background: transparent no-repeat center;
       background-size: contain;
 
       .default-showcase-item-description {
@@ -66,6 +64,7 @@
         }
 
         .default-showcase-item-price {
+          @include rem-fallback('font-size', 2);
           font-weight: bold;
           position: absolute;
           transform: translateY(-50%);
