@@ -12,7 +12,7 @@ import { CartShowcaseComponent } from './components/cart-showcase/cart-showcase.
 import { ShowcaseOutletDirective } from './directives/showcase-outlet';
 import { CartShowcaseItemComponent } from './components/cart-showcase-item/cart-showcase-item.component';
 import { CartModuleOptions } from './interfaces/cart-module-options';
-import { DefaultCartItem } from './classes/default-cart-item';
+import { BaseCartItem } from './classes/base-cart-item';
 import { MemoryCartService } from './services/memory-cart.service';
 import { LocalStorageCartService } from './services/local-storage-cart.service';
 import { SessionStorageCartService } from './services/session-storage-cart.service';
@@ -71,7 +71,7 @@ export class CartModule {
       providers: [
         {
           provide: CART_ITEM_CLASS,
-          useValue: options.itemType || DefaultCartItem
+          useValue: options.itemType || BaseCartItem
         },
         {
           provide: CART_SERVICE_CONFIGURATION,
@@ -84,6 +84,12 @@ export class CartModule {
         }
       ],
     };
+  }
+
+  static forChild():ModuleWithProviders {
+    return {
+      ngModule: CartModule
+    }
   }
 }
 

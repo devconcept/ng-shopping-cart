@@ -1,11 +1,11 @@
-import { DefaultCartItem } from '../classes/default-cart-item';
+import { BaseCartItem } from '../classes/base-cart-item';
 import { SessionStorageCartService } from './session-storage-cart.service';
 
 describe('SessionStorageCartService', () => {
-  let service: SessionStorageCartService<DefaultCartItem>;
+  let service: SessionStorageCartService<BaseCartItem>;
 
   beforeEach(() => {
-    service = new SessionStorageCartService<DefaultCartItem>(DefaultCartItem, {
+    service = new SessionStorageCartService<BaseCartItem>(BaseCartItem, {
       storageKey: 'TestNgCartSession'});
   });
 

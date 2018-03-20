@@ -1,6 +1,6 @@
 import { CartItem } from './cart-item';
 
-export class DefaultCartItem extends CartItem {
+export class BaseCartItem extends CartItem {
   public id: any;
   public name: string;
   public price: number;

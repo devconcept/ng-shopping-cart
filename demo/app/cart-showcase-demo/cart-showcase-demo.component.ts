@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { CartItem } from '../../../src/classes/cart-item';
-import { DefaultCartItem } from '../../../src/classes/default-cart-item';
+import { BaseCartItem } from '../../../src/classes/base-cart-item';
 
 @Component({
   selector: 'cart-showcase-demo',
@@ -11,12 +11,12 @@ export class CartShowcaseDemoComponent {
   ratios: string[] = [];
   aspectRatio = '1:1';
   items: CartItem[] = [
-    new DefaultCartItem({id: 1, name: 'Item1', price: 10, image: '/assets/laptop.jpg', quantity: 1}),
-    new DefaultCartItem({id: 2, name: 'Item1', price: 10, image: '/assets/laptop.jpg', quantity: 1}),
-    new DefaultCartItem({id: 3, name: 'Item1', price: 10, image: '/assets/laptop.jpg', quantity: 1}),
-    new DefaultCartItem({id: 4, name: 'Item1', price: 10, image: '/assets/laptop.jpg', quantity: 1}),
-    new DefaultCartItem({id: 5, name: 'Item1', price: 10, image: '/assets/laptop.jpg', quantity: 1}),
-    new DefaultCartItem({id: 6, name: 'Item1', price: 10, image: '/assets/laptop.jpg', quantity: 1}),
+    new BaseCartItem({id: 1, name: 'Item1', price: 10, image: '/assets/laptop.jpg', quantity: 1}),
+    new BaseCartItem({id: 2, name: 'Item1', price: 10, image: '/assets/laptop.jpg', quantity: 1}),
+    new BaseCartItem({id: 3, name: 'Item1', price: 10, image: '/assets/laptop.jpg', quantity: 1}),
+    new BaseCartItem({id: 4, name: 'Item1', price: 10, image: '/assets/laptop.jpg', quantity: 1}),
+    new BaseCartItem({id: 5, name: 'Item1', price: 10, image: '/assets/laptop.jpg', quantity: 1}),
+    new BaseCartItem({id: 6, name: 'Item1', price: 10, image: '/assets/laptop.jpg', quantity: 1}),
   ];
 
   constructor() {

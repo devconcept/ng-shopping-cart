@@ -1,14 +1,14 @@
-import { DefaultCartItem } from '../classes/default-cart-item';
+import { BaseCartItem } from '../classes/base-cart-item';
 import { LocalStorageCartService } from './local-storage-cart.service';
 
 describe('LocalStorageCartService', () => {
-  let service: LocalStorageCartService<DefaultCartItem>;
+  let service: LocalStorageCartService<BaseCartItem>;
 
   beforeEach(() => {
     localStorage.removeItem('NgShoppingCart');
     localStorage.removeItem('NgShoppingCartTaxRate');
     localStorage.removeItem('NgShoppingShipping');
-    service = new LocalStorageCartService<DefaultCartItem>(DefaultCartItem, {
+    service = new LocalStorageCartService<BaseCartItem>(BaseCartItem, {
       storageKey: 'TestNgCartLocal'
     });
   });
@@ -21,7 +21,7 @@ describe('LocalStorageCartService', () => {
   });
 
   it('should add items', () => {
-    const item = new DefaultCartItem({ id: 1, name: 'Test item', price: 10, photo: '', quantity: 10 });
+    const item = new BaseCartItem({ id: 1, name: 'Test item', price: 10, photo: '', quantity: 10 });
     service.addItem(item);
     expect(service.itemCount()).toBe(1);
     expect(service.getItems()[0].id).toBe(1);
@@ -29,13 +29,13 @@ describe('LocalStorageCartService', () => {
   });
 
   it('should get items', () => {
-    const item = new DefaultCartItem({ id: 1, name: 'Test item', price: 10, photo: '', quantity: 10 });
+    const item = new BaseCartItem({ id: 1, name: 'Test item', price: 10, photo: '', quantity: 10 });
     service.addItem(item);
     expect(service.itemCount()).toBe(1);
   });
 
   it('should remove items', () => {
-    const item = new DefaultCartItem({ id: 1, name: 'Test item', price: 10, photo: '', quantity: 10 });
+    const item = new BaseCartItem({ id: 1, name: 'Test item', price: 10, photo: '', quantity: 10 });
     service.addItem(item);
     expect(service.itemCount()).toBe(1);
     expect(service.isEmpty()).toBe(false);
@@ -45,26 +45,26 @@ describe('LocalStorageCartService', () => {
   });
 
   it('should count single items', () => {
-    const item = new DefaultCartItem({ id: 1, name: 'Test item', price: 10, photo: '', quantity: 10 });
+    const item = new BaseCartItem({ id: 1, name: 'Test item', price: 10, photo: '', quantity: 10 });
     service.addItem(item);
     expect(service.entries()).toBe(10);
   });
 
   it('should compute the items cost', () => {
-    const item = new DefaultCartItem({ id: 1, name: 'Test item', price: 10, photo: '', quantity: 10 });
+    const item = new BaseCartItem({ id: 1, name: 'Test item', price: 10, photo: '', quantity: 10 });
     service.addItem(item);
     expect(service.cost()).toBe(100);
   });
 
   it('should set the tax rate', () => {
-    const item = new DefaultCartItem({ id: 1, name: 'Test item', price: 10, photo: '', quantity: 10 });
+    const item = new BaseCartItem({ id: 1, name: 'Test item', price: 10, photo: '', quantity: 10 });
     service.addItem(item);
     service.setTaxRate(10);
     expect(service.getTaxRate()).toBe(10);
   });
 
   it('should set shipping cost', () => {
-    const item = new DefaultCartItem({ id: 1, name: 'Test item', price: 10, photo: '', quantity: 10 });
+    const item = new BaseCartItem({ id: 1, name: 'Test item', price: 10, photo: '', quantity: 10 });
     service.addItem(item);
     service.setShipping(10);
     expect(service.getShipping()).toBe(10);

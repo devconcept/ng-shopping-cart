@@ -1,5 +1,5 @@
-import { CartServiceFactoryOptions } from './cart-service-factory-options';
-
-export interface CartModuleOptions extends CartServiceFactoryOptions {
+export interface CartModuleOptions  {
   itemType?: any;
+  serviceType?: 'memory' | 'localStorage' | 'sessionStorage' | 'remote';
+  serviceOptions?: any;
 }
