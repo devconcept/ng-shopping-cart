@@ -2,7 +2,7 @@ import { AddToCartComponent } from './components/add-to-cart/add-to-cart.compone
 import { CartCheckoutComponent } from './components/cart-checkout/cart-checkout.component';
 import { CartSummaryComponent } from './components/cart-summary/cart-summary.component';
 import { AddToCartType, AddToCartPosition, CartViewDisplay, CheckoutType } from './types';
-import { CartModule } from './cart.module';
+import { ShoppingCartModule } from './shopping-cart.module';
 import { CartService } from './services/cart.service';
 import { MemoryCartService } from './services/memory-cart.service';
 import { CartShowcaseComponent } from './components/cart-showcase/cart-showcase.component';
@@ -24,7 +24,7 @@ export {
   CartShowcaseComponent,
   CartShowcaseItemComponent,
   /* Module */
-  CartModule,
+  ShoppingCartModule,
   /* Tokens*/
   CART_ITEM_CLASS,
   CART_SERVICE_CONFIGURATION,

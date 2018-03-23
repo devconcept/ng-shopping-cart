@@ -22,12 +22,24 @@ export class BaseCartItem extends CartItem {
     return this.id;
   }
 
+  setId(id: any): void {
+    this.id = id;
+  }
+
   getName(): string {
     return this.name;
   }
 
+  setName(name: string): void {
+    this.name = name;
+  }
+
   getPrice(): number {
     return this.price;
+  }
+
+  setPrice(price: number): void {
+    this.price = price;
   }
 
   setQuantity(quantity: number): void {
@@ -40,5 +52,9 @@ export class BaseCartItem extends CartItem {
 
   getImage(): string {
     return this.image;
+  }
+
+  setImage(image: string): void {
+    this.image = image;
   }
 }

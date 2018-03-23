@@ -5,7 +5,7 @@ import { CartSummaryDemoComponent } from './cart-summary-demo/cart-summary-demo.
 import { CartCheckoutDemoComponent } from './cart-checkout-demo/cart-checkout-demo.component';
 import { FormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
-import { CartModule, CartService, MemoryCartService } from '../../src';
+import { ShoppingCartModule, CartService, MemoryCartService } from '../../src';
 import { CartViewDemoComponent } from './cart-view-demo/cart-view-demo.component';
 import { CartShowcaseDemoComponent } from './cart-showcase-demo/cart-showcase-demo.component';
 
@@ -24,7 +24,7 @@ describe('AppComponent', () => {
         imports: [
           CommonModule,
           FormsModule,
-          CartModule,
+          ShoppingCartModule,
         ],
         providers: [
           { provide: CartService, useClass: MemoryCartService }

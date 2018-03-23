@@ -55,11 +55,13 @@ function cartServiceFactory<T extends CartItem>(serviceType: string) {
     CartSummaryComponent,
     CartShowcaseComponent,
     CartViewComponent,
-    CartShowcaseItemComponent
+    CartShowcaseItemComponent,
+    CommonModule,
+    HttpClientModule
   ],
   entryComponents: [CartShowcaseItemComponent],
 })
-export class CartModule {
+export class ShoppingCartModule {
   static forRoot(options: CartModuleOptions = {}): ModuleWithProviders {
     const serviceType = options.serviceType || 'localStorage';
     let serviceOptions = null;
@@ -67,7 +69,7 @@ export class CartModule {
       serviceOptions = { storageKey: 'NgShoppingCart', clearOnError: true };
     }
     return {
-      ngModule: CartModule,
+      ngModule: ShoppingCartModule,
       providers: [
         {
           provide: CART_ITEM_CLASS,
@@ -86,10 +88,10 @@ export class CartModule {
     };
   }
 
-  static forChild():ModuleWithProviders {
+  static forChild(): ModuleWithProviders {
     return {
-      ngModule: CartModule
-    }
+      ngModule: ShoppingCartModule
+    };
   }
 }
 
