@@ -1,15 +1,37 @@
 {
   "name": "ng-shopping-cart",
   "version": "1.0.0-alpha.1",
+  "description": "An Angular component library to create shopping carts",
   "license": "MIT",
+  "keywords": [
+    "angular",
+    "cart",
+    "shopping-cart",
+    "e-commerce"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/devconcept/ng-shopping-cart.git"
+  },
+  "author": {
+    "name": "devconcept",
+    "email": "devconcept@outlook.com"
+  },
+  "bugs": {
+    "url": "https://github.com/devconcept/ng-shopping-cart/issues"
+  },
+  "homepage": "https://github.com/devconcept/ng-shopping-cart",
   "scripts": {
     "ng": "ng",
     "start": "ng serve --app=1",
     "build": "ng build --prod --app=1",
-    "testdemo": "ng test --app=1",
     "test": "ng test",
+    "test:ci": "ng test --single-run --no-progress --browser=ChromeNoSandbox",
+    "test:demo": "ng test --app=1",
     "lint": "ng lint",
-    "e2e": "ng e2e --app=1",
+    "e2e": "ng e2e",
+    "e2e:ci": "ng e2e --no-progress --config=protractor-ci.conf.js",
+    "e2e:demo": "ng e2e --app=1",
     "pack": "ng-packagr -p ng-package.json"
   },
   "private": false,
