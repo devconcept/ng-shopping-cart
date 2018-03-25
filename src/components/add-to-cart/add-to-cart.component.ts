@@ -12,7 +12,7 @@ export class AddToCartComponent implements OnChanges {
   private _quantity = 1;
   private _editorQuantity = 1;
 
-  labelSet = false;
+  @Input() custom = false;
   @Input() item: CartItem;
   @Input() label = 'Add to cart';
   @Input() buttonClass = 'add-to-cart-button';
@@ -47,9 +47,6 @@ export class AddToCartComponent implements OnChanges {
   }
 
   ngOnChanges(changes: SimpleChanges): void {
-    if (changes['label']) {
-      this.labelSet = true;
-    }
     if (changes['type'] && changes['type'].currentValue === 'dropdown' && this.dropdown.length) {
       const match = this.dropdown.find(i => i.value === this._quantity);
       if (!match) {

@@ -11,13 +11,13 @@ import { CheckoutHttpSettings } from '../../interfaces/checkout-http-settings';
 })
 export class CartCheckoutComponent implements OnChanges, OnInit, OnDestroy {
   private cartSubscription: EventEmitter<any>;
-  labelSet = false;
   empty = true;
   cost = 0;
   taxRate = 0;
   shipping = 0;
   httpSettings: CheckoutHttpSettings;
   paypalSettings: CheckoutPaypalSettings;
+  @Input() custom = false;
   @Input() label = 'Checkout';
   @Input() service: CheckoutType = 'log';
   @Input() settings: CheckoutSettings = null;
@@ -67,9 +67,6 @@ export class CartCheckoutComponent implements OnChanges, OnInit, OnDestroy {
   }
 
   ngOnChanges(changes: SimpleChanges): void {
-    if (changes['label']) {
-      this.labelSet = true;
-    }
     if (changes['settings'] && changes['settings'].currentValue && changes['settings'].currentValue.itemName) {
       this.paypalSettings = changes['settings'].currentValue;
     }

@@ -1,11 +1,8 @@
 <div class="panel">
   <div class="settings">
     <div class="input-group">
-      <label for="addToCartContents">Label:</label>
-      <select id="addToCartContents" [(ngModel)]="contents">
-        <option value="text">Text</option>
-        <option value="html">Html</option>
-      </select>
+      <label for="addToCartContents">Custom:</label>
+      <input id="addToCartContents" type="checkbox" [(ngModel)]="custom">
     </div>
     <div class="input-group" *ngIf="contents === 'text'">
       <label for="addToCartLabel">Label:</label>
@@ -28,20 +25,11 @@
       <input id="addToCartQuantity" [(ngModel)]="quantity" type="text">
     </div>
   </div>
-  <ng-container *ngIf="contents === 'text'">
-    <add-to-cart
-      (add)="addToCart($event)" [item]="cartItem"
-      [type]="editor" [position]="position" [(quantity)]="quantity"
-      [label]="label || 'Add to cart'">
-    </add-to-cart>
-  </ng-container>
-  <ng-container *ngIf="contents === 'html'">
-    <add-to-cart
-      (add)="addToCart($event)" [item]="cartItem"
-      [type]="editor" [position]="position" [(quantity)]="quantity">
-      <button type="button" class="custom-button">
-        Click to add
-      </button>
-    </add-to-cart>
-  </ng-container>
+  <add-to-cart
+    (add)="addToCart($event)" [item]="cartItem" [custom]="custom"
+    [type]="editor" [position]="position" [(quantity)]="quantity" [label]="label || 'Add to cart'">
+    <button type="button" class="custom-button">
+      Click to add
+    </button>
+  </add-to-cart>
 </div>

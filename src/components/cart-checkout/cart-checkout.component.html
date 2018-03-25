@@ -1,13 +1,11 @@
 <ng-container *ngIf="service === 'log' || service === 'http'">
-  <button class="cart-checkout-button" [disabled]="empty" *ngIf="!labelSet" (click)="doCheckout()">
+  <button class="cart-checkout-button" [disabled]="empty" *ngIf="!custom" (click)="doCheckout()">
     {{label}}
   </button>
-  <ng-container *ngIf="labelSet">
-      <span (click)="doCheckout()" [ngClass]="{'checkout-disabled': empty}">
-        <ng-content>
-        </ng-content>
-      </span>
-  </ng-container>
+  <span (click)="doCheckout()" [ngClass]="{'checkout-disabled': empty}" *ngIf="custom">
+    <ng-content>
+    </ng-content>
+  </span>
 </ng-container>
 <ng-container *ngIf="service === 'paypal'">
   <form action="https://www.paypal.com/cgi-bin/webscr" method="post" target="_top">

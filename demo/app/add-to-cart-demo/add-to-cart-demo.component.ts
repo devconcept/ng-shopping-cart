@@ -10,12 +10,13 @@ import { DemoCartItem } from '../demo-cart-item';
 export class AddToCartDemoComponent {
   cartItem: DemoCartItem;
   quantity = 1;
-  contents: 'text' | 'html' = 'text';
+  custom = false;
   label = 'Add to cart';
   editor = 'button';
   editorTypes: AddToCartType[] = ['button', 'text', 'number', 'dropdown'];
   position = 'left';
   positions: AddToCartPosition[] = ['left', 'right', 'top', 'bottom'];
+  customTypes = [{ name: 'True', value: true }, { name: 'False', value: false }];
 
   constructor(private cartService: CartService<DemoCartItem>) {
     this.cartItem = new DemoCartItem({
