@@ -12,7 +12,6 @@ An Angular component library to create shopping carts. Based on it's predecessor
 - A default `CartItem` class ready to go, easy to replace.
 - Several built-in `CartService` implementations to persist cart information in different ways.
 - Easily customizable styles with `Sass` variables
-- Internationalization support.
 
 # Installation
 
