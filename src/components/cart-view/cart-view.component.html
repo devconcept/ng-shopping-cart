@@ -1,5 +1,5 @@
 <div *ngIf="empty" class="cart-view-empty">
-  Your cart is empty
+  {{emptyText}}
 </div>
 <div *ngIf="!empty" class="cart-view" [ngClass]="display">
   <div class="cart-list-view" [ngClass]="{'no-images': !images}">
@@ -7,16 +7,16 @@
       <div class="cart-list-header-value cart-list-image-header">
       </div>
       <div class="cart-list-header-value cart-list-name-header">
-        Name
+        {{nameHeaderText}}
       </div>
       <div class="cart-list-header-value cart-list-quantity-header">
-        Quantity
+        {{quantityHeaderText}}
       </div>
       <div class="cart-list-header-value cart-list-price-header">
-        Price
+        {{priceHeaderText}}
       </div>
       <div class="cart-list-header-value cart-list-total-header">
-        Total
+        {{totalHeaderText}}
       </div>
     </div>
     <div *ngFor="let cartItem of items" class="cart-list-item">
@@ -49,7 +49,7 @@
         <div class="cart-empty-summary"></div>
         <div class="cart-empty-summary"></div>
         <div class="cart-tax-summary">
-          Tax: ({{taxRate}}%) {{tax | currency}}
+          {{taxFooterText}}: ({{taxRate}}%) {{tax | currency}}
         </div>
       </div>
       <div class="cart-list-summary">
@@ -58,7 +58,7 @@
         <div class="cart-empty-summary"></div>
         <div class="cart-empty-summary"></div>
         <div class="cart-shipping-summary">
-          Shipping: {{shipping | currency}}
+          {{shippingFooterText}}: {{shipping | currency}}
         </div>
       </div>
       <div class="cart-list-summary">
@@ -67,7 +67,7 @@
         <div class="cart-empty-summary"></div>
         <div class="cart-empty-summary"></div>
         <div class="cart-total-summary">
-          Total: {{cost | currency}}
+          {{totalFooterText}}: {{cost | currency}}
         </div>
       </div>
     </div>

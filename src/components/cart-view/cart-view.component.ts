@@ -11,6 +11,14 @@ export class CartViewComponent implements OnInit, OnDestroy {
   private serviceSubscription: any;
   @Input() display: CartViewDisplay = 'fixed';
   @Input() images = true;
+  @Input() emptyText = 'Your cart is empty';
+  @Input() nameHeaderText = 'Name';
+  @Input() quantityHeaderText = 'Quantity';
+  @Input() priceHeaderText = 'Price';
+  @Input() totalHeaderText = 'Price';
+  @Input() taxFooterText = 'Tax';
+  @Input() shippingFooterText = 'Shipping';
+  @Input() totalFooterText = 'Total';
   empty = true;
   items: CartItem[];
   taxRate = 0;
