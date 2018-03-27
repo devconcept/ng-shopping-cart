@@ -14,7 +14,7 @@ export class AddToCartComponent implements OnChanges {
 
   @Input() custom = false;
   @Input() item: CartItem;
-  @Input() label = 'Add to cart';
+  @Input() buttonText = 'Add to cart';
   @Input() buttonClass = 'add-to-cart-button';
   @Output() quantityChange = new EventEmitter<number>();
   @Input() type: AddToCartType = 'button';

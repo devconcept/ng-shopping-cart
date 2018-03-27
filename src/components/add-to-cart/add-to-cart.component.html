@@ -7,7 +7,7 @@
        [ngClass]="{'cart-inline-item': position === 'left' || position === 'right', 'cart-block-item': position === 'above' || position === 'below'}">
     <ng-container *ngIf="!custom">
       <button type="button" [ngClass]="buttonClass">
-        {{label}}
+        {{buttonText}}
       </button>
     </ng-container>
     <ng-content *ngIf="custom">

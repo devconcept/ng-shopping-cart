@@ -9,7 +9,7 @@
     <img *ngIf="" [src]="icon" class="summary-icon" alt="cart-summary-icon">
   </div>
   <div class="cart-summary-contents">
-    <div class="cart-summary-items">{{ totalItems | i18nPlural: itemMapping }}</div>
+    <div class="cart-summary-items">{{ totalItems | i18nPlural: totalPlurals }}</div>
     <div class="cart-summary-cost">{{totalCost | currency }}</div>
   </div>
 </div>

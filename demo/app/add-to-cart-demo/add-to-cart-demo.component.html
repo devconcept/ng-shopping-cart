@@ -27,7 +27,7 @@
   </div>
   <add-to-cart
     (add)="addToCart($event)" [item]="cartItem" [custom]="custom"
-    [type]="editor" [position]="position" [(quantity)]="quantity" [label]="label || 'Add to cart'">
+    [type]="editor" [position]="position" [(quantity)]="quantity" [buttonText]="label || 'Add to cart'">
     <button type="button" class="custom-button">
       Click to add
     </button>

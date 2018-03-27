@@ -27,7 +27,7 @@ export class CartViewComponent implements OnInit, OnDestroy {
   cost = 0;
 
   constructor(private cartService: CartService<any>) {
-    this.update();
+
   }
 
   update() {
@@ -54,6 +54,7 @@ export class CartViewComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit(): void {
+    this.update();
     this.serviceSubscription = this.cartService.onItemsChanged.subscribe(() => {
       this.update();
     });

@@ -9,9 +9,9 @@ export class CartSummaryComponent implements OnInit, OnDestroy {
   private cartSubscription: any;
 
   @Input() icon: string;
+  @Input() totalPlurals: { [k: string]: string } = { '=0': 'No items', '=1': 'One item', 'other': '# items' };
   totalItems = 0;
   totalCost = 0;
-  itemMapping: { [k: string]: string } = { '=0': 'No items', '=1': 'One item', 'other': '# items' };
 
   constructor(private cartService: CartService<any>) {
 
