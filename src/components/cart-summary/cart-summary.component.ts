@@ -1,4 +1,4 @@
-import { Component, OnInit, OnDestroy } from '@angular/core';
+import { Component, OnInit, OnDestroy, Input } from '@angular/core';
 import { CartService } from '../../services/cart.service';
 
 @Component({
@@ -7,6 +7,8 @@ import { CartService } from '../../services/cart.service';
 })
 export class CartSummaryComponent implements OnInit, OnDestroy {
   private cartSubscription: any;
+
+  @Input() icon: string;
   totalItems = 0;
   totalCost = 0;
   itemMapping: { [k: string]: string } = { '=0': 'No items', '=1': 'One item', 'other': '# items' };
