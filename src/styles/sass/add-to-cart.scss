@@ -2,12 +2,27 @@
 @import "mixins";
 
 .add-to-cart {
+  display: inline-block;
+
   .cart-inline-item {
     display: inline-block;
   }
 
   .cart-block-item {
     display: block;
+    text-align: center;
+
+    &.bottom {
+      margin-top: $add-to-cart-editor-margin;
+    }
+
+    &.top {
+      margin-bottom: $add-to-cart-editor-margin;
+    }
+  }
+
+  .cart-button-container {
+    text-align: center;
   }
 
   .add-to-cart-button {
@@ -15,14 +30,14 @@
   }
 
   .add-to-cart-input {
-    padding: 6px;
+    padding: $add-to-cart-editor-padding;
     border-radius: $input-radius;
-    border: solid 1px $input-border;
+    border: $add-to-cart-editor-border;
   }
 
   .add-to-cart-select {
-    padding: 6px;
+    padding: $add-to-cart-editor-padding;
     border-radius: $input-radius;
-    border: solid 1px $input-border;
+    border: $add-to-cart-editor-border;
   }
 }

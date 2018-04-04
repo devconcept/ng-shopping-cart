@@ -34,4 +34,7 @@ export class AddToCartDemoComponent {
     console.log('cart items', this.cartService.getItems());
   }
 
+  quantityChanged(value) {
+    console.log('editor changed', value);
+  }
 }

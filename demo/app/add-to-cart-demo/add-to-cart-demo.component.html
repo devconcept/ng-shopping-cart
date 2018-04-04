@@ -4,7 +4,7 @@
       <label for="addToCartContents">Custom:</label>
       <input id="addToCartContents" type="checkbox" [(ngModel)]="custom">
     </div>
-    <div class="input-group" *ngIf="contents === 'text'">
+    <div class="input-group" *ngIf="!custom">
       <label for="addToCartLabel">Label:</label>
       <input id="addToCartLabel" [(ngModel)]="label" type="text">
     </div>
@@ -22,12 +22,11 @@
     </div>
     <div class="input-group" *ngIf="editor === 'button'">
       <label for="addToCartQuantity">Quantity:</label>
-      <input id="addToCartQuantity" [(ngModel)]="quantity" type="text">
+      <input id="addToCartQuantity" [(ngModel)]="quantity" type="number">
     </div>
   </div>
-  <add-to-cart
-    (add)="addToCart($event)" [item]="cartItem" [custom]="custom"
-    [type]="editor" [position]="position" [(quantity)]="quantity" [buttonText]="label || 'Add to cart'">
+  <add-to-cart (added)="addToCart($event)" [item]="cartItem" [custom]="custom" (change)="quantityChanged($event)"
+               [type]="editor" [position]="position" [quantity]="quantity" [buttonText]="label || 'Add to cart'">
     <button type="button" class="custom-button">
       Click to add
     </button>

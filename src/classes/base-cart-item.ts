@@ -1,5 +1,8 @@
 import { CartItem } from './cart-item';
 
+/**
+ * A default implementation for CartItem
+ */
 export class BaseCartItem extends CartItem {
   public id: any;
   public name: string;
@@ -18,42 +21,73 @@ export class BaseCartItem extends CartItem {
     this.data = itemData.data || {};
   }
 
+  /**
+   * The base method to obtain the item id
+   */
   getId(): any {
     return this.id;
   }
 
+  /**
+   * Sets the current id for the item
+   * @param id {any}: The id value
+   */
   setId(id: any): void {
     this.id = id;
   }
 
+  /**
+   * Base method to return the name, a small text describing the item
+   */
   getName(): string {
     return this.name;
   }
 
+  /**
+   * Sets the name of the item
+   */
   setName(name: string): void {
     this.name = name;
   }
 
+  /**
+   * Base method to know how much the item cost
+   */
   getPrice(): number {
     return this.price;
   }
 
+  /**
+   * Set the price of the item
+   */
   setPrice(price: number): void {
     this.price = price;
   }
 
-  setQuantity(quantity: number): void {
-    this.quantity = quantity;
-  }
-
+  /**
+   * Base method to return how much of the item is ordered
+   */
   getQuantity(): number {
     return this.quantity;
   }
 
+  /**
+   * Base method to set how much of the item is ordered
+   */
+  setQuantity(quantity: number): void {
+    this.quantity = quantity;
+  }
+
+  /**
+   * Base method to get the url of an image for the item
+   */
   getImage(): string {
     return this.image;
   }
 
+  /**
+   * Sets the url of the item's image
+   */
   setImage(image: string): void {
     this.image = image;
   }

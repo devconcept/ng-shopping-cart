@@ -9,29 +9,17 @@ import { CartItem } from '../../classes/cart-item';
   templateUrl: './add-to-cart.component.html',
 })
 export class AddToCartComponent implements OnChanges {
-  private _quantity = 1;
   private _editorQuantity = 1;
-
   @Input() custom = false;
   @Input() item: CartItem;
   @Input() buttonText = 'Add to cart';
   @Input() buttonClass = 'add-to-cart-button';
-  @Output() quantityChange = new EventEmitter<number>();
   @Input() type: AddToCartType = 'button';
   @Input() position: AddToCartPosition = 'left';
-  @Output() add = new EventEmitter<CartItem>();
   @Input() dropdown: DropdownValue[] = [{ label: '1 item', value: 1 }, { label: '2 item', value: 2 }, { label: '5 items', value: 5 }];
-
-  @Input()
-  get quantity(): number {
-    return this._quantity;
-  }
-
-  set quantity(value: number) {
-    if (this.type === 'button') {
-      this._quantity = value;
-    }
-  }
+  @Input() quantity: number;
+  @Output() change = new EventEmitter<number>();
+  @Output() added = new EventEmitter<CartItem>();
 
   get editorQuantity(): number {
     return this._editorQuantity;
@@ -39,18 +27,32 @@ export class AddToCartComponent implements OnChanges {
 
   set editorQuantity(value: number) {
     this._editorQuantity = value;
-    this._quantity = this.editorQuantity;
-    this.quantityChange.emit(this._quantity);
+    this.change.emit(value);
   }
 
   constructor(private cartService: CartService<any>) {
   }
 
+  private itemQuantity(): number {
+    if (this.type === 'button') {
+      if (this.quantity) {
+        return this.quantity;
+      }
+      if (this.item) {
+        return this.item.getQuantity();
+      }
+      return 1;
+    } else {
+      return this._editorQuantity;
+    }
+  }
+
   ngOnChanges(changes: SimpleChanges): void {
     if (changes['type'] && changes['type'].currentValue === 'dropdown' && this.dropdown.length) {
-      const match = this.dropdown.find(i => i.value === this._quantity);
+      const quantity = this.itemQuantity();
+      const match = this.dropdown.find(i => i.value === quantity);
       if (!match) {
-        this.editorQuantity = this.dropdown[0].value;
+        this._editorQuantity = this.dropdown[0].value;
       }
     }
   }
@@ -58,10 +60,10 @@ export class AddToCartComponent implements OnChanges {
   addToCart(evt) {
     evt.stopPropagation();
     if (this.item) {
-      const quantity = parseFloat(this._quantity.toString());
+      const quantity = this.itemQuantity();
       this.item.setQuantity(quantity);
       this.cartService.addItem(this.item);
-      this.add.emit(this.item);
+      this.added.emit(this.item);
     }
   }
 
