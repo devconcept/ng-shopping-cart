@@ -32,4 +32,4 @@ yarn add ng-shopping-cart
 
 Hang tight while we write the docs
 
-
+In the meantime check the [wiki](https://github.com/devconcept/ng-shopping-cart/wiki) for updates
