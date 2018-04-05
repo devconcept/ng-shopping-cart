@@ -1,6 +1,6 @@
 <ng-container *ngIf="service === 'log' || service === 'http'">
   <button class="cart-checkout-button" [disabled]="empty" *ngIf="!custom" (click)="doCheckout()">
-    {{label}}
+    {{buttonText}}
   </button>
   <span (click)="doCheckout()" [ngClass]="{'checkout-disabled': empty}" *ngIf="custom">
     <ng-content>
