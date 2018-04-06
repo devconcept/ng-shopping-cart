@@ -1,5 +1,5 @@
-import { BaseCartItem } from '../classes/base-cart-item';
-import { SessionStorageCartService } from './session-storage-cart.service';
+import { BaseCartItem } from '../../classes/base-cart-item';
+import { SessionStorageCartService } from '../session-storage-cart.service';
 
 describe('SessionStorageCartService', () => {
   let service: SessionStorageCartService<BaseCartItem>;
