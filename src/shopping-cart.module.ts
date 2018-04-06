@@ -65,7 +65,9 @@ export class ShoppingCartModule {
   static forRoot(options: CartModuleOptions = {}): ModuleWithProviders {
     const serviceType = options.serviceType || 'localStorage';
     let serviceOptions = null;
-    if (!options.serviceOptions && (serviceType === 'localStorage' || serviceType === 'sessionStorage')) {
+    if (options.serviceOptions) {
+      serviceOptions = options.serviceOptions;
+    } else if (serviceType === 'localStorage' || serviceType === 'sessionStorage') {
       serviceOptions = { storageKey: 'NgShoppingCart', clearOnError: true };
     }
     return {
