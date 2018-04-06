@@ -19,43 +19,39 @@ export abstract class BrowserStorageCartService<T extends CartItem> extends Memo
     this.itemClass = itemClass;
   }
 
-  protected readStorage(): T[] {
-    const storageContents = this.storage.getItem(this.storageKey);
-    if (!storageContents) {
-      return [];
+  private resetStorage() {
+    this.setTaxRate(0);
+    this.setShipping(0);
+    this.clear();
+    this.save();
+  }
+
+  protected save() {
+    this.storage.setItem(this.storageKey, JSON.stringify(this.toObject()));
+  }
+
+  protected restore() {
+    if (!this.storage.getItem(this.storageKey)) {
+      this.resetStorage();
+      return;
     }
-    let contents = [];
     try {
-      contents = JSON.parse(storageContents).map(i => {
+      const sc = JSON.parse(this.storage.getItem(this.storageKey));
+      if (!(sc.hasOwnProperty('items') && Array.isArray(sc.items) && sc.hasOwnProperty('taxRate') && sc.hasOwnProperty('shipping'))) {
+        this.resetStorage();
+        return;
+      }
+      this._items = sc.items.map(i => {
         if (this.itemClass.fromJSON) {
           return this.itemClass.fromJSON(i);
         }
         return new this.itemClass(i);
       });
+      this.setTaxRate(parseFloat(sc.taxRate));
+      this.setShipping(parseFloat(sc.shipping));
     } catch (e) {
-      this.writeStorage([]);
-      this.storage.setItem(this.storageKey + 'Shipping', '0');
-      this.storage.setItem(this.storageKey + 'TaxRate', '0');
+      this.resetStorage();
     }
-    return contents;
-  }
-
-  protected writeStorage(items: T[]): void {
-    this.storage.setItem(this.storageKey, JSON.stringify(items));
-  }
-
-  protected save() {
-    this.writeStorage(this._items);
-    this.storage.setItem(this.storageKey + 'Shipping', this._shipping.toString());
-    this.storage.setItem(this.storageKey + 'TaxRate', this._taxRate.toString());
-  }
-
-  protected restore() {
-    const taxRate = this.storage.getItem(this.storageKey + 'TaxRate');
-    const shipping = this.storage.getItem(this.storageKey + 'Shipping');
-    this._items = this.readStorage();
-    this._taxRate = taxRate ? parseFloat(taxRate) : 0;
-    this._shipping = shipping ? parseFloat(shipping) : 0;
   }
 
   addItem(item: T): void {
