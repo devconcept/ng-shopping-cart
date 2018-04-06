@@ -13,22 +13,18 @@ import { AddToCartType } from '../../types';
 export class AddToCartEditorComponent {
   /**
    * The type of editor to display.
-   * @type {AddToCartType}
    */
   @Input() type: AddToCartType;
   /**
    * A list of values to display in the dropdown editor.
-   * @type {DropdownValue[]}
    */
   @Input() dropdown: DropdownValue[];
   /**
    * The value to display in the editor
-   * @type {number}
    */
   @Input() value: number;
   /**
    * Emits a the value of the editor when the user changes it
-   * @emits {number}
    */
   @Output() valueChange = new EventEmitter<number>();
 

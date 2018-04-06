@@ -22,7 +22,7 @@ export class BaseCartItem extends CartItem {
   }
 
   /**
-   * The base method to obtain the item id
+   * Abstract base method implementation to obtain the item id
    */
   getId(): any {
     return this.id;
@@ -37,7 +37,7 @@ export class BaseCartItem extends CartItem {
   }
 
   /**
-   * Base method to return the name, a small text describing the item
+   * Abstract base method implementation to return the name, a small text describing the item
    */
   getName(): string {
     return this.name;
@@ -51,7 +51,7 @@ export class BaseCartItem extends CartItem {
   }
 
   /**
-   * Base method to know how much the item cost
+   * Abstract base method implementation to know how much the item cost
    */
   getPrice(): number {
     return this.price;
@@ -65,21 +65,21 @@ export class BaseCartItem extends CartItem {
   }
 
   /**
-   * Base method to return how much of the item is ordered
+   * Abstract base method implementation to return how much of the item is ordered
    */
   getQuantity(): number {
     return this.quantity;
   }
 
   /**
-   * Base method to set how much of the item is ordered
+   * Abstract base method implementation to set how much of the item is ordered
    */
   setQuantity(quantity: number): void {
     this.quantity = quantity;
   }
 
   /**
-   * Base method to get the url of an image for the item
+   * Abstract base method implementation to get the url of an image for the item
    */
   getImage(): string {
     return this.image;

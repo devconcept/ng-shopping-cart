@@ -14,52 +14,42 @@ export class CartViewComponent implements OnInit, OnDestroy {
   private serviceSubscription: any;
   /**
    * Changes the appearance how the cart view displays in different screen sizes
-   * @type {CartViewDisplay}
    */
   @Input() display: CartViewDisplay = 'fixed';
   /**
    * Whether to include images in the cart or not.
-   * @type {boolean}
    */
   @Input() images = true;
   /**
    * The text to show when the cart has no items in it.
-   * @type {string}
    */
   @Input() emptyText = 'Your cart is empty';
   /**
    * The text to display in the header of the name column.
-   * @type {string}
    */
   @Input() nameHeaderText = 'Name';
   /**
    * The text to display in the header of the quantity column.
-   * @type {string}
    */
   @Input() quantityHeaderText = 'Quantity';
   /**
    * The text to display in the header of the price column.
-   * @type {string}
    */
   @Input() priceHeaderText = 'Price';
   /**
    * The text to display in the header of the total per item column.
-   * @type {string}
    */
   @Input() totalHeaderText = 'Total';
   /**
    * The text to display in the tax section of the footer.
-   * @type {string}
    */
   @Input() taxFooterText = 'Tax';
   /**
    * The text to display in the shipping section of the footer.
-   * @type {string}
    */
   @Input() shippingFooterText = 'Shipping';
   /**
    * The text to display in the total section of the footer.
-   * @type {string}
    */
   @Input() totalFooterText = 'Total';
   empty = true;

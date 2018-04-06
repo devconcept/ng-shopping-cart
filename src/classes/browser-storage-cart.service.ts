@@ -2,6 +2,10 @@ import { CartItem } from './cart-item';
 import { MemoryCartService } from '../services/memory-cart.service';
 import { BrowserStorageServiceConfiguration } from '../interfaces/browser-storage-service-options';
 
+/**
+ * The base class for all CartService implementations that use the browser storage
+ * @ignore
+ */
 export abstract class BrowserStorageCartService<T extends CartItem> extends MemoryCartService<T> {
   protected itemClass: any;
   protected storage: Storage;

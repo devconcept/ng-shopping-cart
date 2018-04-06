@@ -5,13 +5,29 @@ import {
 import { ShowcaseItem } from '../interfaces/showcase-item';
 import { CartItem } from '../classes/cart-item';
 
+/**
+ * A directive to render items for the showcase component
+ * @ignore
+ */
 @Directive({
   selector: '[cartShowcaseOutlet]',
 })
 export class ShowcaseOutletDirective implements OnChanges, OnDestroy {
+  /**
+   * The component to render
+   */
   @Input() cartShowcaseOutlet: Type<any>;
+  /**
+   * The injector of the selected component
+   */
   @Input() cartShowcaseOutletInjector: Injector;
+  /**
+   * The module factory of the selected component
+   */
   @Input() cartShowcaseOutletNgModuleFactory: NgModuleFactory<any>;
+  /**
+   * The CartItem information to pass into the component
+   */
   @Input() cartShowcaseOutletItem: CartItem;
 
   private _componentRef: ComponentRef<any> | null = null;

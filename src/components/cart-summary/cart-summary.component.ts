@@ -12,13 +12,11 @@ export class CartSummaryComponent implements OnInit, OnDestroy {
   private cartSubscription: any;
   /**
    * The url of an icon to show on the summary. Use this to replace the default icon which is an svg with the image of a shopping cart.
-   * @type: string;
    */
   @Input() icon: string;
   /**
    * The component uses the i18nPlural pipe to translate the number of items of the cart according to locale rules using the ICU format.
    * You can use this binding to internationalize you app or to change how values are converted into words.
-   * @type {{'=0': string; '=1': string; other: string}}
    */
   @Input() totalPlurals: { [k: string]: string } = { '=0': 'No items', '=1': 'One item', 'other': '# items' };
   totalItems = 0;

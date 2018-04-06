@@ -25,33 +25,27 @@ export class CartCheckoutComponent implements OnChanges, OnInit, OnDestroy {
    *
    * > This component captures clicks events bubbling from its projected content. Make sure the event keeps bubbling only when you want
    * the checkout operation to start.
-   * @type {boolean}
    */
   @Input() custom = false;
   /**
    * Changes the default text of the component's button.
-   * @type {string}
    */
   @Input() buttonText = 'Checkout';
   /**
    * Sets the type of service to be used when initiating the checkout.
-   * @type {CheckoutType}
    */
   @Input() service: CheckoutType = 'log';
   /**
    * Depending on the type of the service you might need to add some configuration to it. This input allows you to change that
    * configuration.
-   * @type {CheckoutSettings}
    */
   @Input() settings: CheckoutSettings = null;
   /**
    * Emits the result of the checkout operation. When [service] is set to 'paypal' this event is never emitted.
-   * @emits {any}
    */
   @Output() checkout = new EventEmitter<any>();
   /**
    * When the [service] is set to 'http' and the checkout operation fails the error thrown can be captured using this output.
-   * @emits {any}
    */
   @Output() error = new EventEmitter<any>();
 

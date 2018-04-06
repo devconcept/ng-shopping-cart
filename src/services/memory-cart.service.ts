@@ -2,6 +2,9 @@ import { CartService } from './cart.service';
 import { CartItem } from '../classes/cart-item';
 import { Injectable } from '@angular/core';
 
+/**
+ * An implementation of the CartService using an in-memory array to store items
+ */
 @Injectable()
 export class MemoryCartService<T extends CartItem> extends CartService<T> {
   protected _items: T[] = [];

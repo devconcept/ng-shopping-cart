@@ -5,6 +5,9 @@ import { BrowserStorageServiceConfiguration } from '../interfaces/browser-storag
 import { CART_ITEM_CLASS } from './item-class.token';
 import { CART_SERVICE_CONFIGURATION } from './service-configuration.token';
 
+/**
+ * An implementation of the cart service using localStorage to store items
+ */
 @Injectable()
 export class LocalStorageCartService<T extends CartItem> extends BrowserStorageCartService<T> {
   constructor(@Inject(CART_ITEM_CLASS) itemClass, @Inject(CART_SERVICE_CONFIGURATION) configuration: BrowserStorageServiceConfiguration) {
