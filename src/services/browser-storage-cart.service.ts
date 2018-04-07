@@ -1,5 +1,5 @@
-import { CartItem } from './cart-item';
-import { MemoryCartService } from '../services/memory-cart.service';
+import { CartItem } from '../classes/cart-item';
+import { MemoryCartService } from './memory-cart.service';
 import { BrowserStorageServiceConfiguration } from '../interfaces/browser-storage-service-options';
 
 /**
