@@ -1,6 +1,8 @@
 /**
  * Configuration options for the NgShoppingCart module in the root module of your application.
  */
+import { CartModuleServiceType } from '../types';
+
 export interface CartModuleOptions  {
   /**
    * The class reference for the items used in your cart.
@@ -9,7 +11,7 @@ export interface CartModuleOptions  {
   /**
    * Sets the type of service to use.
    */
-  serviceType?: 'memory' | 'localStorage' | 'sessionStorage' | 'remote';
+  serviceType?: CartModuleServiceType;
   /**
    * Configuration for the service if any is required.
    */
