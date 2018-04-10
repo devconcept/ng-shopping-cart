@@ -1,0 +1,17 @@
+@import "../styles/mixins";
+
+.title-wrapper {
+  display: table;
+  height: 5em;
+  margin-bottom: 1em;
+
+  .title-block {
+    padding: 5px;
+    display: table-cell;
+    vertical-align: middle;
+
+    img {
+      height: 100%;
+    }
+  }
+}
