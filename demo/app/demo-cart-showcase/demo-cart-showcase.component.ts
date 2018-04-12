@@ -3,9 +3,8 @@ import { CartItem } from '../../../src/classes/cart-item';
 import { BaseCartItem } from '../../../src/classes/base-cart-item';
 
 @Component({
-  selector: 'cart-showcase-demo',
-  templateUrl: './cart-showcase-demo.component.html',
-  styleUrls: ['./cart-showcase-demo.component.scss']
+  selector: 'demo-cart-showcase',
+  templateUrl: './demo-cart-showcase.component.html',
 })
 export class CartShowcaseDemoComponent {
   ratios: string[] = [];

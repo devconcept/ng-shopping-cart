@@ -1,14 +1,14 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { AddToCartDemoComponent } from './add-to-cart-demo.component';
+import { DemoAddToCartComponent } from './demo-add-to-cart.component';
 import { FormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 import { AddToCartComponent, CartService, MemoryCartService } from '../../../src';
 import { AddToCartEditorComponent } from '../../../src/components/add-to-cart-editor/add-to-cart-editor.component';
 
-describe('AddToCartDemoComponent', () => {
-  let component: AddToCartDemoComponent;
-  let fixture: ComponentFixture<AddToCartDemoComponent>;
+describe('DemoAddToCartComponent', () => {
+  let component: DemoAddToCartComponent;
+  let fixture: ComponentFixture<DemoAddToCartComponent>;
 
   beforeEach(async(() => {
     TestBed
@@ -16,7 +16,7 @@ describe('AddToCartDemoComponent', () => {
         declarations: [
           AddToCartComponent,
           AddToCartEditorComponent,
-          AddToCartDemoComponent
+          DemoAddToCartComponent
         ],
         imports: [
           CommonModule,
@@ -30,7 +30,7 @@ describe('AddToCartDemoComponent', () => {
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(AddToCartDemoComponent);
+    fixture = TestBed.createComponent(DemoAddToCartComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

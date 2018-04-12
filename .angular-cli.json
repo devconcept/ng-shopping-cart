@@ -38,7 +38,7 @@
       "test": "test.ts",
       "tsconfig": "tsconfig.app.json",
       "testTsconfig": "tsconfig.spec.json",
-      "prefix": "cart",
+      "prefix": "'demo'",
       "styles": [
         "styles.scss"
       ],
@@ -62,7 +62,7 @@
       "test": "test.ts",
       "tsconfig": "tsconfig.app.json",
       "testTsconfig": "tsconfig.spec.json",
-      "prefix": "cart",
+      "prefix": "'doc'",
       "styles": [
         "styles.scss"
       ],

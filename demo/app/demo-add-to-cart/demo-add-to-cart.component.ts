@@ -3,11 +3,11 @@ import { AddToCartType, AddToCartPosition, CartService } from '../../../src';
 import { DemoCartItem } from '../demo-cart-item';
 
 @Component({
-  selector: 'cart-add-demo',
-  templateUrl: './add-to-cart-demo.component.html',
-  styleUrls: ['./add-to-cart-demo.component.scss']
+  selector: 'demo-add-to-cart',
+  templateUrl: './demo-add-to-cart.component.html',
+  styleUrls: ['./demo-add-to-cart.component.scss']
 })
-export class AddToCartDemoComponent {
+export class DemoAddToCartComponent {
   cartItem: DemoCartItem;
   quantity = 1;
   custom = false;

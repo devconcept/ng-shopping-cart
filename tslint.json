@@ -3,7 +3,9 @@
     "node_modules/codelyzer"
   ],
   "rules": {
-    "no-unused-variable": [true],
+    "no-unused-variable": [
+      true
+    ],
     "arrow-return-shorthand": true,
     "callable-types": true,
     "class-name": true,
@@ -121,13 +123,13 @@
     "directive-selector": [
       true,
       "attribute",
-      "cart",
+      "'demo'",
       "camelCase"
     ],
     "component-selector": [
       true,
       "element",
-      "cart",
+      "'demo'",
       "kebab-case"
     ],
     "no-output-on-prefix": true,

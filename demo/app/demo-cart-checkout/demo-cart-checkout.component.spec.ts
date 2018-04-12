@@ -1,17 +1,17 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { CartCheckoutDemoComponent } from './cart-checkout-demo.component';
+import { DemoCheckoutComponent } from './demo-cart-checkout.component';
 import { CartCheckoutComponent, CartService, MemoryCartService } from '../../../src';
 import { HttpClientModule } from '@angular/common/http';
 
-describe('CartCheckoutDemoComponent', () => {
-  let component: CartCheckoutDemoComponent;
-  let fixture: ComponentFixture<CartCheckoutDemoComponent>;
+describe('DemoCheckoutComponent', () => {
+  let component: DemoCheckoutComponent;
+  let fixture: ComponentFixture<DemoCheckoutComponent>;
 
   beforeEach(async(() => {
     TestBed
       .configureTestingModule({
-        declarations: [CartCheckoutDemoComponent, CartCheckoutComponent],
+        declarations: [DemoCheckoutComponent, CartCheckoutComponent],
         imports: [HttpClientModule],
         providers: [
           { provide: CartService, useClass: MemoryCartService }
@@ -21,7 +21,7 @@ describe('CartCheckoutDemoComponent', () => {
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(CartCheckoutDemoComponent);
+    fixture = TestBed.createComponent(DemoCheckoutComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

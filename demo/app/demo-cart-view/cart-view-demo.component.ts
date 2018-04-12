@@ -2,7 +2,7 @@ import { Component } from '@angular/core';
 import { CartViewDisplay } from '../../../src/types';
 
 @Component({
-  selector: 'cart-view-demo',
+  selector: 'demo-cart-view',
   templateUrl: './cart-view-demo.component.html',
   styleUrls: ['./cart-view-demo.component.scss']
 })
