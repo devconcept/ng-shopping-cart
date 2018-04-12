@@ -8,7 +8,7 @@ const OUTPUT = join(BASE, OUT, '/app/api');
 const TEMPLATES = ['./docs/templates/'];
 
 const TYPESCRIPT_SOURCES = [
-  {include: './(components|directives)/**/*.ts', exclude: './**/*.spec.ts'},
+  {include: './components/**/*.ts', exclude: './**/*.spec.ts'},
   {include: './services/**/*.ts', exclude: './**/test/*.ts'},
   './classes/**/*.ts',
   './interfaces/**/*.ts',

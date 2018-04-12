@@ -25,7 +25,7 @@ module.exports = exports = function generateNgModules(getTypeFolder) {
           dependencies: types[name]
         });
       });
-      docs = docs.concat(ngModules);
+      docs = docs.concat(ngModules, ...ngModules.map(m => m.dependencies));
       return docs;
     }
   };

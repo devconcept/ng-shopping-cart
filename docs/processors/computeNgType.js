@@ -18,6 +18,12 @@ module.exports = function computeNgType() {
             doc.ngType = 'component';
             doc.template = doc.ngType;
             doc.ngSelector = component.argumentInfo[0].selector;
+            doc.inputs = doc.members.filter(m => {
+              return m.decorators && m.decorators.findIndex(d => d.name === 'Input') !== -1;
+            });
+            doc.outputs = doc.members.filter(m => {
+              return m.decorators && m.decorators.findIndex(d => d.name === 'Output') !== -1;
+            })
           }
         }
       });

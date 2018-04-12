@@ -1,6 +1,10 @@
-module.exports = function toId() {
+module.exports = function backTicks() {
   return {
     name: 'backTicks',
-    process: function(str) { return str.split('|').map(t => ('`' + t.trim() + '`')).join(' | ') }
+    process: function(str) {
+      return str.split('|')
+        .map(t => ('`' + t.trim() + '`'))
+        .join(' | ')
+    }
   };
 };

@@ -29,9 +29,11 @@ module.exports = exports = new Package('docsCore', [basePkg, njPkg, jsDocsPkg, t
   .config(function (templateFinder, templateEngine) {
     templateFinder.templateFolders = TEMPLATES;
     templateFinder.templatePatterns = [
+      '${doc.template}.html',
       '${doc.template}.ts',
-      '${doc.template}.ts',
-      '${doc.docType}.ts',
+      '${doc.ngType}.html',
+      '${doc.ngType}.ts',
+      '${doc.docType}.html',
       '${doc.docType}.ts',
       'common.ts'
     ];
@@ -40,7 +42,8 @@ module.exports = exports = new Package('docsCore', [basePkg, njPkg, jsDocsPkg, t
       variableEnd: '$}'
     };
     templateEngine.filters.push(
-      require('../rendering/backTicks')()
+      require('../rendering/backTicks')(),
+      require('../rendering/removeParagraph')()
     );
   })
   .config(function (readTypeScriptModules, writeFilesProcessor) {
@@ -55,19 +58,35 @@ module.exports = exports = new Package('docsCore', [basePkg, njPkg, jsDocsPkg, t
         getOutputPath: function (doc) {
           const folder = getTypeFolder(doc);
           const file = doc.ngType === 'component' ? doc.computedName.replace(/-component/, '') : doc.computedName;
-          return `${folder}/components/${file}.component.ts`
+          return `${folder}/components/${file}.component.html`
         },
-        pathTemplate: '${moduleDoc.path}/${computedName}.ts'
+        getPath: function (doc) {
+          if (doc.ngType) {
+            return '${ngType}.html';
+          }
+          return '${docType}.html'
+        }
       },
       {
         docTypes: ['ngModule', 'ngRoute'],
         getOutputPath: function (doc) {
-          if (doc.location) {
-            return `${doc.location}/${doc.file}.ts`
+          if (doc.docType === 'ngModule') {
+            return `${doc.location}/${doc.location}.module.ts`
           }
-          return doc.file + '.ts';
+          if (doc.location) {
+            return `${doc.location}/routes.ts`;
+          }
+          return 'routes.ts';
         },
-        pathTemplate: '${docType}.ts'
+        pathTemplate: '${ngType}.ts'
+      },
+      {
+        docTypes: ['ngComponent'],
+        getOutputPath: function (doc) {
+          const file = doc.computedName.replace(/-component/, '');
+          return `${doc.location}/components/${file}.component.ts`
+        },
+        pathTemplate: '${ngType}.ts'
       },
       {
         docTypes: ['function', 'var', 'const', 'let', 'enum', 'value-module'],
@@ -78,7 +97,7 @@ module.exports = exports = new Package('docsCore', [basePkg, njPkg, jsDocsPkg, t
   })
   .config(function(computeIdsProcessor) {
     computeIdsProcessor.idTemplates.push({
-      docTypes: ['ngModule', 'ngRoute'],
+      docTypes: ['ngModule', 'ngRoute', 'ngComponent'],
       getId: function(doc) {
         return doc.name
       },

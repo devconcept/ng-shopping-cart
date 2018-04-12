@@ -5,9 +5,7 @@ module.exports = exports = class NgRouteDoc {
     this.name = ngModule.name + 'Route';
     this.location = ngModule.location;
     this.docType = 'ngRoute';
-    this.file = 'routes.ts';
-    this.outputPath = this.location ? this.location + '/' + this.file : this.file;
-    this.template = 'ngRoute';
+    this.ngType = 'route';
     this.dependencies = ngModule.dependencies;
     this.lazyRoutes = lazyRoutes;
   }

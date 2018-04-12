@@ -7,13 +7,12 @@ module.exports = exports = class NgModuleDoc {
     this.name = upperFirst(name) + 'Module';
     this.file = name + '.module';
     this.docType = 'ngModule';
-    this.outputPath = name + '/' + name + '.module.ts';
-    this.template = 'ngModule';
+    this.ngType = 'module';
     this.dependencies = dependencies.map(c => {
       return new NgComponentDoc({
         name: upperFirst(c.name) + 'Component',
-        path: c.computedName + '.component',
-        computedName: c.computedName
+        computedName: c.computedName,
+        location: name
       })
     });
   }

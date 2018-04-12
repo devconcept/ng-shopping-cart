@@ -1,0 +1,23 @@
+<h2>{$ doc.name $}</h2>
+<span class="badge badge-warning">Component</span>
+{$ doc.description | marked $}
+{% if doc.inputs.length > 0 %}
+<i>@Input()</i>
+{% for input in doc.inputs %}
+{% if input.description %}
+<h4><code>{$ input.name $}</code></h4>
+<p>Type:<code>{$ input.type $}</code></p>
+{$ input.description | marked $}
+{% endif %}
+{% endfor %}
+{% endif %}
+{% if doc.outputs.length > 0 %}
+<i>@Output()</i>
+{% for output in doc.outputs %}
+{% if output.description %}
+<h4><code>{$ output.name $}</code></h4>
+<p>Emits:<code>{$ output.type.typeExpression $}</code></p>
+{$ output.description | marked $}
+{% endif %}
+{% endfor %}
+{% endif %}

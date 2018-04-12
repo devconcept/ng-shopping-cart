@@ -8,9 +8,7 @@ module.exports = exports = function generateNgRoutes() {
     $runBefore: ['computing-ids'],
     $process: function (docs) {
       const modules = docs.filter(doc => doc.docType === 'ngModule');
-      const ngRoutes = modules.map(m => {
-        return new NgRouteDoc(m);
-      });
+      const ngRoutes = modules.map(m => new NgRouteDoc(m));
       const apiRoute = new NgRouteDoc({
         name: 'ApiModule',
         location: '',
