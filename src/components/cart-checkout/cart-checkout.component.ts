@@ -1,6 +1,6 @@
 import { Component, EventEmitter, Input, OnChanges, OnDestroy, OnInit, Output, SimpleChanges } from '@angular/core';
 import { CheckoutSettings, CheckoutType } from '../../types';
-import { CartService } from '../../services/cart.service';
+import { CartService } from '../../classes/cart.service';
 import { HttpClient, HttpRequest } from '@angular/common/http';
 import { CheckoutPaypalSettings } from '../../interfaces/checkout-paypal-settings';
 import { CheckoutHttpSettings } from '../../interfaces/checkout-http-settings';
@@ -42,10 +42,12 @@ export class CartCheckoutComponent implements OnChanges, OnInit, OnDestroy {
   @Input() settings: CheckoutSettings = null;
   /**
    * Emits the result of the checkout operation. When [service] is set to 'paypal' this event is never emitted.
+   * @type {any}
    */
   @Output() checkout = new EventEmitter<any>();
   /**
    * When the [service] is set to 'http' and the checkout operation fails the error thrown can be captured using this output.
+   * @type {any}
    */
   @Output() error = new EventEmitter<any>();
 

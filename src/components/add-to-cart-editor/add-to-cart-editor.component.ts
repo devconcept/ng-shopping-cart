@@ -25,6 +25,7 @@ export class AddToCartEditorComponent {
   @Input() value: number;
   /**
    * Emits a the value of the editor when the user changes it
+   * @type {number}
    */
   @Output() valueChange = new EventEmitter<number>();
 

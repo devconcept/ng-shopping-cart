@@ -1,7 +1,7 @@
 import { Component, EventEmitter, Input, OnChanges, Output, SimpleChanges } from '@angular/core';
 import { DropdownValue } from '../../interfaces/dropdown-value';
 import { AddToCartPosition, AddToCartType } from '../../types';
-import { CartService } from '../../services/cart.service';
+import { CartService } from '../../classes/cart.service';
 import { CartItem } from '../../classes/cart-item';
 
 /**
@@ -57,10 +57,12 @@ export class AddToCartComponent implements OnChanges {
   @Input() quantity: number;
   /**
    * This event is fired when the component uses an editor and its value is changed by the user.
+   * @type {number}
    */
   @Output() change = new EventEmitter<number>();
   /**
    * This event is fired when the item is added to the cart.
+   * @type {CartItem}
    */
   @Output() added = new EventEmitter<CartItem>();
 

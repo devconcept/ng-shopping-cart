@@ -3,7 +3,7 @@ import { CartCheckoutComponent } from './components/cart-checkout/cart-checkout.
 import { CartSummaryComponent } from './components/cart-summary/cart-summary.component';
 import { AddToCartType, AddToCartPosition, CartViewDisplay, CheckoutType } from './types';
 import { ShoppingCartModule } from './shopping-cart.module';
-import { CartService } from './services/cart.service';
+import { CartService } from './classes/cart.service';
 import { MemoryCartService } from './services/memory-cart.service';
 import { CartShowcaseComponent } from './components/cart-showcase/cart-showcase.component';
 import { CartShowcaseItemComponent } from './components/cart-showcase-item/cart-showcase-item.component';

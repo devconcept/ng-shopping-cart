@@ -1,4 +1,4 @@
-import { CartItem } from '../classes/cart-item';
+import { CartItem } from './cart-item';
 import { EventEmitter } from '@angular/core';
 
 /**
@@ -7,14 +7,17 @@ import { EventEmitter } from '@angular/core';
 export abstract class CartService<T extends CartItem> {
   /**
    * Emits an event every time an item is added to the cart
+   * @type {CartItem}
    */
   public onItemAdded: EventEmitter<T> = new EventEmitter<T>();
   /**
    * Emits an event every time an item is removed from the cart
+   * @type {CartItem}
    */
   public onItemRemoved: EventEmitter<T> = new EventEmitter<T>();
   /**
    * Emits an event every time an item is added or removed from the cart
+   * @type {number}
    */
   public onItemsChanged: EventEmitter<number> = new EventEmitter<number>();
 

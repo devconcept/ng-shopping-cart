@@ -5,23 +5,23 @@ const rename = require('gulp-rename');
 const sourceMaps = require('gulp-sourcemaps');
 const cleanCss = require('gulp-clean-css');
 
-gulp.task('clean', () => {
+gulp.task('lib:clean', () => {
   return del('./dist/styles');
 });
 
-gulp.task('sass', ['clean'], () => {
+gulp.task('lib:sass', ['lib:clean'], () => {
   return gulp.src('./src/styles/sass/*.*')
     .pipe(gulp.dest('./dist/styles/sass'))
 });
 
-gulp.task('css:compile', ['clean'], () => {
+gulp.task('lib:css:compile', ['lib:clean'], () => {
   return gulp.src('./src/styles/sass/index.scss')
     .pipe(sass().on('error', sass.logError))
     .pipe(rename('ng-shopping-cart.css'))
     .pipe(gulp.dest('./dist/styles/css'))
 });
 
-gulp.task('css:min', ['css:compile'], () => {
+gulp.task('lib:css:min', ['lib:css:compile'], () => {
   return gulp.src('./dist/styles/css/ng-shopping-cart.css')
     .pipe(rename('ng-shopping-cart.min.css'))
     .pipe(sourceMaps.init())
@@ -30,6 +30,18 @@ gulp.task('css:min', ['css:compile'], () => {
     .pipe(gulp.dest('./dist/styles/css'))
 });
 
-gulp.task('css', ['css:min']);
+gulp.task('lib:css', ['lib:css:min']);
 
-gulp.task('default', ['sass', 'css']);
+gulp.task('docs:clean', () => {
+  return del('./docs-build');
+});
+
+gulp.task('docs:site', ['docs:clean'], () => {
+  return gulp.src('./docs/site/**/*.*')
+    .pipe(gulp.dest('./docs-build'))
+});
+
+gulp.task('docs', ['docs:site']);
+gulp.task('lib', ['lib:sass', 'lib:css']);
+
+gulp.task('default', ['lib']);

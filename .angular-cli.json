@@ -50,7 +50,7 @@
       }
     },
     {
-      "root": "docs/site",
+      "root": "docs-build",
       "outDir": "docs-dist",
       "assets": [
         "assets",
@@ -64,6 +64,7 @@
       "testTsconfig": "tsconfig.spec.json",
       "prefix": "'doc'",
       "styles": [
+        "../node_modules/bootstrap/dist/css/bootstrap.css",
         "styles.scss"
       ],
       "scripts": [],

@@ -1,2 +1,20 @@
 /* You can add global styles to this file, and also import other style files */
 
+pre[class*="language-"] {
+  border-radius: 0;
+}
+
+a.header, a.header:hover {
+  text-decoration: none;
+  color: #000000;
+  cursor: pointer;
+}
+
+h2:focus, a:focus {
+  outline: none transparent 0;
+}
+
+.navbar-brand svg {
+  width: 28px;
+  height: 28px;
+}
