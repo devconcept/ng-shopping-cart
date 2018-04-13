@@ -4,8 +4,8 @@ const OUT = '/docs-build';
 
 const BASE = resolve(__dirname, '..');
 const SOURCE = join(BASE, '/src');
-const OUTPUT = join(BASE, OUT, '/app/api');
-const TEMPLATES = ['./docs/templates/'];
+const API_OUTPUT = join(BASE, OUT, '/app/api');
+const API_TEMPLATES = ['./docs/api-package/templates/'];
 
 const TYPESCRIPT_SOURCES = [
   {include: './components/**/*.ts', exclude: './**/*.spec.ts'},
@@ -23,4 +23,4 @@ const TYPESCRIPT_SOURCES = [
   };
 });
 
-module.exports = exports = {BASE, SOURCE, TYPESCRIPT_SOURCES, OUTPUT, TEMPLATES};
+module.exports = exports = {BASE, SOURCE, TYPESCRIPT_SOURCES, API_OUTPUT, API_TEMPLATES};

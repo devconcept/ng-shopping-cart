@@ -1,4 +1,6 @@
-const corePackage = require('./packages/core');
+const {Package} = require('dgeni');
+const apiPackage = require('./api-package/index');
+const guidePackage = require('./guide-package/index');
 
-module.exports = exports = corePackage;
+module.exports = exports = new Package('cartDocs', [apiPackage, guidePackage]);
 

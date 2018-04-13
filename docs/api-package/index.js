@@ -4,17 +4,17 @@ const jsDocsPkg = require('dgeni-packages/jsdoc');
 const njPkg = require('dgeni-packages/nunjucks');
 const tsDocsPkg = require('dgeni-packages/typescript');
 
-const {BASE, TYPESCRIPT_SOURCES, OUTPUT, TEMPLATES} = require('../config');
+const {BASE, TYPESCRIPT_SOURCES, API_OUTPUT, API_TEMPLATES} = require('../config');
 
 module.exports = exports = new Package('docsCore', [basePkg, njPkg, jsDocsPkg, tsDocsPkg])
-  .processor(require('../processors/filterUnusedDocs'))
-  .processor(require('../processors/filterIgnoredFiles'))
-  .processor(require('../processors/generateKebabNames'))
-  .processor(require('../processors/computeNgType'))
-  .processor(require('../processors/collectMeansTags'))
-  .processor(require('../processors/generateNgModules'))
-  .processor(require('../processors/generateNgRoutes'))
-  .factory(require('../services/getTypeFolder'))
+  .processor(require('./processors/filterUnusedDocs'))
+  .processor(require('./processors/filterIgnoredFiles'))
+  .processor(require('./processors/generateKebabNames'))
+  .processor(require('./processors/computeNgType'))
+  .processor(require('./processors/collectMeansTags'))
+  .processor(require('./processors/generateNgModules'))
+  .processor(require('./processors/generateNgRoutes'))
+  .factory(require('./services/getTypeFolder'))
   .config(function (readFilesProcessor, unescapeCommentsProcessor) {
     readFilesProcessor.$enabled = false;
     readFilesProcessor.basePath = BASE;
@@ -22,12 +22,12 @@ module.exports = exports = new Package('docsCore', [basePkg, njPkg, jsDocsPkg, t
   })
   .config(function (parseTagsProcessor) {
     parseTagsProcessor.tagDefinitions.push(
-      require('../tag-defs/ignore')(),
-      require('../tag-defs/means')(),
+      require('./tag-defs/ignore')(),
+      require('./tag-defs/means')(),
     );
   })
   .config(function (templateFinder, templateEngine) {
-    templateFinder.templateFolders = TEMPLATES;
+    templateFinder.templateFolders = API_TEMPLATES;
     templateFinder.templatePatterns = [
       '${doc.template}.html',
       '${doc.template}.ts',
@@ -42,14 +42,15 @@ module.exports = exports = new Package('docsCore', [basePkg, njPkg, jsDocsPkg, t
       variableEnd: '$}'
     };
     templateEngine.filters.push(
-      require('../rendering/backTicks')(),
-      require('../rendering/removeParagraph')()
+      require('./rendering/backTicks')(),
+      require('./rendering/removeParagraph')(),
+      require('./rendering/emitterType')()
     );
   })
   .config(function (readTypeScriptModules, writeFilesProcessor) {
     readTypeScriptModules.sourceFiles = TYPESCRIPT_SOURCES;
     writeFilesProcessor.$enabled = true;
-    writeFilesProcessor.outputFolder = OUTPUT;
+    writeFilesProcessor.outputFolder = API_OUTPUT;
   })
   .config(function (computePathsProcessor, getTypeFolder) {
     computePathsProcessor.pathTemplates = [

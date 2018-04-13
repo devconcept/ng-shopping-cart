@@ -42,12 +42,10 @@ export class CartCheckoutComponent implements OnChanges, OnInit, OnDestroy {
   @Input() settings: CheckoutSettings = null;
   /**
    * Emits the result of the checkout operation. When [service] is set to 'paypal' this event is never emitted.
-   * @type {any}
    */
   @Output() checkout = new EventEmitter<any>();
   /**
    * When the [service] is set to 'http' and the checkout operation fails the error thrown can be captured using this output.
-   * @type {any}
    */
   @Output() error = new EventEmitter<any>();
 

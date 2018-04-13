@@ -16,7 +16,7 @@
 {% for output in doc.outputs %}
 {% if output.description %}
 <h4><code>{$ output.name $}</code></h4>
-<p>Emits:<code>{$ output.type.typeExpression $}</code></p>
+<p>Emits:<code>{$ output.type | emitterType $}</code></p>
 {$ output.description | marked $}
 {% endif %}
 {% endfor %}
