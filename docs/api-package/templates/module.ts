@@ -3,7 +3,7 @@ import {RouterModule} from '@angular/router';
 import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
 import {SharedModule} from '../../shared/shared.module';
 
-{% for dep in doc.dependencies %}import { {$ dep.name $} } from './components/{$ dep.path $}';
+{% for dep in doc.dependencies %}import { {$ dep.name $} } from './routes/{$ dep.path $}';
 {% endfor %}
 
 import {routes} from './routes';

@@ -12,7 +12,8 @@ module.exports = exports = class NgModuleDoc {
       return new NgComponentDoc({
         name: upperFirst(c.name) + 'Component',
         computedName: c.computedName,
-        location: name
+        location: name,
+        route: c.computedName
       })
     });
   }

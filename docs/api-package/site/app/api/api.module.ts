@@ -5,6 +5,7 @@ import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
 import {SharedModule} from '../shared/shared.module';
 
 import {routes} from './routes';
+import { SearchComponent } from './routes/search.component';
 
 
 @NgModule({
@@ -13,7 +14,7 @@ import {routes} from './routes';
     RouterModule.forChild(routes),
     NgbModule,
   ],
-  declarations: [],
+  declarations: [SearchComponent],
   exports: []
 })
 export class ApiModule {

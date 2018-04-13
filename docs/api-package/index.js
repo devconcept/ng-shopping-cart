@@ -29,8 +29,7 @@ module.exports = exports = new Package('docsCore', [basePkg, njPkg, jsDocsPkg, t
   .config(function (templateFinder, templateEngine) {
     templateFinder.templateFolders = API_TEMPLATES;
     templateFinder.templatePatterns = [
-      '${doc.template}.html',
-      '${doc.template}.ts',
+      '${doc.template}',
       '${doc.ngType}.html',
       '${doc.ngType}.ts',
       '${doc.docType}.html',
@@ -59,7 +58,7 @@ module.exports = exports = new Package('docsCore', [basePkg, njPkg, jsDocsPkg, t
         getOutputPath: function (doc) {
           const folder = getTypeFolder(doc);
           const file = doc.ngType === 'component' ? doc.computedName.replace(/-component/, '') : doc.computedName;
-          return `${folder}/components/${file}.component.html`
+          return `${folder}/routes/${file}.component.html`
         },
         getPath: function (doc) {
           if (doc.ngType) {
@@ -84,8 +83,7 @@ module.exports = exports = new Package('docsCore', [basePkg, njPkg, jsDocsPkg, t
       {
         docTypes: ['ngComponent'],
         getOutputPath: function (doc) {
-          const file = doc.computedName.replace(/-component/, '');
-          return `${doc.location}/components/${file}.component.ts`
+          return `${doc.location}/routes/${doc.computedName}.component.ts`
         },
         pathTemplate: '${ngType}.ts'
       },

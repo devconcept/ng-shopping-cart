@@ -37,7 +37,7 @@ gulp.task('docs:clean', () => {
 });
 
 gulp.task('docs:site', ['docs:clean'], () => {
-  return gulp.src('./docs/site/**/*.*')
+  return gulp.src('./docs/api-package/site/**/*.*')
     .pipe(gulp.dest('./docs-build'))
 });
 

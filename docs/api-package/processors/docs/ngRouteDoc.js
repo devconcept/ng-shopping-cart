@@ -1,5 +1,3 @@
-const NgLazyRoute = require('./ngLazyRoute');
-
 module.exports = exports = class NgRouteDoc {
   constructor(ngModule, lazyRoutes = []) {
     this.name = ngModule.name + 'Route';
