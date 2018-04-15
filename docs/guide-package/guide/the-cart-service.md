@@ -1,3 +1,4 @@
+@next guide/styling
 ## The cart service
 
 The cart service is used to store your user's shopping cart contents as well as to set taxes, shipping cost and provide information to most of the built-in components. You should use only one instance of the service for your whole app. Although you can ignore this warning later on, make sure not to use different `CartItem` types under the same browser `Storage` key. Angular allows you to inject different service instances in different branches of the injector tree but the selected key in the `Storage` is unique for the whole app and this can create conflicts when saving and reading items.
@@ -136,6 +137,7 @@ export class AppModule {
 ```
 
 Then, writing your service's constructor
+
 
 ```typescript
 @Injectable()

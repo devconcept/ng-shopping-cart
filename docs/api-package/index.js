@@ -1,64 +1,40 @@
 const {Package} = require('dgeni');
-const basePkg = require('dgeni-packages/base');
-const jsDocsPkg = require('dgeni-packages/jsdoc');
-const njPkg = require('dgeni-packages/nunjucks');
 const tsDocsPkg = require('dgeni-packages/typescript');
+const cartBasePkg = require('../base-package/index');
 
-const {BASE, TYPESCRIPT_SOURCES, API_OUTPUT, API_TEMPLATES} = require('../config');
+const {TYPESCRIPT_SOURCES, API_OUTPUT} = require('../config');
 
-module.exports = exports = new Package('docsCore', [basePkg, njPkg, jsDocsPkg, tsDocsPkg])
+module.exports = exports = new Package('cartApi', [cartBasePkg, tsDocsPkg])
   .processor(require('./processors/filterUnusedDocs'))
   .processor(require('./processors/filterIgnoredFiles'))
   .processor(require('./processors/generateKebabNames'))
   .processor(require('./processors/computeNgType'))
-  .processor(require('./processors/collectMeansTags'))
-  .processor(require('./processors/generateNgModules'))
-  .processor(require('./processors/generateNgRoutes'))
+  .processor(require('./processors/generateApiModules'))
+  .processor(require('./processors/generateApiRoutes'))
   .factory(require('./services/getTypeFolder'))
-  .config(function (readFilesProcessor, unescapeCommentsProcessor) {
-    readFilesProcessor.$enabled = false;
-    readFilesProcessor.basePath = BASE;
-    unescapeCommentsProcessor.$enabled = false;
+  .config(function (parseTagsProcessor, getInjectables) {
+    parseTagsProcessor.tagDefinitions = parseTagsProcessor.tagDefinitions.concat(getInjectables([
+      require('./tag-defs/ignore'),
+      require('./tag-defs/means'),
+    ]));
   })
-  .config(function (parseTagsProcessor) {
-    parseTagsProcessor.tagDefinitions.push(
-      require('./tag-defs/ignore')(),
-      require('./tag-defs/means')(),
-    );
-  })
-  .config(function (templateFinder, templateEngine) {
-    templateFinder.templateFolders = API_TEMPLATES;
-    templateFinder.templatePatterns = [
-      '${doc.template}',
-      '${doc.ngType}.html',
-      '${doc.ngType}.ts',
-      '${doc.docType}.html',
-      '${doc.docType}.ts',
-      'common.ts'
-    ];
-    templateEngine.config.tags = {
-      variableStart: '{$',
-      variableEnd: '$}'
-    };
-    templateEngine.filters.push(
-      require('./rendering/backTicks')(),
-      require('./rendering/removeParagraph')(),
-      require('./rendering/emitterType')()
-    );
-  })
-  .config(function (readTypeScriptModules, writeFilesProcessor) {
+  .config(function (unescapeCommentsProcessor, readTypeScriptModules, templateEngine, getInjectables) {
     readTypeScriptModules.sourceFiles = TYPESCRIPT_SOURCES;
-    writeFilesProcessor.$enabled = true;
-    writeFilesProcessor.outputFolder = API_OUTPUT;
+    unescapeCommentsProcessor.$enabled = false;
+    templateEngine.filters = templateEngine.filters.concat(getInjectables([
+      require('./rendering/backTicks'),
+      require('./rendering/removeParagraph'),
+      require('./rendering/emitterType')
+    ]));
   })
   .config(function (computePathsProcessor, getTypeFolder) {
-    computePathsProcessor.pathTemplates = [
+    computePathsProcessor.pathTemplates = computePathsProcessor.pathTemplates.concat([
       {
         docTypes: ['class', 'interface', 'type-alias'],
         getOutputPath: function (doc) {
           const folder = getTypeFolder(doc);
           const file = doc.ngType === 'component' ? doc.computedName.replace(/-component/, '') : doc.computedName;
-          return `${folder}/routes/${file}.component.html`
+          return `${API_OUTPUT}/${folder}/routes/${file}.component.html`
         },
         getPath: function (doc) {
           if (doc.ngType) {
@@ -66,42 +42,6 @@ module.exports = exports = new Package('docsCore', [basePkg, njPkg, jsDocsPkg, t
           }
           return '${docType}.html'
         }
-      },
-      {
-        docTypes: ['ngModule', 'ngRoute'],
-        getOutputPath: function (doc) {
-          if (doc.docType === 'ngModule') {
-            return `${doc.location}/${doc.location}.module.ts`
-          }
-          if (doc.location) {
-            return `${doc.location}/routes.ts`;
-          }
-          return 'routes.ts';
-        },
-        pathTemplate: '${ngType}.ts'
-      },
-      {
-        docTypes: ['ngComponent'],
-        getOutputPath: function (doc) {
-          return `${doc.location}/routes/${doc.computedName}.component.ts`
-        },
-        pathTemplate: '${ngType}.ts'
-      },
-      {
-        docTypes: ['function', 'var', 'const', 'let', 'enum', 'value-module'],
-        outputPathTemplate: '${docType}/${computedName}.md',
-        pathTemplate: '${moduleDoc.path}/${computedName}.md'
       }
-    ];
-  })
-  .config(function(computeIdsProcessor) {
-    computeIdsProcessor.idTemplates.push({
-      docTypes: ['ngModule', 'ngRoute', 'ngComponent'],
-      getId: function(doc) {
-        return doc.name
-      },
-      getAliases: function(doc) {
-        return [doc.id];
-      }
-    });
+    ]);
   });

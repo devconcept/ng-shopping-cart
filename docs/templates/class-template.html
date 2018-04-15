@@ -1,7 +1,6 @@
 <h2>{$ doc.name $}</h2>
 {% block badge %}{% endblock %}
-
-{$ doc.description | marked $}
+{$ doc.description | marked  $}
 {% for member in doc.members %}
 {% if member.description %}
 <h4><code>{$ member.name $}{% if member.declaration.kind == 152 %}(){% endif %}</code></h4>

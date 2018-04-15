@@ -1,3 +1,4 @@
+@next api/index
 ## Styling
 
 All of the components provided by this module use global styles. This is intentional to allow several strategies for customization of a single component, all components of one type or to harness the power of CSS preprocessors to change how the library behaves.

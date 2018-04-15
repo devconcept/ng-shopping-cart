@@ -1,18 +1,19 @@
-const NgRouteDoc = require('./docs/ngRouteDoc');
-const NgLazyRoute = require('./docs/ngLazyRoute');
-const NgComponentDoc = require('./docs/ngComponentDoc');
-
-module.exports = exports = function generateNgRoutes() {
+module.exports = exports = function generateApiRoutes(customDocs) {
   return {
-    name: 'generateNgRoutes',
-    $runAfter: ['generateNgModules'],
-    $runBefore: ['computing-ids'],
+    name: 'generateApiRoutes',
+    $runAfter: ['adding-routes'],
+    $runBefore: ['routes-added'],
     $process: function (docs) {
-      const modules = docs.filter(doc => doc.docType === 'ngModule');
+      const [NgRouteDoc, NgLazyRoute, NgComponentDoc] = customDocs
+        .getDocs(['NgRouteDoc', 'NgLazyRoute', 'NgComponentDoc']);
+
+      const pkg = 'api';
+      const modules = docs.filter(doc => doc.docType === 'ngModule' && doc.pkg === pkg);
       const ngRoutes = modules.map(m => new NgRouteDoc(m));
       const apiRoute = new NgRouteDoc({
         name: 'ApiModule',
         location: '',
+        pkg,
         dependencies: [new NgComponentDoc({
           name: 'SearchComponent',
           computedName: 'search',

@@ -36,12 +36,6 @@ gulp.task('docs:clean', () => {
   return del('./docs-build');
 });
 
-gulp.task('docs:site', ['docs:clean'], () => {
-  return gulp.src('./docs/api-package/site/**/*.*')
-    .pipe(gulp.dest('./docs-build'))
-});
-
-gulp.task('docs', ['docs:site']);
 gulp.task('lib', ['lib:sass', 'lib:css']);
 
 gulp.task('default', ['lib']);

@@ -123,13 +123,13 @@
     "directive-selector": [
       true,
       "attribute",
-      "'demo'",
+      "cart",
       "camelCase"
     ],
     "component-selector": [
       true,
       "element",
-      "'demo'",
+      "cart",
       "kebab-case"
     ],
     "no-output-on-prefix": true,

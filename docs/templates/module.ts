@@ -1,7 +1,8 @@
 import {NgModule} from '@angular/core';
 import {RouterModule} from '@angular/router';
 import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
-import {SharedModule} from '../../shared/shared.module';
+import {MarkdownModule} from 'ngx-markdown';
+import {SharedModule} from '../{% if doc.location !== '' %}../{% endif %}shared/shared.module';
 
 {% for dep in doc.dependencies %}import { {$ dep.name $} } from './routes/{$ dep.path $}';
 {% endfor %}
@@ -13,6 +14,7 @@ import {routes} from './routes';
     SharedModule,
     RouterModule.forChild(routes),
     NgbModule,
+    MarkdownModule.forChild(),
   ],
   declarations: [
     {% for dep in doc.dependencies %}{$ dep.name $},

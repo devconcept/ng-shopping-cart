@@ -4,10 +4,12 @@ module.exports = function generateKebabNames() {
   return {
     name: 'generateKebabNames',
     $runAfter: ['filterIgnoredFiles'],
-    $runBefore: ['computing-paths'],
-    $process: function(docs) {
-      docs.forEach(function(doc) {
-        doc.computedName = kebabCase(doc.name);
+    $runBefore: ['adding-modules'],
+    $process: function (docs) {
+      docs.forEach(function (doc) {
+        if (doc.docType !== 'markdown' && doc.docType !== 'md-template') {
+          doc.computedName = kebabCase(doc.name);
+        }
       });
     }
   };

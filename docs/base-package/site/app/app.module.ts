@@ -1,8 +1,9 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { RouterModule } from '@angular/router';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import {MarkdownModule} from 'ngx-markdown';
 
 import { AppComponent } from './app.component';
 import { HomeComponent } from './routes/home/home.component';
@@ -27,6 +28,7 @@ import { routes } from './routes';
     CommonModule,
     NgbModule.forRoot(),
     RouterModule.forRoot(routes),
+    MarkdownModule.forRoot(),
     SharedModule
   ],
   bootstrap: [AppComponent],

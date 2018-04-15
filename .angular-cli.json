@@ -38,7 +38,7 @@
       "test": "test.ts",
       "tsconfig": "tsconfig.app.json",
       "testTsconfig": "tsconfig.spec.json",
-      "prefix": "'demo'",
+      "prefix": "demo",
       "styles": [
         "styles.scss"
       ],
@@ -62,12 +62,19 @@
       "test": "test.ts",
       "tsconfig": "tsconfig.app.json",
       "testTsconfig": "tsconfig.spec.json",
-      "prefix": "'doc'",
+      "prefix": "doc",
       "styles": [
         "../node_modules/bootstrap/dist/css/bootstrap.css",
+        "../node_modules/prismjs/themes/prism-okaidia.css",
         "styles.scss"
       ],
-      "scripts": [],
+      "scripts": [
+        "../node_modules/prismjs/prism.js",
+        "../node_modules/prismjs/components/prism-typescript.min.js",
+        "../node_modules/prismjs/components/prism-json.min.js",
+        "../node_modules/prismjs/components/prism-css.min.js",
+        "../node_modules/prismjs/components/prism-scss.min.js"
+      ],
       "environmentSource": "environments/environment.ts",
       "environments": {
         "dev": "environments/environment.ts",

@@ -1,6 +1,8 @@
 module.exports = exports = class NgComponentDoc {
-  constructor({name, computedName, location, route}) {
+  constructor({name, computedName, pkg, location, route, chapter}) {
     this.name = name;
+    this.chapter = chapter;
+    this.pkg = pkg;
     this.computedName = computedName.replace(/-component/, '');
     this.path = this.computedName + '.component';
     this.docType = 'ngComponent';
