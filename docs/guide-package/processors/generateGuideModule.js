@@ -4,7 +4,7 @@ module.exports = exports = function generateGuideModule(customDocs) {
     $runAfter: ['adding-modules'],
     $runBefore: ['modules-added'],
     $process: function (docs) {
-      const NgModuleDoc = customDocs.getDoc('NgModuleDoc');
+      const [NgModuleDoc, NgTemplateDoc] = customDocs.getDocs(['NgModuleDoc', 'NgTemplateDoc']);
       const dependencies = docs.filter(d => d.docType === 'markdown').map(d => {
         return {
           name: d.name,
@@ -19,7 +19,9 @@ module.exports = exports = function generateGuideModule(customDocs) {
         dependencies,
         pkg: 'guide'
       });
-      docs = docs.concat(ngModule, ...ngModule.dependencies);
+      const deps = ngModule.dependencies;
+      const templates = deps.map(d => new NgTemplateDoc(d));
+      docs = docs.concat(ngModule, ...deps, ...templates);
       return docs;
     }
   };

@@ -7,7 +7,7 @@ module.exports = function generateKebabNames() {
     $runBefore: ['adding-modules'],
     $process: function (docs) {
       docs.forEach(function (doc) {
-        if (doc.docType !== 'markdown' && doc.docType !== 'md-template') {
+        if (doc.docType !== 'markdown' && doc.docType !== 'ngTemplate') {
           doc.computedName = kebabCase(doc.name);
         }
       });

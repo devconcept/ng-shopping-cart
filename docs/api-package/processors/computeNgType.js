@@ -5,7 +5,7 @@ module.exports = function computeNgType(getTypeFolder) {
     $runBefore: ['adding-modules'],
     $process: function (docs) {
       docs.forEach(function (doc) {
-        if (doc.docType !== 'markdown' && doc.docType !== 'md-template') {
+        if (doc.docType !== 'markdown' && doc.docType !== 'ngTemplate') {
           doc.ngType = undefined;
           if (doc.decorators && doc.decorators.length && doc.docType === 'class') {
             const injectable = doc.decorators.find(d => d.name === 'Injectable');

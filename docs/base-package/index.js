@@ -3,7 +3,7 @@ const basePkg = require('dgeni-packages/base');
 const jsDocsPkg = require('dgeni-packages/jsdoc');
 const njPkg = require('dgeni-packages/nunjucks');
 
-const {OUTPUT, APP, BASE, TEMPLATES, SITE} = require('../config');
+const {OUTPUT, APP, BASE, TEMPLATES, SITE, ASSETS} = require('../config');
 
 module.exports = exports = new Package('cartBase', [basePkg, jsDocsPkg, njPkg])
   .processor({name: 'adding-modules', $runAfter: ['adding-extra-docs'], $runBefore: ['extra-docs-added']})
@@ -12,7 +12,6 @@ module.exports = exports = new Package('cartBase', [basePkg, jsDocsPkg, njPkg])
   .processor({name: 'routes-added', $runAfter: ['adding-routes'], $runBefore: ['extra-docs-added']})
   .processor(require('./processors/copySite'))
   .processor(require('./processors/navigationMap'))
-  .processor(require('./rendering/escapeBrackets'))
   //.processor(require('./processors/removeExtraSpace'))
   .factory(require('./services/customDocs'))
   .factory(require('./services/copyFolder'))
@@ -22,12 +21,13 @@ module.exports = exports = new Package('cartBase', [basePkg, jsDocsPkg, njPkg])
     readFilesProcessor.sourceFiles = [];
     writeFilesProcessor.outputFolder = APP;
   })
-  .config(function (templateFinder, templateEngine, computePathsProcessor, getInjectables) {
+  .config(function (templateFinder, templateEngine, computePathsProcessor) {
     templateFinder.templateFolders = TEMPLATES;
     templateFinder.templatePatterns = [
       '${doc.template}',
-      '${doc.ngType}.html',
+      '${doc.ngType}.md',
       '${doc.ngType}.ts',
+      '${doc.docType}.md',
       '${doc.docType}.html',
       '${doc.docType}.ts',
       'common.ts'
@@ -36,9 +36,6 @@ module.exports = exports = new Package('cartBase', [basePkg, jsDocsPkg, njPkg])
       variableStart: '{$',
       variableEnd: '$}'
     };
-    templateEngine.filters = templateEngine.filters.concat(getInjectables([
-      require('./rendering/escapeBrackets'),
-    ]));
     computePathsProcessor.pathTemplates = [
       {
         docTypes: ['function', 'var', 'const', 'let', 'enum', 'value-module'],
@@ -75,6 +72,22 @@ module.exports = exports = new Package('cartBase', [basePkg, jsDocsPkg, njPkg])
         docTypes: ['toc'],
         outputPathTemplate: 'shared/services/toc.data.ts',
         pathTemplate: '${docType}.ts'
+      },
+      {
+        docTypes: ['ngTemplate'],
+        getOutputPath: function (doc) {
+          const {location, pkg} = doc.component;
+          const folder = location ? '/' + location : '';
+          return `${pkg}${folder}/routes/${doc.computedName}.component.html`
+        },
+        pathTemplate: '${docType}.html'
+      },
+      {
+        docTypes: ['md-file'],
+        getOutputPath: function (doc) {
+          return `${ASSETS}/${doc.computedName}.md`
+        },
+        pathTemplate: '${docType}.md'
       }
     ];
   })
@@ -92,7 +105,7 @@ module.exports = exports = new Package('cartBase', [basePkg, jsDocsPkg, njPkg])
   .config(function (customDocs) {
     customDocs.addDocs([
       require('./docs/guideDoc'),
-      require('./docs/guideTemplate'),
+      require('./docs/ngTemplate'),
       require('./docs/ngComponentDoc'),
       require('./docs/ngLazyRoute'),
       require('./docs/ngModuleDoc'),

@@ -10,6 +10,7 @@ module.exports = exports = class GuideDoc {
     this.content = content;
     this.template = 'component.ts';
     this.path = this.computedName + '.component';
+    this.template = 'ng-component.ts';
     this.ngTemplatePath = './' + this.path + '.html';
     this.startingLine = 1;
   }

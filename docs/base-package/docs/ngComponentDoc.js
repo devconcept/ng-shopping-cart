@@ -10,6 +10,6 @@ module.exports = exports = class NgComponentDoc {
     this.ngTemplatePath = './' + this.path + '.html';
     this.location = location;
     this.route = route || computedName;
-    this.template = 'component.ts';
+    this.template = 'ng-component.ts';
   }
 };

@@ -2,7 +2,7 @@ const {Package} = require('dgeni');
 const tsDocsPkg = require('dgeni-packages/typescript');
 const cartBasePkg = require('../base-package/index');
 
-const {TYPESCRIPT_SOURCES, API_OUTPUT} = require('../config');
+const {TYPESCRIPT_SOURCES, ASSETS} = require('../config');
 
 module.exports = exports = new Package('cartApi', [cartBasePkg, tsDocsPkg])
   .processor(require('./processors/filterUnusedDocs'))
@@ -22,25 +22,21 @@ module.exports = exports = new Package('cartApi', [cartBasePkg, tsDocsPkg])
     readTypeScriptModules.sourceFiles = TYPESCRIPT_SOURCES;
     unescapeCommentsProcessor.$enabled = false;
     templateEngine.filters = templateEngine.filters.concat(getInjectables([
-      require('./rendering/backTicks'),
-      require('./rendering/removeParagraph'),
       require('./rendering/emitterType')
     ]));
   })
-  .config(function (computePathsProcessor, getTypeFolder) {
+  .config(function (computePathsProcessor) {
     computePathsProcessor.pathTemplates = computePathsProcessor.pathTemplates.concat([
       {
         docTypes: ['class', 'interface', 'type-alias'],
         getOutputPath: function (doc) {
-          const folder = getTypeFolder(doc);
-          const file = doc.ngType === 'component' ? doc.computedName.replace(/-component/, '') : doc.computedName;
-          return `${API_OUTPUT}/${folder}/routes/${file}.component.html`
+          return `${ASSETS}/${doc.computedName}.md`
         },
         getPath: function (doc) {
           if (doc.ngType) {
-            return '${ngType}.html';
+            return '${ngType}.md';
           }
-          return '${docType}.html'
+          return '${docType}.md'
         }
       }
     ]);
