@@ -11,6 +11,8 @@ module.exports = exports = new Package('cartBase', [basePkg, jsDocsPkg, njPkg])
   .processor({name: 'adding-routes', $runAfter: ['modules-added'], $runBefore: ['extra-docs-added']})
   .processor({name: 'routes-added', $runAfter: ['adding-routes'], $runBefore: ['extra-docs-added']})
   .processor(require('./processors/copySite'))
+  .processor(require('./processors/navigationMap'))
+  .processor(require('./rendering/escapeBrackets'))
   //.processor(require('./processors/removeExtraSpace'))
   .factory(require('./services/customDocs'))
   .factory(require('./services/copyFolder'))
@@ -20,7 +22,7 @@ module.exports = exports = new Package('cartBase', [basePkg, jsDocsPkg, njPkg])
     readFilesProcessor.sourceFiles = [];
     writeFilesProcessor.outputFolder = APP;
   })
-  .config(function (templateFinder, templateEngine, computePathsProcessor) {
+  .config(function (templateFinder, templateEngine, computePathsProcessor, getInjectables) {
     templateFinder.templateFolders = TEMPLATES;
     templateFinder.templatePatterns = [
       '${doc.template}',
@@ -34,6 +36,9 @@ module.exports = exports = new Package('cartBase', [basePkg, jsDocsPkg, njPkg])
       variableStart: '{$',
       variableEnd: '$}'
     };
+    templateEngine.filters = templateEngine.filters.concat(getInjectables([
+      require('./rendering/escapeBrackets'),
+    ]));
     computePathsProcessor.pathTemplates = [
       {
         docTypes: ['function', 'var', 'const', 'let', 'enum', 'value-module'],
@@ -65,12 +70,17 @@ module.exports = exports = new Package('cartBase', [basePkg, jsDocsPkg, njPkg])
           return `${doc.pkg}/routes/${doc.computedName}.component.ts`
         },
         pathTemplate: '${ngType}.ts'
+      },
+      {
+        docTypes: ['toc'],
+        outputPathTemplate: 'shared/services/toc.data.ts',
+        pathTemplate: '${docType}.ts'
       }
     ];
   })
   .config(function (computeIdsProcessor) {
     computeIdsProcessor.idTemplates.push({
-      docTypes: ['ngModule', 'ngRoute', 'ngComponent'],
+      docTypes: ['ngModule', 'ngRoute', 'ngComponent', 'toc'],
       getId: function (doc) {
         return doc.name
       },
@@ -88,6 +98,7 @@ module.exports = exports = new Package('cartBase', [basePkg, jsDocsPkg, njPkg])
       require('./docs/ngModuleDoc'),
       require('./docs/ngRouteDoc'),
       require('./docs/guideMarkdownDoc'),
+      require('./docs/tocDoc'),
     ]);
   })
   .config(function (staticAssets) {

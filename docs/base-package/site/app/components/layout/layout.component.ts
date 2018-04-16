@@ -11,7 +11,6 @@ export class LayoutComponent implements OnInit, OnDestroy {
   subscription: Subscription;
   navbar: any[] = [];
   navbarOpen = true;
-  needsLayout = true;
   needsSidebar = true;
 
   constructor(private tocService: TocService) {
@@ -34,7 +33,6 @@ export class LayoutComponent implements OnInit, OnDestroy {
   }
 
   updateNavbar(data) {
-    this.needsLayout = data.layout === undefined || data.layout;
     this.needsSidebar = !!data.topics;
   }
 

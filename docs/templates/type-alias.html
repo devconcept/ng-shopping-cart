@@ -1,10 +1,10 @@
 <h2>{$ doc.name $}</h2>
 <span class="badge badge-warning">Type</span>
 {$ doc.description | marked $}
-<p>Values: {$ doc.typeDefinition | backTicks | marked | removeParagraph $}</p>
+<p>Values: {$ doc.typeDefinition | backTicks | marked | removeParagraph | escapeBrackets $}</p>
 <p>Meaning:</p>
 {% if doc.means %}
 {% for means in doc.means %}
-{$ means.description | marked $}
+{$ means | marked | escapeBrackets $}
 {% endfor %}
 {% endif %}

@@ -1,4 +1,4 @@
-module.exports = function computeNgType() {
+module.exports = function computeNgType(getTypeFolder) {
   return {
     name: 'computeNgType',
     $runAfter: ['generateKebabNames'],
@@ -12,6 +12,7 @@ module.exports = function computeNgType() {
             if (injectable) {
               doc.ngType = 'service';
               doc.template = doc.ngType;
+              doc.location = getTypeFolder(doc);
               return;
             }
             const component = doc.decorators.find(d => d.name === 'Component');
@@ -27,6 +28,7 @@ module.exports = function computeNgType() {
               })
             }
           }
+          doc.location = getTypeFolder(doc);
         }
       });
     }

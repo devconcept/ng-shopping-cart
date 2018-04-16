@@ -3,5 +3,5 @@
 {$ doc.description | marked $}
 {% for member in doc.members %}
 <h4><code>{$ member.name $}</code></h4>
-{$ member.description | marked $}
+{$ member.description | marked | escapeBrackets $}
 {% endfor %}

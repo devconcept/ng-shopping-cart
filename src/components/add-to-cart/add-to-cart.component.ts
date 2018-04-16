@@ -46,7 +46,7 @@ export class AddToCartComponent implements OnChanges {
   @Input() position: AddToCartPosition = 'left';
   /**
    * If [type] is set 'dropdown' it can be used to set the options of the rendered `<select>` editor. Is an array of objects with label and
-   * a value properties used to populate the select's <option> elements.
+   * a value properties used to populate the select's `<option>` elements.
    */
   @Input() dropdown: DropdownValue[] = [{ label: '1 item', value: 1 }, { label: '2 item', value: 2 }, { label: '5 items', value: 5 }];
   /**
