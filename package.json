@@ -64,6 +64,7 @@
     "del": "^3.0.0",
     "dgeni": "^0.4.9",
     "dgeni-packages": "^0.26.0",
+    "fs-extra": "^5.0.0",
     "gulp": "^3.9.1",
     "gulp-clean-css": "^3.9.3",
     "gulp-dgeni": "^0.1.0",

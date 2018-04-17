@@ -2,15 +2,17 @@ const {Package} = require('dgeni');
 const basePkg = require('dgeni-packages/base');
 const jsDocsPkg = require('dgeni-packages/jsdoc');
 const njPkg = require('dgeni-packages/nunjucks');
+const gitPkg = require('dgeni-packages/git');
 
 const {OUTPUT, APP, BASE, TEMPLATES, SITE, ASSETS} = require('../config');
 
-module.exports = exports = new Package('cartBase', [basePkg, jsDocsPkg, njPkg])
+module.exports = exports = new Package('cartBase', [basePkg, jsDocsPkg, njPkg, gitPkg])
   .processor({name: 'adding-modules', $runAfter: ['adding-extra-docs'], $runBefore: ['extra-docs-added']})
   .processor({name: 'modules-added', $runAfter: ['adding-modules'], $runBefore: ['extra-docs-added']})
   .processor({name: 'adding-routes', $runAfter: ['modules-added'], $runBefore: ['extra-docs-added']})
   .processor({name: 'routes-added', $runAfter: ['adding-routes'], $runBefore: ['extra-docs-added']})
   .processor(require('./processors/copySite'))
+  .processor(require('./processors/addGitInfo'))
   .processor(require('./processors/navigationMap'))
   //.processor(require('./processors/removeExtraSpace'))
   .factory(require('./services/customDocs'))
@@ -74,6 +76,11 @@ module.exports = exports = new Package('cartBase', [basePkg, jsDocsPkg, njPkg])
         pathTemplate: '${docType}.ts'
       },
       {
+        docTypes: ['info-service'],
+        outputPathTemplate: 'shared/services/info-service.ts',
+        pathTemplate: '${docType}.ts'
+      },
+      {
         docTypes: ['ngTemplate'],
         getOutputPath: function (doc) {
           const {location, pkg} = doc.component;
@@ -91,9 +98,10 @@ module.exports = exports = new Package('cartBase', [basePkg, jsDocsPkg, njPkg])
       }
     ];
   })
-  .config(function (computeIdsProcessor) {
+  .config(function (computeIdsProcessor, gitData, packageInfo) {
+    gitData.package = packageInfo;
     computeIdsProcessor.idTemplates.push({
-      docTypes: ['ngModule', 'ngRoute', 'ngComponent', 'toc'],
+      docTypes: ['ngModule', 'ngRoute', 'ngComponent', 'toc', 'info-service'],
       getId: function (doc) {
         return doc.name
       },
@@ -112,6 +120,7 @@ module.exports = exports = new Package('cartBase', [basePkg, jsDocsPkg, njPkg])
       require('./docs/ngRouteDoc'),
       require('./docs/guideMarkdownDoc'),
       require('./docs/tocDoc'),
+      require('./docs/infoServiceDoc'),
     ]);
   })
   .config(function (staticAssets) {

@@ -5,6 +5,7 @@ import { Title } from '@angular/platform-browser';
 
 import { NextTopicComponent } from './next-topic/next-topic.component';
 import { TocService } from './services/toc-service';
+import { InfoService } from './services/info-service';
 import { ParentRouteComponent } from './parent-route/parent-route.component';
 
 @NgModule({
@@ -14,7 +15,7 @@ import { ParentRouteComponent } from './parent-route/parent-route.component';
   ],
   declarations: [NextTopicComponent, ParentRouteComponent],
   exports: [NextTopicComponent, ParentRouteComponent, CommonModule, RouterModule],
-  providers: [TocService, Title]
+  providers: [TocService, Title, InfoService]
 })
 export class SharedModule {
 }

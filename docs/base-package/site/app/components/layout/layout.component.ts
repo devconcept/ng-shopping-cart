@@ -1,5 +1,6 @@
 import {Component, OnDestroy, OnInit} from '@angular/core';
 import {TocService} from '../../shared/services/toc-service';
+import {InfoService} from '../../shared/services/info-service';
 import {Subscription} from 'rxjs/Subscription';
 import {RouteChangedEvent} from '../../shared/services/route-changed-event';
 
@@ -8,15 +9,17 @@ import {RouteChangedEvent} from '../../shared/services/route-changed-event';
   templateUrl: './layout.component.html',
 })
 export class LayoutComponent implements OnInit, OnDestroy {
+  version: string;
   subscription: Subscription;
   navbar: any[] = [];
   navbarOpen = true;
   needsSidebar = true;
 
-  constructor(private tocService: TocService) {
+  constructor(private tocService: TocService, private infoService: InfoService) {
   }
 
   ngOnInit() {
+    this.version = this.infoService.getVersion();
     this.navbar = this.tocService.getNavbarItems();
     const {data: current} = this.tocService.getCurrentState();
     this.updateNavbar(current);

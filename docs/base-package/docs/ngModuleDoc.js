@@ -12,11 +12,12 @@ module.exports = exports = class NgModuleDoc {
     this.dependencies = dependencies.map(c => {
       return new NgComponentDoc({
         name: upperFirst(c.name) + 'Component',
+        source: c,
         computedName: c.computedName,
         location: this.location,
         route: c.computedName,
         chapter: c.nochapter ? undefined : c.chapter,
-        pkg
+        pkg,
       })
     });
   }

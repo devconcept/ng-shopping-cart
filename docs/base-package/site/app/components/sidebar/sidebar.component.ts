@@ -27,7 +27,7 @@ export class SidebarComponent implements OnInit, OnDestroy {
   }
 
   updateSidebar({url, data}) {
-    this.sidebarTitle = data.path;
+    this.sidebarTitle = data.title;
     this.sidebarPath = url;
     this.sidebarItems = data.topics || [];
   }
