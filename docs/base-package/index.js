@@ -11,6 +11,8 @@ module.exports = exports = new Package('cartBase', [basePkg, jsDocsPkg, njPkg, g
   .processor({name: 'modules-added', $runAfter: ['adding-modules'], $runBefore: ['extra-docs-added']})
   .processor({name: 'adding-routes', $runAfter: ['modules-added'], $runBefore: ['extra-docs-added']})
   .processor({name: 'routes-added', $runAfter: ['adding-routes'], $runBefore: ['extra-docs-added']})
+  .processor({name: 'adding-navigation', $runAfter: ['routes-added'], $runBefore: ['extra-docs-added']})
+  .processor({name: 'navigation-added', $runAfter: ['adding-navigation'], $runBefore: ['extra-docs-added']})
   .processor(require('./processors/copySite'))
   .processor(require('./processors/addGitInfo'))
   .processor(require('./processors/navigationMap'))
@@ -23,7 +25,7 @@ module.exports = exports = new Package('cartBase', [basePkg, jsDocsPkg, njPkg, g
     readFilesProcessor.sourceFiles = [];
     writeFilesProcessor.outputFolder = APP;
   })
-  .config(function (templateFinder, templateEngine, computePathsProcessor) {
+  .config(function (templateFinder, templateEngine, computePathsProcessor, getInjectables) {
     templateFinder.templateFolders = TEMPLATES;
     templateFinder.templatePatterns = [
       '${doc.template}',
@@ -38,6 +40,9 @@ module.exports = exports = new Package('cartBase', [basePkg, jsDocsPkg, njPkg, g
       variableStart: '{$',
       variableEnd: '$}'
     };
+    templateEngine.filters = templateEngine.filters.concat(getInjectables([
+      require('./rendering/escapeHtml')
+    ]));
     computePathsProcessor.pathTemplates = [
       {
         docTypes: ['function', 'var', 'const', 'let', 'enum', 'value-module'],

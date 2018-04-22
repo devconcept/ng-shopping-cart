@@ -18,3 +18,37 @@ h2:focus, a:focus {
   width: 28px;
   height: 28px;
 }
+
+:root {
+  position: relative;
+  min-height: 100%;
+  padding-bottom: 40px;
+}
+
+.github-icon {
+  text-align: center;
+
+  svg {
+    vertical-align: text-bottom;
+  }
+}
+
+.github-link:hover {
+  text-decoration: none;
+}
+
+.navbar {
+  .dropdown-item.submenu {
+    padding: 0.25rem 0.5rem 0.25rem 1.5rem;
+
+    a {
+      display: block;
+
+      &:after {
+        float: right;
+        margin-top: 0.5em;
+      }
+    }
+  }
+}
+

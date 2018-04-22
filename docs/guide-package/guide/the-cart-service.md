@@ -3,7 +3,7 @@
 
 The cart service is used to store your user's shopping cart contents as well as to set taxes, shipping cost and provide information to most of the built-in components. You should use only one instance of the service for your whole app. Although you can ignore this warning later on, make sure not to use different `CartItem` types under the same browser `Storage` key. Angular allows you to inject different service instances in different branches of the injector tree but the selected key in the `Storage` is unique for the whole app and this can create conflicts when saving and reading items.
 
-## Default service
+#### Default service
 
 By default the browser `localStorage` is used to persist items between app restarts. To inject it into one of your components write this in the constructor
 
@@ -28,7 +28,7 @@ constructor(private cartService: CartService<CustomCartItem>) {
 
 Each time you add or remove an item the contents of the service are persisted in `localStorage`. The service also holds items in memory to boost performance.
 
-## Other services
+#### Other services
 
 There are other built-in options for `CartService`, you can also use your own implementation but let's focus first on changing the service for one that comes with the library.
 
@@ -53,7 +53,7 @@ export class AppModule {
 
 Check each service documentation to learn how to configure them.
 
-## Custom cart service
+#### Custom cart service
 
 So, you have in mind a different strategy for the service, right? First and foremost you have to implement your own class based on the *abstract and generic* `CartService` and make it `Injectable`
 

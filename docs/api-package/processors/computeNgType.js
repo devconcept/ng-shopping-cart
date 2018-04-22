@@ -19,7 +19,7 @@ module.exports = function computeNgType(getTypeFolder) {
             if (component) {
               doc.ngType = 'component';
               doc.template = doc.ngType;
-              doc.ngSelector = component.argumentInfo[0].selector;
+              doc.ngSelector = component.argumentInfo[0].selector.replace(/'/g, '');
               doc.inputs = doc.members.filter(m => {
                 return m.decorators && m.decorators.findIndex(d => d.name === 'Input') !== -1;
               });

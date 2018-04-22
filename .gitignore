@@ -2,11 +2,11 @@
 
 # compiled output
 /dist
-/dist-docs
 /dist-server
 /tmp
 /out-tsc
 /docs-build
+/docs-dist
 
 # dependencies
 /node_modules

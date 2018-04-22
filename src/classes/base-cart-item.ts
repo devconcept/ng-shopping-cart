@@ -2,13 +2,37 @@ import { CartItem } from './cart-item';
 
 /**
  * A default implementation for CartItem
+ *
+ * @note {info} You can access item information either with direct property access or method calls, eg. `item.id === item.getId()`
+ * @example
+ * const item = new BaseCartItem({id: 1, name: 'Demo'});
+ * item.quantity = 10;
+ * item.setPrice(50);
  */
 export class BaseCartItem extends CartItem {
+  /**
+   * The id of the item
+   */
   public id: any;
+  /**
+   * The name of the item
+   */
   public name: string;
+  /**
+   * The price of the item
+   */
   public price: number;
+  /**
+   * The url of an image for the item
+   */
   public image: string;
+  /**
+   * The ordered quantity of the item
+   */
   public quantity: number;
+  /**
+   * Any additional data you want to include in the item
+   */
   public data: any;
 
   constructor(itemData: any = {}) {
@@ -90,5 +114,19 @@ export class BaseCartItem extends CartItem {
    */
   setImage(image: string): void {
     this.image = image;
+  }
+
+  /**
+   * Gets any additional data added to the item
+   */
+  getData(): any {
+    return this.data;
+  }
+
+  /**
+   * Sets any additional data to the item
+   */
+  setData(data: any): void {
+    this.data = data;
   }
 }

@@ -1,6 +1,6 @@
 @nochapter
 @next guide/the-cart-item
-## Installing
+#### Installing
 
 Using `npm`
 
@@ -14,7 +14,7 @@ or `yarn`
 yarn add ng-shopping-cart
 ```
 
-## Configuring
+#### Configuring
 
 Add the `ShoppingCartModule` module to your app
 

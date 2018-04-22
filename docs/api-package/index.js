@@ -1,14 +1,16 @@
 const {Package} = require('dgeni');
-const tsDocsPkg = require('dgeni-packages/typescript');
+const tsPkg = require('dgeni-packages/typescript');
 const cartBasePkg = require('../base-package/index');
 
 const {TYPESCRIPT_SOURCES, ASSETS} = require('../config');
 
-module.exports = exports = new Package('cartApi', [cartBasePkg, tsDocsPkg])
+module.exports = exports = new Package('cartApi', [cartBasePkg, tsPkg])
   .processor(require('./processors/filterUnusedDocs'))
   .processor(require('./processors/filterIgnoredFiles'))
   .processor(require('./processors/generateKebabNames'))
   .processor(require('./processors/computeNgType'))
+  .processor(require('./processors/addTypeParameters'))
+  .processor(require('./processors/addServiceDependencies'))
   .processor(require('./processors/generateApiModules'))
   .processor(require('./processors/generateApiRoutes'))
   .factory(require('./services/getTypeFolder'))
@@ -16,6 +18,8 @@ module.exports = exports = new Package('cartApi', [cartBasePkg, tsDocsPkg])
     parseTagsProcessor.tagDefinitions = parseTagsProcessor.tagDefinitions.concat(getInjectables([
       require('./tag-defs/ignore'),
       require('./tag-defs/means'),
+      require('./tag-defs/note'),
+      require('./tag-defs/example'),
     ]));
   })
   .config(function (unescapeCommentsProcessor, readTypeScriptModules, templateEngine, getInjectables) {

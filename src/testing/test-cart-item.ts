@@ -1,4 +1,4 @@
-import { CartItem } from '../../classes/cart-item';
+import { CartItem } from '../classes/cart-item';
 
 export class TestCartItem extends CartItem {
   id: number;

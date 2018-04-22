@@ -34,17 +34,27 @@ export class TocService {
   getNavbarItems(): any {
     return contents.reduce((curr, t) => {
       if (t.path !== '**' && t.path !== '') {
-        const { title, path } = t;
-        if (t.chapter) {
-          const found = curr.find(c => c.title === t.chapter && c.submenu);
-          const item = { title, path };
+        const { title, path, chapter, section, menu } = t;
+        if (chapter) {
+          const found = curr.find(c => c.title === chapter && c.submenu);
+          const item = { title, path, menu };
           if (found) {
-            found.submenu.push(item);
+            if (section) {
+              const sect = found.submenu.find(i => i.title === section);
+              if (sect) {
+                sect.items.push(item);
+              } else {
+                found.submenu.push({ title: section, section: true, items: [item] });
+              }
+            } else {
+              found.submenu.push(item);
+            }
           } else {
-            curr.push({ title: t.chapter, submenu: [item] });
+            const menu = section ? { title: section, section: true, items: [item] } : item;
+            curr.push({ title: chapter, submenu: [menu] });
           }
-        } else if (t.chapter !== false) {
-          curr.push({ title, path });
+        } else if (chapter !== false) {
+          curr.push({ title, path, menu });
         }
       }
       return curr;

@@ -3,21 +3,21 @@ import { EventEmitter } from '@angular/core';
 
 /**
  * The base class for storing items in your cart
+ *
+ * @note {warning} Do not modify the items id after its added to the cart. Doing so could end up with duplicates which can cause
+ * undefined behaviour
  */
 export abstract class CartService<T extends CartItem> {
   /**
    * Emits an event every time an item is added to the cart
-   * @type {CartItem}
    */
   public onItemAdded: EventEmitter<T> = new EventEmitter<T>();
   /**
    * Emits an event every time an item is removed from the cart
-   * @type {CartItem}
    */
   public onItemRemoved: EventEmitter<T> = new EventEmitter<T>();
   /**
    * Emits an event every time an item is added or removed from the cart
-   * @type {number}
    */
   public onItemsChanged: EventEmitter<number> = new EventEmitter<number>();
 

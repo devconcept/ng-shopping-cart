@@ -1,6 +1,8 @@
 ## {$ doc.name $}
 <span class="badge badge-warning">Component</span>
 
+Selector: `<{$ doc.ngSelector $}>`
+
 {$ doc.description $}
 {% if doc.inputs.length > 0 %}
 *@Input()*

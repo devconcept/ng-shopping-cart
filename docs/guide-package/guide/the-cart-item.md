@@ -5,7 +5,7 @@ Cart items are the building blocks of a cart. They are what the customers choose
 
 > You can't have multiple items with the same `id` in your cart. Adding another will overwrite the previous item with that particular `id`. 
 
-## The `CartItem` class
+#### The `CartItem` class
 
 The `CartItem` class is an *abstract class* with 6 *abstract methods* that you must implement if you want to use your own data structure. This methods are the minimum required for the library to interact with the items. Those methods and their return values are:
 
@@ -20,7 +20,7 @@ Ids are compared using strict equality so make sure you use the same data type f
 
 > Using objects as ids might have undesirable side effects.
 
-## Default `CartItem`
+#### Default `CartItem`
 
 The built-in implementation of the `CartItem` class is `BaseCartItem` which uses the following properties to store data
 
@@ -57,7 +57,7 @@ Using `id`, `name`, and the all other properties directly is equivalent to use s
 
 > Do not change the id of the item after you added to the cart service collection. The service only tracks each individual item when they are added to the cart.
 
-## Using other classes
+#### Using other classes
 
 The `BaseCartItem` is great but forces your app to have a predefined data structure. What if you designed your app with the word `'cost'` as the indication of price? What if you use a lot of other properties to store data about your items and don't want to be forced to fit all of them in a `item.data.['...']` property? The solution is simple, just create a new class and extend the abstract `CartItem`. Thanks to the power of Typescript generics you can use your class in the service as well, preserving all the benefits of static typing.
 
@@ -96,7 +96,7 @@ export class AppModule {
 
 Always set a reference to the class itself. The service stores that reference and uses it to create new instances when they are needed.
 
-## Persisting items
+#### Persisting items
 
 You might be wondering why the constructor takes one argument, an object, as single parameter instead of writing something like this:
 

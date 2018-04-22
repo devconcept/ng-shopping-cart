@@ -1,6 +1,6 @@
 import { CartItem } from '../classes/cart-item';
 import { MemoryCartService } from './memory-cart.service';
-import { BrowserStorageServiceConfiguration } from '../interfaces/browser-storage-service-options';
+import { BrowserStorageServiceConfiguration } from '../interfaces/browser-storage-service-configuration';
 
 /**
  * The base class for all CartService implementations that use the browser storage

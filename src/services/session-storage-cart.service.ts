@@ -1,7 +1,7 @@
 import { Inject, Injectable } from '@angular/core';
 import { CartItem } from '../classes/cart-item';
 import { BrowserStorageCartService } from './browser-storage-cart.service';
-import { BrowserStorageServiceConfiguration } from '../interfaces/browser-storage-service-options';
+import { BrowserStorageServiceConfiguration } from '../interfaces/browser-storage-service-configuration';
 import { CART_ITEM_CLASS } from './item-class.token';
 import { CART_SERVICE_CONFIGURATION } from './service-configuration.token';
 

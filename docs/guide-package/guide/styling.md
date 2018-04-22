@@ -3,7 +3,7 @@
 
 All of the components provided by this module use global styles. This is intentional to allow several strategies for customization of a single component, all components of one type or to harness the power of CSS preprocessors to change how the library behaves.
 
-## Using css
+#### Using css
 
 If you plan on using the default styles unchanged or make the modifications on your app stylesheets you must include the base generated css in your `angular-cli.json` file.
 
@@ -57,7 +57,7 @@ the `html` would be
 
 If you follow the example you will see that this particular `add-to-cart` component renders blue while all the others have red backgrounds.
 
-## Using css preprocessors
+#### Using css preprocessors
 
 Some popular frameworks use CSS preprocessor variables to perform quick customizations to the whole generated CSS. The `<cart-showcase>` component, for example, uses a grid system to display items of identical sizes in a single row in a responsive manner. You can have a different amount of columns in tablets or desktop screens but it is not possible to cover all scenarios. Preprocessor variables allow you to fill this gap. Check the following example: 
 

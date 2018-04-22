@@ -1,5 +1,5 @@
-import { MemoryCartService } from '../memory-cart.service';
-import { BaseCartItem } from '../../classes/base-cart-item';
+import { MemoryCartService } from './memory-cart.service';
+import { BaseCartItem } from '../classes/base-cart-item';
 
 describe('MemoryCartService', () => {
   let service: MemoryCartService<BaseCartItem>;

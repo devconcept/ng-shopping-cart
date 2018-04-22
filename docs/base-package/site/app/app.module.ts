@@ -1,9 +1,10 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { RouterModule } from '@angular/router';
+import { RouterModule, Router } from '@angular/router';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
-import {MarkdownModule} from 'ngx-markdown';
+import { MarkdownModule, MarkedOptions } from 'ngx-markdown';
+import { markedOptionsFactory } from './markdown-factory';
 
 import { AppComponent } from './app.component';
 import { HomeComponent } from './routes/home/home.component';
@@ -28,7 +29,11 @@ import { routes } from './routes';
     CommonModule,
     NgbModule.forRoot(),
     RouterModule.forRoot(routes),
-    MarkdownModule.forRoot(),
+    MarkdownModule.forRoot({
+      provide: MarkedOptions,
+      useFactory: markedOptionsFactory,
+      deps: [Router]
+    }),
     SharedModule
   ],
   bootstrap: [AppComponent],

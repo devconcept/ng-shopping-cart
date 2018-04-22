@@ -1,8 +1,8 @@
 module.exports = function navigationMap(customDocs) {
   return {
     name: 'navigationMap',
-    $runAfter: ['routes-added'],
-    $runBefore: ['extra-docs-added'],
+    $runAfter: ['adding-navigation'],
+    $runBefore: ['navigation-added'],
     $process: function (docs) {
       const TocDoc = customDocs.getDoc('TocDoc');
       const types = ['class', 'interface', 'type-alias', 'markdown'];

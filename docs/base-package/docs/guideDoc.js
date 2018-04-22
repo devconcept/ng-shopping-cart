@@ -5,7 +5,7 @@ module.exports = exports = class GuideDoc {
     const {baseName, content} = fileInfo;
     this.chapter = 'guide';
     this.docType = 'markdown';
-    this.name = startCase(baseName).replace(/ /g, '');
+    this.name = startCase(baseName).replace(/ /g, '') + 'Component';
     this.computedName = baseName;
     this.content = content;
     this.template = 'component.ts';

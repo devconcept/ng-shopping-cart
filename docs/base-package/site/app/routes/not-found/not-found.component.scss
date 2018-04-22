@@ -1,6 +1,11 @@
 .not-found-wrapper {
-  position: absolute;
+  position: fixed;
   left: 50%;
   top: 50%;
   transform: translate(-50%, -50%);
+  text-align: center;
+
+  .not-found-code {
+    font-size: 10rem;
+  }
 }
