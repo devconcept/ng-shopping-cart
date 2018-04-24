@@ -2,9 +2,8 @@
 
 {% if doc.typeParams %}<span class="badge badge-primary">Generic</span>{% endif %}
 <span class="badge badge-warning">Service</span>
-{% if doc.extendsClauses.length %}
-Extends: {% for ext in doc.extendsClauses %}`{$ ext.text $}`{% if not loop.last %},{% endif %}{% endfor %}
-{% endif %}
+
+{% include 'class-inheritance.md' -%}
 {$ doc.description $}
 
 Dependencies: {% if doc.dependencies.length === 0 %}

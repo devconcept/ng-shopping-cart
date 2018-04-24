@@ -1,19 +1,43 @@
-<!--The content below is only a placeholder and can be replaced.-->
-<div style="text-align:center">
-  <h1>
-    Welcome to NgShoppingCart
-  </h1>
-  <img width="300" alt="Angular Logo" src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAyNTAgMjUwIj4KICAgIDxwYXRoIGZpbGw9IiNERDAwMzEiIGQ9Ik0xMjUgMzBMMzEuOSA2My4ybDE0LjIgMTIzLjFMMTI1IDIzMGw3OC45LTQzLjcgMTQuMi0xMjMuMXoiIC8+CiAgICA8cGF0aCBmaWxsPSIjQzMwMDJGIiBkPSJNMTI1IDMwdjIyLjItLjFWMjMwbDc4LjktNDMuNyAxNC4yLTEyMy4xTDEyNSAzMHoiIC8+CiAgICA8cGF0aCAgZmlsbD0iI0ZGRkZGRiIgZD0iTTEyNSA1Mi4xTDY2LjggMTgyLjZoMjEuN2wxMS43LTI5LjJoNDkuNGwxMS43IDI5LjJIMTgzTDEyNSA1Mi4xem0xNyA4My4zaC0zNGwxNy00MC45IDE3IDQwLjl6IiAvPgogIDwvc3ZnPg==">
+<div class="row justify-content-center m-5 align-items-center">
+  <img class="col-auto col-lg-3 cart-logo" alt="Library Logo" src="assets/cart.svg">
+  <div class="col-auto text-center text-lg-left">
+    <h1>
+      NgShoppingCart
+    </h1>
+    <p>An Angular library to create shopping carts for your e-commerce applications</p>
+  </div>
 </div>
-<h2>Here are some links to help you start: </h2>
-<ul>
-  <li>
-    <h2><a target="_blank" rel="noopener" href="https://angular.io/tutorial">Tour of Heroes</a></h2>
-  </li>
-  <li>
-    <h2><a target="_blank" rel="noopener" href="https://github.com/angular/angular-cli/wiki">CLI Documentation</a></h2>
-  </li>
-  <li>
-    <h2><a target="_blank" rel="noopener" href="https://blog.angular.io/">Angular blog</a></h2>
-  </li>
-</ul>
+<div class="row no-gutters justify-content-center py-5 align-items-center bg-primary text-white">
+  <div class="col-auto">
+    <h2>What is included?</h2>
+    <ul>
+      <li>Generic and extendable services to manipulate cart items however you want</li>
+      <li>Several components to add items, checkout or view a summary of the cart</li>
+      <li>A component to display items arranged in a grid for your e-commerce application</li>
+      <li>Any shape for cart item objects</li>
+      <li>Simple module configuration</li>
+      <li>Easy styling of one or all components of the same type</li>
+      <li>Support for CSS Preprocessors to customize styles with variables</li>
+    </ul>
+  </div>
+  <div class="fill-space d-none d-lg-block"></div>
+</div>
+<div class="row justify-content-center m-5 align-items-center">
+  <a class="feature-link col-md-auto text-center p-5 m-5 bg-primary text-white"
+     [routerLink]="'/guide/get-started'">
+    <div [innerHtml]="getStarted"></div>
+    <p>Get started</p>
+  </a>
+  <a class="feature-link col-md-auto text-center p-5 m-5 bg-info text-white"
+     [routerLink]="'/api/search'">
+    <div [innerHtml]="search"></div>
+    <p>Search the API</p>
+  </a>
+  <a class="feature-link col-md-auto text-center p-5 m-5 bg-primary text-white"
+     [routerLink]="'/get-started'">
+    <div [innerHtml]="examples"></div>
+    <p>Examples</p>
+  </a>
+</div>
+
+

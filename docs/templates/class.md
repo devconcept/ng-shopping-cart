@@ -4,9 +4,7 @@
 {% if doc.isAbstract %}<span class="badge badge-warning">Abstract class</span>
 {% endif %}{% if not doc.isAbstract %}<span class="badge badge-warning">Class</span>{% endif %}
 
-{% if doc.extendsClauses.length %}
-Extends: {% for ext in doc.extendsClauses %}`{$ ext.text $}`{% if not loop.last %},{% endif %}{% endfor %}
-{% endif %}
+{% include 'class-inheritance.md' -%}
 {$ doc.description  $}
 {% for member in doc.members %}
 {% if member.description %}

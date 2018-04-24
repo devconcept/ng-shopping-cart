@@ -1,20 +1,20 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { ParentRouteComponent } from './parent-route.component';
+import { NotImplementedComponent } from './not-implemented.component';
 
 describe('NotImplementedComponent', () => {
-  let component: ParentRouteComponent;
-  let fixture: ComponentFixture<ParentRouteComponent>;
+  let component: NotImplementedComponent;
+  let fixture: ComponentFixture<NotImplementedComponent>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ ParentRouteComponent ]
+      declarations: [ NotImplementedComponent ]
     })
     .compileComponents();
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(ParentRouteComponent);
+    fixture = TestBed.createComponent(NotImplementedComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

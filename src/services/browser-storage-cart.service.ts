@@ -4,7 +4,6 @@ import { BrowserStorageServiceConfiguration } from '../interfaces/browser-storag
 
 /**
  * The base class for all CartService implementations that use the browser storage
- * @ignore
  */
 export abstract class BrowserStorageCartService<T extends CartItem> extends MemoryCartService<T> {
   protected itemClass: any;

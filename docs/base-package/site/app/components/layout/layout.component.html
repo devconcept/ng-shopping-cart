@@ -1,4 +1,4 @@
-<nav class="navbar navbar-dark navbar-expand-lg bg-primary">
+<nav class="navbar navbar-dark navbar-expand-md bg-primary">
   <div class="container-fluid">
     <a class="navbar-brand" routerLink="/">
       <svg version="1.1" class="icon d-inline-block align-top" xmlns="http://www.w3.org/2000/svg"
@@ -64,6 +64,11 @@
             </a>
           </li>
         </ng-container>
+        <li class="nav-item">
+          <a class="nav-link"[routerLink]="'/examples'" [routerLinkActive]="'active'">
+            Examples
+          </a>
+        </li>
       </ul>
       <ul class="navbar-nav d-none d-sm-block">
         <li class="navbar-text">
@@ -76,16 +81,12 @@
     </div>
   </div>
 </nav>
-<div class="container-fluid">
-  <div class="row">
-    <div class="col-md-3 col-lg-2" *ngIf="needsSidebar">
-      <doc-sidebar></doc-sidebar>
-    </div>
-    <div [ngClass]="{'col-md-12': !needsSidebar, 'col-md-9 col-lg-10': needsSidebar}">
-      <div style="padding: 20px">
-        <ng-content></ng-content>
-      </div>
-    </div>
+<div class="row no-gutters">
+  <div class="col-md-3 col-lg-2" *ngIf="needsSidebar">
+    <doc-sidebar></doc-sidebar>
+  </div>
+  <div [ngClass]="{'col-md-12': !needsSidebar, 'col-md-9 col-lg-10': needsSidebar}">
+    <ng-content></ng-content>
   </div>
 </div>
 

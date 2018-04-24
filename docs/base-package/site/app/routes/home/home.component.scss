@@ -1,0 +1,17 @@
+.cart-logo {
+  min-width: 300px;
+}
+
+.feature-link {
+  border-radius: 3px;
+
+  &:hover {
+    text-decoration: none;
+
+  }
+}
+
+.fill-space {
+  width: 300px;
+  min-height: 1px;
+}

@@ -3,7 +3,7 @@ const {kebabCase} = require('lodash');
 module.exports = function generateKebabNames() {
   return {
     name: 'generateKebabNames',
-    $runAfter: ['filterIgnoredFiles'],
+    $runAfter: ['docs-processed'],
     $runBefore: ['adding-modules'],
     $process: function (docs) {
       docs.forEach(function (doc) {

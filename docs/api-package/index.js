@@ -12,6 +12,7 @@ module.exports = exports = new Package('cartApi', [cartBasePkg, tsPkg])
   .processor(require('./processors/addTypeParameters'))
   .processor(require('./processors/addServiceDependencies'))
   .processor(require('./processors/generateApiModules'))
+  .processor(require('./processors/fixHeritageInfo'))
   .processor(require('./processors/generateApiRoutes'))
   .factory(require('./services/getTypeFolder'))
   .config(function (parseTagsProcessor, getInjectables) {
