@@ -10,11 +10,11 @@ module.exports = exports = class TocDoc {
         const title = doc.docType === 'markdown'
           ? upperFirst(lowerCase(computedName))
           : startCase(computedName).replace(/ /g, '');
-        let menu = title;
+        let menu = doc.docType !== 'const' ? title : doc.name;
         if (doc.ngType === 'component') {
           menu = '<' + doc.computedName.replace(/-component$/, '') + '>';
         }
-        if (['markdown', 'type-alias'].indexOf(doc.docType) === -1) {
+        if (['markdown', 'type-alias', 'const'].indexOf(doc.docType) === -1) {
           extra = {
             topics: doc.members.reduce((curr, m) => {
               if (m.description) {

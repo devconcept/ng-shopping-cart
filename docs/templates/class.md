@@ -6,6 +6,7 @@
 
 {% include 'class-inheritance.md' -%}
 {$ doc.description  $}
+{% include 'notes.md' -%}
 {% for member in doc.members %}
 {% if member.description %}
 #### `{$ member.name $}{% if member.declaration.kind == 152 %}({% for param in member.parameters %}{$ param $}{% endfor %}){% endif %}`

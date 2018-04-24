@@ -7,7 +7,7 @@ export const routes: Routes = [
   {path: '', component: HomeComponent},
   {path: 'api', loadChildren: 'app/api/api.module#ApiModule'},
   {path: 'guide', loadChildren: 'app/guide/guide.module#GuideModule'},
-  {path: 'examples', component: NotImplementedComponent},
+  {path: 'demo', component: NotImplementedComponent},
   {path: '**', component: NotFoundComponent}
 ];
 

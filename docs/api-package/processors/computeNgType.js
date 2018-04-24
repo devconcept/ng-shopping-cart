@@ -28,6 +28,9 @@ module.exports = function computeNgType(getTypeFolder) {
               })
             }
           }
+          if (doc.docType === 'const') {
+            doc.ngType = 'token';
+          }
           doc.location = getTypeFolder(doc);
         }
       });

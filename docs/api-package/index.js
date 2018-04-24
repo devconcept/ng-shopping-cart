@@ -33,7 +33,7 @@ module.exports = exports = new Package('cartApi', [cartBasePkg, tsPkg])
   .config(function (computePathsProcessor) {
     computePathsProcessor.pathTemplates = computePathsProcessor.pathTemplates.concat([
       {
-        docTypes: ['class', 'interface', 'type-alias'],
+        docTypes: ['class', 'interface', 'type-alias', 'const'],
         getOutputPath: function (doc) {
           return `${ASSETS}/${doc.computedName}.md`
         },

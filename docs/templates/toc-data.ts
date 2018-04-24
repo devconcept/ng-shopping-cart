@@ -16,6 +16,10 @@ export const contents: any = [
   },
   {% endfor %}
   {
+    title: 'Demo',
+    path: '/demo',
+  },
+  {
     title: 'Not found',
     path: '**',
   },

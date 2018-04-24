@@ -15,6 +15,10 @@ module.exports = function addTypeParameters() {
           }).join(',');
           doc.typeParameters = `<${types}>`;
         }
+        if (doc.docType === 'const') {
+          const tokenRegExp = /\s*new\s*/g;
+          doc.typeParameters = doc.type.replace(tokenRegExp, '');
+        }
       });
     }
   };

@@ -9,7 +9,7 @@ module.exports = function getTypeFolder() {
     if (type === 'type-alias') {
       return 'types';
     }
-    const singulars = ['component', 'injection-token', 'interface', 'service'];
+    const singulars = ['component', 'injection-token', 'interface', 'service', 'token'];
     return singulars.indexOf(type) !== -1 ? type + 's' : type + 'es';
   }
 };

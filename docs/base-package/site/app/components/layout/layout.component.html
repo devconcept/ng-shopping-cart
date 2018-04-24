@@ -25,7 +25,7 @@
             </a>
             <div ngbDropdownMenu aria-labelledby="navbarDropdown">
               <ng-container *ngFor="let m of item.submenu">
-                <a class="dropdown-item" [routerLink]="[m.path]" [routerLinkActive]="'active'" *ngIf="!m.section">
+                <a class="dropdown-item" [routerLink]="[m.path]" *ngIf="!m.section">
                   {{m.title}}
                 </a>
                 <ng-container *ngIf="m.section">
@@ -35,8 +35,7 @@
                         {{m.title}}
                       </a>
                       <div ngbDropdownMenu>
-                        <a (click)="drop.close()" *ngFor="let i of m.items" [routerLink]="i.path" class="dropdown-item"
-                           [routerLinkActive]="'active'">
+                        <a (click)="drop.close()" *ngFor="let i of m.items" [routerLink]="i.path" class="dropdown-item">
                           {{i.menu}}
                         </a>
                       </div>
@@ -59,14 +58,14 @@
           </span>
           </li>
           <li class="nav-item d-block d-sm-none" *ngFor="let m of item.submenu">
-            <a class="nav-link" [routerLink]="[m.path]" [routerLinkActive]="'active'">
+            <a class="nav-link" [routerLink]="[m.path]">
               {{m.title}}
             </a>
           </li>
         </ng-container>
         <li class="nav-item">
-          <a class="nav-link"[routerLink]="'/examples'" [routerLinkActive]="'active'">
-            Examples
+          <a class="nav-link"[routerLink]="'/demo'" [routerLinkActive]="'active'">
+            Demo
           </a>
         </li>
       </ul>
