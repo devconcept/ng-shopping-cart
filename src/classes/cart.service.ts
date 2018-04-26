@@ -6,6 +6,7 @@ import { EventEmitter } from '@angular/core';
  *
  * @note {warning} Do not modify the items id after its added to the cart. Doing so could end up with duplicates which can cause
  * undefined behaviour
+ * @order 2
  */
 export abstract class CartService<T extends CartItem> {
   /**

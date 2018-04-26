@@ -1,5 +1,6 @@
 /**
  * The base class for every unit of information stored in the cart service
+ * @order 1
  */
 export abstract class CartItem {
   /**

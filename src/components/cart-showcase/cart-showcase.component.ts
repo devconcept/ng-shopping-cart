@@ -1,10 +1,50 @@
 import { Component, Input, OnChanges, SimpleChanges } from '@angular/core';
 import { CartItem } from '../../classes/cart-item';
 import { CartShowcaseItemComponent } from '../../components/cart-showcase-item/cart-showcase-item.component';
-// import { ShowcaseItem } from '../../interfaces/showcase-item';
 
 /**
  * Renders items arranged in columns using a dynamic component for the item useful for getting started with e-commerce applications.
+ *
+ * @howToUse "Using wider items"
+ * ```html
+ * <cart-showcase [items]="items" [aspectRatio]="'2:1'">
+ * </cart-showcase>
+ * ```
+ *
+ * @howToUse "Using four columns in all screen sizes bigger than 768px"
+ * ```html
+ * <cart-showcase [items]="items" [mCols]="4" [lCols]="4">
+ * </cart-showcase>
+ * ```
+ *
+ * @howToUse "Using a different item component"
+ * ```html
+ * <cart-showcase [items]="items" [itemComponent]="itemComponent">
+ * </cart-showcase>
+ * ```
+ * ```typescript
+ * export class MyComponent {
+ *   itemComponent = MyCustomItemComponent;
+ * }
+
+ * export class MyCustomItemComponent implements ShowcaseItem  {
+ *   item: CartItem;
+ * }
+ *
+ * @NgModule({
+ *   // .....
+ *   entryComponents: [MyCustomItemComponent],
+ * })
+ * export class AppModule {
+ * }
+ * ```
+ *
+ * @note If you change the [columns] input you must also change the SASS variable that controls the component grid. A similar procedure is
+ * required to create aspect ratios with values greater than four eg: '1:5'. Check the styling guide for more information.
+ *
+ * @note The aspect ratio is the width/height proportion of the items therefore a ratio of "2:2" is equivalent to "1:1". Redundant ratios
+ * like these are removed from the source so don't try to use them.
+ *
  */
 @Component({
   selector: 'cart-showcase',
@@ -50,7 +90,8 @@ export class CartShowcaseComponent implements OnChanges {
    */
   @Input() itemComponent: any = CartShowcaseItemComponent;
   /**
-   * The aspect ratio of the container of the items
+   * The aspect ratio of the container of the items. A value of `1:1` means square items, `2:1` means two times wider, `1:2` two times
+   * taller and so on.
    */
   @Input() aspectRatio = '1:1';
 
@@ -61,7 +102,7 @@ export class CartShowcaseComponent implements OnChanges {
   ngOnChanges(changes: SimpleChanges): void {
     const columnProps = ['xsCols', 'sCols', 'mCols', 'lCols', 'xlCols'];
     const classPrefix = ['xs', 's', 'm', 'l', 'xl'];
-    for (let i = 0; i < columnProps.length; i ++) {
+    for (let i = 0; i < columnProps.length; i++) {
       const colChanges = changes[columnProps[i]];
       if (colChanges) {
         this[`${classPrefix[i]}Class`] = `showcase-container-xs-${this.getColumnSize(colChanges.currentValue)}`;

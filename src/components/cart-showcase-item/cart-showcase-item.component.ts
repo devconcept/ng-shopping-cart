@@ -10,5 +10,8 @@ import { CartItem } from '../../classes/cart-item';
   templateUrl: './cart-showcase-item.component.html',
 })
 export class CartShowcaseItemComponent implements ShowcaseItem {
+  /**
+   * The required member from the interface `ShowcaseItem`
+   */
   item: CartItem;
 }

@@ -7,6 +7,54 @@ import { CheckoutHttpSettings } from '../../interfaces/checkout-http-settings';
 
 /**
  * Renders a button to initiate checkout of the cart.
+ *
+ * @howToUse "With a custom button or projected content"
+ * ```html
+ * <cart-checkout [custom]="true">
+ *    <button type="button" class="my-custom-class">Add item</button>
+ * </cart-checkout>
+ * ```
+ *
+ * @howToUse "With different text and classes"
+ * ```html
+ * <cart-checkout [buttonText]="'Add item'" buttonClass="'my-custom-class'">
+ * </cart-checkout>
+ * ```
+ *
+ * @howToUse "Using http in a protected endpoint"
+ * ```html
+ * <cart-checkout [service]="'http'" settings="settings">
+ * </cart-checkout>
+ * ```
+ * ```typescript
+ * export class MyComponent {
+ *   settings: CheckoutHttpSettings = {
+ *     method: 'post',
+ *     url: 'http://myapi.com/',
+ *     options: { headers: { Authorization: 'Bearer my-auth-token' } }
+ *   };
+ * }
+ * ```
+ *
+ * @howToUse "Using the PayPal service"
+ * ```html
+ * <cart-checkout [service]="'paypal'" settings="settings">
+ * </cart-checkout>
+ * ```
+ * ```typescript
+ * export class MyComponent {
+ *  settings: CheckoutPaypalSettings = {
+ *    business: 'myaccount@paypal.com',
+ *    itemName: 'myMarketplaceAppCart',
+ *    itemNumber: '1234',
+ *    currencyCode: 'USD',
+ *    noNote: '1'
+ *  };
+ * }
+ * ```
+ *
+ * @note {warning} This component captures clicks events bubbling from its projected content. Make sure the event keeps bubbling only when
+ * you want the checkout operation to start.
  */
 @Component({
   selector: 'cart-checkout',
@@ -22,9 +70,6 @@ export class CartCheckoutComponent implements OnChanges, OnInit, OnDestroy {
   paypalSettings: CheckoutPaypalSettings;
   /**
    *  If true displays a default button provided by the component. When false projects the contents of the component.
-   *
-   * > This component captures clicks events bubbling from its projected content. Make sure the event keeps bubbling only when you want
-   * the checkout operation to start.
    */
   @Input() custom = false;
   /**

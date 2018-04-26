@@ -4,7 +4,7 @@
 
 {$ doc.description $}
 
-Values: {$ doc.typeDefinition $}
+Values: {$ doc.typeDefinition | backTicks $}
 
 Meaning:
 {% if doc.means %}

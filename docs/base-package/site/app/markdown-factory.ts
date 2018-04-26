@@ -15,7 +15,7 @@ export function markedOptionsFactory(router: Router): MarkedOptions {
       .replace(/\([a-zA-Z: ]*\)$/, '');
 
     const currentUrl = router.routerState.snapshot.url.split('#')[0];
-    return level >= 3
+    return level >= 4
       ? `
         <a id="${escapedText}" class="header" href="${currentUrl}#${escapedText}">
           <h${level}>

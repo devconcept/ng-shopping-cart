@@ -60,3 +60,15 @@ blockquote.doc.note {
   padding: 1em;
 }
 
+.how-to-use {
+  font-style: italic;
+
+  &:not(:first-of-type) {
+    padding-top: 1rem;
+
+    & ~ code, p {
+      padding-bottom: 1rem;
+    }
+  }
+}
+

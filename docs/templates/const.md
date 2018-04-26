@@ -1,4 +1,4 @@
-## `{$ doc.name $}`
+## {$ doc.name $}
 
 <span class="badge badge-warning">Injection token</span>
 

@@ -7,14 +7,7 @@
 {% include 'class-inheritance.md' -%}
 {$ doc.description  $}
 {% include 'notes.md' -%}
-{% for member in doc.members %}
-{% if member.description %}
-#### `{$ member.name $}{% if member.declaration.kind == 152 %}({% for param in member.parameters %}{$ param $}{% endfor %}){% endif %}`
-{% if member.type !== 'void' %}
-Type: `{% if member.type.typeExpression %}{$ member.type.typeExpression $}{% else %}{$ member.type $}{% endif %}`
 
-{% endif %}
-{$ member.description $}
-{% endif %}
-{% endfor %}
+{% include 'members.md' -%}
+{% include 'how-to-use.md' -%}
 

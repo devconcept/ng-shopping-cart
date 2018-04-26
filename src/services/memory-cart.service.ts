@@ -4,6 +4,7 @@ import { Injectable } from '@angular/core';
 
 /**
  * An implementation of the CartService using an in-memory array to store items
+ * @order 1
  */
 @Injectable()
 export class MemoryCartService<T extends CartItem> extends CartService<T> {

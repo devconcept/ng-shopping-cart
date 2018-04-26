@@ -1,8 +1,8 @@
 # NgShoppingCart
 
-> This is a work in progress. While most of the components and services are ready breaking changes might occur while we release a stable version. 
+An Angular component library to create shopping carts. Based on it's predecessor for Angular.js with tons of improvements.
 
-An Angular component library to create shopping carts. Based on it's predecessor for Angular.js with tons of improvements. 
+> This is a work in progress. We are now in beta and getting close to a stable release. 
 
 # Features
 
@@ -12,6 +12,8 @@ An Angular component library to create shopping carts. Based on it's predecessor
 - A default `CartItem` class ready to go, easy to replace.
 - Several built-in `CartService` implementations to persist cart information in different ways.
 - Easily customizable styles with `Sass` variables
+
+> This library is compatible with Angular version >=5
 
 # Installation
 
@@ -30,6 +32,18 @@ yarn add ng-shopping-cart
 
 # Documentation
 
-Hang tight while we write the docs
+Documentation is available at http://ng-shopping-cart.github.io/
 
-In the meantime check the [wiki](https://github.com/devconcept/ng-shopping-cart/wiki) for updates
+# Demo
+
+To view a demo of the components of the library:
+
+- Clone the repository
+- Install it's dependencies with `npm install`
+- Run the main npm script with `npm start` or `ng serve --app=1`
+
+## License
+
+[MIT](https://github.com/devconcept/ng-shopping-cart/blob/master/LICENSE)
+
+

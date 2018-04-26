@@ -4,13 +4,16 @@
 Selector: `<{$ doc.ngSelector $}>`
 
 {$ doc.description $}
+{% include 'notes.md' -%}
 {% if doc.inputs.length > 0 %}
 *@Input()*
 {% for input in doc.inputs %}
 {% if input.description %}
 #### `{$ input.name $}`
-Type:`{$ input.type $}`
-
+Type:`{$ input.typeInfo $}`
+{% if input.initialValue %}
+Initial value: `{$ input.initialValue $}`
+{% endif %}
 {$ input.description $}
 {% endif %}
 {% endfor %}
@@ -27,3 +30,5 @@ Emits: `{$ output.type | emitterType  $}`
 {% endif %}
 {% endfor %}
 {% endif %}
+{% include 'members.md' -%}
+{% include 'how-to-use.md' -%}

@@ -4,10 +4,14 @@ import { CartItem } from './cart-item';
  * A default implementation for CartItem
  *
  * @note {info} You can access item information either with direct property access or method calls, eg. `item.id === item.getId()`
- * @example
+ * @order 3
+ * @howToUse "Using properties and methods"
+ * ```typescript
  * const item = new BaseCartItem({id: 1, name: 'Demo'});
  * item.quantity = 10;
- * item.setPrice(50);
+ * item.setQuantity(50);
+ * console.log(item.quantity) // prints 50
+ * ```
  */
 export class BaseCartItem extends CartItem {
   /**

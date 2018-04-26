@@ -14,3 +14,4 @@ Dependencies: {% if doc.dependencies.length === 0 %}
 {$ member.description $}
 {% endif %}
 {% endfor %}
+{% include 'how-to-use.md' -%}

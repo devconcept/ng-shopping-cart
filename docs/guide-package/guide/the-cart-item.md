@@ -1,4 +1,5 @@
 @next guide/the-cart-service
+@order 2
 ## The cart item
 
 Cart items are the building blocks of a cart. They are what the customers choose when they wish to purchase anything. Each item is unique but can be ordered more than once so if you want 3 items of a particular product what you have is one item with `quantity=3`.

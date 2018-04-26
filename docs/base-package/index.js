@@ -103,6 +103,11 @@ module.exports = exports = new Package('cartBase', [basePkg, jsDocsPkg, njPkg, g
       }
     ];
   })
+  .config(function (parseTagsProcessor, getInjectables) {
+    parseTagsProcessor.tagDefinitions = parseTagsProcessor.tagDefinitions.concat(getInjectables([
+      require('./tag-defs/order')
+    ]));
+  })
   .config(function (computeIdsProcessor, gitData, packageInfo) {
     gitData.package = packageInfo;
     computeIdsProcessor.idTemplates.push({

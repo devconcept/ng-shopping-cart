@@ -13,6 +13,7 @@ module.exports = exports = new Package('cartApi', [cartBasePkg, tsPkg])
   .processor(require('./processors/addServiceDependencies'))
   .processor(require('./processors/generateApiModules'))
   .processor(require('./processors/fixHeritageInfo'))
+  .processor(require('./processors/fixMembersType'))
   .processor(require('./processors/generateApiRoutes'))
   .factory(require('./services/getTypeFolder'))
   .config(function (parseTagsProcessor, getInjectables) {
@@ -21,13 +22,15 @@ module.exports = exports = new Package('cartApi', [cartBasePkg, tsPkg])
       require('./tag-defs/means'),
       require('./tag-defs/note'),
       require('./tag-defs/example'),
+      require('./tag-defs/howToUse'),
     ]));
   })
   .config(function (unescapeCommentsProcessor, readTypeScriptModules, templateEngine, getInjectables) {
     readTypeScriptModules.sourceFiles = TYPESCRIPT_SOURCES;
     unescapeCommentsProcessor.$enabled = false;
     templateEngine.filters = templateEngine.filters.concat(getInjectables([
-      require('./rendering/emitterType')
+      require('./rendering/emitterType'),
+      require('./rendering/backTicks')
     ]));
   })
   .config(function (computePathsProcessor) {

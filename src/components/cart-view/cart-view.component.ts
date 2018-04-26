@@ -5,6 +5,43 @@ import { CartViewDisplay } from '../../types';
 
 /**
  * Renders a view of the cart.
+ *
+ * @howToUse "Using responsive layout"
+ * ```html
+ * <cart-view [display]="'responsive'">
+ * </cart-view>
+ * ```
+ *
+ * @howToUse "No images and using scrollbars on small screens"
+ * ```html
+ * <cart-view [images]="false" [display]="'responsive-table'">
+ * </cart-view>
+ * ```
+ *
+ * @howToUse "Using different text for headers"
+ * ```html
+ * <cart-view [emptyText]="headers.empty" [nameHeaderText]="headers.name" [quantityHeaderText]="headers.quantity"
+ *  [priceHeaderText]="headers.quantity" [totalHeaderText]="headers.total" [taxFooterText]="footers.tax"
+ *  [shippingFooterText]="footers.shipping" [totalFooterText]="footers.total"
+ * >
+ * </cart-view>
+ * ```
+ * ```typescript
+ * export class MyComponent {
+ *   headers = {
+ *     empty: 'No items. Add some to the cart',
+ *     name: 'Description',
+ *     quantity: 'Amount',
+ *     price: 'Cost',
+ *     total: 'Total x item',
+ *   }
+ *   footers = {
+ *     tax: 'Tax rate',
+ *     shipping: 'Shipping cost',
+ *     total: 'Total cost'
+ *   }
+ * }
+ * ```
  */
 @Component({
   selector: 'cart-view',

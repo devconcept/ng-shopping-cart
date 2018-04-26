@@ -1,5 +1,6 @@
 @nochapter
 @next guide/the-cart-item
+@order 1
 #### Installing
 
 Using `npm`

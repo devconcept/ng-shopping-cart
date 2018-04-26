@@ -7,6 +7,7 @@ import { CART_SERVICE_CONFIGURATION } from './service-configuration.token';
 
 /**
  * An implementation of the cart service using sessionStorage to store items
+ * @order 3
  */
 @Injectable()
 export class SessionStorageCartService<T extends CartItem> extends BrowserStorageCartService<T> {

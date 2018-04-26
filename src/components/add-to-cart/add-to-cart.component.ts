@@ -6,6 +6,41 @@ import { CartItem } from '../../classes/cart-item';
 
 /**
  * A component to add items to the cart by pressing a button. Has different built-in editors to select quantity.
+ *
+ * @howToUse "With a custom button or projected content"
+ * ```html
+ * <add-to-cart [item]="item" [custom]="true">
+ *    <button type="button" class="my-custom-class">Add item</button>
+ * </add-to-cart>
+ * ```
+ *
+ * @howToUse "With different text and classes"
+ * ```html
+ * <add-to-cart [item]="item" [buttonText]="'Add item'" buttonClass="'my-custom-class'">
+ * </add-to-cart>
+ * ```
+ *
+ * @howToUse "With a html number input positioned on top"
+ * ```html
+ * <add-to-cart [item]="item" [type]="'number'" [position]="'top'">
+ * </add-to-cart>
+ * ```
+ *
+ * @howToUse "With a select for selecting quantity"
+ * ```html
+ * <add-to-cart [item]="item" [type]="'dropdown'" [dropdown]="[{ label: 'One item', value: 1 }, { label: 'Two items', value: 2 }]">
+ * </add-to-cart>
+ * ```
+ *
+ * @howToUse "With the default button and different quantity"
+ * ```html
+ * <add-to-cart [item]="item" [quantity]="5">
+ * </add-to-cart>
+ * ```
+ *
+ * @note {warning} This component captures click events that bubble from its projected content if you are using [custom]=true therefore if
+ * you have other html content other than buttons inside you must stop the event propagation unless the click originated in the button that
+ * add the items to the cart.
  */
 @Component({
   selector: 'add-to-cart', // tslint:disable-line component-selector
@@ -15,10 +50,6 @@ export class AddToCartComponent implements OnChanges {
   private _editorQuantity = 1;
   /**
    * If true displays a default button provided by the component, otherwise projects the contents of the component to be used as a button.
-   *
-   * > This component captures click events that bubble from its projected content if you are using [custom]=true therefore if you have
-   * other html content other than buttons inside you must stop the event propagation unless the click originated in the button that add
-   * the items to the cart.
    */
   @Input() custom = false;
   /**

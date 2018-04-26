@@ -3,6 +3,21 @@ import { CartService } from '../../classes/cart.service';
 
 /**
  * Renders a summary of the contents of the cart.
+ *
+ * @howToUse "With a different icon"
+ * ```html
+ * <cart-summary [icon]="'http://myapi/assets/icon.svg'"></cart-summary>
+ * ```
+ *
+ * @howToUse "Display different words when the cart changes"
+ * ```html
+ * <cart-summary [totalPlurals]="summaryPlurals"></cart-summary>
+ * ```
+ * ```typescript
+ * export class MyComponent {
+ *   summaryPlurals = {'=0': 'Empty cart', '=2': 'A couple of items', '=12': 'A dozen items', 'other': '# items'}
+ * }
+ * ```
  */
 @Component({
   selector: 'cart-summary',
