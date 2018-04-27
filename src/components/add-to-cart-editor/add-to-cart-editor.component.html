@@ -1,9 +1,0 @@
-<ng-container *ngIf="type === 'dropdown'">
-  <select class="add-to-cart-input" #selectAmount (change)="changeValue(selectAmount.value)">
-    <option [selected]="item.value === value" *ngFor="let item of dropdown" [value]="item.value">{{item.label}}</option>
-  </select>
-</ng-container>
-<ng-container *ngIf="type === 'number' || type === 'text'">
-  <input class="add-to-cart-input" #inputAmount [type]="type" (change)="changeValue(inputAmount.value)" [value]="value">
-</ng-container>
-
