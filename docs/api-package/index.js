@@ -15,6 +15,7 @@ module.exports = exports = new Package('cartApi', [cartBasePkg, tsPkg])
   .processor(require('./processors/fixHeritageInfo'))
   .processor(require('./processors/fixMembersType'))
   .processor(require('./processors/generateApiRoutes'))
+  .processor(require('./processors/generateSearchService'))
   .factory(require('./services/getTypeFolder'))
   .config(function (parseTagsProcessor, getInjectables) {
     parseTagsProcessor.tagDefinitions = parseTagsProcessor.tagDefinitions.concat(getInjectables([

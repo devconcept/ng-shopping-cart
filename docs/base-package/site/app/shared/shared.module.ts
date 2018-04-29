@@ -6,6 +6,7 @@ import { Title } from '@angular/platform-browser';
 import { NextTopicComponent } from './next-topic/next-topic.component';
 import { TocService } from './services/toc-service';
 import { InfoService } from './services/info-service';
+import { SearchService } from './services/search-service';
 import { ParentRouteComponent } from './parent-route/parent-route.component';
 import { NotImplementedComponent } from './not-implemented/not-implemented.component';
 
@@ -16,7 +17,7 @@ import { NotImplementedComponent } from './not-implemented/not-implemented.compo
   ],
   declarations: [NextTopicComponent, ParentRouteComponent, NotImplementedComponent],
   exports: [NextTopicComponent, ParentRouteComponent, NotImplementedComponent, CommonModule, RouterModule],
-  providers: [TocService, Title, InfoService]
+  providers: [TocService, Title, InfoService, SearchService]
 })
 export class SharedModule {
 }

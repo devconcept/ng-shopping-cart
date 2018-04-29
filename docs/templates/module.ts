@@ -1,5 +1,6 @@
 import {NgModule} from '@angular/core';
 import {RouterModule} from '@angular/router';
+{% for mod in doc.modules %}import {{$ mod.imports $}} from '{$ mod.name $}';{% endfor %}
 import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
 import {MarkdownModule} from 'ngx-markdown';
 import {SharedModule} from '../{% if doc.location !== '' %}../{% endif %}shared/shared.module';

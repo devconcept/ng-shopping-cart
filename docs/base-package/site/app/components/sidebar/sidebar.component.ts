@@ -1,7 +1,6 @@
 import {Component, OnDestroy, OnInit} from '@angular/core';
 import {TocService} from '../../shared/services/toc-service';
 import {Subscription} from 'rxjs/Subscription';
-// import {UpperFirstPipe} from '../../shared/upper-first.pipe';
 
 @Component({
   selector: 'doc-sidebar',
@@ -10,13 +9,11 @@ import {Subscription} from 'rxjs/Subscription';
 })
 export class SidebarComponent implements OnInit, OnDestroy {
   private tocSubscription: Subscription;
-  // private upperFirst: UpperFirstPipe;
   sidebarTitle: string;
   sidebarPath: string;
   sidebarItems: any[] = [];
 
   constructor(private tocService: TocService) {
-    // this.upperFirst = new UpperFirstPipe();
   }
 
   ngOnInit() {

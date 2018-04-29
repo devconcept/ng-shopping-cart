@@ -1,5 +1,6 @@
 import {NgModule} from '@angular/core';
 import {RouterModule} from '@angular/router';
+import {FormsModule} from '@angular/forms';
 
 import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
 import {SharedModule} from '../shared/shared.module';
@@ -13,6 +14,7 @@ import { SearchComponent } from './routes/search.component';
     SharedModule,
     RouterModule.forChild(routes),
     NgbModule,
+    FormsModule,
   ],
   declarations: [SearchComponent],
   exports: []

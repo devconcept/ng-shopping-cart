@@ -2,7 +2,7 @@ const {upperFirst} = require('lodash');
 const NgComponentDoc = require('./ngComponentDoc');
 
 module.exports = exports = class NgModuleDoc {
-  constructor({name, pkg, dependencies = [], location = name}) {
+  constructor({name, pkg, dependencies = [], modules = [], location = name}) {
     this.location = location;
     this.pkg = pkg;
     this.name = upperFirst(name) + 'Module';
@@ -18,7 +18,9 @@ module.exports = exports = class NgModuleDoc {
         route: c.computedName,
         chapter: c.nochapter ? undefined : c.chapter,
         pkg,
+        next: c.next,
       })
     });
+    this.modules = modules;
   }
 };

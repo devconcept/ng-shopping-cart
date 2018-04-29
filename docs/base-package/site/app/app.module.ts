@@ -2,6 +2,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterModule, Router } from '@angular/router';
+import {FormsModule} from '@angular/forms';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { MarkdownModule, MarkedOptions } from 'ngx-markdown';
 import { markedOptionsFactory } from './markdown-factory';
@@ -15,7 +16,6 @@ import { SharedModule } from './shared/shared.module';
 
 import { routes } from './routes';
 
-
 @NgModule({
   declarations: [
     AppComponent,
@@ -27,6 +27,7 @@ import { routes } from './routes';
   imports: [
     BrowserModule,
     CommonModule,
+    FormsModule,
     NgbModule.forRoot(),
     RouterModule.forRoot(routes),
     MarkdownModule.forRoot({

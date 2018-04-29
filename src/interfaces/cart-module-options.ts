@@ -1,8 +1,8 @@
+import { CartModuleServiceType } from '../types';
+
 /**
  * Configuration options for the NgShoppingCart module in the root module of your application.
  */
-import { CartModuleServiceType } from '../types';
-
 export interface CartModuleOptions  {
   /**
    * The class reference for the items used in your cart.

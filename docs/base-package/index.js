@@ -86,6 +86,11 @@ module.exports = exports = new Package('cartBase', [basePkg, jsDocsPkg, njPkg, g
         pathTemplate: '${docType}.ts'
       },
       {
+        docTypes: ['search-service'],
+        outputPathTemplate: 'shared/services/search-service.ts',
+        pathTemplate: '${docType}.ts'
+      },
+      {
         docTypes: ['ngTemplate'],
         getOutputPath: function (doc) {
           const {location, pkg} = doc.component;
@@ -111,7 +116,7 @@ module.exports = exports = new Package('cartBase', [basePkg, jsDocsPkg, njPkg, g
   .config(function (computeIdsProcessor, gitData, packageInfo) {
     gitData.package = packageInfo;
     computeIdsProcessor.idTemplates.push({
-      docTypes: ['ngModule', 'ngRoute', 'ngComponent', 'toc', 'info-service'],
+      docTypes: ['ngModule', 'ngRoute', 'ngComponent', 'toc', 'info-service', 'search-service'],
       getId: function (doc) {
         return doc.name
       },
@@ -131,6 +136,7 @@ module.exports = exports = new Package('cartBase', [basePkg, jsDocsPkg, njPkg, g
       require('./docs/guideMarkdownDoc'),
       require('./docs/tocDoc'),
       require('./docs/infoServiceDoc'),
+      require('./docs/searchServiceDoc'),
     ]);
   })
   .config(function (staticAssets) {

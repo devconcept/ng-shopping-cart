@@ -17,7 +17,7 @@ module.exports = exports = function generateApiRoutes(customDocs) {
         dependencies: [new NgComponentDoc({
           name: 'SearchComponent',
           computedName: 'search',
-          route: 'index'
+          route: 'search'
         })],
       }, modules.map(m => new NgLazyRoute(m)));
       docs.push(apiRoute);

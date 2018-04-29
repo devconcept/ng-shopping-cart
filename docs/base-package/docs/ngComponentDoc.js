@@ -1,5 +1,5 @@
 module.exports = exports = class NgComponentDoc {
-  constructor({name, computedName, pkg, location, route, chapter}) {
+  constructor({name, computedName, pkg, location, route, chapter, next}) {
     this.name = name;
     this.chapter = chapter;
     this.pkg = pkg;
@@ -11,5 +11,6 @@ module.exports = exports = class NgComponentDoc {
     this.location = location;
     this.route = route || computedName;
     this.template = 'ng-component.ts';
+    this.next = next;
   }
 };

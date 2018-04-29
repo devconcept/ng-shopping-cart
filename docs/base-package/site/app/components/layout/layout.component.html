@@ -64,16 +64,24 @@
           </li>
         </ng-container>
         <li class="nav-item">
-          <a class="nav-link"[routerLink]="'/demo'" [routerLinkActive]="'active'">
+          <a class="nav-link" [routerLink]="'/demo'" [routerLinkActive]="'active'">
             Demo
           </a>
         </li>
       </ul>
+      <form class="form-inline mr-5" (ngSubmit)="search(searchInput.value)">
+        <div class="input-group">
+          <input #searchInput type="text" class="form-control">
+          <div class="input-group-append">
+            <button class="btn btn-info" type="submit" [innerHtml]="searchIcon"></button>
+          </div>
+        </div>
+      </form>
       <ul class="navbar-nav d-none d-sm-block">
         <li class="navbar-text">
           <a href="{{repoUrl}}" class="github-link">
-            <span class="github-icon" [innerHTML]="github"></span>
-            v{{version}}
+            <span class="github-icon" [innerHTML]="githubIcon"></span>
+            {{version}}
           </a>
         </li>
       </ul>
@@ -88,5 +96,6 @@
     <ng-content></ng-content>
   </div>
 </div>
+
 
 

@@ -7,5 +7,6 @@ module.exports = exports = class NgTemplateDoc {
     this.template = 'ng-template.html';
     this.component = doc;
     this.route = doc.route;
+    this.next = doc.next;
   }
 };

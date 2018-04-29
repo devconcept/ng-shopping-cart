@@ -31,7 +31,7 @@
     "test:demo": "ng test --app=1",
     "lint": "ng lint",
     "docs": "dgeni ./docs/index.js",
-    "docs:run": "ng serve --app=2",
+    "docs:run": "ng serve --app=2 --serve-path=ng-shopping-cart",
     "docs:lint": "eslint ./docs",
     "docs:build": "ng build --aot --prod --app=2",
     "e2e": "ng e2e",

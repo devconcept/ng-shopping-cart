@@ -1,3 +1,5 @@
+const {upperFirst, startCase} = require('lodash');
+
 module.exports = exports = function generateGuideModule(customDocs) {
   return {
     name: 'generateGuideModule',
@@ -5,12 +7,25 @@ module.exports = exports = function generateGuideModule(customDocs) {
     $runBefore: ['modules-added'],
     $process: function (docs) {
       const [NgModuleDoc, NgTemplateDoc] = customDocs.getDocs(['NgModuleDoc', 'NgTemplateDoc']);
-      const dependencies = docs.filter(d => d.docType === 'markdown').map(d => {
+      const mdDocs = docs.filter(d => d.docType === 'markdown');
+      const dependencies = mdDocs.map(d => {
+        let next = null;
+        if (d.next) {
+          const docRoute = d.next.split('/');
+          const nextDoc = mdDocs.find(doc => doc.computedName === docRoute[1]);
+          if (nextDoc) {
+            next = {
+              title: upperFirst(nextDoc.computedName.replace(/-/g, ' ')),
+              url: d.next
+            };
+          }
+        }
         return {
           name: d.name.replace(/Component$/, ''),
           computedName: d.computedName,
           nochapter: d.nochapter,
-          chapter: 'guide'
+          chapter: 'guide',
+          next,
         };
       });
       const ngModule = new NgModuleDoc({

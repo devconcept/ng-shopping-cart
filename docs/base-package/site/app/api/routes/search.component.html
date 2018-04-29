@@ -1,1 +1,42 @@
-<input class="form-control" type="text">
+<div class="container mt-3">
+  <form #form="ngForm" (ngSubmit)="onSearch()">
+    <div class="form-group row">
+      <label for="q" class="col-form-label col-sm-2">Search keywords</label>
+      <div class="col-sm-6">
+        <input type="text" class="form-control" id="q" name="q" #model="ngModel" aria-describedby="searchHelp"
+               required placeholder="Enter a few keywords to search"
+               [(ngModel)]="q"
+               [ngClass]="{'is-invalid': model.invalid && (!model.pristine || form.submitted)}">
+        <small id="searchHelp" class="form-text text-muted">
+          Type keywords to look for in names, descriptions, inputs and outputs in components or services.
+        </small>
+      </div>
+      <div class="col-sm-4">
+        <button type="submit" class="btn btn-primary">
+          Search
+        </button>
+      </div>
+    </div>
+  </form>
+  <div class="p-5 rounded bg-light text-center" *ngIf="!searched">
+    <i>No search terms introduced yet</i>
+  </div>
+  <div class="p-5 rounded bg-light text-center" *ngIf="searched && !results.length">
+    <h3>No results</h3>
+    <p> Please try again </p>
+  </div>
+  <ul class="results">
+    <li *ngFor="let res of results" class="result-item">
+      <a [routerLink]="res.path" class="row justify-content-between align-items-center">
+        <div class="col-auto">
+          <div class="result-title">{{res.name}}</div>
+          <small>{{res.description}}</small>
+        </div>
+        <div class=" col-auto">
+          <span class="badge badge-warning">{{res.type}}</span>
+        </div>
+      </a>
+    </li>
+  </ul>
+</div>
+

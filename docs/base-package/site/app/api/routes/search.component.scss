@@ -1,0 +1,24 @@
+.results {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+
+  .result-item {
+    cursor: pointer;
+    padding: 1.5em;
+    margin: 1em 0;
+    border: solid 1px lightgrey;
+
+    .result-title {
+      font-size: 1.2em;
+    }
+
+    a {
+      color: black;
+
+      &:hover {
+        text-decoration: none;
+      }
+    }
+  }
+}

@@ -16,8 +16,16 @@ export const contents: any = [
   },
   {% endfor %}
   {
+    title: 'Search api',
+    path: 'search',
+    url: '/api/search',
+    menu: false,
+  },
+  {
     title: 'Demo',
-    path: '/demo',
+    path: 'demo',
+    url: '/demo',
+    menu: false
   },
   {
     title: 'Not found',

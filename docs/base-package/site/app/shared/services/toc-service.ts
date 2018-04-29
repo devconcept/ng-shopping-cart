@@ -19,8 +19,13 @@ export class TocService {
       .subscribe(evt => {
         const event = <NavigationEnd>evt;
         const url = event.url;
-        const fragment = url.indexOf('#');
-        this.url = fragment !== -1 ? url.substring(0, fragment) : url;
+        const query = url.indexOf('?')
+        if (query !== -1) {
+          this.url = url.substring(0, query);
+        } else {
+          const fragment = url.indexOf('#');
+          this.url = fragment !== -1 ? url.substring(0, fragment) : url;
+        }
         this.data = contents.find(c => c.url === this.url);
         if (!this.data) {
           this.data = contents.find(c => c.path === '**');
@@ -33,8 +38,8 @@ export class TocService {
 
   getNavbarItems(): any {
     return contents.reduce((curr, t) => {
-      if (t.path !== '**' && t.path !== '') {
-        const { title, path, chapter, section, menu } = t;
+      const { title, path, chapter, section, menu } = t;
+      if (path !== '**' && path !== '' && menu !== false) {
         if (chapter) {
           const found = curr.find(c => c.title === chapter && c.submenu);
           const item = { title, path, menu };
