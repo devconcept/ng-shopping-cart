@@ -2,8 +2,6 @@
 
 An Angular component library to create shopping carts. Based on it's predecessor for Angular.js with tons of improvements.
 
-> This is a work in progress. We are now in beta and getting close to a stable release. 
-
 # Features
 
 - All the previous components with more features.
@@ -32,7 +30,7 @@ yarn add ng-shopping-cart
 
 # Documentation
 
-Documentation is available at http://ng-shopping-cart.github.io/
+Documentation is available at http://devconcept.github.io/ng-shopping-cart
 
 # Demo
 
