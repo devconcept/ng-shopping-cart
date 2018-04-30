@@ -1,7 +1,7 @@
 ## CartModuleOptions
 <span class="badge badge-warning">Interface</span>
 
-
+Configuration options for the NgShoppingCart module in the root module of your application.
 
 #### `itemType`
 
