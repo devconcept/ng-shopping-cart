@@ -1,6 +1,7 @@
-import { Component, Input, OnChanges, SimpleChanges } from '@angular/core';
-import { CartItem } from '../../classes/cart-item';
-import { CartShowcaseItemComponent } from '../../components/cart-showcase-item/cart-showcase-item.component';
+import {Component, Input, OnChanges, SimpleChanges, Type} from '@angular/core';
+import {CartItem} from '../../classes/cart-item';
+import {CartShowcaseItemComponent} from '../../components/cart-showcase-item/cart-showcase-item.component';
+import {ShowcaseItem} from '../../interfaces/showcase-item';
 
 /**
  * Renders items arranged in columns using a dynamic component for the item useful for getting started with e-commerce applications.
@@ -88,7 +89,7 @@ export class CartShowcaseComponent implements OnChanges {
   /**
    * The component to use to display the items
    */
-  @Input() itemComponent: any = CartShowcaseItemComponent;
+  @Input() itemComponent: Type<ShowcaseItem> = CartShowcaseItemComponent;
   /**
    * The aspect ratio of the container of the items. A value of `1:1` means square items, `2:1` means two times wider, `1:2` two times
    * taller and so on.

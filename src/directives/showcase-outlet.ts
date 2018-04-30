@@ -16,7 +16,7 @@ export class ShowcaseOutletDirective implements OnChanges, OnDestroy {
   /**
    * The component to render
    */
-  @Input() cartShowcaseOutlet: Type<any>;
+  @Input() cartShowcaseOutlet: Type<ShowcaseItem>;
   /**
    * The injector of the selected component
    */
@@ -67,7 +67,7 @@ export class ShowcaseOutletDirective implements OnChanges, OnDestroy {
         componentFactoryResolver.resolveComponentFactory(this.cartShowcaseOutlet);
 
       this._componentRef = this.viewContainerRef.createComponent(componentFactory, this.viewContainerRef.length, elInjector);
-      (<ShowcaseItem>this._componentRef.instance).item = this.cartShowcaseOutletItem;
+      this._componentRef.instance.item = this.cartShowcaseOutletItem;
 
     }
   }
