@@ -6,7 +6,7 @@
       <circle fill="currentColor" cx="11" cy="24" r="2"></circle>
       <circle fill="currentColor" cx="21" cy="24" r="2"></circle>
     </svg>
-    <img *ngIf="" [src]="icon" class="summary-icon" alt="cart-summary-icon">
+    <img *ngIf="icon" [src]="icon" class="summary-icon" alt="cart-summary-icon">
   </div>
   <div class="cart-summary-contents">
     <div class="cart-summary-items">{{ totalItems | i18nPlural: totalPlurals }}</div>
