@@ -1,6 +1,6 @@
-import { CartItem } from '../classes/cart-item';
-import { MemoryCartService } from './memory-cart.service';
-import { BrowserStorageServiceConfiguration } from '../interfaces/browser-storage-service-configuration';
+import {CartItem} from '../classes/cart-item';
+import {MemoryCartService} from './memory-cart.service';
+import {BrowserStorageServiceConfiguration} from '../interfaces/browser-storage-service-configuration';
 
 /**
  * The base class for all CartService implementations that use the browser storage
@@ -19,11 +19,18 @@ export abstract class BrowserStorageCartService<T extends CartItem> extends Memo
     this.itemClass = itemClass;
   }
 
-  private resetStorage() {
-    this.setTaxRate(0);
-    this.setShipping(0);
-    this.clear();
-    this.save();
+  private resetStorage(error: boolean | string | Error) {
+    if (this.clearOnError || !error) {
+      this.setTaxRate(0);
+      this.setShipping(0);
+      this.clear();
+      this.save();
+    } else if (error) {
+      if (typeof error === 'string') {
+        throw new Error(error);
+      }
+      throw error;
+    }
   }
 
   protected save() {
@@ -32,13 +39,13 @@ export abstract class BrowserStorageCartService<T extends CartItem> extends Memo
 
   protected restore() {
     if (!this.storage.getItem(this.storageKey)) {
-      this.resetStorage();
+      this.resetStorage(false);
       return;
     }
     try {
       const sc = JSON.parse(this.storage.getItem(this.storageKey));
       if (!(sc.hasOwnProperty('items') && Array.isArray(sc.items) && sc.hasOwnProperty('taxRate') && sc.hasOwnProperty('shipping'))) {
-        this.resetStorage();
+        this.resetStorage('The object found under the key ' + this.storageKey + ' is not a valid cart object');
         return;
       }
       this._items = sc.items.map(i => {
@@ -50,7 +57,7 @@ export abstract class BrowserStorageCartService<T extends CartItem> extends Memo
       this.setTaxRate(parseFloat(sc.taxRate));
       this.setShipping(parseFloat(sc.shipping));
     } catch (e) {
-      this.resetStorage();
+      this.resetStorage(e);
     }
   }
 

@@ -1,7 +1,6 @@
-import { BaseCartItem } from '../classes/base-cart-item';
-import { TestCartItem } from '../testing/test-cart-item';
-import { CartService } from '../classes/cart.service';
-
+import {BaseCartItem} from '../classes/base-cart-item';
+import {TestCartItem} from '../testing/test-cart-item';
+import {CartService} from '../classes/cart.service';
 
 export function browserStorageSuite(browserStorage: any, cartService: any) {
   describe(cartService.name, () => {
@@ -14,7 +13,7 @@ export function browserStorageSuite(browserStorage: any, cartService: any) {
 
       it('should initialize the storage key provided as option', () => {
         expect(browserStorage.getItem(storageKey)).toBeNull();
-        const service = new cartService(BaseCartItem, { storageKey });
+        const service = new cartService(BaseCartItem, {storageKey});
         expect(service['storageKey']).toEqual(storageKey);
       });
 
@@ -36,7 +35,7 @@ export function browserStorageSuite(browserStorage: any, cartService: any) {
 
       beforeEach(() => {
         browserStorage.removeItem('TestNgCartLocal');
-        service = new cartService(BaseCartItem, { storageKey });
+        service = new cartService(BaseCartItem, {storageKey});
       });
 
       it('should count items', () => {
@@ -47,7 +46,7 @@ export function browserStorageSuite(browserStorage: any, cartService: any) {
       });
 
       it('should add items', () => {
-        const item = new BaseCartItem({ id: 1, name: 'Test item', price: 10, photo: '', quantity: 10 });
+        const item = new BaseCartItem({id: 1, name: 'Test item', price: 10, photo: '', quantity: 10});
         service.addItem(item);
         expect(service.itemCount()).toBe(1);
         expect(service.getItems()[0].id).toBe(1);
@@ -55,13 +54,13 @@ export function browserStorageSuite(browserStorage: any, cartService: any) {
       });
 
       it('should get items', () => {
-        const item = new BaseCartItem({ id: 1, name: 'Test item', price: 10, photo: '', quantity: 10 });
+        const item = new BaseCartItem({id: 1, name: 'Test item', price: 10, photo: '', quantity: 10});
         service.addItem(item);
         expect(service.itemCount()).toBe(1);
       });
 
       it('should remove items', () => {
-        const item = new BaseCartItem({ id: 1, name: 'Test item', price: 10, photo: '', quantity: 10 });
+        const item = new BaseCartItem({id: 1, name: 'Test item', price: 10, photo: '', quantity: 10});
         service.addItem(item);
         expect(service.itemCount()).toBe(1);
         expect(service.isEmpty()).toBe(false);
@@ -71,19 +70,19 @@ export function browserStorageSuite(browserStorage: any, cartService: any) {
       });
 
       it('should count single items', () => {
-        const item = new BaseCartItem({ id: 1, name: 'Test item', price: 10, photo: '', quantity: 10 });
+        const item = new BaseCartItem({id: 1, name: 'Test item', price: 10, photo: '', quantity: 10});
         service.addItem(item);
         expect(service.entries()).toBe(10);
       });
 
       it('should compute the items cost', () => {
-        const item = new BaseCartItem({ id: 1, name: 'Test item', price: 10, photo: '', quantity: 10 });
+        const item = new BaseCartItem({id: 1, name: 'Test item', price: 10, photo: '', quantity: 10});
         service.addItem(item);
         expect(service.cost()).toBe(100);
       });
 
       it('should set the tax rate', () => {
-        const item = new BaseCartItem({ id: 1, name: 'Test item', price: 10, photo: '', quantity: 10 });
+        const item = new BaseCartItem({id: 1, name: 'Test item', price: 10, photo: '', quantity: 10});
         service.addItem(item);
         service.setTaxRate(20);
         expect(service.getTaxRate()).toEqual(20);
@@ -91,7 +90,7 @@ export function browserStorageSuite(browserStorage: any, cartService: any) {
       });
 
       it('should set shipping cost', () => {
-        const item = new BaseCartItem({ id: 1, name: 'Test item', price: 10, photo: '', quantity: 10 });
+        const item = new BaseCartItem({id: 1, name: 'Test item', price: 10, photo: '', quantity: 10});
         service.addItem(item);
         service.setShipping(10);
         expect(service.getShipping()).toEqual(10);

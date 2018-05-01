@@ -51,6 +51,10 @@ describe('CartSummaryComponent', () => {
     expect(component.totalCost).toEqual(50);
     expect(totalCount.nativeElement.innerText).toEqual('One item');
     expect(totalCost.nativeElement.innerText).toMatch(/50\.00$/);
+    cartService.addItem(new BaseCartItem({id: 2, name: 'Test item 2', quantity: 1, price: 10}));
+    fixture.detectChanges();
+    expect(component.totalItems).toEqual(2);
+    expect(component.totalCost).toEqual(60);
   });
 
   it('should allow to change the icon', () => {

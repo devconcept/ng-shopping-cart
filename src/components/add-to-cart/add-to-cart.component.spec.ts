@@ -1,10 +1,10 @@
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
-import { By } from '@angular/platform-browser';
-import { AddToCartComponent } from './add-to-cart.component';
-import { AddToCartEditorComponent } from '../add-to-cart-editor/add-to-cart-editor.component';
-import { CartService } from '../../classes/cart.service';
-import { MemoryCartService } from '../../services/memory-cart.service';
-import { Component, Type } from '@angular/core';
+import {async, ComponentFixture, TestBed} from '@angular/core/testing';
+import {By} from '@angular/platform-browser';
+import {AddToCartComponent} from './add-to-cart.component';
+import {AddToCartEditorComponent} from '../add-to-cart-editor/add-to-cart-editor.component';
+import {CartService} from '../../classes/cart.service';
+import {MemoryCartService} from '../../services/memory-cart.service';
+import {Component, Type} from '@angular/core';
 
 describe('AddToCartComponent', () => {
   let component: AddToCartComponent;
@@ -15,20 +15,20 @@ describe('AddToCartComponent', () => {
       .configureTestingModule({
         declarations: [AddToCartComponent, AddToCartEditorComponent],
         providers: [
-          { provide: CartService, useClass: MemoryCartService }
+          {provide: CartService, useClass: MemoryCartService}
         ]
       })
       .compileComponents();
   }));
 
-  describe('Default button', () => {
+  describe('Default component', () => {
     beforeEach(() => {
       fixture = TestBed.createComponent(AddToCartComponent);
       component = fixture.componentInstance;
-      fixture.detectChanges();
     });
 
     it('should create with default values', () => {
+      fixture.detectChanges();
       expect(component).toBeTruthy();
       const componentContainer = fixture.debugElement.query(By.css('.add-to-cart'));
       const buttonContainer = fixture.debugElement.query(By.css('.cart-button-container'));
@@ -83,13 +83,4 @@ describe('AddToCartComponent', () => {
       expect(editor).toBeTruthy();
     });
   });
-
 });
-
-const TEST_CMP_TEMPLATE =
-  `<add-to-cart [custom]="true">bar</add-to-cart>`;
-
-@Component({ selector: 'cart-add-to-cart-test', template: TEST_CMP_TEMPLATE })
-class AddToCartTestComponent {
-  itemComponent: Type<any>;
-}

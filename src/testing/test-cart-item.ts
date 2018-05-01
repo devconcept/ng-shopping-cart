@@ -1,47 +1,47 @@
-import { CartItem } from '../classes/cart-item';
+import {CartItem} from '../classes/cart-item';
 
 export class TestCartItem extends CartItem {
-  id: number;
-  name: string;
-  price: number;
-  quantity: number;
-  image: string;
+  uuid: number;
+  description: string;
+  cost: number;
+  amount: number;
+  picture: string;
 
   constructor(id, name, price, quantity, image) {
     super();
-    this.id = id;
-    this.name = name;
-    this.price = price;
-    this.quantity = quantity;
-    this.image = image;
+    this.uuid = id;
+    this.description = name;
+    this.cost = price;
+    this.amount = quantity;
+    this.picture = image;
   }
 
   static fromJSON(item) {
-    const { id, name, price, quantity, image } = item;
-    return new TestCartItem(id, name, price, quantity, image);
+    const {uuid, description: description, cost, amount, picture} = item;
+    return new TestCartItem(uuid, description, cost, amount, picture);
   }
 
   getId(): any {
-    return this.id;
+    return this.uuid;
   }
 
   getName(): string {
-    return this.name;
+    return this.description;
   }
 
   getPrice(): number {
-    return this.price;
+    return this.cost;
   }
 
   setQuantity(quantity: number): void {
-    this.quantity = quantity;
+    this.amount = quantity;
   }
 
   getQuantity(): number {
-    return this.quantity;
+    return this.amount;
   }
 
   getImage(): string {
-    return this.image;
+    return this.picture;
   }
 }
