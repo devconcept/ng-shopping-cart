@@ -13,7 +13,7 @@ describe('CartSummaryComponent', () => {
   let totalCount: DebugElement;
   let totalCost: DebugElement;
 
-  beforeEach(async(() =>
+  beforeEach(async(() => {
     TestBed
       .configureTestingModule({
         declarations: [CartSummaryComponent],
@@ -21,8 +21,8 @@ describe('CartSummaryComponent', () => {
           {provide: CartService, useClass: MemoryCartService}
         ]
       })
-      .compileComponents()
-  ));
+      .compileComponents();
+  }));
 
   beforeEach(() => {
     fixture = TestBed.createComponent(CartSummaryComponent);
@@ -60,6 +60,6 @@ describe('CartSummaryComponent', () => {
     expect(svg).toBeFalsy();
     const icon = fixture.debugElement.query(By.css('img'));
     expect(icon).toBeTruthy();
-    expect(icon.nativeElement.classList.length).toEqual(1);
+    expect(icon.nativeElement.className).toEqual('summary-icon');
   });
 });
