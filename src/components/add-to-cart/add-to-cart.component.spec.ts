@@ -6,13 +6,15 @@ import {CartService} from '../../classes/cart.service';
 import {MemoryCartService} from '../../services/memory-cart.service';
 import {Component} from '@angular/core';
 import {AddToCartType} from '../../types';
-import {BaseCartItem} from '../../';
+import {BaseCartItem, CartItem} from '../../';
 
 describe('AddToCartComponent', () => {
+  let subscriptions = [];
+
   beforeEach(async(() => {
     TestBed
       .configureTestingModule({
-        declarations: [AddToCartComponent, AddToCartEditorComponent, TestEditorComponent],
+        declarations: [AddToCartComponent, AddToCartEditorComponent, TestEditorComponent, TestCustomButtonComponent],
         providers: [
           {provide: CartService, useClass: MemoryCartService}
         ]
@@ -168,7 +170,7 @@ describe('AddToCartComponent', () => {
 
     it('should  not add anything to the cart when the component has no item binding', () => {
       const added = jasmine.createSpy('added');
-      component.added.subscribe(added);
+      subscriptions.push(component.added.subscribe(added));
       fixture.detectChanges();
       expect(service.itemCount()).toEqual(0);
       const button = fixture.debugElement.query(By.css('button'));
@@ -183,6 +185,42 @@ describe('AddToCartComponent', () => {
       expect(added).toHaveBeenCalled();
     });
   });
+
+  describe('Custom component', () => {
+    let component: TestCustomButtonComponent;
+    let fixture: ComponentFixture<TestCustomButtonComponent>;
+
+    beforeEach(() => {
+      fixture = TestBed.createComponent(TestCustomButtonComponent);
+      component = fixture.componentInstance;
+    });
+
+    it('should render custom content', () => {
+      fixture.detectChanges();
+      const container = fixture.debugElement.query(By.css('.cart-button-container'));
+      expect(container).toBeTruthy();
+      expect(container.query(By.css('.test'))).toBeTruthy();
+      component.custom = false;
+      fixture.detectChanges();
+      expect(container.query(By.css('.test'))).toBeFalsy();
+    });
+
+    it('should invoke the addToCart method when the projected content is clicked', () => {
+      component.item = new BaseCartItem({id: 1, name: 'Test item', quantity: 1, price: 1});
+      fixture.detectChanges();
+      const comp = fixture.debugElement.query(By.css('add-to-cart'));
+      expect(comp.componentInstance instanceof AddToCartComponent).toEqual(true);
+      const spy = spyOn(comp.componentInstance, 'addToCart');
+      const content = fixture.debugElement.query(By.css('.test'));
+      content.nativeElement.click();
+      expect(spy).toHaveBeenCalled();
+    });
+  });
+
+  afterEach(() => {
+    subscriptions.forEach(s => s.unsubscribe());
+    subscriptions = [];
+  });
 });
 
 const TEST_EDITOR_TEMPLATE = '<add-to-cart [type]="type"></add-to-cart>';
@@ -193,4 +231,15 @@ const TEST_EDITOR_TEMPLATE = '<add-to-cart [type]="type"></add-to-cart>';
 })
 class TestEditorComponent {
   type: AddToCartType;
+}
+
+const TEST_CUSTOM_BUTTON_TEMPLATE = '<add-to-cart [item]="item" [custom]="custom"><div class="test"></div></add-to-cart>';
+
+@Component({
+  selector: 'cart-test-custom-add-to-cart',
+  template: TEST_CUSTOM_BUTTON_TEMPLATE
+})
+class TestCustomButtonComponent {
+  item: CartItem;
+  custom = true;
 }
