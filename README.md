@@ -1,5 +1,7 @@
 # NgShoppingCart
 
+[![Build Status][travis-image]][travis-url] [![Coverage Status][coveralls-image]][coveralls-url] ![Npm version][version-image] ![Downloads][downloads-image]
+
 An Angular component library to create shopping carts. Based on it's predecessor for Angular.js with tons of improvements.
 
 # Features
@@ -43,5 +45,14 @@ To view a demo of the components of the library:
 ## License
 
 [MIT](https://github.com/devconcept/ng-shopping-cart/blob/master/LICENSE)
+
+[travis-url]: https://travis-ci.org/devconcept/multer-gridfs-storage
+[travis-image]: https://travis-ci.org/devconcept/multer-gridfs-storage.svg?branch=master "Build status"
+[coveralls-url]: https://coveralls.io/github/devconcept/multer-gridfs-storage?branch=master
+[coveralls-image]: https://coveralls.io/repos/github/devconcept/multer-gridfs-storage/badge.svg?branch=master "Coverage report"
+[version-image]:https://img.shields.io/npm/v/multer-gridfs-storage.svg "Npm version"
+[downloads-image]: https://img.shields.io/npm/dm/multer-gridfs-storage.svg "Monthly downloads"
+
+
 
 

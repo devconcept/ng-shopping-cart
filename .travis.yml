@@ -24,3 +24,6 @@ script:
   - export CHROME_BIN=chromium-browser
   - xvfb-run -a npm run test:ci
   - xvfb-run -a npm run e2e:ci
+
+after_script:
+  - xvfb-run -a  npm run coveralls
