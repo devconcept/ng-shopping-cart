@@ -17,6 +17,13 @@ export function browserStorageSuite(browserStorage: any, cartService: any) {
         expect(service['storageKey']).toEqual(storageKey);
       });
 
+      it('should initialize remember the option to clear on errors', () => {
+        let service = new cartService(BaseCartItem);
+        expect(service['clearOnError']).toEqual(true);
+        service = new cartService(BaseCartItem, {clearOnError: false});
+        expect(service['clearOnError']).toEqual(false);
+      });
+
       it('should store a reference to the item class provided as option', () => {
         const service = new cartService(TestCartItem, {});
         expect(service['storageKey']).toEqual('NgShoppingCart');
@@ -95,6 +102,36 @@ export function browserStorageSuite(browserStorage: any, cartService: any) {
         service.setShipping(10);
         expect(service.getShipping()).toEqual(10);
         expect(JSON.parse(browserStorage.getItem(storageKey)).shipping).toEqual(10);
+      });
+
+      afterAll(() => {
+        browserStorage.removeItem(storageKey);
+      });
+    });
+
+    describe('Serialization', () => {
+      const storageKey = 'TestNgCartLocal';
+      let service: CartService<TestCartItem>;
+
+      beforeEach(() => {
+        browserStorage.removeItem('TestNgCartLocal');
+        service = new cartService(TestCartItem, {storageKey});
+      });
+
+      it('should be able to save and restore classes with the fromJSON method', () => {
+        const item = new TestCartItem(1, 'Test item', 10, 5, '');
+        service.addItem(item);
+        const contents = JSON.parse(browserStorage.getItem(storageKey));
+        expect(contents.items).toBeTruthy();
+        expect(contents.items.length).toEqual(1);
+        const otherService = new cartService(TestCartItem, {storageKey});
+        const otherItem = otherService.getItem(1);
+        expect(otherItem).toBeTruthy();
+        expect(otherItem.getId()).toEqual(1);
+        expect(otherItem.getName()).toEqual('Test item');
+        expect(otherItem.getPrice()).toEqual(10);
+        expect(otherItem.getQuantity()).toEqual(5);
+        expect(otherItem.getImage()).toEqual('');
       });
 
       afterAll(() => {

@@ -1,8 +1,8 @@
-import { Component, EventEmitter, Input, OnChanges, Output, SimpleChanges } from '@angular/core';
-import { DropdownValue } from '../../interfaces/dropdown-value';
-import { AddToCartPosition, AddToCartType } from '../../types';
-import { CartService } from '../../classes/cart.service';
-import { CartItem } from '../../classes/cart-item';
+import {Component, EventEmitter, Input, OnChanges, Output, SimpleChanges} from '@angular/core';
+import {DropdownValue} from '../../interfaces/dropdown-value';
+import {AddToCartPosition, AddToCartType} from '../../types';
+import {CartService} from '../../classes/cart.service';
+import {CartItem} from '../../classes/cart-item';
 
 /**
  * A component to add items to the cart by pressing a button. Has different built-in editors to select quantity.
@@ -79,7 +79,7 @@ export class AddToCartComponent implements OnChanges {
    * If [type] is set 'dropdown' it can be used to set the options of the rendered `<select>` editor. Is an array of objects with label and
    * a value properties used to populate the select's `<option>` elements.
    */
-  @Input() dropdown: DropdownValue[] = [{ label: '1 item', value: 1 }, { label: '2 item', value: 2 }, { label: '5 items', value: 5 }];
+  @Input() dropdown: DropdownValue[] = [{label: '1 item', value: 1}, {label: '2 item', value: 2}, {label: '5 items', value: 5}];
   /**
    * If you use this binding you can easily override the quantity that will be added to the cart when the button is clicked.
    *
@@ -112,10 +112,7 @@ export class AddToCartComponent implements OnChanges {
       if (this.quantity) {
         return this.quantity;
       }
-      if (this.item) {
-        return this.item.getQuantity();
-      }
-      return 1;
+      return this.item.getQuantity();
     } else {
       return this._editorQuantity;
     }
