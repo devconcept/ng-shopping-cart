@@ -1,9 +1,9 @@
-import { Component, EventEmitter, Input, OnChanges, OnDestroy, OnInit, Output, SimpleChanges } from '@angular/core';
-import { CheckoutSettings, CheckoutType } from '../../types';
-import { CartService } from '../../classes/cart.service';
-import { HttpClient, HttpRequest } from '@angular/common/http';
-import { CheckoutPaypalSettings } from '../../interfaces/checkout-paypal-settings';
-import { CheckoutHttpSettings } from '../../interfaces/checkout-http-settings';
+import {Component, EventEmitter, Input, OnChanges, OnDestroy, OnInit, Output, SimpleChanges} from '@angular/core';
+import {CheckoutSettings, CheckoutType} from '../../types';
+import {CartService} from '../../classes/cart.service';
+import {HttpClient, HttpRequest} from '@angular/common/http';
+import {CheckoutPaypalSettings} from '../../interfaces/checkout-paypal-settings';
+import {CheckoutHttpSettings} from '../../interfaces/checkout-http-settings';
 
 /**
  * Renders a button to initiate checkout of the cart.
@@ -77,6 +77,10 @@ export class CartCheckoutComponent implements OnChanges, OnInit, OnDestroy {
    */
   @Input() buttonText = 'Checkout';
   /**
+   * Changes the default text of the component's button.
+   */
+  @Input() buttonClass = 'cart-checkout-button';
+  /**
    * Sets the type of service to be used when initiating the checkout.
    */
   @Input() service: CheckoutType = 'log';
@@ -111,7 +115,7 @@ export class CartCheckoutComponent implements OnChanges, OnInit, OnDestroy {
   }
 
   doCheckout() {
-    const body = this.cartService.getItems();
+    const body = this.cartService.toObject();
     switch (this.service) {
       case 'log':
         console.log(body);
@@ -121,10 +125,9 @@ export class CartCheckoutComponent implements OnChanges, OnInit, OnDestroy {
         if (!this.settings) {
           throw new Error('Missing settings configuration');
         }
-        const { url, method, options } = this.httpSettings;
-        const opts = { ...options, body: this.cartService.getItems() };
+        const {url, method, options} = this.httpSettings;
         this.httpClient
-          .request(new HttpRequest(method, url, opts))
+          .request(new HttpRequest(method, url, body, options))
           .toPromise()
           .then(response => {
             this.checkout.emit(response);

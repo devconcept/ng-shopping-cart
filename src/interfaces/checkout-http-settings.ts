@@ -13,5 +13,5 @@ export interface CheckoutHttpSettings {
   /**
    * Headers and other options for the checkout http request.
    */
-  options: any;
+  options?: any;
 }
