@@ -81,11 +81,11 @@ An array of items to display
 
 
 #### `itemComponent`
-Type:`any`
+Type:`Type<ShowcaseItem>`
 
 Initial value: `CartShowcaseItemComponent`
 
-The component to use to display the items
+The component to render for each item. `Type<ShowcaseItem>` means any component that implements the interface `ShowcaseItem`
 
 
 
@@ -156,6 +156,10 @@ taller and so on.
 </cart-showcase>
 ```
 ```typescript
+@Component({
+ selector: 'my-component',
+ template: '<div class="item-class">{{item.getName()]}</div>'
+})
 export class MyComponent {
   itemComponent = MyCustomItemComponent;
 }

@@ -33,6 +33,15 @@ Changes the default text of the component's button.
 
 
 
+#### `buttonClass`
+Type:`string`
+
+Initial value: `'cart-checkout-button'`
+
+Changes the default text of the component's button.
+
+
+
 #### `service`
 Type:`CheckoutType`
 
@@ -66,6 +75,8 @@ Emits the result of the checkout operation. When [service] is set to `'paypal'` 
 Emits: `any`
 
 When the [service] is set to `'http'` and the checkout operation fails the error thrown can be captured using this output.
+
+
 
 
 

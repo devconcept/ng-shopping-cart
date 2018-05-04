@@ -9,6 +9,7 @@ The default implementation of a showcase item
 
 
 
+
 #### `item`
 
 Type: `CartItem`
