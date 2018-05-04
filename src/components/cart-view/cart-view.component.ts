@@ -6,6 +6,7 @@ import { CartViewDisplay } from '../../types';
 /**
  * Renders a view of the cart.
  *
+ * @order 2
  * @howToUse "Using responsive layout"
  * ```html
  * <cart-view [display]="'responsive'">

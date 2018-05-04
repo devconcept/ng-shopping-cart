@@ -8,6 +8,7 @@ import {CheckoutHttpSettings} from '../../interfaces/checkout-http-settings';
 /**
  * Renders a button to initiate checkout of the cart.
  *
+ * @order 6
  * @howToUse "With a custom button or projected content"
  * ```html
  * <cart-checkout [custom]="true">

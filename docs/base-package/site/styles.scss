@@ -45,8 +45,9 @@ h2:focus, a:focus {
       display: block;
 
       &:after {
-        float: right;
-        margin-top: 0.5em;
+        position: absolute;
+        right: 0;
+        top: 0.5rem;
       }
     }
   }

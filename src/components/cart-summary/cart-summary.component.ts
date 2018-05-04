@@ -4,6 +4,7 @@ import { CartService } from '../../classes/cart.service';
 /**
  * Renders a summary of the contents of the cart.
  *
+ * @order 3
  * @howToUse "With a different icon"
  * ```html
  * <cart-summary [icon]="'http://myapi/assets/icon.svg'"></cart-summary>

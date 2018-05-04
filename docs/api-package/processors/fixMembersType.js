@@ -14,7 +14,7 @@ module.exports = function fixMembersType() {
             const implicit = get(m, 'declaration.initializer.text');
             m.initialValue = undefined;
             if (implicit) {
-              m.initialValue = type !== 'any' ? `'${implicit}'` : implicit;
+              m.initialValue = type !== 'any' && !type.startsWith('Type') ? `'${implicit}'` : implicit;
             }
             const stringRegExp = /^('.*'|".*")$/;
             const numberRegExp = /^[0-9]+$/;

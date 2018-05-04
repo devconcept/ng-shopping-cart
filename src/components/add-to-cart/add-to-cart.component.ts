@@ -7,6 +7,7 @@ import {CartItem} from '../../classes/cart-item';
 /**
  * A component to add items to the cart by pressing a button. Has different built-in editors to select quantity.
  *
+ * @order 1
  * @howToUse "With a custom button or projected content"
  * ```html
  * <add-to-cart [item]="item" [custom]="true">

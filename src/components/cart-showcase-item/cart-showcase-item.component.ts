@@ -4,6 +4,8 @@ import { CartItem } from '../../classes/cart-item';
 
 /**
  * The default implementation of a showcase item
+ *
+ * @order 5
  */
 @Component({
   selector: 'cart-showcase-item',

@@ -6,6 +6,7 @@ import {ShowcaseItem} from '../../interfaces/showcase-item';
 /**
  * Renders items arranged in columns using a dynamic component for the item useful for getting started with e-commerce applications.
  *
+ * @order 4
  * @howToUse "Using wider items"
  * ```html
  * <cart-showcase [items]="items" [aspectRatio]="'2:1'">
@@ -24,6 +25,10 @@ import {ShowcaseItem} from '../../interfaces/showcase-item';
  * </cart-showcase>
  * ```
  * ```typescript
+ * @Component({
+ *  selector: 'my-component',
+ *  template: '<div class="item-class">{{item.getName()]}</div>'
+ * })
  * export class MyComponent {
  *   itemComponent = MyCustomItemComponent;
  * }
