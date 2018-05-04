@@ -46,12 +46,12 @@ To view a demo of the components of the library:
 
 [MIT](https://github.com/devconcept/ng-shopping-cart/blob/master/LICENSE)
 
-[travis-url]: https://travis-ci.org/devconcept/multer-gridfs-storage
-[travis-image]: https://travis-ci.org/devconcept/multer-gridfs-storage.svg?branch=master "Build status"
-[coveralls-url]: https://coveralls.io/github/devconcept/multer-gridfs-storage?branch=master
-[coveralls-image]: https://coveralls.io/repos/github/devconcept/multer-gridfs-storage/badge.svg?branch=master "Coverage report"
-[version-image]:https://img.shields.io/npm/v/multer-gridfs-storage.svg "Npm version"
-[downloads-image]: https://img.shields.io/npm/dm/multer-gridfs-storage.svg "Monthly downloads"
+[travis-url]: https://travis-ci.org/devconcept/ng-shopping-cart
+[travis-image]: https://travis-ci.org/devconcept/ng-shopping-cart.svg?branch=master "Build status"
+[coveralls-url]: https://coveralls.io/github/devconcept/ng-shopping-cart?branch=master
+[coveralls-image]: https://coveralls.io/repos/github/devconcept/ng-shopping-cart/badge.svg?branch=master "Coverage report"
+[version-image]:https://img.shields.io/npm/v/ng-shopping-cart.svg "Npm version"
+[downloads-image]: https://img.shields.io/npm/dm/ng-shopping-cart.svg "Monthly downloads"
 
 
 
