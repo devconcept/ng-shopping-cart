@@ -1,7 +1,7 @@
 import {async, ComponentFixture, fakeAsync, TestBed, tick} from '@angular/core/testing';
 
 import {CartCheckoutComponent} from './cart-checkout.component';
-import {BaseCartItem, CartService, CheckoutHttpSettings, MemoryCartService} from '../../';
+import {BaseCartItem, CartService, MemoryCartService} from '../../';
 import {HttpClient, HttpClientModule, HttpEvent, HttpResponse} from '@angular/common/http';
 import {By} from '@angular/platform-browser';
 import {Component} from '@angular/core';

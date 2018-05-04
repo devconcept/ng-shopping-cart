@@ -24,6 +24,7 @@
   "scripts": {
     "ng": "ng",
     "start": "ng serve --app=1",
+    "demo": "ng serve --app=1",
     "build": "ng build --prod --app=1",
     "test": "ng test",
     "coverage": "ng test --watch=false --code-coverage",

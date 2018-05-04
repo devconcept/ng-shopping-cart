@@ -87,7 +87,7 @@ export class CartShowcaseComponent implements OnChanges {
    */
   @Input() items: CartItem[];
   /**
-   * The component to use to display the items
+   * The component to render for each item. `Type<ShowcaseItem>` means any component that implements the interface `ShowcaseItem`
    */
   @Input() itemComponent: Type<ShowcaseItem> = CartShowcaseItemComponent;
   /**
@@ -104,15 +104,20 @@ export class CartShowcaseComponent implements OnChanges {
     const columnProps = ['xsCols', 'sCols', 'mCols', 'lCols', 'xlCols'];
     const classPrefix = ['xs', 's', 'm', 'l', 'xl'];
     for (let i = 0; i < columnProps.length; i++) {
-      const colChanges = changes[columnProps[i]];
-      if (colChanges) {
-        this[`${classPrefix[i]}Class`] = `showcase-container-xs-${this.getColumnSize(colChanges.currentValue)}`;
+      const prop = columnProps[i];
+      const colChanges = changes[prop];
+      if (changes['columns'] || colChanges) {
+        const prefix = classPrefix[i];
+        const size = this.getColumnSize(this[prop]);
+        this[`${prefix}Class`] = `showcase-container-${prefix}-${size}`;
       }
     }
     if (changes['aspectRatio']) {
       const newRatio = changes['aspectRatio'].currentValue;
       const values = newRatio.split(':');
-      this.ratioClass = `showcase-ratio-${values[0]}-${values[1]}`;
+      if (values.length === 2) {
+        this.ratioClass = `showcase-ratio-${values[0]}-${values[1]}`;
+      }
     }
   }
 }
