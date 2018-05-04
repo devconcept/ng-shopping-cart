@@ -25,4 +25,4 @@ script:
   - xvfb-run -a npm run test:ci
 
 after_script:
-  - xvfb-run -a  npm run coveralls
+  - npm run coveralls
