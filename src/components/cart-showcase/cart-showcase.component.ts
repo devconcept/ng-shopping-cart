@@ -27,7 +27,7 @@ import {ShowcaseItem} from '../../interfaces/showcase-item';
  * ```typescript
  * @Component({
  *  selector: 'my-component',
- *  template: '<div class="item-class">{{item.getName()]}</div>'
+ *  template: '<div class="item-class">{{item.getName()}}</div>'
  * })
  * export class MyComponent {
  *   itemComponent = MyCustomItemComponent;
