@@ -2,7 +2,7 @@
 
 [![Build Status][travis-image]][travis-url] [![Coverage Status][coveralls-image]][coveralls-url] ![Npm version][version-image] ![Downloads][downloads-image]
 
-An Angular component library to create shopping carts. Based on it's predecessor for Angular.js with tons of improvements.
+An Angular component library to create shopping carts. Based on it's [predecessor][ng-cart] for Angular.js with tons of improvements.
 
 # Features
 
@@ -46,6 +46,7 @@ To view a demo of the components of the library:
 
 [MIT](https://github.com/devconcept/ng-shopping-cart/blob/master/LICENSE)
 
+[ng-cart]: http://ngcart.snapjay.com/ "ngCart"
 [travis-url]: https://travis-ci.org/devconcept/ng-shopping-cart
 [travis-image]: https://travis-ci.org/devconcept/ng-shopping-cart.svg?branch=master "Build status"
 [coveralls-url]: https://coveralls.io/github/devconcept/ng-shopping-cart?branch=master
