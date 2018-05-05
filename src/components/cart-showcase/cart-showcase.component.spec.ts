@@ -1,11 +1,12 @@
 import {async, ComponentFixture, TestBed} from '@angular/core/testing';
+import {BrowserDynamicTestingModule} from '@angular/platform-browser-dynamic/testing';
+import {By} from '@angular/platform-browser';
+import {Component} from '@angular/core';
 
 import {CartShowcaseComponent} from './cart-showcase.component';
 import {ShowcaseOutletDirective} from '../../directives/showcase-outlet';
 import {CartItem} from '../../classes/cart-item';
-import {Component, Input, NgModule} from '@angular/core';
 import {BaseCartItem, CartShowcaseItemComponent} from '../../';
-import {By} from '@angular/platform-browser';
 
 describe('CartShowcaseComponent', () => {
 
@@ -18,8 +19,12 @@ describe('CartShowcaseComponent', () => {
           TestShowcaseRatioComponent,
           TestShowcaseColumnsComponent,
           CartShowcaseItemComponent,
-        ],
-        imports: [TestModule]
+        ]
+      })
+      .overrideModule(BrowserDynamicTestingModule, {
+        set: {
+          entryComponents: [CartShowcaseItemComponent]
+        }
       })
       .compileComponents();
   }));
@@ -111,13 +116,6 @@ describe('CartShowcaseComponent', () => {
     });
   });
 });
-
-@NgModule({
-  entryComponents: [CartShowcaseItemComponent]
-})
-class TestModule {
-
-}
 
 const TEST_RATIO_TEMPLATE = '<cart-showcase [items]="items" [aspectRatio]="aspectRatio"></cart-showcase>';
 
