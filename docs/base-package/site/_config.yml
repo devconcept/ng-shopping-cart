@@ -1,0 +1,5 @@
+# Handling Reading
+exclude: ['assets/']
+
+# Plugins
+plugins:   ['pageless_redirects']
