@@ -1,4 +1,4 @@
-import {Component, OnInit, SimpleChanges} from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {ActivatedRoute, Router} from '@angular/router';
 
 import {SearchService} from '../search-service';
@@ -69,7 +69,7 @@ export class SearchComponent implements OnInit {
 
   onSearch() {
     if (this.q) {
-      let queryParams = {q: this.q};
+      let queryParams:any = {q: this.q};
       const sort = [this.sort1, this.sort2, this.sort3];
       const sameOrder = sort.findIndex((m, idx) => m !== this._defaultOrder[idx]);
       if (sameOrder !== -1) {

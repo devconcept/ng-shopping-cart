@@ -8,15 +8,15 @@
         <circle fill="currentColor" cx="11" cy="24" r="2"/>
         <circle fill="currentColor" cx="21" cy="24" r="2"/>
       </svg>
-      NgShoppingCart
+      <span class="d-inline d-md-none d-lg-inline">NgShoppingCart</span>
     </a>
     <button class="navbar-toggler" type="button" (click)="toggleNavbar()"
             aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
     </button>
-    <div class="navbar-collapse collapse" id="navbarSupportedContent" [ngbCollapse]="navbarOpen">
+    <div class="navbar-collapse collapse" id="navbarSupportedContent" [ngbCollapse]="!navbarOpen">
       <ul class="navbar-nav mr-auto">
-        <li class="nav-item d-none d-sm-block" #drop="ngbDropdown" *ngFor="let item of navbar" ngbDropdown
+        <li class="nav-item d-none d-md-block" #drop="ngbDropdown" *ngFor="let item of navbar" ngbDropdown
             [autoClose]="item.submenu && item.submenu[0].section ? 'outside' : true">
           <ng-container *ngIf="item.submenu">
             <a class="nav-link" ngbDropdownToggle id="navbarDropdown" role="button" style="cursor: pointer"
@@ -32,7 +32,7 @@
                   <div class="dropdown-item submenu">
                     <div class="dropright" ngbDropdown placement="right-top">
                       <a aria-haspopup="true" ngbDropdownToggle [id]="m.title" aria-expanded="false">
-                        {{m.title}}
+                        {{m.title | titlecase}}
                       </a>
                       <div ngbDropdownMenu>
                         <a (click)="drop.close()" *ngFor="let i of m.items" [routerLink]="i.path" class="dropdown-item">
@@ -51,25 +51,39 @@
             </a>
           </ng-container>
         </li>
-        <ng-container *ngFor="let item of navbar">
-          <li class="text-white d-block d-sm-none">
-          <span class="nav-item">
-            {{item.title}}
-          </span>
-          </li>
-          <li class="nav-item d-block d-sm-none" *ngFor="let m of item.submenu">
-            <a class="nav-link" [routerLink]="[m.path]">
-              {{m.title}}
+        <li class="nav-item d-block d-md-none" *ngFor="let item of navbar">
+          <ng-container *ngIf="!item.submenu">
+            <a class="nav-link" (click)="navigate([item.path])">
+              {{item.menu}}
             </a>
-          </li>
-        </ng-container>
+          </ng-container>
+          <ng-container *ngFor="let m of item.submenu">
+            <ng-container *ngIf="!m.section">
+              <a class="nav-link" (click)="navigate([m.path])">
+                {{m.menu}}
+              </a>
+            </ng-container>
+            <ng-container *ngIf="m.section">
+              <a class="nav-link" (click)="collapseNav(m.title)" style="cursor: pointer">
+                {{m.title | titlecase}}
+              </a>
+              <ul class="nav flex-column" [ngbCollapse]="!isCollapsed[m.title]">
+                <li class="nav-item" *ngFor="let i of m.items">
+                  <a class="nav-link pl-2" (click)="navigate([i.path])">
+                    {{i.menu}}
+                  </a>
+                </li>
+              </ul>
+            </ng-container>
+          </ng-container>
+        </li>
         <li class="nav-item">
           <a class="nav-link" [routerLink]="'/demo'" [routerLinkActive]="'active'">
             Demo
           </a>
         </li>
       </ul>
-      <form class="form-inline mr-5" (ngSubmit)="search(searchInput.value)">
+      <form class="form-inline mr-5 d-none d-md-inline" (ngSubmit)="search(searchInput.value)">
         <div class="input-group">
           <input #searchInput type="text" class="form-control">
           <div class="input-group-append">
@@ -77,7 +91,15 @@
           </div>
         </div>
       </form>
-      <ul class="navbar-nav d-none d-sm-block">
+      <form class="d-flex d-md-none row no-gutters mt-2" (ngSubmit)="search(searchInput.value)">
+        <div class="col">
+          <input #searchInput type="text" class="form-control">
+        </div>
+        <div class="col-auto">
+          <button class="btn btn-info" type="submit" [innerHtml]="searchIcon"></button>
+        </div>
+      </form>
+      <ul class="navbar-nav d-none d-md-block">
         <li class="navbar-text">
           <a href="{{repoUrl}}" class="github-link">
             <span class="github-icon" [innerHTML]="githubIcon"></span>
@@ -88,14 +110,6 @@
     </div>
   </div>
 </nav>
-<div class="row no-gutters">
-  <div class="col-md-3 col-lg-2" *ngIf="needsSidebar">
-    <doc-sidebar></doc-sidebar>
-  </div>
-  <div [ngClass]="{'col-md-12': !needsSidebar, 'col-md-9 col-lg-10': needsSidebar}">
-    <ng-content></ng-content>
-  </div>
-</div>
 
 
 

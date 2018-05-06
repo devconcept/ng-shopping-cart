@@ -6,6 +6,7 @@ import {Subscription} from 'rxjs/Subscription';
 import {RouteChangedEvent} from '../../shared/services/route-changed-event';
 import * as octicons from 'octicons';
 import {DomSanitizer, SafeHtml} from '@angular/platform-browser'
+import {forOwn} from 'lodash';
 
 @Component({
   selector: 'doc-navbar',
@@ -15,10 +16,11 @@ export class NavbarComponent implements OnInit, OnDestroy {
   version: string;
   subscription: Subscription;
   navbar: any[] = [];
-  navbarOpen = true;
+  navbarOpen = false;
   githubIcon: SafeHtml;
   searchIcon: SafeHtml;
   repoUrl: string;
+  isCollapsed = {};
 
   constructor(
     private tocService: TocService,
@@ -41,10 +43,20 @@ export class NavbarComponent implements OnInit, OnDestroy {
     this.navbarOpen = !this.navbarOpen;
   }
 
+  collapseNav(title) {
+    forOwn(this.isCollapsed, (v, k) => { this.isCollapsed[k] = false });
+    this.isCollapsed[title] = !this.isCollapsed[title];
+  }
+
   search(q) {
     if (q) {
       this.router.navigate(['/api/search'], {queryParams: { q }})
     }
+  }
+
+  navigate(url) {
+    this.navbarOpen = false;
+    this.router.navigate(url);
   }
 
   ngOnDestroy() {
