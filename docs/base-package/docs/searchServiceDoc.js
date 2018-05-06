@@ -24,12 +24,13 @@ module.exports = exports = class SearchServiceDoc {
       if (type === 'Token') {
         type = 'Injection token';
       }
+      const members = doc.docType === 'class' ? doc.members.map(d => `${d.name} ${d.description}`).join(' ') : '';
       return {
         name,
         type,
         description: doc.description,
         path: `/${doc.chapter}/${doc.location}/${doc.computedName}`,
-        source: [doc.computedName, doc.description].map(s => s.toLowerCase())
+        source: [doc.computedName, doc.description, members].map(s => s.toLowerCase())
       };
     });
   }

@@ -7,6 +7,7 @@ import {SharedModule} from '../shared/shared.module';
 
 import {routes} from './routes';
 import { SearchComponent } from './routes/search.component';
+import {SearchService} from './search-service'
 
 
 @NgModule({
@@ -17,6 +18,7 @@ import { SearchComponent } from './routes/search.component';
     FormsModule,
   ],
   declarations: [SearchComponent],
+  providers: [SearchService],
   exports: []
 })
 export class ApiModule {

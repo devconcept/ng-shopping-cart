@@ -47,6 +47,11 @@ module.exports = exports = new Package('cartApi', [cartBasePkg, tsPkg])
           }
           return '${docType}.md'
         }
-      }
+      },
+      {
+        docTypes: ['search-service'],
+        outputPathTemplate: 'api/search-service.ts',
+        pathTemplate: '${docType}.ts'
+      },
     ]);
   });

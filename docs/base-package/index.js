@@ -86,11 +86,6 @@ module.exports = exports = new Package('cartBase', [basePkg, jsDocsPkg, njPkg, g
         pathTemplate: '${docType}.ts'
       },
       {
-        docTypes: ['search-service'],
-        outputPathTemplate: 'shared/services/search-service.ts',
-        pathTemplate: '${docType}.ts'
-      },
-      {
         docTypes: ['ngTemplate'],
         getOutputPath: function (doc) {
           const {location, pkg} = doc.component;

@@ -1,5 +1,5 @@
 import {Component, OnDestroy, OnInit} from '@angular/core';
-import {TocService} from '../../shared/services/toc-service';
+import {TocService} from '../services/toc-service';
 import {Subscription} from 'rxjs/Subscription';
 
 @Component({

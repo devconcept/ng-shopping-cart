@@ -8,15 +8,14 @@ import * as octicons from 'octicons';
 import {DomSanitizer, SafeHtml} from '@angular/platform-browser'
 
 @Component({
-  selector: 'doc-layout',
-  templateUrl: './layout.component.html',
+  selector: 'doc-navbar',
+  templateUrl: './navbar.component.html',
 })
-export class LayoutComponent implements OnInit, OnDestroy {
+export class NavbarComponent implements OnInit, OnDestroy {
   version: string;
   subscription: Subscription;
   navbar: any[] = [];
   navbarOpen = true;
-  needsSidebar = true;
   githubIcon: SafeHtml;
   searchIcon: SafeHtml;
   repoUrl: string;
@@ -36,22 +35,10 @@ export class LayoutComponent implements OnInit, OnDestroy {
     this.version = this.infoService.getVersion();
     this.repoUrl = this.infoService.getRepoUrl();
     this.navbar = this.tocService.getNavbarItems();
-    const {data: current} = this.tocService.getCurrentState();
-    this.updateNavbar(current);
-    this.subscription = this.tocService.events.subscribe(evt => {
-      if (evt instanceof RouteChangedEvent) {
-        const {data} = evt;
-        this.updateNavbar(data);
-      }
-    });
   }
 
   toggleNavbar() {
     this.navbarOpen = !this.navbarOpen;
-  }
-
-  updateNavbar(data) {
-    this.needsSidebar = data.topics && data.topics.length;
   }
 
   search(q) {

@@ -1,8 +1,10 @@
 <div class="container-fluid my-3">
-  <markdown [src]="'assets/{$ doc.route $}.md'"></markdown>
-  {% if doc.next %}
-  <doc-next-topic [title]="'{$ doc.next.title $}'" [url]="['/{$ doc.next.url $}']"></doc-next-topic>
-  {% endif %}
+  <doc-layout>
+    <markdown [src]="'assets/{$ doc.route $}.md'"></markdown>
+    {% if doc.next %}
+    <doc-next-topic [title]="'{$ doc.next.title $}'" [url]="['/{$ doc.next.url $}']"></doc-next-topic>
+    {% endif %}
+  </doc-layout>
 </div>
 
 

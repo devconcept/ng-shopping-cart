@@ -1,0 +1,11 @@
+<div class="row no-gutters">
+  <div class="col-md-3 col-lg-2" *ngIf="needsSidebar">
+    <doc-sidebar></doc-sidebar>
+  </div>
+  <div [ngClass]="{'col-md-12': !needsSidebar, 'col-md-9 col-lg-10': needsSidebar}">
+    <ng-content></ng-content>
+  </div>
+</div>
+
+
+

@@ -1,8 +1,8 @@
 <div class="container mt-3">
   <form #form="ngForm" (ngSubmit)="onSearch()">
     <div class="form-group row">
-      <label for="q" class="col-form-label col-sm-2">Search keywords</label>
-      <div class="col-sm-6">
+      <label id="qLabel" for="q" class="col-form-label col-12 col-md-2">Search keywords</label>
+      <div class="col-12 col-md-8">
         <input type="text" class="form-control" id="q" name="q" #model="ngModel" aria-describedby="searchHelp"
                required placeholder="Enter a few keywords to search"
                [(ngModel)]="q"
@@ -11,10 +11,36 @@
           Type keywords to look for in names, descriptions, inputs and outputs in components or services.
         </small>
       </div>
-      <div class="col-sm-4">
+      <div class="col-12 col-md-2 mt-3 mt-md-0 mb-3 mb-md-0 order-5 order-md-0">
         <button type="submit" class="btn btn-primary">
           Search
         </button>
+      </div>
+      <label class="col-form-label col-12 col-md-2 mt-2">Sort matches</label>
+      <div class="col-12 col-md-8 mt-2">
+        <div class="row">
+          <div class="col-12 col-md">
+            <select name="sort1" id="sort1" class="form-control my-2 my-md-0" [(ngModel)]="sort1">
+              <option *ngFor="let m of sorts" [value]="m">
+                {{ m | titlecase }}
+              </option>
+            </select>
+          </div>
+          <div class="col-12 col-md">
+            <select name="sort2" id="sort2" class="form-control my-2 my-md-0" [(ngModel)]="sort2">
+              <option *ngFor="let m of sorts" [value]="m">
+                {{ m | titlecase }}
+              </option>
+            </select>
+          </div>
+          <div class="col-12 col-md">
+            <select name="sort3" id="sort3" class="form-control my-2 my-md-0" [(ngModel)]="sort3">
+              <option *ngFor="let m of sorts" [value]="m">
+                {{ m | titlecase }}
+              </option>
+            </select>
+          </div>
+        </div>
       </div>
     </div>
   </form>
@@ -28,11 +54,11 @@
   <ul class="results">
     <li *ngFor="let res of results" class="result-item">
       <a [routerLink]="res.path" class="row justify-content-between align-items-center">
-        <div class="col-auto">
+        <div class="col-12 col-md-auto">
           <div class="result-title">{{res.name}}</div>
           <small>{{res.description}}</small>
         </div>
-        <div class=" col-auto">
+        <div class="col-12 col-md-auto">
           <span class="badge badge-warning">{{res.type}}</span>
         </div>
       </a>
