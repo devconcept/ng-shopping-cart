@@ -11,6 +11,19 @@ import {TestCartItem} from './testing/test-cart-item';
 
 describe('ShoppingCartModule', () => {
   describe('forRoot', () => {
+    it('should provide the module with localStorage and BaseCartItem by default', () => {
+      TestBed
+        .configureTestingModule(ShoppingCartModule.forRoot());
+      const service = TestBed.get(CartService);
+      const itemClass = TestBed.get(CART_ITEM_CLASS);
+      const serviceConfig = TestBed.get(CART_SERVICE_CONFIGURATION);
+      expect(service instanceof LocalStorageCartService).toEqual(true);
+      expect(itemClass).toEqual(BaseCartItem);
+      expect(serviceConfig).toBeTruthy();
+      expect(serviceConfig.storageKey).toEqual('NgShoppingCart');
+      expect(serviceConfig.clearOnError).toEqual(true);
+    });
+
     it('should provide the module with a memory storage service', () => {
       TestBed
         .configureTestingModule(ShoppingCartModule.forRoot({
