@@ -25,7 +25,7 @@ export abstract class BrowserStorageCartService<T extends CartItem> extends Memo
       this.setShipping(0);
       this.clear();
       this.save();
-    } else if (error) {
+    } else {
       if (typeof error === 'string') {
         throw new Error(error);
       }
