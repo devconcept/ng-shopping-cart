@@ -1,5 +1,5 @@
 import {async, ComponentFixture, TestBed} from '@angular/core/testing';
-import {DebugElement} from '@angular/core';
+import {Component} from '@angular/core';
 import {By} from '@angular/platform-browser';
 import {CartViewComponent} from './cart-view.component';
 import {CartService} from '../../classes/cart.service';
@@ -7,15 +7,11 @@ import {MemoryCartService} from '../../services/memory-cart.service';
 import {BaseCartItem} from '../../classes/base-cart-item';
 import {toArray} from 'lodash';
 
-
 describe('CartViewComponent', () => {
-  let component: CartViewComponent;
-  let fixture: ComponentFixture<CartViewComponent>;
-
   beforeEach(async(() => {
     TestBed
       .configureTestingModule({
-        declarations: [CartViewComponent],
+        declarations: [CartViewComponent, TestCustomEmptyComponent],
         providers: [
           {provide: CartService, useClass: MemoryCartService}
         ]
@@ -23,12 +19,15 @@ describe('CartViewComponent', () => {
       .compileComponents();
   }));
 
-  beforeEach(() => {
-    fixture = TestBed.createComponent(CartViewComponent);
-    component = fixture.componentInstance;
-  });
-
   describe('Default component', () => {
+    let component: CartViewComponent;
+    let fixture: ComponentFixture<CartViewComponent>;
+
+    beforeEach(() => {
+      fixture = TestBed.createComponent(CartViewComponent);
+      component = fixture.componentInstance;
+    });
+
     it('should show empty and display the contents of the emptyText input', () => {
       fixture.detectChanges();
       expect(component).toBeTruthy();
@@ -44,9 +43,13 @@ describe('CartViewComponent', () => {
   });
 
   describe('Component with items', () => {
+    let component: CartViewComponent;
+    let fixture: ComponentFixture<CartViewComponent>;
     let cartService: CartService<BaseCartItem>;
 
     beforeEach(() => {
+      fixture = TestBed.createComponent(CartViewComponent);
+      component = fixture.componentInstance;
       cartService = TestBed.get(CartService);
       cartService.addItem(new BaseCartItem({id: 1, name: 'Test item', price: 10, quantity: 1, image: 'http://my-image.com'}));
     });
@@ -139,4 +142,32 @@ describe('CartViewComponent', () => {
       expect(cartService.getItem(1)).toBeUndefined();
     });
   });
+
+  describe('Custom component', () => {
+    let component: TestCustomEmptyComponent;
+    let fixture: ComponentFixture<TestCustomEmptyComponent>;
+
+    beforeEach(() => {
+      fixture = TestBed.createComponent(TestCustomEmptyComponent);
+      component = fixture.componentInstance;
+    });
+
+    it('should render custom content', () => {
+      fixture.detectChanges();
+      const comp = fixture.debugElement.query(By.css('cart-view'));
+      expect(comp).toBeTruthy();
+      fixture.detectChanges();
+      expect(comp.query(By.css('.test'))).toBeTruthy();
+    });
+  });
 });
+
+const TEST_CUSTOM_EMPTY_TEMPLATE = '<cart-view [customEmptyContent]="true"><div class="test"></div></cart-view>';
+
+@Component({
+  selector: 'cart-test-custom-cart-view',
+  template: TEST_CUSTOM_EMPTY_TEMPLATE
+})
+class TestCustomEmptyComponent {
+
+}

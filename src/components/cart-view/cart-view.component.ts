@@ -43,6 +43,32 @@ import { CartViewDisplay } from '../../types';
  *   }
  * }
  * ```
+ *
+ * @howToUse "Change the default empty cart content"
+ * ```html
+ * <cart-view [customEmptyContent]="true">
+ *   <div class="my-empty-cart-view">
+ *       <span style="font-size: 36px;" class="glyphicon glyphicon-shopping-cart" aria-hidden="true"></span>
+ *       Your cart is empty
+ *   </div>
+ * </cart-view>
+ * ```
+ * ```typescript
+ * export class MyComponent {
+ *   headers = {
+ *     empty: 'No items. Add some to the cart',
+ *     name: 'Description',
+ *     quantity: 'Amount',
+ *     price: 'Cost',
+ *     total: 'Total x item',
+ *   }
+ *   footers = {
+ *     tax: 'Tax rate',
+ *     shipping: 'Shipping cost',
+ *     total: 'Total cost'
+ *   }
+ * }
+ * ```
  */
 @Component({
   selector: 'cart-view',
@@ -62,6 +88,10 @@ export class CartViewComponent implements OnInit, OnDestroy {
    * The text to show when the cart has no items in it.
    */
   @Input() emptyText = 'Your cart is empty';
+  /**
+   * When set to `true` and the cart is empty displays whatever is in the component projected content.
+   */
+  @Input() customEmptyContent = false;
   /**
    * The text to display in the header of the name column.
    */

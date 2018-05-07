@@ -1,6 +1,7 @@
-<div *ngIf="empty" class="cart-view-empty">
+<div *ngIf="empty && !customEmptyContent" class="cart-view-empty">
   {{emptyText}}
 </div>
+<ng-content *ngIf="empty && customEmptyContent"></ng-content>
 <div *ngIf="!empty" class="cart-view" [ngClass]="display">
   <div class="cart-list-view" [ngClass]="{'no-images': !images}">
     <div class="cart-list-header">
