@@ -1,7 +1,7 @@
 import { AddToCartComponent } from './components/add-to-cart/add-to-cart.component';
 import { CartCheckoutComponent } from './components/cart-checkout/cart-checkout.component';
 import { CartSummaryComponent } from './components/cart-summary/cart-summary.component';
-import { AddToCartType, AddToCartPosition, CartViewDisplay, CheckoutType, CartModuleServiceType } from './types';
+import { AddToCartType, AddToCartPosition, CartViewDisplay, CheckoutType, CartModuleServiceType, CheckoutSettings } from './types';
 import { ShoppingCartModule } from './shopping-cart.module';
 import { CartService } from './classes/cart.service';
 import { MemoryCartService } from './services/memory-cart.service';
@@ -44,6 +44,7 @@ export {
   AddToCartPosition,
   CartViewDisplay,
   CheckoutType,
+  CheckoutSettings,
   CartModuleServiceType,
   /* Interfaces*/
   CheckoutHttpSettings,
