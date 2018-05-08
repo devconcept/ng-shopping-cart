@@ -49,7 +49,7 @@ export class ShowcaseOutletDirective implements OnChanges, OnDestroy {
     if (this.cartShowcaseOutlet) {
       const elInjector = this.cartShowcaseOutletInjector || this.viewContainerRef.parentInjector;
 
-      if (changes['ngComponentOutletNgModuleFactory']) {
+      if (changes['cartShowcaseOutletNgModuleFactory']) {
         this.cleanModule();
 
         if (this.cartShowcaseOutletNgModuleFactory) {
