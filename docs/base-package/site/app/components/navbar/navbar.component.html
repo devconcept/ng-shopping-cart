@@ -53,13 +53,13 @@
         </li>
         <li class="nav-item d-block d-md-none" *ngFor="let item of navbar">
           <ng-container *ngIf="!item.submenu">
-            <a class="nav-link" (click)="navigate([item.path])" style="cursor: pointer">
+            <a class="nav-link" [routerLink]="[item.path]" routerLinkActive="'active'" (click)="toggleNavbar()">
               {{item.menu}}
             </a>
           </ng-container>
           <ng-container *ngFor="let m of item.submenu">
             <ng-container *ngIf="!m.section">
-              <a class="nav-link" (click)="navigate([m.path])" style="cursor: pointer">
+              <a class="nav-link" [routerLink]="[m.path]" routerLinkActive="'active'" (click)="toggleNavbar()">
                 {{m.menu}}
               </a>
             </ng-container>
@@ -69,7 +69,7 @@
               </a>
               <ul class="nav flex-column" [ngbCollapse]="!isCollapsed[m.title]">
                 <li class="nav-item" *ngFor="let i of m.items">
-                  <a class="nav-link pl-2" (click)="navigate([i.path])" style="cursor: pointer">
+                  <a class="nav-link pl-2" [routerLink]="[i.path]" routerLinkActive="'active'" (click)="toggleNavbar()">
                     {{i.menu}}
                   </a>
                 </li>

@@ -54,11 +54,6 @@ export class NavbarComponent implements OnInit, OnDestroy {
     }
   }
 
-  navigate(url) {
-    this.navbarOpen = false;
-    this.router.navigate(url);
-  }
-
   ngOnDestroy() {
     this.subscription.unsubscribe();
   }
