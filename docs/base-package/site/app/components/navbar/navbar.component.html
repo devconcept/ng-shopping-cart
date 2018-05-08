@@ -83,7 +83,7 @@
           </a>
         </li>
         <li class="nav-item d-block d-md-none">
-          <a class="nav-link" (click)="navigate(['/demo'])">
+          <a class="nav-link" [routerLink]="'/demo'" [routerLinkActive]="'active'" (click)="toggleNavbar()">
             Demo
           </a>
         </li>
