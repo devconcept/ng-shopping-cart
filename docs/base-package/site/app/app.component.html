@@ -2,15 +2,17 @@
 <router-outlet></router-outlet>
 <nav class="navbar navbar-dark bg-dark" style="position: absolute; bottom: 0; left: 0; width: 100%">
   <div class="container-fluid">
-    <ul class="navbar-nav">
+    <ul class="navbar-nav mr-auto">
       <li class="nav-item text-white">
-        <a [href]="license" class="text-white link-unstyled">
-          MIT licensed
+        <a [href]="license" class="text-white link-unstyled" title="MIT licensed">
+          <span [innerHtml]="law"></span>
+          <span class="d-none d-md-inline">MIT licensed</span>
+          <span class="d-inline d-md-none">MIT</span>
         </a>
       </li>
     </ul>
     <ul class="navbar-nav">
-      <li class="nav-item float-right">
+      <li class="nav-item">
         <a href="https://octicons.github.com" class="text-white link-unstyled">
           <span [innerHtml]="github"></span>
           <small>Using Octicons, the Github iconset</small>
