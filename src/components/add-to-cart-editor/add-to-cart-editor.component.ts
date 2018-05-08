@@ -14,7 +14,7 @@ export class AddToCartEditorComponent {
   /**
    * The type of editor to display.
    */
-  @Input() type: AddToCartType;
+  @Input() type: AddToCartType = 'text';
   /**
    * A list of values to display in the dropdown editor.
    */
@@ -22,7 +22,7 @@ export class AddToCartEditorComponent {
   /**
    * The value to display in the editor
    */
-  @Input() value: number;
+  @Input() value = 1;
   /**
    * Emits a the value of the editor when the user changes it
    */
