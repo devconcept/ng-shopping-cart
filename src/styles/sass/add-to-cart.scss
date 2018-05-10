@@ -1,16 +1,29 @@
 @import "variables";
 @import "mixins";
 
+add-to-cart {
+  display: inline-block;
+}
+
 .add-to-cart {
   display: inline-block;
 
-  .cart-inline-item {
-    display: inline-block;
+  &.editor-position-horizontal {
+    display: table;
+
+    .add-to-cart-component {
+      display: table-cell;
+    }
+
+    .cart-button-container {
+      display: table-cell;
+    }
   }
 
-  .cart-block-item {
+  .add-to-cart-component {
     display: block;
     text-align: center;
+    vertical-align: middle;
 
     &.bottom {
       margin-top: $add-to-cart-editor-margin;
@@ -22,7 +35,10 @@
   }
 
   .cart-button-container {
+    display: block;
     text-align: center;
+    vertical-align: middle;
+    padding: 0 2px;
   }
 
   .add-to-cart-button {
@@ -31,13 +47,13 @@
 
   .add-to-cart-input {
     padding: $add-to-cart-editor-padding;
-    border-radius: $input-radius;
+    @include rem-fallback('border-radius', $button-radius);
     border: $add-to-cart-editor-border;
   }
 
   .add-to-cart-select {
     padding: $add-to-cart-editor-padding;
-    border-radius: $input-radius;
+    @include rem-fallback('border-radius', $button-radius);
     border: $add-to-cart-editor-border;
   }
 }

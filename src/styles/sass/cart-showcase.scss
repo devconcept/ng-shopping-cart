@@ -56,7 +56,6 @@
 
         .default-showcase-item-name {
           @include rem-fallback('font-size', 2);
-          font-weight: bold;
           position: absolute;
           transform: translateY(-50%);
           top: 50%;
@@ -65,7 +64,6 @@
 
         .default-showcase-item-price {
           @include rem-fallback('font-size', 2);
-          font-weight: bold;
           position: absolute;
           transform: translateY(-50%);
           top: 50%;

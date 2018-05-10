@@ -8,6 +8,29 @@ import {Component} from '@angular/core';
 import {CheckoutSettings, CheckoutType} from '../../types';
 import {Observable} from 'rxjs/Observable';
 
+// region Test setup
+const TEST_CUSTOM_BUTTON_TEMPLATE = '<cart-checkout [custom]="custom"><div class="test"></div></cart-checkout>';
+
+@Component({
+  selector: 'cart-test-custom-cart-checkout',
+  template: TEST_CUSTOM_BUTTON_TEMPLATE
+})
+class TestCustomButtonComponent {
+  custom = true;
+}
+
+const TEST_SERVICE_TEMPLATE = '<cart-checkout [service]="service" [settings]="settings"></cart-checkout>';
+
+@Component({
+  selector: 'cart-test-service-checkout',
+  template: TEST_SERVICE_TEMPLATE
+})
+class TestServiceComponent {
+  service: CheckoutType;
+  settings: CheckoutSettings;
+}
+// endregion
+
 describe('CartCheckoutComponent', () => {
   let subscriptions = [];
 
@@ -237,24 +260,3 @@ describe('CartCheckoutComponent', () => {
     subscriptions = [];
   });
 });
-
-const TEST_CUSTOM_BUTTON_TEMPLATE = '<cart-checkout [custom]="custom"><div class="test"></div></cart-checkout>';
-
-@Component({
-  selector: 'cart-test-custom-cart-checkout',
-  template: TEST_CUSTOM_BUTTON_TEMPLATE
-})
-class TestCustomButtonComponent {
-  custom = true;
-}
-
-const TEST_SERVICE_TEMPLATE = '<cart-checkout [service]="service" [settings]="settings"></cart-checkout>';
-
-@Component({
-  selector: 'cart-test-service-checkout',
-  template: TEST_SERVICE_TEMPLATE
-})
-class TestServiceComponent {
-  service: CheckoutType;
-  settings: CheckoutSettings;
-}

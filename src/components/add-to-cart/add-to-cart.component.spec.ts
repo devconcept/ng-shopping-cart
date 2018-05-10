@@ -8,6 +8,29 @@ import {Component} from '@angular/core';
 import {AddToCartType} from '../../types';
 import {BaseCartItem, CartItem} from '../../';
 
+// region Test setup
+const TEST_EDITOR_TEMPLATE = '<add-to-cart [type]="type"></add-to-cart>';
+
+@Component({
+  selector: 'cart-test-add-to-cart',
+  template: TEST_EDITOR_TEMPLATE
+})
+class TestEditorComponent {
+  type: AddToCartType;
+}
+
+const TEST_CUSTOM_BUTTON_TEMPLATE = '<add-to-cart [item]="item" [custom]="custom"><div class="test"></div></add-to-cart>';
+
+@Component({
+  selector: 'cart-test-custom-add-to-cart',
+  template: TEST_CUSTOM_BUTTON_TEMPLATE
+})
+class TestCustomButtonComponent {
+  item: CartItem;
+  custom = true;
+}
+// endregion
+
 describe('AddToCartComponent', () => {
   let subscriptions = [];
 
@@ -222,24 +245,3 @@ describe('AddToCartComponent', () => {
     subscriptions = [];
   });
 });
-
-const TEST_EDITOR_TEMPLATE = '<add-to-cart [type]="type"></add-to-cart>';
-
-@Component({
-  selector: 'cart-test-add-to-cart',
-  template: TEST_EDITOR_TEMPLATE
-})
-class TestEditorComponent {
-  type: AddToCartType;
-}
-
-const TEST_CUSTOM_BUTTON_TEMPLATE = '<add-to-cart [item]="item" [custom]="custom"><div class="test"></div></add-to-cart>';
-
-@Component({
-  selector: 'cart-test-custom-add-to-cart',
-  template: TEST_CUSTOM_BUTTON_TEMPLATE
-})
-class TestCustomButtonComponent {
-  item: CartItem;
-  custom = true;
-}

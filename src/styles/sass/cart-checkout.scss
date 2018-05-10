@@ -1,5 +1,9 @@
 @import "mixins";
 
+cart-checkout {
+  display: inline-block;
+}
+
 .cart-checkout-button {
   @include make-button()
 }

@@ -5,5 +5,5 @@ import { Component } from '@angular/core';
   templateUrl: './demo-cart-summary.component.html',
 })
 export class CartSummaryDemoComponent {
-
+  resultsCollapsed = false;
 }

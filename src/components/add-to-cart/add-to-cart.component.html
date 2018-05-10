@@ -1,10 +1,9 @@
-<div class="add-to-cart">
-  <div [ngClass]="{'cart-inline-item left': position === 'left', 'cart-block-item top': position === 'top'}"
-       *ngIf="(position === 'left' || position === 'top') && type !== 'button'">
+<div class="add-to-cart" [ngClass]="containerClass">
+  <div class="add-to-cart-component" [ngClass]="position"
+       *ngIf="editorPrecedence === 'before' && hasEditor">
     <add-to-cart-editor [type]="type" [dropdown]="dropdown" [(value)]="editorQuantity"></add-to-cart-editor>
   </div>
-  <div class="cart-button-container" (click)="addToCart($event)"
-       [ngClass]="{'cart-inline-item': position === 'left' || position === 'right', 'cart-block-item': position === 'above' || position === 'below'}">
+  <div class="cart-button-container" (click)="addToCart($event)">
     <ng-container *ngIf="!custom">
       <button type="button" [ngClass]="buttonClass">
         {{buttonText}}
@@ -13,8 +12,8 @@
     <ng-content *ngIf="custom">
     </ng-content>
   </div>
-  <div [ngClass]="{'cart-inline-item right': position === 'right', 'cart-block-item bottom': position === 'bottom'}"
-       *ngIf="(position === 'right' || position === 'bottom') && type !== 'button'">
+  <div class="add-to-cart-component" [ngClass]="position"
+       *ngIf="editorPrecedence === 'after' && hasEditor">
     <add-to-cart-editor [type]="type" [dropdown]="dropdown" [(value)]="editorQuantity"></add-to-cart-editor>
   </div>
 </div>

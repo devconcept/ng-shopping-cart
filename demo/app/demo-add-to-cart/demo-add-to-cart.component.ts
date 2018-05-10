@@ -17,10 +17,12 @@ export class DemoAddToCartComponent {
   position = 'left';
   positions: AddToCartPosition[] = ['left', 'right', 'top', 'bottom'];
   customTypes = [{ name: 'True', value: true }, { name: 'False', value: false }];
+  settingsCollapsed = false;
+  resultsCollapsed = false;
 
   constructor(private cartService: CartService<DemoCartItem>) {
     this.cartItem = new DemoCartItem({
-      identifier: '1',
+      identifier: Date.now(),
       label: 'Test',
       cost: 14.5,
       description: 'Test description',

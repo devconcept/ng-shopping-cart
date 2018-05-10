@@ -1,0 +1,43 @@
+.item-container {
+  position: absolute;
+  left: 2px;
+  top: 2px;
+  right: 2px;
+  bottom: 2px;
+  padding: 1rem;
+  border: solid 1px lightgrey;
+
+  .item-image {
+    height: 80%;
+    background: transparent no-repeat center;
+    background-size: contain;
+  }
+
+  .item-price {
+    position: absolute;
+    right: -1px;
+    top: 1rem;
+    padding: 0.5rem;
+    background-color: red;
+    color: white;
+    border-bottom-left-radius: 3px;
+    border-top-left-radius: 3px;
+  }
+
+  .item-name {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-color: rgba(0, 0, 0, 0.5);
+    color: white;
+  }
+
+  .item-buttons {
+    position: relative;
+    height: 20%;
+    border-top: solid 1px lightgrey;
+    text-align: center;
+    padding: 5px;
+  }
+}

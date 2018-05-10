@@ -9,4 +9,7 @@ import { CartViewDisplay } from '../../../src/types';
 export class CartViewDemoComponent {
   display: CartViewDisplay = 'fixed';
   showImages = true;
+
+  settingsCollapsed = false;
+  resultsCollapsed = false;
 }

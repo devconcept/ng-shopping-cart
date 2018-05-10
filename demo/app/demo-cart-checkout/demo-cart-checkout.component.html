@@ -1,3 +1,37 @@
-<p>
-  <cart-checkout></cart-checkout>
-</p>
+<h3>Cart checkout</h3>
+<div class="card">
+  <div class="card-header p-1">
+    <button type="button" class="btn btn-link header-link" (click)="settingsCollapsed = !settingsCollapsed">
+      Change settings
+    </button>
+  </div>
+  <div class="card-body" [ngbCollapse]="settingsCollapsed">
+    <form class="form-inline">
+      <div class="form-group mr-3" *ngIf="!custom">
+        <label for="addToCartLabel">Label</label>
+        <input id="addToCartLabel" name="addToCartLabel" class="form-control" [(ngModel)]="label" type="text">
+      </div>
+      <div class="form-check form-check-inline">
+        <input id="addToCartContents" name="addToCartContents" type="checkbox" class="form-check-input"
+               [(ngModel)]="custom">
+        <label for="addToCartContents" class="form-check-label">Custom</label>
+      </div>
+    </form>
+    <hr>
+    <small>Checkout and inspect the console to view the contents of the cart</small>
+  </div>
+</div>
+<div class="card">
+  <div class="card-header p-1">
+    <button type="button" class="btn btn-link header-link" (click)="resultsCollapsed = !resultsCollapsed">
+      Results
+    </button>
+  </div>
+  <div class="card-body" [ngbCollapse]="resultsCollapsed">
+    <cart-checkout [custom]="custom" [buttonText]="label || 'Checkout'">
+      <button type="button" class="custom-checkout-button">
+        Start checkout
+      </button>
+    </cart-checkout>
+  </div>
+</div>

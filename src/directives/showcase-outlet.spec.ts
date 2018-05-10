@@ -1,5 +1,5 @@
 import {
-  Compiler, Component, Inject, InjectionToken, Injector, NgModule, NgModuleFactory, Optional, Type, ViewChild,
+  Compiler, Component, InjectionToken, Injector, NgModule, NgModuleFactory, Type, ViewChild,
   ViewContainerRef
 } from '@angular/core';
 import {TestBed, async, ComponentFixture} from '@angular/core/testing';
@@ -10,7 +10,71 @@ import {ShowcaseOutletDirective} from './showcase-outlet';
 import {BrowserDynamicTestingModule} from '@angular/platform-browser-dynamic/testing';
 import {By} from '@angular/platform-browser';
 
+// region Test setup
 const TEST_TOKEN = new InjectionToken('testToken');
+const TEST_CMP_TEMPLATE =
+  `<ng-template *cartShowcaseOutlet="itemComponent;item:item"></ng-template>`;
+
+@Component({selector: 'cart-showcase-test-cmp', template: TEST_CMP_TEMPLATE})
+class ShowcaseTestComponent {
+  itemComponent: Type<any>;
+  item: CartItem;
+}
+
+const TEST_CMP_ADVANCED_TEMPLATE =
+  `<ng-template *cartShowcaseOutlet="itemComponent;item:item;injector:injector"></ng-template>`;
+
+@Component({selector: 'cart-showcase-test-cmp', template: TEST_CMP_ADVANCED_TEMPLATE})
+class ShowcaseTestAdvancedComponent {
+  itemComponent: Type<any>;
+  item: CartItem;
+  injector: Injector;
+}
+
+const TEST_CMP_MODULE_TEMPLATE =
+  `<ng-template *cartShowcaseOutlet="itemComponent;item:item;ngModuleFactory:moduleFactory"></ng-template>`;
+
+@Component({selector: 'cart-showcase-test-module-cmp', template: TEST_CMP_MODULE_TEMPLATE})
+class ShowcaseTestModuleComponent {
+  itemComponent: Type<any>;
+  item: CartItem;
+  moduleFactory: NgModuleFactory<any>;
+
+  @ViewChild(ShowcaseOutletDirective) ngComponentOutlet: ShowcaseOutletDirective;
+
+  constructor(public viewContainerRef: ViewContainerRef) {}
+}
+
+@Component({selector: 'cart-showcase-item-test-cmp', template: '{{item.getName()}}'})
+class ShowcaseItemTestComponent implements ShowcaseItem {
+  item: CartItem;
+}
+
+@Component({selector: 'cart-showcase-item-test-module-cmp', template: '{{item.getId()}}'})
+class ShowcaseItemTestModuleComponent implements ShowcaseItem {
+  item: CartItem;
+}
+@Component({selector: 'cart-showcase-item-test-additional-module-cmp', template: '{{item.getId()}} {{item.getName()}}'})
+class ShowcaseItemTestAdditionalModuleComponent implements ShowcaseItem {
+  item: CartItem;
+}
+
+@NgModule({
+  declarations: [ShowcaseItemTestModuleComponent],
+  exports: [ShowcaseItemTestModuleComponent],
+  entryComponents: [ShowcaseItemTestModuleComponent]
+})
+export class ShowcaseTestModule {
+}
+
+@NgModule({
+  declarations: [ShowcaseItemTestAdditionalModuleComponent],
+  exports: [ShowcaseItemTestAdditionalModuleComponent],
+  entryComponents: [ShowcaseItemTestAdditionalModuleComponent]
+})
+export class ShowcaseTestAdditionalModule {
+}
+// endregion
 
 describe('ShowcaseOutletDirective', () => {
   beforeEach(async(() => {
@@ -127,68 +191,5 @@ describe('ShowcaseOutletDirective', () => {
     expect(fixture.nativeElement.innerText).toEqual('1 test-item');
   }));
 });
-
-const TEST_CMP_TEMPLATE =
-  `<ng-template *cartShowcaseOutlet="itemComponent;item:item"></ng-template>`;
-
-@Component({selector: 'cart-showcase-test-cmp', template: TEST_CMP_TEMPLATE})
-class ShowcaseTestComponent {
-  itemComponent: Type<any>;
-  item: CartItem;
-}
-
-const TEST_CMP_ADVANCED_TEMPLATE =
-  `<ng-template *cartShowcaseOutlet="itemComponent;item:item;injector:injector"></ng-template>`;
-
-@Component({selector: 'cart-showcase-test-cmp', template: TEST_CMP_ADVANCED_TEMPLATE})
-class ShowcaseTestAdvancedComponent {
-  itemComponent: Type<any>;
-  item: CartItem;
-  injector: Injector;
-}
-
-const TEST_CMP_MODULE_TEMPLATE =
-  `<ng-template *cartShowcaseOutlet="itemComponent;item:item;ngModuleFactory:moduleFactory"></ng-template>`;
-
-@Component({selector: 'cart-showcase-test-module-cmp', template: TEST_CMP_MODULE_TEMPLATE})
-class ShowcaseTestModuleComponent {
-  itemComponent: Type<any>;
-  item: CartItem;
-  moduleFactory: NgModuleFactory<any>;
-
-  @ViewChild(ShowcaseOutletDirective) ngComponentOutlet: ShowcaseOutletDirective;
-
-  constructor(public viewContainerRef: ViewContainerRef) {}
-}
-
-@Component({selector: 'cart-showcase-item-test-cmp', template: '{{item.getName()}}'})
-class ShowcaseItemTestComponent implements ShowcaseItem {
-  item: CartItem;
-}
-
-@Component({selector: 'cart-showcase-item-test-module-cmp', template: '{{item.getId()}}'})
-class ShowcaseItemTestModuleComponent implements ShowcaseItem {
-  item: CartItem;
-}
-@Component({selector: 'cart-showcase-item-test-additional-module-cmp', template: '{{item.getId()}} {{item.getName()}}'})
-class ShowcaseItemTestAdditionalModuleComponent implements ShowcaseItem {
-  item: CartItem;
-}
-
-@NgModule({
-  declarations: [ShowcaseItemTestModuleComponent],
-  exports: [ShowcaseItemTestModuleComponent],
-  entryComponents: [ShowcaseItemTestModuleComponent]
-})
-export class ShowcaseTestModule {
-}
-
-@NgModule({
-  declarations: [ShowcaseItemTestAdditionalModuleComponent],
-  exports: [ShowcaseItemTestAdditionalModuleComponent],
-  entryComponents: [ShowcaseItemTestAdditionalModuleComponent]
-})
-export class ShowcaseTestAdditionalModule {
-}
 
 

@@ -1,15 +1,107 @@
-
-<div class="panel">
-  <div class="settings">
-    <div class="input-group">
-      <label for="showCaseRatio">Aspect ratio:</label>
-      <select id="showCaseRatio" [(ngModel)]="aspectRatio">
-        <option *ngFor="let ratio of ratios" [value]="ratio">{{ratio}}</option>
-      </select>
-    </div>
+<h3>CartShowcase</h3>
+<div class="card">
+  <div class="card-header p-1">
+    <button type="button" class="btn btn-link header-link" (click)="editorCollapsed = !editorCollapsed">
+      Edit items
+    </button>
   </div>
-  <div >
-    <cart-showcase [items]="items" [aspectRatio]="aspectRatio"></cart-showcase>
+  <div class="card-body" [ngbCollapse]="editorCollapsed">
+    <form>
+      <div class="form-row">
+        <div class="form-group col-12 col-md-6">
+          <label for="itemName">Name</label>
+          <input id="itemName" name="itemName" type="text" class="form-control" [(ngModel)]="item.label">
+        </div>
+        <div class="form-group col-12 col-md-6">
+          <label for="itemPrice">Price</label>
+          <input id="itemPrice" name="itemPrice" type="number" class="form-control" [(ngModel)]="item.cost">
+        </div>
+        <div class="form-group col-12 col-md-6">
+          <label for="itemImage">Image url</label>
+          <input id="itemImage" name="itemImage" type="text" class="form-control" [(ngModel)]="item.photo">
+          <small>Leave blank to auto-generate</small>
+        </div>
+        <div class="form-group col-12 col-md-6">
+          <label for="itemQuantity">Quantity</label>
+          <input id="itemQuantity" name="itemQuantity" type="number" class="form-control" [(ngModel)]="item.amount">
+        </div>
+      </div>
+      <hr>
+      <button type="submit" class="btn btn-success" (click)="addItem()">Add</button>
+    </form>
   </div>
 </div>
+<div class="card">
+  <div class="card-header p-1">
+    <button type="button" class="btn btn-link header-link" (click)="settingsCollapsed = !settingsCollapsed">
+      Change settings
+    </button>
+  </div>
+  <div class="card-body" [ngbCollapse]="settingsCollapsed">
+    <form>
+      <div class="form-row">
+        <div class="form-group col-12 col-md-4">
+          <label for="showCaseRatio">Aspect ratio</label>
+          <select id="showCaseRatio" name="showCaseRatio" [(ngModel)]="aspectRatio" class="form-control">
+            <option *ngFor="let ratio of ratios" [value]="ratio">{{ratio}}</option>
+          </select>
+        </div>
+        <div class="form-group col-12 col-md-4">
+          <label for="xsCols">Phone columns</label>
+          <select id="xsCols" name="xsCols" [(ngModel)]="xsCols" class="form-control">
+            <option *ngFor="let col of columns" [value]="col">{{col}} columns</option>
+          </select>
+        </div>
+        <div class="form-group col-12 col-md-4">
+          <label for="sCols">Tablet columns</label>
+          <select id="sCols" name="sCols" [(ngModel)]="sCols" class="form-control">
+            <option *ngFor="let col of columns" [value]="col">{{col}} columns</option>
+          </select>
+        </div>
+        <div class="form-group col-12 col-md-4">
+          <label for="mCols">Desktop columns</label>
+          <select id="mCols" name="mCols" [(ngModel)]="mCols" class="form-control">
+            <option *ngFor="let col of columns" [value]="col">{{col}} columns</option>
+          </select>
+        </div>
+        <div class="form-group col-12 col-md-4">
+          <label for="lCols">Large columns</label>
+          <select id="lCols" name="lCols" [(ngModel)]="lCols" class="form-control">
+            <option *ngFor="let col of columns" [value]="col">{{col}} columns</option>
+          </select>
+        </div>
+        <div class="form-group col-12 col-md-4">
+          <label for="xlCols">Extra large cols</label>
+          <select id="xlCols" name="xlCols" [(ngModel)]="xlCols" class="form-control">
+            <option *ngFor="let col of columns" [value]="col">{{col}} columns</option>
+          </select>
+        </div>
+        <div class="form-group col-12 col-md-4">
+          <label for="itemType">Item component</label>
+          <select id="itemType" name="itemType" [(ngModel)]="itemType" class="form-control">
+            <option value="default">Default</option>
+            <option value="custom">Custom component</option>
+          </select>
+        </div>
+      </div>
+    </form>
+    <hr>
+    <small>Resize the browser window to check the effects on different resolutions</small>
+  </div>
+</div>
+<div class="card">
+  <div class="card-header p-1">
+    <button type="button" class="btn btn-link header-link" (click)="resultsCollapsed = !resultsCollapsed">
+      Results
+    </button>
+  </div>
+  <div class="card-body" [ngbCollapse]="resultsCollapsed">
+    <cart-showcase
+      [items]="items" [aspectRatio]="aspectRatio" [xsCols]="xsCols" [sCols]="sCols" [mCols]="mCols" [lCols]="lCols"
+      [xlCols]="xlCols" [itemComponent]="itemComponent"
+    >
+    </cart-showcase>
+  </div>
+</div>
+
 

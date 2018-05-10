@@ -1,0 +1,13 @@
+<div class="item-container">
+  <div class="item-image" [ngStyle]="{'background-image': 'url(' + item.getImage() + ')'}">
+  </div>
+  <h3 class="item-name">{{item.getName()}}</h3>
+  <div class="item-price">
+    {{item.getPrice() | currency}}
+  </div>
+  <div class="item-buttons">
+    <add-to-cart [item]="item" [custom]="true" [type]="'dropdown'">
+      <button type="button" class="btn btn-sm btn-info">Add</button>
+    </add-to-cart>
+  </div>
+</div>

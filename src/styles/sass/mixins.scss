@@ -24,11 +24,29 @@
 }
 
 @mixin make-button() {
-  color: $add-to-cart-text;
+  display: inline-block;
+  white-space: nowrap;
+  vertical-align: middle;
+  color: $button-text;
   border: solid 1px $button-border;
-  padding: 6px;
-  border-radius: $add-to-cart-radius;
-  background-color: $add-to-cart-color;
+  @include rem-fallback('border-radius', $button-radius);
+  background-color: $button-color;
+  text-transform: none;
+  overflow: visible;
+  margin: 0;
+  @include rem-fallback('font-size', 1);
+  @include rem-fallback('padding-top', 0.5);
+  @include rem-fallback('padding-bottom', 0.5);
+  @include rem-fallback('padding-left', 0.75);
+  @include rem-fallback('padding-right', 0.75);
+
+  &:not(.disabled):not(:disabled) {
+    cursor: pointer;
+  }
+
+  &:hover {
+    background-color: darken($button-color, 10);
+  }
 }
 
 @mixin media-up($brk, $brk-points: $breakpoints) {

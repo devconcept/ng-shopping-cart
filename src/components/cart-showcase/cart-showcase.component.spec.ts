@@ -8,6 +8,37 @@ import {ShowcaseOutletDirective} from '../../directives/showcase-outlet';
 import {CartItem} from '../../classes/cart-item';
 import {BaseCartItem, CartShowcaseItemComponent} from '../../';
 
+// region Test setup
+const TEST_RATIO_TEMPLATE = '<cart-showcase [items]="items" [aspectRatio]="aspectRatio"></cart-showcase>';
+
+@Component({
+  selector: 'cart-test-showcase',
+  template: TEST_RATIO_TEMPLATE
+})
+class TestShowcaseRatioComponent {
+  items: CartItem[];
+  aspectRatio: string;
+}
+
+const TEST_COLUMNS_TEMPLATE = '<cart-showcase ' +
+  '[items]="items" [xsCols]="xsCols" [sCols]="sCols" [mCols]="mCols" [lCols]="lCols" [xlCols]="xlCols" [columns]="columns">' +
+  '</cart-showcase>';
+
+@Component({
+  selector: 'cart-test-showcase',
+  template: TEST_COLUMNS_TEMPLATE
+})
+class TestShowcaseColumnsComponent {
+  items: CartItem[];
+  xsCols: number;
+  sCols: number;
+  mCols: number;
+  lCols: number;
+  xlCols: number;
+  columns: number;
+}
+// endregion
+
 describe('CartShowcaseComponent', () => {
 
   beforeEach(async(() => {
@@ -116,32 +147,3 @@ describe('CartShowcaseComponent', () => {
     });
   });
 });
-
-const TEST_RATIO_TEMPLATE = '<cart-showcase [items]="items" [aspectRatio]="aspectRatio"></cart-showcase>';
-
-@Component({
-  selector: 'cart-test-showcase',
-  template: TEST_RATIO_TEMPLATE
-})
-class TestShowcaseRatioComponent {
-  items: CartItem[];
-  aspectRatio: string;
-}
-
-const TEST_COLUMNS_TEMPLATE = '<cart-showcase ' +
-  '[items]="items" [xsCols]="xsCols" [sCols]="sCols" [mCols]="mCols" [lCols]="lCols" [xlCols]="xlCols" [columns]="columns">' +
-  '</cart-showcase>';
-
-@Component({
-  selector: 'cart-test-showcase',
-  template: TEST_COLUMNS_TEMPLATE
-})
-class TestShowcaseColumnsComponent {
-  items: CartItem[];
-  xsCols: number;
-  sCols: number;
-  mCols: number;
-  lCols: number;
-  xlCols: number;
-  columns: number;
-}

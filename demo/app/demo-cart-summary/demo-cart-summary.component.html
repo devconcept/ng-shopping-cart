@@ -1,3 +1,64 @@
-<div class="panel">
-  <cart-summary></cart-summary>
+<h3>Cart summary</h3>
+<div class="card">
+  <div class="card-header p-1">
+    <button type="button" class="btn btn-link header-link" (click)="resultsCollapsed = !resultsCollapsed">
+      Results
+    </button>
+  </div>
+  <div class="card-body" [ngbCollapse]="resultsCollapsed">
+    <nav class="navbar navbar-dark bg-dark">
+      <a class="navbar-brand" href="javascript:void(0)">
+        <svg version="1.1" class="icon" width="30" height="30" xmlns="http://www.w3.org/2000/svg"
+             style="vertical-align: middle"
+             xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 32 32">
+          <path stroke="currentColor" stroke-width="2" stroke-linecap="round" fill="none" stroke-linejoin="round"
+                d="M2,4 L6,4 L10,20 L21,20 L25,10 L8,10 M13,10 L13,20 M18,20 L18,10 M10,15 L23,15"/>
+          <circle fill="currentColor" cx="11" cy="24" r="2"/>
+          <circle fill="currentColor" cx="21" cy="24" r="2"/>
+        </svg>
+        NgShoppingCart
+      </a>
+      <ul class="navbar nav">
+        <li class="nav-item text-white">
+          <cart-summary></cart-summary>
+        </li>
+      </ul>
+    </nav>
+    <nav class="navbar navbar-light bg-light">
+      <a class="navbar-brand" href="javascript:void(0)">
+        <svg version="1.1" class="icon" width="30" height="30" xmlns="http://www.w3.org/2000/svg"
+             style="vertical-align: middle"
+             xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 32 32">
+          <path stroke="currentColor" stroke-width="2" stroke-linecap="round" fill="none" stroke-linejoin="round"
+                d="M2,4 L6,4 L10,20 L21,20 L25,10 L8,10 M13,10 L13,20 M18,20 L18,10 M10,15 L23,15"/>
+          <circle fill="currentColor" cx="11" cy="24" r="2"/>
+          <circle fill="currentColor" cx="21" cy="24" r="2"/>
+        </svg>
+        NgShoppingCart
+      </a>
+      <ul class="navbar nav">
+        <li class="nav-item">
+          <cart-summary></cart-summary>
+        </li>
+      </ul>
+    </nav>
+    <nav class="navbar navbar-light" style="background-color: #e3f2fd;">
+      <a class="navbar-brand" href="javascript:void(0)">
+        <svg version="1.1" class="icon" width="30" height="30" xmlns="http://www.w3.org/2000/svg"
+             style="vertical-align: middle"
+             xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 32 32">
+          <path stroke="currentColor" stroke-width="2" stroke-linecap="round" fill="none" stroke-linejoin="round"
+                d="M2,4 L6,4 L10,20 L21,20 L25,10 L8,10 M13,10 L13,20 M18,20 L18,10 M10,15 L23,15"/>
+          <circle fill="currentColor" cx="11" cy="24" r="2"/>
+          <circle fill="currentColor" cx="21" cy="24" r="2"/>
+        </svg>
+        NgShoppingCart
+      </a>
+      <ul class="navbar nav">
+        <li class="nav-item">
+          <cart-summary></cart-summary>
+        </li>
+      </ul>
+    </nav>
+  </div>
 </div>

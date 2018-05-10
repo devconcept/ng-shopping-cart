@@ -3,7 +3,7 @@
  */
 export interface BrowserStorageServiceConfiguration {
   /**
-   * The key where all the information of the cart will be stored.
+   * The localStorage or sessionStorage key where all the information of the cart will be stored.
    */
   storageKey?: string;
   /**

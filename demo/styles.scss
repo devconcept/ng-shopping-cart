@@ -1,29 +1,15 @@
 /* You can add global styles to this file, and also import other style files */
-@import "../src/styles/sass/index";
-@import "./styles/forms";
 
-.panel {
-  padding: 20px 10px;
-  border: solid 1px #a3a3a3;
-  background-color: #ffffff;
-  margin: 10px 0;
+.header-link {
+  color: inherit;
 
-  .settings {
-    padding-bottom: 20px;
-    margin-bottom: 20px;
-    border-bottom: solid 1px lightgray;
+  &:hover {
+    text-decoration: none;
+  }
 
-    .input-group {
-      display: inline-block;
-      margin: 0 10px;
-
-      &:last-of-type {
-        margin: 0 0 0 10px;
-      }
-
-      &:first-of-type {
-        margin: 0 10px 0 0;
-      }
-    }
+  &:focus {
+    outline: dashed 1px lightgrey;
+    text-decoration: none;
   }
 }
+

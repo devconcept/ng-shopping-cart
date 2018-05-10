@@ -1,0 +1,12 @@
+.custom-checkout-button {
+  padding: 10px;
+  background-color: #607d8b;
+  color: white;
+  cursor: pointer;
+  border: solid 1px lightslategray;
+  border-radius: 10px;
+
+  &:hover {
+    background-color: #7496a4;
+  }
+}

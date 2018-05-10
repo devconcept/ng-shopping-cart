@@ -11,6 +11,8 @@ import { FormsModule } from '@angular/forms';
 import { CartViewDemoComponent } from './demo-cart-view/cart-view-demo.component';
 import { CartShowcaseDemoComponent } from './demo-cart-showcase/demo-cart-showcase.component';
 import { DemoCartItem } from './demo-cart-item';
+import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
+import { DemoShowcaseItemComponent } from './demo-showcase-item-component/demo-showcase-item.component';
 
 @NgModule({
   declarations: [
@@ -20,6 +22,7 @@ import { DemoCartItem } from './demo-cart-item';
     CartSummaryDemoComponent,
     CartViewDemoComponent,
     CartShowcaseDemoComponent,
+    DemoShowcaseItemComponent,
   ],
   imports: [
     BrowserModule,
@@ -30,8 +33,10 @@ import { DemoCartItem } from './demo-cart-item';
       serviceType: 'sessionStorage',
       serviceOptions: { storageKey: 'NgCartDemo', clearOnError: true },
     }),
+    NgbModule.forRoot(),
   ],
   bootstrap: [AppComponent],
+  entryComponents: [DemoShowcaseItemComponent]
 })
 export class AppModule {
 }

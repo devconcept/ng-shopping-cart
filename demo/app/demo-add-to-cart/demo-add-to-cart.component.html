@@ -1,34 +1,56 @@
-<div class="panel">
-  <div class="settings">
-    <div class="input-group">
-      <label for="addToCartContents">Custom:</label>
-      <input id="addToCartContents" type="checkbox" [(ngModel)]="custom">
-    </div>
-    <div class="input-group" *ngIf="!custom">
-      <label for="addToCartLabel">Label:</label>
-      <input id="addToCartLabel" [(ngModel)]="label" type="text">
-    </div>
-    <div class="input-group">
-      <label for="addToCartType">Type:</label>
-      <select id="addToCartType" [(ngModel)]="editor">
-        <option *ngFor="let editor of editorTypes" [value]="editor">{{editor|titlecase}}</option>
-      </select>
-    </div>
-    <div class="input-group" *ngIf="editor !== 'button'">
-      <label for="addToCartPosition">Position:</label>
-      <select id="addToCartPosition" [(ngModel)]="position">
-        <option *ngFor="let position of positions" [value]="position">{{position|titlecase}}</option>
-      </select>
-    </div>
-    <div class="input-group" *ngIf="editor === 'button'">
-      <label for="addToCartQuantity">Quantity:</label>
-      <input id="addToCartQuantity" [(ngModel)]="quantity" type="number">
-    </div>
-  </div>
-  <add-to-cart (added)="addToCart($event)" [item]="cartItem" [custom]="custom" (change)="quantityChanged($event)"
-               [type]="editor" [position]="position" [quantity]="quantity" [buttonText]="label || 'Add to cart'">
-    <button type="button" class="custom-button">
-      Click to add
+<h3>Add to cart</h3>
+<div class="card">
+  <div class="card-header p-1">
+    <button type="button" class="btn btn-link header-link" (click)="settingsCollapsed = !settingsCollapsed">
+      Change settings
     </button>
-  </add-to-cart>
+  </div>
+  <div class="card-body" [ngbCollapse]="settingsCollapsed">
+    <form>
+      <div class="form-row">
+        <div class="form-group col-12 col-md-4" *ngIf="!custom">
+          <label for="addToCartLabel">Label</label>
+          <input id="addToCartLabel" name="addToCartLabel" class="form-control" [(ngModel)]="label" type="text">
+        </div>
+        <div class="form-group col-12 col-md-4">
+          <label for="addToCartType">Type</label>
+          <select id="addToCartType" name="addToCartType" class="form-control" [(ngModel)]="editor">
+            <option *ngFor="let editor of editorTypes" [value]="editor">{{editor|titlecase}}</option>
+          </select>
+        </div>
+        <div class="form-group col-12 col-md-4" *ngIf="editor !== 'button'">
+          <label for="addToCartPosition">Position</label>
+          <select id="addToCartPosition" name="addToCartPosition" class="form-control" [(ngModel)]="position">
+            <option *ngFor="let position of positions" [value]="position">{{position|titlecase}}</option>
+          </select>
+        </div>
+        <div class="form-group col-12 col-md-4" *ngIf="editor === 'button'">
+          <label for="addToCartQuantity">Quantity</label>
+          <input id="addToCartQuantity" name="addToCartQuantity" class="form-control" [(ngModel)]="quantity"
+                 type="number">
+        </div>
+      </div>
+      <div class="form-check">
+        <input id="addToCartContents" name="addToCartContents" type="checkbox" class="form-check-input"
+               [(ngModel)]="custom">
+        <label for="addToCartContents" class="form-check-label">Custom</label>
+      </div>
+    </form>
+  </div>
 </div>
+<div class="card">
+  <div class="card-header p-1">
+    <button type="button" class="btn btn-link header-link" (click)="resultsCollapsed = !resultsCollapsed">
+      Results
+    </button>
+  </div>
+  <div class="card-body" [ngbCollapse]="resultsCollapsed">
+    <add-to-cart (added)="addToCart($event)" [item]="cartItem" [custom]="custom" (change)="quantityChanged($event)"
+                 [type]="editor" [position]="position" [quantity]="quantity" [buttonText]="label || 'Add to cart'">
+      <button type="button" class="custom-button">
+        Click to add
+      </button>
+    </add-to-cart>
+  </div>
+</div>
+

@@ -1,4 +1,4 @@
-import {Component, EventEmitter, Input, OnChanges, Output, SimpleChanges} from '@angular/core';
+import {Component, EventEmitter, Input, OnChanges, OnInit, Output, SimpleChanges} from '@angular/core';
 import {DropdownValue} from '../../interfaces/dropdown-value';
 import {AddToCartPosition, AddToCartType} from '../../types';
 import {CartService} from '../../classes/cart.service';
@@ -47,8 +47,12 @@ import {CartItem} from '../../classes/cart-item';
   selector: 'add-to-cart', // tslint:disable-line component-selector
   templateUrl: './add-to-cart.component.html',
 })
-export class AddToCartComponent implements OnChanges {
+export class AddToCartComponent implements OnInit, OnChanges {
   private _editorQuantity = 1;
+  containerClass: any;
+  hasEditor = false;
+  horizontalEditor = true;
+  editorPrecedence: 'before' | 'after' = 'before';
   /**
    * If true displays a default button provided by the component, otherwise projects the contents of the component to be used as a button.
    */
@@ -80,7 +84,11 @@ export class AddToCartComponent implements OnChanges {
    * If [type] is set 'dropdown' it can be used to set the options of the rendered `<select>` editor. Is an array of objects with label and
    * a value properties used to populate the select's `<option>` elements.
    */
-  @Input() dropdown: DropdownValue[] = [{label: '1 item', value: 1}, {label: '2 item', value: 2}, {label: '5 items', value: 5}];
+  @Input() dropdown: DropdownValue[] = [
+    {label: '1 item', value: 1},
+    {label: '2 items', value: 2},
+    {label: '5 items', value: 5}
+  ];
   /**
    * If you use this binding you can easily override the quantity that will be added to the cart when the button is clicked.
    *
@@ -108,6 +116,10 @@ export class AddToCartComponent implements OnChanges {
   constructor(private cartService: CartService<any>) {
   }
 
+  ngOnInit(): void {
+    this.computeClass();
+  }
+
   private itemQuantity(): number {
     if (this.type === 'button') {
       if (this.quantity) {
@@ -120,13 +132,22 @@ export class AddToCartComponent implements OnChanges {
   }
 
   ngOnChanges(changes: SimpleChanges): void {
-    if (changes['type'] && changes['type'].currentValue === 'dropdown' && this.dropdown.length) {
-      const quantity = this.itemQuantity();
-      const match = this.dropdown.find(i => i.value === quantity);
-      if (!match) {
-        this._editorQuantity = this.dropdown[0].value;
+    if (changes['type']) {
+      this.hasEditor = changes['type'].currentValue !== 'button';
+      if (changes['type'].currentValue === 'dropdown' && this.dropdown.length) {
+        const quantity = this.itemQuantity();
+        const match = this.dropdown.find(i => i.value === quantity);
+        if (!match) {
+          this._editorQuantity = this.dropdown[0].value;
+        }
       }
     }
+    if (changes['position']) {
+      const pos = changes['position'].currentValue;
+      this.horizontalEditor = pos === 'left' || pos === 'right';
+      this.editorPrecedence = pos === 'left' || pos === 'top' ? 'before' : 'after';
+    }
+    this.computeClass();
   }
 
   addToCart(evt) {
@@ -137,6 +158,10 @@ export class AddToCartComponent implements OnChanges {
       this.cartService.addItem(this.item);
       this.added.emit(this.item);
     }
+  }
+
+  computeClass() {
+    this.containerClass = ['add-to-cart-' + this.type, this.horizontalEditor ? 'editor-position-horizontal' : 'editor-position-vertical'];
   }
 
 }

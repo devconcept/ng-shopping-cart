@@ -7,6 +7,18 @@ import {MemoryCartService} from '../../services/memory-cart.service';
 import {BaseCartItem} from '../../classes/base-cart-item';
 import {toArray} from 'lodash';
 
+// region Test setup
+const TEST_CUSTOM_EMPTY_TEMPLATE = '<cart-view [customEmptyContent]="true"><div class="test"></div></cart-view>';
+
+@Component({
+  selector: 'cart-test-custom-cart-view',
+  template: TEST_CUSTOM_EMPTY_TEMPLATE
+})
+class TestCustomEmptyComponent {
+
+}
+// endregion
+
 describe('CartViewComponent', () => {
   beforeEach(async(() => {
     TestBed
@@ -161,13 +173,3 @@ describe('CartViewComponent', () => {
     });
   });
 });
-
-const TEST_CUSTOM_EMPTY_TEMPLATE = '<cart-view [customEmptyContent]="true"><div class="test"></div></cart-view>';
-
-@Component({
-  selector: 'cart-test-custom-cart-view',
-  template: TEST_CUSTOM_EMPTY_TEMPLATE
-})
-class TestCustomEmptyComponent {
-
-}

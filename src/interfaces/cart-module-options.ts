@@ -5,7 +5,7 @@ import { CartModuleServiceType } from '../types';
  */
 export interface CartModuleOptions  {
   /**
-   * The class reference for the items used in your cart.
+   * The **class reference** for the items used in your cart.
    */
   itemType?: any;
   /**

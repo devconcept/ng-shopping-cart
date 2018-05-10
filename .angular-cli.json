@@ -40,6 +40,8 @@
       "testTsconfig": "tsconfig.spec.json",
       "prefix": "demo",
       "styles": [
+        "../node_modules/bootstrap/dist/css/bootstrap.css",
+        "../src/styles/sass/index.scss",
         "styles.scss"
       ],
       "scripts": [],

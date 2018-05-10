@@ -125,7 +125,7 @@
           display: table-cell;
           text-align: right;
           white-space: nowrap;
-          @include rem-fallback('padding', 0.75);
+          @include rem-fallback('padding', 0.25);
         }
       }
     }
