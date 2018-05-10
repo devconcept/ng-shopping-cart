@@ -9,6 +9,6 @@ describe('ng-shopping-cart App', () => {
 
   it('should display welcome message', () => {
     page.navigateTo();
-    expect(page.getParagraphText()).toEqual('Welcome to app!');
+    expect(page.getHeaderText()).toEqual('NgShoppingCart Demo');
   });
 });

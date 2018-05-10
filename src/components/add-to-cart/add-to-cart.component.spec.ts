@@ -5,11 +5,11 @@ import {AddToCartEditorComponent} from '../add-to-cart-editor/add-to-cart-editor
 import {CartService} from '../../classes/cart.service';
 import {MemoryCartService} from '../../services/memory-cart.service';
 import {Component} from '@angular/core';
-import {AddToCartType} from '../../types';
+import {AddToCartPosition, AddToCartType} from '../../types';
 import {BaseCartItem, CartItem} from '../../';
 
 // region Test setup
-const TEST_EDITOR_TEMPLATE = '<add-to-cart [type]="type"></add-to-cart>';
+const TEST_EDITOR_TEMPLATE = '<add-to-cart [type]="type" [position]="position"></add-to-cart>';
 
 @Component({
   selector: 'cart-test-add-to-cart',
@@ -17,6 +17,7 @@ const TEST_EDITOR_TEMPLATE = '<add-to-cart [type]="type"></add-to-cart>';
 })
 class TestEditorComponent {
   type: AddToCartType;
+  position: AddToCartPosition = 'left';
 }
 
 const TEST_CUSTOM_BUTTON_TEMPLATE = '<add-to-cart [item]="item" [custom]="custom"><div class="test"></div></add-to-cart>';
@@ -29,6 +30,7 @@ class TestCustomButtonComponent {
   item: CartItem;
   custom = true;
 }
+
 // endregion
 
 describe('AddToCartComponent', () => {
@@ -80,6 +82,16 @@ describe('AddToCartComponent', () => {
       const button = fixture.debugElement.query(By.css('button'));
       expect(button.nativeElement.className).toEqual('test');
     });
+  });
+
+  describe('Component editor', () => {
+    let component: TestEditorComponent;
+    let fixture: ComponentFixture<TestEditorComponent>;
+
+    beforeEach(() => {
+      fixture = TestBed.createComponent(TestEditorComponent);
+      component = fixture.componentInstance;
+    });
 
     it('should add a number editor to the button', () => {
       component.type = 'number';
@@ -109,15 +121,41 @@ describe('AddToCartComponent', () => {
       const editor = editors[0];
       expect(editor).toBeTruthy();
     });
-  });
 
-  describe('Component editor', () => {
-    let component: TestEditorComponent;
-    let fixture: ComponentFixture<TestEditorComponent>;
+    it('should place the editor before the button when the position is top or left', () => {
+      const testFn = () => {
+        const container = fixture.debugElement.query(By.css('.add-to-cart'));
+        expect(container).toBeTruthy();
+        expect(container.children.length).toEqual(2);
+        expect(container.children[0].nativeElement.classList.contains('add-to-cart-component')).toEqual(true);
+        expect(container.children[1].nativeElement.classList.contains('cart-button-container')).toEqual(true);
+      };
 
-    beforeEach(() => {
-      fixture = TestBed.createComponent(TestEditorComponent);
-      component = fixture.componentInstance;
+      component.type = 'text';
+      component.position = 'left';
+      fixture.detectChanges();
+      testFn();
+      component.position = 'top';
+      fixture.detectChanges();
+      testFn();
+    });
+
+    it('should place the editor after the button when the position is right or bottom', () => {
+      const testFn = () => {
+        const container = fixture.debugElement.query(By.css('.add-to-cart'));
+        expect(container).toBeTruthy();
+        expect(container.children.length).toEqual(2);
+        expect(container.children[0].nativeElement.classList.contains('cart-button-container')).toEqual(true);
+        expect(container.children[1].nativeElement.classList.contains('add-to-cart-component')).toEqual(true);
+      };
+
+      component.type = 'text';
+      component.position = 'right';
+      fixture.detectChanges();
+      testFn();
+      component.position = 'bottom';
+      fixture.detectChanges();
+      testFn();
     });
 
     it('should keep the current value when one of the dropdown values match', () => {
