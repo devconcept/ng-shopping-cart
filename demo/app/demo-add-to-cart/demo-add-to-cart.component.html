@@ -1,6 +1,35 @@
 <h3>Add to cart</h3>
 <div class="card">
   <div class="card-header p-1">
+    <button type="button" class="btn btn-link header-link" (click)="editorCollapsed = !editorCollapsed">
+      Item info
+    </button>
+  </div>
+  <div class="card-body" [ngbCollapse]="editorCollapsed">
+    <form>
+      <div class="form-row">
+        <div class="form-group col-12 col-md-6">
+          <label for="itemName">Name</label>
+          <input id="itemName" name="itemName" type="text" class="form-control" [(ngModel)]="cartItem.label">
+        </div>
+        <div class="form-group col-12 col-md-6">
+          <label for="itemPrice">Price</label>
+          <input id="itemPrice" name="itemPrice" type="number" class="form-control" [(ngModel)]="cartItem.cost">
+        </div>
+        <div class="form-group col-12 col-md-6">
+          <label for="itemImage">Image url</label>
+          <input id="itemImage" name="itemImage" type="text" class="form-control" [(ngModel)]="cartItem.photo">
+        </div>
+        <div class="form-group col-12 col-md-6">
+          <label for="itemQuantity">Quantity</label>
+          <input id="itemQuantity" name="itemQuantity" type="number" class="form-control" [(ngModel)]="cartItem.amount">
+        </div>
+      </div>
+    </form>
+  </div>
+</div>
+<div class="card">
+  <div class="card-header p-1">
     <button type="button" class="btn btn-link header-link" (click)="settingsCollapsed = !settingsCollapsed">
       Change settings
     </button>

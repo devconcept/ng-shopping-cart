@@ -1,6 +1,6 @@
-import { Component } from '@angular/core';
-import { AddToCartType, AddToCartPosition, CartService } from '../../../src';
-import { DemoCartItem } from '../demo-cart-item';
+import {Component} from '@angular/core';
+import {AddToCartType, AddToCartPosition, CartService} from '../../../src';
+import {DemoCartItem} from '../demo-cart-item';
 
 @Component({
   selector: 'demo-add-to-cart',
@@ -16,11 +16,16 @@ export class DemoAddToCartComponent {
   editorTypes: AddToCartType[] = ['button', 'text', 'number', 'dropdown'];
   position = 'left';
   positions: AddToCartPosition[] = ['left', 'right', 'top', 'bottom'];
-  customTypes = [{ name: 'True', value: true }, { name: 'False', value: false }];
+  customTypes = [{name: 'True', value: true}, {name: 'False', value: false}];
+  editorCollapsed = true;
   settingsCollapsed = false;
   resultsCollapsed = false;
 
   constructor(private cartService: CartService<DemoCartItem>) {
+    this.createItem();
+  }
+
+  createItem() {
     this.cartItem = new DemoCartItem({
       identifier: Date.now(),
       label: 'Test',
@@ -34,6 +39,7 @@ export class DemoAddToCartComponent {
   addToCart(item) {
     console.log('added', item);
     console.log('cart items', this.cartService.getItems());
+    this.createItem();
   }
 
   quantityChanged(value) {
