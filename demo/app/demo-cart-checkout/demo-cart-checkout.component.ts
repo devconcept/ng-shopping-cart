@@ -1,9 +1,10 @@
-import { Component } from '@angular/core';
+import {Component, ViewEncapsulation} from '@angular/core';
 
 @Component({
   selector: 'demo-cart-checkout',
   templateUrl: './demo-cart-checkout.component.html',
   styleUrls: ['./demo-cart-checkout.component.scss'],
+  encapsulation: ViewEncapsulation.None
 })
 export class DemoCheckoutComponent  {
   custom = false;

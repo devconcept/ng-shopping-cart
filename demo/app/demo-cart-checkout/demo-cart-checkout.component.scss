@@ -1,6 +1,8 @@
+$btn-color: #607d8b;
+
 .custom-checkout-button {
   padding: 10px;
-  background-color: #607d8b;
+  background-color: $btn-color;
   color: white;
   cursor: pointer;
   border: solid 1px lightslategray;
@@ -8,5 +10,11 @@
 
   &:hover {
     background-color: #7496a4;
+  }
+
+  .checkout-disabled & {
+    pointer-events: none;
+    background-color: dimgray;
+    color: lightgrey;
   }
 }
