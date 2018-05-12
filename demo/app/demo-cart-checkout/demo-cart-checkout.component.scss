@@ -12,7 +12,7 @@ $btn-color: #607d8b;
     background-color: #7496a4;
   }
 
-  .checkout-disabled & {
+  ::ng-deep.checkout-disabled & {
     pointer-events: none;
     background-color: dimgray;
     color: lightgrey;
