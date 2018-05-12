@@ -8,7 +8,7 @@
   <div class="card-body" [ngbCollapse]="settingsCollapsed">
     <form class="form-inline">
       <div class="form-group mr-3">
-        <label for="cartViewDisplay">Label</label>
+        <label for="cartViewDisplay" class="mr-1">Label</label>
         <select id="cartViewDisplay" name="cartViewDisplay" class="form-control" [(ngModel)]="display">
           <option value="fixed">Fixed</option>
           <option value="responsive">Responsive</option>
@@ -19,6 +19,11 @@
         <input type="checkbox" id="cartViewImages" name="cartViewImages" class="form-check-input"
                [(ngModel)]="showImages">
         <label for="cartViewImages" class="form-check-label">Show images</label>
+      </div>
+      <div class="form-check form-check-inline">
+        <input type="checkbox" id="cartViewCustom" name="cartViewCustom" class="form-check-input"
+               [(ngModel)]="useCustom">
+        <label for="cartViewCustom" class="form-check-label">Use custom empty content</label>
       </div>
     </form>
     <hr>
@@ -32,6 +37,8 @@
     </button>
   </div>
   <div class="card-body" [ngbCollapse]="resultsCollapsed">
-    <cart-view [display]="display" [images]="showImages"></cart-view>
+    <cart-view [display]="display" [images]="showImages" [customEmptyContent]="useCustom">
+      <h1 style="text-align: center">Empty cart</h1>
+    </cart-view>
   </div>
 </div>
