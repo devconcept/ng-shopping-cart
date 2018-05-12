@@ -29,7 +29,7 @@
   </div>
   <div class="card-body" [ngbCollapse]="resultsCollapsed">
     <cart-checkout [custom]="custom" [buttonText]="label || 'Checkout'">
-      <button type="button" class="custom-checkout-button">
+      <button type="button" [disabled]="disabled" class="custom-checkout-button">
         Start checkout
       </button>
     </cart-checkout>

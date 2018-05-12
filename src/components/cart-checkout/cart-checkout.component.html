@@ -2,7 +2,7 @@
   <button [ngClass]="buttonClass" [disabled]="empty" *ngIf="!custom" (click)="doCheckout()">
     {{buttonText}}
   </button>
-  <span (click)="doCheckout()" [ngClass]="{'checkout-disabled': empty}" *ngIf="custom">
+  <span (click)="doCheckout()" *ngIf="custom">
     <ng-content>
     </ng-content>
   </span>
