@@ -56,7 +56,9 @@
       "outDir": "docs-dist",
       "assets": [
         "assets",
-        "favicon.ico"
+        "favicon.ico",
+        ".nojekyll",
+        "404.html"
       ],
       "index": "index.html",
       "main": "main.ts",
