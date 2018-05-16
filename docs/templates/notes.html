@@ -1,0 +1,7 @@
+{% if doc.note %}
+{% for note in doc.note %}
+<blockquote class="blockquote {$ note.type $}">
+  <markdown>{$ note.description | ngEscape $}</markdown>
+</blockquote>
+{% endfor %}
+{% endif %}

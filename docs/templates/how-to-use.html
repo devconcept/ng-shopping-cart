@@ -1,7 +1,7 @@
 {% if doc.howToUse and doc.howToUse.length > 0 %}
-### How to use
+<h3>How to use</h3>
 {% for how in doc.howToUse %}
 <div class="how-to-use">{$ how.title $}</div>
-{$ how.description $}
+<markdown [data]="howToUse['{$ how.title $}']"></markdown>
 {% endfor %}
 {% endif %}

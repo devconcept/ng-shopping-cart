@@ -1,0 +1,11 @@
+{% extends 'layout.html' %}
+{% block body %}
+{% include 'header.html' -%}
+{% include 'class-inheritance.html' -%}
+<markdown>{$ doc.description | ngEscape $}</markdown>
+{% include 'notes.html' -%}
+{% include 'members.html' -%}
+{% include 'how-to-use.html' -%}
+{% endblock %}
+
+

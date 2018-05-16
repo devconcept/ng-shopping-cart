@@ -1,5 +1,5 @@
-import { CartItem } from './cart-item';
-import { EventEmitter } from '@angular/core';
+import {CartItem} from './cart-item';
+import {EventEmitter} from '@angular/core';
 
 /**
  * The base class for storing items in your cart
@@ -105,7 +105,7 @@ export abstract class CartService<T extends CartItem> {
    * Returns an object with all the cart information in it
    * Useful for serialization of the cart
    */
-  public toObject() {
+  public toObject(): any {
     return {
       taxRate: this.getTaxRate(),
       shipping: this.getShipping(),

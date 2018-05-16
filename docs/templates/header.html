@@ -1,0 +1,3 @@
+<h2>{$ doc.name $}{$ doc.typeParameters | escapeHtml $}</h2>
+{% if doc.typeParams %}<span class="badge badge-primary">Generic</span>{% endif %}
+<span class="badge badge-warning">{$ doc.badgeType $}</span>

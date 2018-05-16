@@ -1,0 +1,30 @@
+{% extends 'layout.html' %}
+{% block body %}
+{% include 'header.html' -%}
+{% include 'class-inheritance.md' -%}
+<markdown>{$ doc.description | ngEscape $}</markdown>
+<p>
+  Dependencies:
+  {% if doc.dependencies.length === 0 %}
+  <b>None</b>
+  {% endif %}
+  {% if doc.dependencies.length > 0 %}
+  {% for dep in doc.dependencies %}
+  <code>{$ dep $}</code>
+  {% if not loop.last %},
+  {% endif %}
+  {% endfor %}
+  {% endif %}
+</p>
+{% for member in doc.members %}
+{% if member.description %}
+<h4 id="{$ member.name $}">
+  <code>
+    {$ member.name $}
+  </code>
+</h4>
+<markdown>{$ member.description | ngEscape $}</markdown>
+{% endif %}
+{% endfor %}
+{% include 'how-to-use.html' -%}
+{% endblock %}

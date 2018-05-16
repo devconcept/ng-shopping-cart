@@ -72,7 +72,7 @@ export class AddToCartComponent implements OnInit, OnChanges {
   @Input() buttonClass = 'add-to-cart-button';
   /**
    * Renders a button or a button with an editor to select the quantity of the item that will be added in the cart. When it has a value
-   * other than 'button' an editor is displayed depending on the selected [type]; it can be a `<select>`, or a text or a number `<input>`.
+   * other than 'button' an editor is displayed depending on the selected [type]; it can be a `select`, or a text or a number `input`.
    */
   @Input() type: AddToCartType = 'button';
   /**
@@ -81,8 +81,8 @@ export class AddToCartComponent implements OnInit, OnChanges {
    */
   @Input() position: AddToCartPosition = 'left';
   /**
-   * If [type] is set 'dropdown' it can be used to set the options of the rendered `<select>` editor. Is an array of objects with label and
-   * a value properties used to populate the select's `<option>` elements.
+   * If [type] is set 'dropdown' it can be used to set the options of the rendered `select` editor. Is an array of objects with label and
+   * a value properties used to populate the select's `option` elements.
    */
   @Input() dropdown: DropdownValue[] = [
     {label: '1 item', value: 1},

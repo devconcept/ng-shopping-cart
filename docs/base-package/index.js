@@ -16,7 +16,7 @@ module.exports = exports = new Package('cartBase', [basePkg, jsDocsPkg, njPkg, g
   .processor(require('./processors/copySite'))
   .processor(require('./processors/addGitInfo'))
   .processor(require('./processors/navigationMap'))
-  //.processor(require('./processors/removeExtraSpace'))
+  .processor(require('./processors/removeExtraSpace'))
   .factory(require('./services/customDocs'))
   .factory(require('./services/copyFolder'))
   .factory(require('./services/staticAssets'))
@@ -41,13 +41,15 @@ module.exports = exports = new Package('cartBase', [basePkg, jsDocsPkg, njPkg, g
       variableEnd: '$}'
     };
     templateEngine.filters = templateEngine.filters.concat(getInjectables([
-      require('./rendering/escapeHtml')
+      require('./rendering/escapeHtml'),
+      require('./rendering/ngEscape'),
+      require('./rendering/escapeQuotes'),
     ]));
     computePathsProcessor.pathTemplates = [
       {
-        docTypes: ['function', 'var', 'const', 'let', 'enum', 'value-module'],
-        outputPathTemplate: 'api/${docType}/${computedName}.md',
-        pathTemplate: '${moduleDoc.path}/${computedName}.md'
+        docTypes: ['function', 'var', 'let', 'enum', 'value-module'],
+        outputPathTemplate: 'api/${docType}/${computedName}.html',
+        pathTemplate: '${docType}.html'
       },
       {
         docTypes: ['ngModule', 'ngRoute'],

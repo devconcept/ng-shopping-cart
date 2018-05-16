@@ -1,0 +1,21 @@
+{% for member in doc.members %}
+{% if member.description and not member.isInput and not member.isOutput %}
+<h4 id="{$ member.name $}">
+  <code>
+    {$ member.name $}{% if member.declaration.kind == 152 %}({% for param in member.parameters %}{$ param $}{% endfor %}){% endif %}
+  </code>
+</h4>
+{% if member.type !== 'void' %}
+<p>
+  Type:
+  <code>
+    {% if member.type.typeExpression %}{$ member.type.typeExpression | escapeHtml $}{% else %}{$ member.typeInfo | escapeHtml $}{% endif %}
+  </code>
+</p>
+{% if member.initialValue !== undefined %}
+<p>Initial value: <code>{$ member.initialValue $}</code></p>
+{% endif %}
+{% endif %}
+<markdown>{$ member.description | ngEscape $}</markdown>
+{% endif %}
+{% endfor %}

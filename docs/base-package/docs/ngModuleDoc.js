@@ -11,6 +11,7 @@ module.exports = exports = class NgModuleDoc {
     this.ngType = 'module';
     this.dependencies = dependencies.map(c => {
       return new NgComponentDoc({
+        ...c,
         name: upperFirst(c.name) + 'Component',
         source: c,
         computedName: c.computedName,
@@ -18,7 +19,6 @@ module.exports = exports = class NgModuleDoc {
         route: c.computedName,
         chapter: c.nochapter ? undefined : c.chapter,
         pkg,
-        next: c.next,
       })
     });
     this.modules = modules;

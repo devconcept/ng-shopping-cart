@@ -16,6 +16,7 @@ module.exports = exports = new Package('cartApi', [cartBasePkg, tsPkg])
   .processor(require('./processors/fixMembersType'))
   .processor(require('./processors/generateApiRoutes'))
   .processor(require('./processors/generateSearchService'))
+  .processor(require('./processors/generateBadgeInfo'))
   .factory(require('./services/getTypeFolder'))
   .config(function (parseTagsProcessor, getInjectables) {
     parseTagsProcessor.tagDefinitions = parseTagsProcessor.tagDefinitions.concat(getInjectables([
@@ -39,13 +40,16 @@ module.exports = exports = new Package('cartApi', [cartBasePkg, tsPkg])
       {
         docTypes: ['class', 'interface', 'type-alias', 'const'],
         getOutputPath: function (doc) {
-          return `${ASSETS}/${doc.computedName}.md`
+          const {location} = doc;
+          const folder = location ? '/' + location : '';
+          const file = doc.ngType === 'component' ? doc.computedName.replace(/-component/, '') : doc.computedName;
+          return `api${folder}/routes/${file}.component.html`
         },
         getPath: function (doc) {
           if (doc.ngType) {
-            return '${ngType}.md';
+            return `${doc.ngType}.html`;
           }
-          return '${docType}.md'
+          return `${doc.docType}.html`
         }
       },
       {

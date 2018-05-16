@@ -1,0 +1,16 @@
+{% if doc.extendsClauses.length %}
+<p>
+  Extends:
+  {% for ext in doc.extendsClauses %}
+  {% if ext.doc %}
+  <a [routerLink]="['/{$ ext.doc.chapter + '/' + ext.doc.location + '/' + ext.doc.computedName $}']">
+    <code>{$ ext.text | escapeHtml $}</code>
+  </a>
+  {% else %}
+  <code>{$ ext.text $}</code>
+  {% endif %}
+  {% if not loop.last %},
+  {% endif %}
+  {% endfor %}
+</p>
+{% endif %}

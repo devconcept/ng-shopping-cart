@@ -5,7 +5,10 @@ module.exports = function removeExtraSpace() {
     $runBefore: ['writing-files'],
     $process: function (docs) {
       docs.forEach(function (doc) {
-        //doc.renderedContent = doc.renderedContent.replace(/\n+/gm, '\n').replace(/\r+/gm, '\r').replace(/(\r\n)+/gm, '\r\n');
+        doc.renderedContent = doc.renderedContent
+          .replace(/\n+/g, '\n')
+          .replace(/\r+/g, '\r')
+          .replace(/(\r\n)+/g, '\r\n');
       });
     }
   };

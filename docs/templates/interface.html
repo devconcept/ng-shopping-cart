@@ -1,0 +1,13 @@
+{% extends 'layout.html' %}
+{% block body %}
+<h2>{$ doc.name $}</h2>
+<span class="badge badge-warning">Interface</span>
+<markdown>{$ doc.description | ngEscape $}</markdown>
+{% for member in doc.members %}
+<h4 id="member.name"><code>{$ member.name $}</code></h4>
+<p>
+  Type: <code>{$ member.type $}</code>
+</p>
+<markdown>{$ member.description | ngEscape $}</markdown>
+{% endfor %}
+{% endblock %}

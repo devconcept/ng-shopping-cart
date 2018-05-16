@@ -1,0 +1,18 @@
+{% extends 'layout.html' %}
+{% block body %}
+<h2>{$ doc.name $}</h2>
+<span class="badge badge-warning">Type</span>
+<markdown>{$ doc.description | ngEscape $}</markdown>
+<p>
+  Values: {$ doc.typeDefinition | backTicks $}
+</p>
+<p>
+  Meaning:
+</p>
+{% if doc.means %}
+{% for means in doc.means %}
+<markdown>{$ means | ngEscape $}</markdown>
+{% endfor %}
+{% endif %}
+{% endblock %}
+

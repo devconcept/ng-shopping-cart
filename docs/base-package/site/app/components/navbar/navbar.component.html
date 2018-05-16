@@ -19,7 +19,7 @@
         <li class="nav-item d-none d-md-block" #drop="ngbDropdown" *ngFor="let item of navbar" ngbDropdown
             [autoClose]="item.submenu && item.submenu[0].section ? 'outside' : true">
           <ng-container *ngIf="item.submenu">
-            <a class="nav-link" ngbDropdownToggle id="navbarDropdown" role="button" style="cursor: pointer"
+            <a class="nav-link nav-item-link" ngbDropdownToggle id="navbarDropdown" role="button"
                aria-haspopup="true" aria-expanded="false">
               {{item.title}}
             </a>
@@ -31,11 +31,13 @@
                 <ng-container *ngIf="m.section">
                   <div class="dropdown-item submenu">
                     <div class="dropright" ngbDropdown placement="right-top">
-                      <a aria-haspopup="true" ngbDropdownToggle [id]="m.title" aria-expanded="false">
+                      <a class="nav-item-link" aria-haspopup="true" ngbDropdownToggle [id]="m.title"
+                         aria-expanded="false">
                         {{m.title | titlecase}}
                       </a>
                       <div ngbDropdownMenu>
-                        <a (click)="drop.close()" *ngFor="let i of m.items" [routerLink]="i.path" class="dropdown-item">
+                        <a (click)="drop.close()" *ngFor="let i of m.items" [routerLink]="i.path"
+                           [routerLinkActive]="'active'" class="dropdown-item">
                           {{i.menu}}
                         </a>
                       </div>
@@ -53,23 +55,24 @@
         </li>
         <li class="nav-item d-block d-md-none" *ngFor="let item of navbar">
           <ng-container *ngIf="!item.submenu">
-            <a class="nav-link" [routerLink]="[item.path]" routerLinkActive="'active'" (click)="toggleNavbar()">
+            <a class="nav-link" [routerLink]="[item.path]" [routerLinkActive]="'active'" (click)="toggleNavbar()">
               {{item.menu}}
             </a>
           </ng-container>
           <ng-container *ngFor="let m of item.submenu">
             <ng-container *ngIf="!m.section">
-              <a class="nav-link" [routerLink]="[m.path]" routerLinkActive="'active'" (click)="toggleNavbar()">
+              <a class="nav-link" [routerLink]="[m.path]" [routerLinkActive]="'active'" (click)="toggleNavbar()">
                 {{m.menu}}
               </a>
             </ng-container>
             <ng-container *ngIf="m.section">
-              <a class="nav-link" (click)="collapseNav(m.title)" style="cursor: pointer">
+              <a class="nav-link nav-item-link" (click)="collapseNav(m.title)">
                 {{m.title | titlecase}}
               </a>
               <ul class="nav flex-column" [ngbCollapse]="!isCollapsed[m.title]">
                 <li class="nav-item" *ngFor="let i of m.items">
-                  <a class="nav-link pl-2" [routerLink]="[i.path]" routerLinkActive="'active'" (click)="toggleNavbar()">
+                  <a class="nav-link pl-2" [routerLink]="[i.path]" [routerLinkActive]="'active'"
+                     (click)="toggleNavbar()">
                     {{i.menu}}
                   </a>
                 </li>
@@ -107,7 +110,7 @@
       <ul class="navbar-nav d-none d-md-block">
         <li class="navbar-text">
           <a href="{{repoUrl}}" class="github-link">
-            <span class="github-icon" [innerHTML]="githubIcon"></span>
+            <span class="repo-github-icon" [innerHTML]="githubIcon"></span>
             {{version}}
           </a>
         </li>

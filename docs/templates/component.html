@@ -1,0 +1,40 @@
+{% extends 'layout.html' %}
+{% block body %}
+{% include 'header.html' -%}
+<p>
+  Selector: <code>{$ doc.ngSelector $}</code>
+</p>
+<markdown>{$ doc.description | ngEscape $}</markdown>
+{% include 'notes.html' -%}
+{% if doc.inputs.length > 0 %}
+<i>@Input()</i>
+{% for input in doc.inputs %}
+{% if input.description %}
+<h4 id="{$ input.name $}"><code>{$ input.name $}</code></h4>
+<p>
+  Type:<code>{$ input.typeInfo | ngEscape $}</code>
+</p>
+{% if input.initialValue %}
+<p>
+  Initial value: <code>{$ input.initialValue $}</code>
+</p>
+{% endif %}
+<markdown>{$ input.description | ngEscape $}</markdown>
+{% endif %}
+{% endfor %}
+{% endif %}
+{% if doc.outputs.length > 0 %}
+<i>@Output()</i>
+{% for output in doc.outputs %}
+{% if output.description %}
+<h4 id="{$ output.name $}"><code>{$ output.name $}</code></h4>
+<p>
+  Emits: <code>{$ output.type | emitterType  $}</code>
+</p>
+<markdown>{$ output.description | ngEscape $}</markdown>
+{% endif %}
+{% endfor %}
+{% endif %}
+{% include 'members.html' -%}
+{% include 'how-to-use.html' -%}
+{% endblock %}
