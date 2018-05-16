@@ -33,6 +33,7 @@ class TestServiceComponent {
 
 describe('CartCheckoutComponent', () => {
   let subscriptions = [];
+  let service: CartService<BaseCartItem>;
 
   beforeEach(async(() => {
     TestBed
@@ -45,6 +46,11 @@ describe('CartCheckoutComponent', () => {
       })
       .compileComponents();
   }));
+
+  beforeEach(() => {
+    service = TestBed.get(CartService);
+    service.clear();
+  });
 
   describe('Default component', () => {
     let component: CartCheckoutComponent;
@@ -62,6 +68,7 @@ describe('CartCheckoutComponent', () => {
       expect(button).toBeTruthy();
       const buttonEl = button.nativeElement;
       expect(buttonEl.classList.contains('cart-checkout-button')).toEqual(true);
+      expect(buttonEl.attributes['disabled']).toBeTruthy();
       expect(buttonEl.innerText).toEqual('Checkout');
     });
 
@@ -79,39 +86,35 @@ describe('CartCheckoutComponent', () => {
       const button = fixture.debugElement.query(By.css('button'));
       expect(button.nativeElement.className).toEqual('test');
     });
+
+    it('should enable the button when the cart has items', () => {
+      fixture.detectChanges();
+      const button = fixture.debugElement.query(By.css('button'));
+      expect(button.nativeElement.attributes['disabled']).toBeTruthy();
+      service.addItem(new BaseCartItem({id: 1, name: 'Test item', quantity: 1, price: 1}));
+      fixture.detectChanges();
+      expect(button.nativeElement.attributes['disabled']).toBeFalsy();
+    });
   });
 
   describe('Custom component', () => {
     let component: TestCustomButtonComponent;
     let fixture: ComponentFixture<TestCustomButtonComponent>;
-    let service: CartService<BaseCartItem>;
 
     beforeEach(() => {
       fixture = TestBed.createComponent(TestCustomButtonComponent);
       component = fixture.componentInstance;
-      service = TestBed.get(CartService);
-      service.clear();
     });
 
     it('should render custom content', () => {
       fixture.detectChanges();
       const container = fixture.debugElement.query(By.css('span'));
       expect(container).toBeTruthy();
-      expect(container.nativeElement.classList.contains('checkout-disabled')).toEqual(true);
       expect(container.query(By.css('.test'))).toBeTruthy();
       expect(fixture.debugElement.query(By.css('.test'))).toBeTruthy();
       component.custom = false;
       fixture.detectChanges();
       expect(fixture.debugElement.query(By.css('.test'))).toBeFalsy();
-    });
-
-    it('should remove the disabled class when there are items in the cart', () => {
-      fixture.detectChanges();
-      const container = fixture.debugElement.query(By.css('span'));
-      expect(container.nativeElement.classList.contains('checkout-disabled')).toEqual(true);
-      service.addItem(new BaseCartItem({id: 1, name: 'Test item', quantity: 1, price: 1}));
-      fixture.detectChanges();
-      expect(container.nativeElement.classList.contains('checkout-disabled')).toEqual(false);
     });
 
     it('should invoke the checkout when the projected content is clicked', () => {
@@ -134,14 +137,11 @@ describe('CartCheckoutComponent', () => {
   describe('Http service', () => {
     let component: TestServiceComponent;
     let fixture: ComponentFixture<TestServiceComponent>;
-    let service: CartService<BaseCartItem>;
     let httpClient: HttpClient;
 
     beforeEach(() => {
       fixture = TestBed.createComponent(TestServiceComponent);
       component = fixture.componentInstance;
-      service = TestBed.get(CartService);
-      service.clear();
       httpClient = TestBed.get(HttpClient);
     });
 
@@ -215,13 +215,10 @@ describe('CartCheckoutComponent', () => {
   describe('Paypal service', () => {
     let component: TestServiceComponent;
     let fixture: ComponentFixture<TestServiceComponent>;
-    let service: CartService<BaseCartItem>;
 
     beforeEach(() => {
       fixture = TestBed.createComponent(TestServiceComponent);
       component = fixture.componentInstance;
-      service = TestBed.get(CartService);
-      service.clear();
     });
 
     it('should render a paypal form', () => {
