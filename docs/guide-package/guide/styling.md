@@ -142,11 +142,11 @@ The current grid system uses a 12 column layout, the same as other popular CSS f
 First create a `.scss` file and write this
 
 ```scss
-+ @import "./node_modules/ng-shopping-cart/styles/scss/variables"; // Add the variables first
+@import "./node_modules/ng-shopping-cart/styles/scss/variables"; // Add the variables first
 
 $columns: 15; // <-- here you change all the variables you need
 
-+ @import "./node_modules/ng-shopping-cart/styles/scss/lib"; // Add the rest of the library styles
+@import "./node_modules/ng-shopping-cart/styles/scss/lib"; // Add the rest of the library styles
 ```
 
 All you need to do is locate the `variables` and `lib` scss files changing the values after you imported the variables file. The `lib` file will compile to CSS with your values instead of the defaults and now you have a grid with `15` columns which can fit your five items.
