@@ -91,17 +91,17 @@
           </a>
         </li>
       </ul>
-      <form class="form-inline mr-5 d-none d-md-inline" (ngSubmit)="search(searchInput.value)">
+      <form class="form-inline mr-5 d-none d-md-inline" (ngSubmit)="search(searchLarge.value)">
         <div class="input-group">
-          <input #searchInput type="text" class="form-control">
+          <input #searchLarge type="text" class="form-control">
           <div class="input-group-append">
             <button class="btn btn-info" type="submit" [innerHtml]="searchIcon"></button>
           </div>
         </div>
       </form>
-      <form class="d-flex d-md-none row no-gutters mt-2" (ngSubmit)="search(searchInput.value)">
+      <form class="d-flex d-md-none row no-gutters mt-2" (ngSubmit)="search(searchSmall.value)">
         <div class="col">
-          <input #searchInput type="text" class="form-control">
+          <input #searchSmall type="text" class="form-control">
         </div>
         <div class="col-auto">
           <button class="btn btn-info" type="submit" [innerHtml]="searchIcon"></button>
