@@ -11,6 +11,8 @@ module.exports = exports = class TocDoc {
         ? upperFirst(lowerCase(computedName))
         : startCase(computedName).replace(/ /g, '');
       let menu = doc.docType !== 'const' ? title : doc.name;
+      const getPath = (name) => (name.toLowerCase().replace(/ /g, '-'));
+
       if (doc.ngType === 'component') {
         menu = '<' + doc.computedName.replace(/-component$/, '') + '>';
       }
@@ -18,7 +20,7 @@ module.exports = exports = class TocDoc {
         extra = {
           topics: doc.members.reduce((curr, m) => {
             if (m.description) {
-              curr.push(m.name)
+              curr.push({name: m.name, path: getPath(m.name)})
             }
             return curr;
           }, [])
@@ -29,7 +31,7 @@ module.exports = exports = class TocDoc {
           .reduce((curr, line) => {
             const match = /^#{3,5}\s+([A-Za-z0-9_ ]+)$/.exec(line);
             if (match) {
-              curr.push(match[1]);
+              curr.push({name: match[1], path: getPath(match[1])});
             }
             return curr;
           }, []);

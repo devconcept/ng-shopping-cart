@@ -44,6 +44,7 @@ module.exports = exports = new Package('cartBase', [basePkg, jsDocsPkg, njPkg, g
       require('./rendering/escapeHtml'),
       require('./rendering/ngEscape'),
       require('./rendering/escapeQuotes'),
+      require('./rendering/pathName'),
     ]));
     computePathsProcessor.pathTemplates = [
       {

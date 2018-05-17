@@ -32,7 +32,7 @@ export class DemoAddToCartComponent {
       cost: 14.5,
       description: 'Test description',
       country: 'US',
-      photo: '/assets/laptop.jpg'
+      photo: 'assets/laptop.jpg'
     });
   }
 

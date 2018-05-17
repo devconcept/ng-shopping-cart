@@ -7,14 +7,14 @@ export function markedOptionsFactory(router: Router): MarkedOptions {
 
   renderer.heading = (text: string, level: number) => {
     const escapedText = text.toLowerCase()
-      .replace(/[^\w(): ]+/g, '-')
+      .replace(/[^\w():]+/g, '-')
       .replace(/-code-/g, '-')
       .replace(/-strong-/g, '')
       .replace(/-$/, '')
       .replace(/^-/, '')
       .replace(/\([a-zA-Z: ]*\)$/, '');
 
-    const currentUrl = router.routerState.snapshot.url.split('#')[0];
+    const currentUrl = router.routerState.snapshot.url.split('#')[0].substr(1);
     return level >= 4
       ? `
         <a id="${escapedText}" class="header" href="${currentUrl}#${escapedText}">

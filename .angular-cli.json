@@ -94,6 +94,14 @@
   },
   "lint": [
     {
+      "project": "src/tsconfig.app.json",
+      "exclude": "**/node_modules/**"
+    },
+    {
+      "project": "src/tsconfig.spec.json",
+      "exclude": "**/node_modules/**"
+    },
+    {
       "project": "demo/tsconfig.app.json",
       "exclude": "**/node_modules/**"
     },

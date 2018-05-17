@@ -3,7 +3,9 @@
     <h5>Topics</h5>
     <ol>
       <li *ngFor="let item of sidebarItems">
-        <a [href]="'/ng-shopping-cart' + sidebarPath + '#' + (item | lowercase)" class="text-secondary">{{item}}</a>
+        <a [href]="'/ng-shopping-cart' + sidebarPath + '#' + item.path" class="text-secondary">
+          {{item.name}}
+        </a>
       </li>
     </ol>
   </ng-container>

@@ -1,6 +1,6 @@
 {% for member in doc.members %}
 {% if member.description and not member.isInput and not member.isOutput %}
-<h4 id="{$ member.name $}">
+<h4 id="{$ member.name | pathName $}">
   <code>
     {$ member.name $}{% if member.declaration.kind == 152 %}({% for param in member.parameters %}{$ param $}{% endfor %}){% endif %}
   </code>

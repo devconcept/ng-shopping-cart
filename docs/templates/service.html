@@ -18,7 +18,7 @@
 </p>
 {% for member in doc.members %}
 {% if member.description %}
-<h4 id="{$ member.name $}">
+<h4 id="{$ member.name | pathName $}">
   <code>
     {$ member.name $}
   </code>

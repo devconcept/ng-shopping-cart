@@ -28,7 +28,7 @@ export class CartShowcaseDemoComponent {
       identifier: 1,
       label: 'Item1',
       cost: 10,
-      photo: '/assets/laptop.jpg',
+      photo: 'assets/laptop.jpg',
       amount: 1
     }),
   ];

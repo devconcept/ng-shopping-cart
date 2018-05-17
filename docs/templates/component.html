@@ -10,7 +10,7 @@
 <i>@Input()</i>
 {% for input in doc.inputs %}
 {% if input.description %}
-<h4 id="{$ input.name $}"><code>{$ input.name $}</code></h4>
+<h4 id="{$ input.name | pathName $}"><code>{$ input.name $}</code></h4>
 <p>
   Type:<code>{$ input.typeInfo | ngEscape $}</code>
 </p>
@@ -27,7 +27,7 @@
 <i>@Output()</i>
 {% for output in doc.outputs %}
 {% if output.description %}
-<h4 id="{$ output.name $}"><code>{$ output.name $}</code></h4>
+<h4 id="{$ output.name | pathName $}"><code>{$ output.name $}</code></h4>
 <p>
   Emits: <code>{$ output.type | emitterType  $}</code>
 </p>
