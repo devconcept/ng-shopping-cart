@@ -81,4 +81,4 @@ The `forRoot` static method makes this initial configuration easy. It has 3 opti
 - `serviceType` (default: `'localStorage'`): to set where will the service persist the data ('localStorage', 'sessionStorage', 'memory', etc).
 - `serviceOptions` (default: depends of service): to set any additional service configuration in case it is supported or required.
 
-You can also change the service and use your own implementation. To learn how to do it check ["The cart service"](/guide/the-cart-service)
+You can also change the service and use your own implementation. To learn how to do it check ["The cart service"](guide/the-cart-service)
