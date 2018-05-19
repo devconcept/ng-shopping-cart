@@ -19,6 +19,7 @@
 {% for member in doc.members %}
 {% if member.description %}
 <h4 id="{$ member.name | pathName $}">
+  <span [innerHtml]="link"></span>
   <code>
     {$ member.name $}
   </code>

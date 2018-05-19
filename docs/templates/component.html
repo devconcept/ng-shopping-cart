@@ -7,10 +7,13 @@
 <markdown>{$ doc.description | ngEscape $}</markdown>
 {% include 'notes.html' -%}
 {% if doc.inputs.length > 0 %}
-<i>@Input()</i>
+<h4><i>@Input()</i></h4>
 {% for input in doc.inputs %}
 {% if input.description %}
-<h4 id="{$ input.name | pathName $}"><code>{$ input.name $}</code></h4>
+<h4 id="{$ input.name | pathName $}">
+  <span [innerHtml]="link"></span>
+  <code>{$ input.name $}</code>
+</h4>
 <p>
   Type:<code>{$ input.typeInfo | ngEscape $}</code>
 </p>
@@ -24,10 +27,13 @@
 {% endfor %}
 {% endif %}
 {% if doc.outputs.length > 0 %}
-<i>@Output()</i>
+<h4><i>@Output()</i></h4>
 {% for output in doc.outputs %}
 {% if output.description %}
-<h4 id="{$ output.name | pathName $}"><code>{$ output.name $}</code></h4>
+<h4 id="{$ output.name | pathName $}">
+  <span [innerHtml]="link"></span>
+  <code>{$ output.name $}</code>
+</h4>
 <p>
   Emits: <code>{$ output.type | emitterType  $}</code>
 </p>
