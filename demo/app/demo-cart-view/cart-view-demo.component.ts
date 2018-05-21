@@ -7,7 +7,7 @@ import { CartViewDisplay } from '../../../src/types';
   styleUrls: ['./cart-view-demo.component.scss']
 })
 export class CartViewDemoComponent {
-  display: CartViewDisplay = 'fixed';
+  display: CartViewDisplay = 'responsive-table';
   showImages = true;
   useCustom = false;
 

@@ -1,7 +1,7 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { DemoCheckoutComponent } from './demo-cart-checkout.component';
-import { CartCheckoutComponent, CartService, MemoryCartService } from '../../../src';
+import { CartCheckoutComponent, CartService, MemoryCartService } from 'ng-shopping-cart';
 import { HttpClientModule } from '@angular/common/http';
 
 describe('DemoCheckoutComponent', () => {

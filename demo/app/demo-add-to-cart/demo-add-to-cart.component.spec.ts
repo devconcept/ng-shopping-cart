@@ -3,7 +3,7 @@ import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { DemoAddToCartComponent } from './demo-add-to-cart.component';
 import { FormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
-import { AddToCartComponent, CartService, MemoryCartService } from '../../../src';
+import { AddToCartComponent, CartService, MemoryCartService } from 'ng-shopping-cart';
 import { AddToCartEditorComponent } from '../../../src/components/add-to-cart-editor/add-to-cart-editor.component';
 
 describe('DemoAddToCartComponent', () => {

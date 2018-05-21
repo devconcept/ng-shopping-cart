@@ -1,5 +1,5 @@
 import {Component} from '@angular/core';
-import {AddToCartType, AddToCartPosition, CartService} from '../../../src';
+import {AddToCartType, AddToCartPosition, CartService} from 'ng-shopping-cart';
 import {DemoCartItem} from '../demo-cart-item';
 
 @Component({

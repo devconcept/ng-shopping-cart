@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import {CartItem} from '../../src/classes/cart-item';
+import {CartItem} from 'ng-shopping-cart';
 
 @Component({
   selector: 'demo-root',

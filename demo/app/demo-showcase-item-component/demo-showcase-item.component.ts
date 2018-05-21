@@ -1,6 +1,5 @@
 import {Component} from '@angular/core';
-import {ShowcaseItem} from '../../../src/interfaces/showcase-item';
-import {CartItem} from '../../../src/classes/cart-item';
+import {ShowcaseItem, CartItem} from 'ng-shopping-cart';
 
 @Component({
   selector: 'demo-demo-showcase-item-component',

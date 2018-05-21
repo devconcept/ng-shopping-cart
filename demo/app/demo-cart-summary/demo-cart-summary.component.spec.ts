@@ -1,7 +1,7 @@
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import {async, ComponentFixture, TestBed} from '@angular/core/testing';
 
-import { CartSummaryDemoComponent } from './demo-cart-summary.component';
-import { CartService, CartSummaryComponent, MemoryCartService } from '../../../src';
+import {CartSummaryDemoComponent} from './demo-cart-summary.component';
+import {CartService, CartSummaryComponent, MemoryCartService} from 'ng-shopping-cart';
 
 describe('CartSummaryDemoComponent', () => {
   let component: CartSummaryDemoComponent;
@@ -15,7 +15,7 @@ describe('CartSummaryDemoComponent', () => {
           CartSummaryComponent
         ],
         providers: [
-          { provide: CartService, useClass: MemoryCartService }
+          {provide: CartService, useClass: MemoryCartService}
         ]
       })
       .compileComponents();

@@ -1,9 +1,9 @@
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import {async, ComponentFixture, TestBed} from '@angular/core/testing';
 
-import { CartShowcaseDemoComponent } from './demo-cart-showcase.component';
-import { FormsModule } from '@angular/forms';
-import { CommonModule } from '@angular/common';
-import { ShoppingCartModule } from '../../../src';
+import {CartShowcaseDemoComponent} from './demo-cart-showcase.component';
+import {FormsModule} from '@angular/forms';
+import {CommonModule} from '@angular/common';
+import {ShoppingCartModule} from 'ng-shopping-cart';
 
 describe('CartShowcaseDemoComponent', () => {
   let component: CartShowcaseDemoComponent;
@@ -11,14 +11,14 @@ describe('CartShowcaseDemoComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ CartShowcaseDemoComponent ],
+      declarations: [CartShowcaseDemoComponent],
       imports: [
         CommonModule,
         FormsModule,
         ShoppingCartModule,
       ],
     })
-    .compileComponents();
+      .compileComponents();
   }));
 
   beforeEach(() => {
