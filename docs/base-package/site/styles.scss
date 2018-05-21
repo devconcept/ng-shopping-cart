@@ -77,3 +77,16 @@ a.nav-item-link {
  cursor: pointer;
 }
 
+.note {
+  background-color: #ffe5644d;
+  border-left: 9px #ffe564 solid;
+  padding: 20px 40px 20px 25px;
+  margin: 20px 0;
+  color: #000000;
+  font-size: 1rem;
+
+  markdown p:last-of-type {
+    margin-bottom: 0;
+  }
+}
+
