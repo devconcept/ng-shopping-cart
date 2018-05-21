@@ -19,11 +19,11 @@ export type AddToCartType = 'button' | 'dropdown' | 'text' | 'number';
 export type AddToCartPosition = 'top' | 'bottom' | 'left' | 'right';
 /**
  * The used layout to render the cart-view component
- * @means `'responsive'`: On small screens each item is displayed like a card. On other resolutions a table layout is used
- * @means `'responsive-table'`: On small screens scrollbars appear to prevent the content from overflowing
- * @means `'fixed'`: No adjustments are done and the content might overflow the container
+ * @means `'responsive'`: On small screens each item is displayed like a card. On other resolutions a css table layout is used instead.
+ * @means `'responsive-table'`: Uses a css table layout. On small screens scrollbars appear to prevent the content from overflowing.
+ * @means `'table'`: An actual html table element is used to render a view of the cart.
  */
-export type CartViewDisplay = 'responsive' | 'responsive-table' | 'fixed';
+export type CartViewDisplay = 'table' | 'responsive-table' | 'fixed';
 /**
  * The service to use when starting the checkout operation
  * @means `'log'`: Pressing the checkout button renders the cart contents on the console

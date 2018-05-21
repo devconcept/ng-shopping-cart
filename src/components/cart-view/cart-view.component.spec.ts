@@ -72,7 +72,7 @@ describe('CartViewComponent', () => {
       expect(emptyPanel).toBeFalsy();
       const cartView = fixture.debugElement.query(By.css('.cart-view'));
       expect(cartView).toBeTruthy();
-      expect(cartView.nativeElement.classList.contains('fixed')).toBeTruthy();
+      expect(cartView.nativeElement.classList.contains('responsive-table-display')).toBeTruthy();
       const cartListView = fixture.debugElement.query(By.css('.cart-list-view'));
       expect(cartListView).toBeTruthy();
       expect(cartListView.nativeElement.classList.contains('no-images')).toBeFalsy();

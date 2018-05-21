@@ -79,7 +79,7 @@ export class CartViewComponent implements OnInit, OnDestroy {
   /**
    * Changes the appearance how the cart view displays in different screen sizes
    */
-  @Input() display: CartViewDisplay = 'fixed';
+  @Input() display: CartViewDisplay = 'responsive-table';
   /**
    * Whether to include images in the cart or not.
    */
