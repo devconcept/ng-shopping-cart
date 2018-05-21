@@ -17,6 +17,8 @@
           &.showcase-container-#{$name}-#{$i} {
             width: percentage($i / $columns);
             padding: percentage($i / $columns) 0 0;
+            box-sizing: border-box;
+
             $used: ();
             @for $r from 1 through $ratios {
               @for $ir from 1 through $ratios {
