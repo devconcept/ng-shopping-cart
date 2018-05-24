@@ -5,6 +5,10 @@ import { Router } from '@angular/router';
 export function markedOptionsFactory(router: Router): MarkedOptions {
   const renderer = new MarkedRenderer();
 
+  renderer.blockquote = (quote: string) => {
+    return `<blockquote class="note default">${quote}</blockquote>`
+  };
+
   renderer.heading = (text: string, level: number) => {
     const escapedText = text.toLowerCase()
       .replace(/[^\w():]+/g, '-')

@@ -74,18 +74,30 @@ blockquote.doc.note {
 }
 
 a.nav-item-link {
- cursor: pointer;
+  cursor: pointer;
 }
 
-.note {
+@mixin note() {
   background-color: #ffe5644d;
   border-left: 9px #ffe564 solid;
   padding: 20px 40px 20px 25px;
   margin: 20px 0;
   color: #000000;
   font-size: 1rem;
+}
+
+blockquote.note, .note {
+  @include note();
 
   markdown p:last-of-type {
+    margin-bottom: 0;
+  }
+}
+
+markdown blockquote.note {
+  @include note();
+
+  p:last-of-type {
     margin-bottom: 0;
   }
 }
