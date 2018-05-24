@@ -7,7 +7,9 @@
     {
       "root": "src",
       "outDir": "src-dist",
-      "assets": [],
+      "assets": [
+        "cart.svg"
+      ],
       "index": "",
       "main": "index.ts",
       "polyfills": "../demo/polyfills.ts",
