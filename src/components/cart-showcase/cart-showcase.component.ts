@@ -45,8 +45,9 @@ import {ShowcaseItem} from '../../interfaces/showcase-item';
  * }
  * ```
  *
- * @note If you change the [columns] input you must also change the SASS variable that controls the component grid. A similar procedure is
- * required to create aspect ratios with values greater than four eg: '1:5'. Check the styling guide for more information.
+ * @note If you change the `[columns]` input you must also change the SASS variable that controls the component grid and vice-versa.
+ * A similar procedure is required to create aspect ratios with values greater than four eg: '1:5'.
+ * Check the styling guide for more information.
  *
  * @note The aspect ratio is the width/height proportion of the items therefore a ratio of "2:2" is equivalent to "1:1". Redundant ratios
  * like these are removed from the source so don't try to use them.
@@ -84,7 +85,8 @@ export class CartShowcaseComponent implements OnChanges {
    */
   @Input() xlCols = 4;
   /**
-   * The number of columns in the grid
+   * The number of columns in the grid.
+   * Only update this value if you changed the columns SASS variable in the library styles following the Styling guide.
    */
   @Input() columns = 12;
   /**
@@ -92,7 +94,7 @@ export class CartShowcaseComponent implements OnChanges {
    */
   @Input() items: CartItem[];
   /**
-   * The component to render for each item. `Type<ShowcaseItem>` means any component that implements the interface `ShowcaseItem`
+   * The component to render for each item. This type means any component that implements the interface `ShowcaseItem`
    */
   @Input() itemComponent: Type<ShowcaseItem> = CartShowcaseItemComponent;
   /**
