@@ -13,10 +13,20 @@ export class SearchComponent implements OnInit {
   private _sort1 = 'name';
   private _sort2 = 'description';
   private _sort3 = 'members';
-  q = '';
+  private _q = '';
   results = [];
   searched = false;
+  canSearch = false;
   sorts = ['name', 'description', 'members'];
+
+  get q(): string {
+    return this._q;
+  }
+
+  set q(value: string) {
+    this._q = value;
+    this.updateButton();
+  }
 
   get sort1(): string {
     return this._sort1;
@@ -25,6 +35,7 @@ export class SearchComponent implements OnInit {
   set sort1(value: string) {
     this.checkSorts('_sort1', value, this.sort1);
     this._sort1 = value;
+    this.updateButton();
   }
 
   get sort2(): string {
@@ -34,6 +45,7 @@ export class SearchComponent implements OnInit {
   set sort2(value: string) {
     this.checkSorts('_sort2', value, this.sort2);
     this._sort2 = value;
+    this.updateButton();
   }
 
   get sort3(): string {
@@ -43,6 +55,7 @@ export class SearchComponent implements OnInit {
   set sort3(value: string) {
     this.checkSorts('_sort3', value, this.sort3);
     this._sort3 = value;
+    this.updateButton();
   }
 
   constructor(private router: Router, private activatedRoute: ActivatedRoute, private searchService: SearchService) {
@@ -52,11 +65,11 @@ export class SearchComponent implements OnInit {
   ngOnInit() {
     const params = this.activatedRoute.snapshot.queryParams;
     if (params && params.q) {
-      this.q = params.q;
+      this._q = params.q;
       if (params.sort) {
         const sort = params.sort;
         if (!Array.isArray(sort) || sort.length !== 3 || sort.find(s => this._defaultOrder.indexOf(s) === -1)) {
-          this.routerNavigate({q: this.q});
+          this.routerNavigate({q: this._q});
           return;
         }
         this.sort1 = sort[0];
@@ -68,8 +81,8 @@ export class SearchComponent implements OnInit {
   }
 
   onSearch() {
-    if (this.q) {
-      let queryParams:any = {q: this.q};
+    if (this._q) {
+      let queryParams: any = {q: this._q};
       const sort = [this.sort1, this.sort2, this.sort3];
       const sameOrder = sort.findIndex((m, idx) => m !== this._defaultOrder[idx]);
       if (sameOrder !== -1) {
@@ -88,8 +101,9 @@ export class SearchComponent implements OnInit {
   }
 
   searchInDocs() {
-    this.results = this.searchService.doSearch(this.q, [this.sort1, this.sort2, this.sort3]);
+    this.results = this.searchService.doSearch(this._q, [this.sort1, this.sort2, this.sort3]);
     this.searched = true;
+    this.updateButton();
   }
 
   checkSorts(changed, value, previous): void {
@@ -101,5 +115,12 @@ export class SearchComponent implements OnInit {
         this[swap] = previous;
       }
     });
+  }
+
+  updateButton() {
+    const params = this.activatedRoute.snapshot.queryParams;
+    const {sort = this.sorts, q = ''} = params;
+    this.canSearch = this.q !== q ||
+      sort.length !== 3 || sort[0] !== this.sort1 || sort[1] !== this.sort2 || sort[2] !== this.sort3;
   }
 }

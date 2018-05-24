@@ -12,7 +12,7 @@
         </small>
       </div>
       <div class="col-12 col-md-2 mt-3 mt-md-0 mb-3 mb-md-0 order-5 order-md-0">
-        <button type="submit" class="btn btn-primary">
+        <button type="submit" [disabled]="!canSearch" class="btn btn-primary">
           Search
         </button>
       </div>
