@@ -125,7 +125,7 @@ The shape of the `itemData` object is the same that you get when you execute:
 console.log(JSON.parse(JSON.stringify(item)));
 ```
 
-If you previously called `console.log(item)` it shows the word `CustomCartItem`. The class prototype is there and all the methods are present. After you parsed the result all functions were lost and the items is recognized as a plain object. The `itemData` parameter contains all deep properties that contained primitive values. You must use those values to reconstruct the item.  
+If you previously called `console.log(item)` it shows the word `CustomCartItem`. The class prototype is there and all the methods are present. After you parsed the result all functions were lost and the item is recognized as a plain object. The `itemData` parameter contains all deep properties that contained primitive values. You must use those values to reconstruct the item.  
 
 Oh, you still want to use your `CartItem` constructor in a different way? Don't worry we have you covered. In that case, you must add a static `fromJSON` method to your class. It takes one object as parameter. The `CartService` will first check if this method is present and use it to instantiate the objects. Only if this method is missing the service will use the constructor to create items. Of course this method must return a new class instance or otherwise it will be completely useless.
 

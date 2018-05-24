@@ -64,8 +64,8 @@ This will target only cart buttons who are the children of an element with the c
 
 The previous example worked because you added classes using the global styles of your app. The same cannot be said when you try to customize one particular library component inside one of your own components. The culprit is the Angular's view encapsulation. Let's say we added this in the template of your component:
 
-```typescript
-// my-component.ts file
+```html
+<!-- my-component.ts file -->
 <div class="my-class">
   <add-to-cart></add-to-cart>
 </div>
@@ -99,7 +99,7 @@ Checking the results you'll see that the component still have the default color.
 
 The emulated encapsulation automatically added an attribute to each selector in your component styles and since the `add-to-cart` element is a child but a completely different component it doesn't have the attribute added and the selector doesn't match. 
 
-> The styles specified in @Component metadata apply only within the template of that component. They are not inherited by any components nested within the template nor by any content projected into the component.
+> The styles specified in `@Component` metadata apply only within the template of that component. They are not inherited by any components nested within the template nor by any content projected into the component.
 
 There are a couple of techniques to deal with this but we strongly encourage you to use global styles instead. Let's dive in an example to see why. 
 
@@ -136,11 +136,12 @@ Using this technique also works because now Angular doesn't add the attribute to
 
 Some popular frameworks use CSS preprocessor variables to perform quick customizations to the whole generated CSS. The `<cart-showcase>` component, for example, uses a grid system to display items of identical sizes in a single row in a responsive manner. You can have a different amount of columns in tablets or desktop screens but it is not possible to cover all scenarios. Preprocessor variables allow you to fill this gap. Check the following example: 
 
-The current grid system uses a 12 column layout, the same as other popular CSS frameworks like Bootstrap or Foundation. If you need, for example, five items arranged in a row, the current grid system would not be able to help you because `12` is not divisible by `5` and you will get a chunk of space at the end that is not filled by any item. You could change the number of columns of the grid but remember this will generate a new file and will affect all components of this type.
+The current grid system uses a `12` column layout, the same as other popular CSS frameworks like Bootstrap or Foundation. If you need, for example, five items arranged in a row, the current grid system would not be able to help you because `12` is not divisible by `5` and you will get a chunk of space at the end that is not filled by any item. You could change the number of columns of the grid but remember this will generate a new file and will affect all components of this type.
 
 First create a `.scss` file and write this
 
 ```scss
+// cart.scss
 @import "../node_modules/ng-shopping-cart/styles/scss/variables"; // Add the variables first
 
 $columns: 15; // <-- here you change all the variables you need
@@ -150,7 +151,9 @@ $columns: 15; // <-- here you change all the variables you need
 
 All you need to do is locate the `variables` and `lib` scss files changing the values after you imported the variables file. The `lib` file will compile to CSS with your values instead of the defaults and now you have a grid with `15` columns which can fit your five items.
 
-Your app still doesn't know how to use that file though so you need to add the created file using imports or to your styles array in the `angular-cli.json` if you are using scss in your app or compile the file to css and include the generated file instead. Either way should work.
+Your app still doesn't know how to use that file though, so you need to add the created file using imports or the styles array in the `angular-cli.json`. If you are using scss just add the file or compile it to css first and then include the generated file; either way should work. If you previously included the library styles in the cli remove the old reference and use your new file. The final step is to change the `[columns]` input in all `<cart-showcase>` instances because now all grids use `15` columns instead of the default value `12`.
 
 > So far only the SASS language is supported. Other languages will be included in a future release.
+
+You can also configure breakpoints for different screen sizes or the available combinations of all `<cart-showcase>` aspect ratios. By default styles are generated for ratios from `1` to `4`, that is `1:1`, `1:2`, `1:3` up to `4:3`. Changing the `$ratios` variable generates more or less combinations. Make sure you use values that were generated using this formula or your components will not behave as you expected.
 
