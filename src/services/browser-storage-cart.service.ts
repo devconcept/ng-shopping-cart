@@ -1,6 +1,9 @@
 import {CartItem} from '../classes/cart-item';
 import {MemoryCartService} from './memory-cart.service';
 import {BrowserStorageServiceConfiguration} from '../interfaces/browser-storage-service-configuration';
+import {Inject} from '@angular/core';
+import {CART_ITEM_CLASS} from './item-class.token';
+import {CART_SERVICE_CONFIGURATION} from './service-configuration.token';
 
 /**
  * The base class for all CartService implementations that use the browser storage
@@ -12,7 +15,10 @@ export abstract class BrowserStorageCartService<T extends CartItem> extends Memo
   protected storageKey: string;
   protected clearOnError: boolean;
 
-  constructor(itemClass: CartItem, configuration: BrowserStorageServiceConfiguration) {
+  protected constructor(
+    @Inject(CART_ITEM_CLASS) itemClass: CartItem,
+    @Inject(CART_SERVICE_CONFIGURATION) configuration: BrowserStorageServiceConfiguration
+  ) {
     super();
     this.storageKey = configuration && configuration.storageKey ? configuration.storageKey : 'NgShoppingCart';
     this.clearOnError = configuration && configuration.clearOnError !== undefined ? configuration.clearOnError : true;

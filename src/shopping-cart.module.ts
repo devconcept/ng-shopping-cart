@@ -12,10 +12,10 @@ import {CartShowcaseComponent} from './components/cart-showcase/cart-showcase.co
 import {ShowcaseOutletDirective} from './directives/showcase-outlet';
 import {CartShowcaseItemComponent} from './components/cart-showcase-item/cart-showcase-item.component';
 import {CartModuleOptions} from './interfaces/cart-module-options';
-import {BaseCartItem} from './classes/base-cart-item';
 import {CART_ITEM_CLASS} from './services/item-class.token';
 import {CART_SERVICE_CONFIGURATION} from './services/service-configuration.token';
-import {localStorageFactory, memoryStorageFactory, sessionStorageFactory} from './service.factory';
+import {CART_SERVICE_TYPE} from './services/service-type.token';
+import {serviceFactory, setItemClass, setServiceConfiguration, setupService} from './service.factory';
 
 @NgModule({
   declarations: [
@@ -47,40 +47,16 @@ import {localStorageFactory, memoryStorageFactory, sessionStorageFactory} from '
 })
 export class ShoppingCartModule {
   static forRoot(options: CartModuleOptions = {}): ModuleWithProviders {
-    const serviceType = options.serviceType || 'localStorage';
-    let serviceOptions = null;
-    if (options.serviceOptions) {
-      serviceOptions = options.serviceOptions;
-    } else if (serviceType === 'localStorage' || serviceType === 'sessionStorage') {
-      serviceOptions = {storageKey: 'NgShoppingCart', clearOnError: true};
-    }
-    let serviceFactory: any;
-    switch (serviceType) {
-      case 'localStorage':
-        serviceFactory = localStorageFactory;
-        break;
-      case 'sessionStorage':
-        serviceFactory = sessionStorageFactory;
-        break;
-      default:
-        serviceFactory = memoryStorageFactory;
-        break;
-    }
     return {
       ngModule: ShoppingCartModule,
       providers: [
-        {
-          provide: CART_ITEM_CLASS,
-          useValue: options.itemType || BaseCartItem
-        },
-        {
-          provide: CART_SERVICE_CONFIGURATION,
-          useValue: serviceOptions
-        },
+        setItemClass(options.itemType),
+        setupService(options.serviceType),
+        setServiceConfiguration(options.serviceType, options.serviceOptions),
         {
           provide: CartService,
           useFactory: serviceFactory,
-          deps: [CART_ITEM_CLASS, CART_SERVICE_CONFIGURATION]
+          deps: [CART_SERVICE_TYPE, CART_ITEM_CLASS, CART_SERVICE_CONFIGURATION]
         }
       ],
     };
