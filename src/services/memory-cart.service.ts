@@ -1,6 +1,6 @@
-import { CartService } from '../classes/cart.service';
-import { CartItem } from '../classes/cart-item';
-import { Injectable } from '@angular/core';
+import {CartService} from '../classes/cart.service';
+import {CartItem} from '../classes/cart-item';
+import {Injectable} from '@angular/core';
 
 /**
  * An implementation of the CartService using an in-memory array to store items
@@ -12,27 +12,23 @@ export class MemoryCartService<T extends CartItem> extends CartService<T> {
   protected _taxRate = 0;
   protected _shipping = 0;
 
-  protected _addItem(item: T, emit: boolean = true): void {
+  protected _addItem(item: T): void {
     const foundIdx = this._items.findIndex(i => i.getId() === item.getId());
     if (foundIdx === -1) {
       this._items.push(item);
     } else {
       this._items[foundIdx] = item;
     }
-    if (emit) {
-      this.onItemAdded.emit(item);
-      this.onItemsChanged.emit(this._items.length);
-    }
+    this.onItemAdded.emit(item);
+    this.onItemsChanged.emit(this._items.length);
   }
 
-  protected _removeItem(id: any, emit: boolean = true): void {
+  protected _removeItem(id: any): void {
     const idx = this._items.findIndex(i => i.getId() === id);
     if (idx !== -1) {
       const removed = this._items.splice(idx, 1);
-      if (emit) {
-        this.onItemRemoved.emit(removed[0]);
-        this.onItemsChanged.emit(this._items.length);
-      }
+      this.onItemRemoved.emit(removed[0]);
+      this.onItemsChanged.emit(this._items.length);
     }
   }
 
