@@ -19,11 +19,12 @@
 }
 
 @mixin rem-fallback($prop, $rems) {
-  #{$prop}: #{$rems * 14}px;
+  #{$prop}: #{$rems * $base-font}px;
   #{$prop}: #{$rems}rem;
 }
 
 @mixin make-button() {
+  font-weight: normal;
   display: inline-block;
   white-space: nowrap;
   vertical-align: middle;

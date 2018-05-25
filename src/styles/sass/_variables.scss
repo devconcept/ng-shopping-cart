@@ -1,0 +1,40 @@
+/* General */
+$base-font: 14 !default;
+$input-border: #d3d3d3 !default;
+$input-radius: 0.25 !default;
+$button-border: #d3d3d3 !default;
+$button-color: #28a745 !default;
+$button-text: #ffffff !default;
+$button-radius: 0.25 !default;
+
+/* Grid system */
+$breakpoints: (
+  xs: 0,
+  s: 576px,
+  m: 768px,
+  l: 992px,
+  xl: 1200px
+) !default;
+
+$columns: 12 !default;
+
+/* AddToCart editor */
+$add-to-cart-editor-margin: 5px !default;
+$add-to-cart-editor-padding: 6px !default;
+$add-to-cart-editor-border: solid 1px $input-border !default;
+
+/* CartView */
+$cart-view-empty-color: #efefef !default;
+$cart-view-empty-text: #000000 !default;
+$cart-view-empty-font: italic normal normal 1rem/1.2 "Times New Roman", sans serif !default;
+$cart-view-empty-border: none 0 transparent !default;
+$cart-view-empty-padding: 2 !default;
+$cart-view-responsive-price-bg: #3f51b5 !default;
+$cart-view-responsive-price: #ffffff !default;
+$cart-view-image-size: 100px !default;
+
+/* CartShowcase */
+$ratios: 4 !default;
+
+/* CartSummary */
+$cart-summary-icon-size: 32px !default;

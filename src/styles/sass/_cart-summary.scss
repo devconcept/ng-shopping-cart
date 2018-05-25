@@ -1,3 +1,4 @@
+@import "variables";
 @import "mixins";
 
 .cart-summary {
@@ -6,8 +7,8 @@
 
   .cart-summary-icon {
     float: left;
-    width: 32px;
-    height: 32px;
+    width: $cart-summary-icon-size;
+    height: $cart-summary-icon-size;
   }
 
   .cart-summary-contents {
