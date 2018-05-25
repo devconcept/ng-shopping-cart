@@ -1,13 +1,23 @@
-/* General */
+// General
+
+/* The base font to calculate the fallback size in pixels of properties specified in rem units */
 $base-font: 14 !default;
+/* Border color for all input and select controls */
 $input-border: #d3d3d3 !default;
+/* Border radius for all input and select controls in rem */
 $input-radius: 0.25 !default;
+/* Border color for all button controls */
 $button-border: #d3d3d3 !default;
+/* Background color for all button controls */
 $button-color: #28a745 !default;
+/* Text color for all button controls */
 $button-text: #ffffff !default;
+/* Border radius for all button controls in rem */
 $button-radius: 0.25 !default;
 
-/* Grid system */
+// Grid system
+
+/* Screen breakpoints for the grid system */
 $breakpoints: (
   xs: 0,
   s: 576px,
@@ -15,25 +25,42 @@ $breakpoints: (
   l: 992px,
   xl: 1200px
 ) !default;
-
+/* The number of columns for each row of the grid system */
 $columns: 12 !default;
 
-/* AddToCart editor */
-$add-to-cart-editor-margin: 5px !default;
+// AddToCart editor
+
+/* Margin between add-to-cart editor controls and the buttons  */
+$add-to-cart-editor-margin: 2px !default;
+/* Padding for input and select controls inside add-to-cart components */
 $add-to-cart-editor-padding: 6px !default;
+/* Border for editors inside add-to-cart components */
 $add-to-cart-editor-border: solid 1px $input-border !default;
 
-/* CartView */
-$cart-view-empty-color: #efefef !default;
-$cart-view-empty-text: #000000 !default;
-$cart-view-empty-font: italic normal normal 1rem/1.2 "Times New Roman", sans serif !default;
-$cart-view-empty-border: none 0 transparent !default;
-$cart-view-empty-padding: 2 !default;
-$cart-view-responsive-price-bg: #3f51b5 !default;
-$cart-view-responsive-price: #ffffff !default;
-$cart-view-image-size: 100px !default;
+// CartView
 
-/* CartShowcase */
+/* Background color for the default empty cart-view */
+$cart-view-empty-color: #efefef !default;
+/* Text color for the default empty cart-view */
+$cart-view-empty-text: #000000 !default;
+/* Font for the default empty cart-view */
+$cart-view-empty-font: italic normal normal 1rem/1.2 "Times New Roman", sans serif !default;
+/* Border for the default empty cart-view */
+$cart-view-empty-border: none 0 transparent !default;
+/* Padding in rems for the default empty cart-view */
+$cart-view-empty-padding: 2 !default;
+/* Background color for the price tag in cart-views using responsive mode  */
+$cart-view-responsive-price-bg: #3f51b5 !default;
+/* Text color for the price tag in cart-views using responsive mode  */
+$cart-view-responsive-price: #ffffff !default;
+/* Image width for cart-views displaying as tables  */
+$cart-view-image-width: 100px !default;
+/* Image height for cart-views displaying as tables  */
+$cart-view-image-height: 100px !default;
+
+// CartShowcase
+/* Maximum combination of ratios starting from 1 to this value */
+/* Bigger values generate more combinations in exponential order so use with caution */
 $ratios: 4 !default;
 
 /* CartSummary */

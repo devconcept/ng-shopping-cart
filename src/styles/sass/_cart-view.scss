@@ -382,9 +382,9 @@
 
       &.cart-list-image-value {
         padding: 0;
-        width: $cart-view-image-size;
-        height: $cart-view-image-size;
-        min-width: $cart-view-image-size;
+        width: $cart-view-image-width;
+        height: $cart-view-image-height;
+        min-width: $cart-view-image-width;
         background: transparent no-repeat center;
         background-size: contain;
       }
