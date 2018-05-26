@@ -4,8 +4,7 @@ const sass = require('gulp-sass');
 const rename = require('gulp-rename');
 const sourceMaps = require('gulp-sourcemaps');
 const cleanCss = require('gulp-clean-css');
-const pify = require('pify');
-const git = pify(require('gulp-git'));
+const git = require('gulp-git');
 const pkg = require('./package.json');
 const {exec} = require('child_process');
 const pump = require('pump');
@@ -51,22 +50,22 @@ gulp.task('docs:compile', ['docs:generate'], (cb) => {
   exec('npm run docs:build', {windowsHide: true}, cb);
 });
 
-gulp.task('docs:checkout', ['docs:compile'], () => {
-  return git.checkout('gh-pages');
+gulp.task('docs:checkout', ['docs:compile'], (cb) => {
+  return git.checkout('gh-pages', cb);
 });
 
 gulp.task('docs:clean', ['docs:checkout'], () => {
   return del(['*.js', '*.css', '*.html', './assets/*', '3rdpartylicenses.txt', '.nojekyll', 'favicon.ico']);
 });
 
-gulp.task('docs:update', ['docs:clean'], () => {
+gulp.task('docs:update', ['docs:clean'], (cb) => {
   pump([
     gulp.src('./docs-dist/*'),
     gulp.dest('./')
   ], cb);
 });
 
-gulp.task('docs:index', ['docs:update'], () => {
+gulp.task('docs:index', ['docs:update'], (cb) => {
   pump([
     gulp.src('./index.html'),
     rename('404.html'),
@@ -75,7 +74,11 @@ gulp.task('docs:index', ['docs:update'], () => {
 });
 
 gulp.task('docs:commit', ['docs:index'], () => {
-  return git.commit(`Updating docs version ${pkg.version} at ${new Date().toISOString()}`);
+  pump([
+    gulp.src('./*'),
+    git.add(),
+    git.commit(`Updating docs version ${pkg.version} at ${new Date().toISOString()}`)
+  ], cb);
 });
 
 
