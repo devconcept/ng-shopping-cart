@@ -86,8 +86,7 @@ gulp.task('docs:finish', ['docs:commit'], () => {
   return git.checkout('develop');
 });
 
-//gulp.task('docs', ['docs:finish']);
-gulp.task('docs', ['docs:compile']);
+gulp.task('docs', ['docs:finish']);
 
 gulp.task('lib', ['lib:sass', 'lib:css']);
 
