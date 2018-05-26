@@ -35,12 +35,12 @@ gulp.task('lib:css:min', ['lib:css:compile'], () => {
 
 gulp.task('lib:css', ['lib:css:min']);
 
-gulp.task('docs:clean', ['docs:checkout'], () => {
-  return del(['*.js', '*.css', '3rdpartylicenses.txt', '*.html', './assets/*']);
-});
-
 gulp.task('docs:checkout', () => {
   return git.checkout('gh-pages');
+});
+
+gulp.task('docs:clean', ['docs:checkout'], () => {
+  return del(['*.js', '*.css', '3rdpartylicenses.txt', '*.html', './assets/*']);
 });
 
 gulp.task('docs:update', ['docs:clean'], () => {
@@ -54,7 +54,7 @@ gulp.task('docs:index', ['docs:update'], () => {
     .pipe(gulp.dest('./'));
 });
 
-gulp.task('docs:commit', () => {
+gulp.task('docs:commit', ['docs:index'], () => {
   return git.commit(`Updating docs version ${pkg.version} at ${new Date().toISOString()}`);
 });
 
