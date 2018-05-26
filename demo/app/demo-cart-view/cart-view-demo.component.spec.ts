@@ -4,7 +4,8 @@ import {CartViewDemoComponent} from './cart-view-demo.component';
 import {FormsModule} from '@angular/forms';
 import {CommonModule} from '@angular/common';
 import {CartViewComponent} from '../../../src/components/cart-view/cart-view.component';
-import {CartService, MemoryCartService} from 'ng-shopping-cart';
+import {CartService} from '../../../src/classes/cart.service';
+import {MemoryCartService} from '../../../src/services/memory-cart.service';
 
 describe('CartViewDemoComponent', () => {
   let component: CartViewDemoComponent;

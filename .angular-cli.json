@@ -72,6 +72,8 @@
         "../node_modules/bootstrap/dist/css/bootstrap.css",
         "../node_modules/prismjs/themes/prism-okaidia.css",
         "../node_modules/octicons/build/build.css",
+        "../src/styles/sass/index.scss",
+        "../demo/styles.scss",
         "styles.scss"
       ],
       "scripts": [

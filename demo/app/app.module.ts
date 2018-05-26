@@ -1,8 +1,8 @@
 import {BrowserModule} from '@angular/platform-browser';
 import {NgModule} from '@angular/core';
 
-import {ShoppingCartModule} from 'ng-shopping-cart';
-import {AppComponent} from './app.component';
+import {ShoppingCartModule} from '../../src/shopping-cart.module';
+import {DemoComponent} from './demo.component';
 import {DemoAddToCartComponent} from './demo-add-to-cart/demo-add-to-cart.component';
 import {DemoCheckoutComponent} from './demo-cart-checkout/demo-cart-checkout.component';
 import {CartSummaryDemoComponent} from './demo-cart-summary/demo-cart-summary.component';
@@ -16,7 +16,7 @@ import {DemoShowcaseItemComponent} from './demo-showcase-item-component/demo-sho
 
 @NgModule({
   declarations: [
-    AppComponent,
+    DemoComponent,
     DemoAddToCartComponent,
     DemoCheckoutComponent,
     CartSummaryDemoComponent,
@@ -35,7 +35,7 @@ import {DemoShowcaseItemComponent} from './demo-showcase-item-component/demo-sho
     }),
     NgbModule.forRoot(),
   ],
-  bootstrap: [AppComponent],
+  bootstrap: [DemoComponent],
   entryComponents: [DemoShowcaseItemComponent]
 })
 export class AppModule {

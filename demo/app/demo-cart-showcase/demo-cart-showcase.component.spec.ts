@@ -3,7 +3,7 @@ import {async, ComponentFixture, TestBed} from '@angular/core/testing';
 import {CartShowcaseDemoComponent} from './demo-cart-showcase.component';
 import {FormsModule} from '@angular/forms';
 import {CommonModule} from '@angular/common';
-import {ShoppingCartModule} from 'ng-shopping-cart';
+import {ShoppingCartModule} from '../../../src/shopping-cart.module';
 
 describe('CartShowcaseDemoComponent', () => {
   let component: CartShowcaseDemoComponent;

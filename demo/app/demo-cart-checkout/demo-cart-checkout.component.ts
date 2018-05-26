@@ -1,5 +1,5 @@
 import {Component, EventEmitter, OnDestroy, OnInit} from '@angular/core';
-import {CartService} from 'ng-shopping-cart';
+import {CartService} from '../../../src/classes/cart.service';
 import {DemoCartItem} from '../demo-cart-item';
 
 @Component({

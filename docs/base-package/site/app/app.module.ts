@@ -12,7 +12,9 @@ import { HomeComponent } from './routes/home/home.component';
 import { NotFoundComponent } from './routes/not-found/not-found.component';
 import { NavbarComponent } from './components/navbar/navbar.component';
 import { SharedModule } from './shared/shared.module';
-
+import { DemoModule } from '../../demo/app/demo.module';
+import { DemoCartItem } from '../../demo/app/demo-cart-item';
+import { ShoppingCartModule } from '../../src/shopping-cart.module';
 import { routes } from './routes';
 
 @NgModule({
@@ -24,14 +26,18 @@ import { routes } from './routes';
   ],
   imports: [
     BrowserModule,
-    CommonModule,
-    FormsModule,
+    DemoModule,
     NgbModule.forRoot(),
     RouterModule.forRoot(routes),
     MarkdownModule.forRoot({
       provide: MarkedOptions,
       useFactory: markedOptionsFactory,
       deps: [Router]
+    }),
+    ShoppingCartModule.forRoot({
+      itemType: DemoCartItem,
+      serviceType: 'sessionStorage',
+      serviceOptions: {storageKey: 'NgCartDemo', clearOnError: true},
     }),
     SharedModule
   ],

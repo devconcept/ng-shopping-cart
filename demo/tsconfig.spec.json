@@ -7,10 +7,7 @@
     "types": [
       "jasmine",
       "node"
-    ],
-    "paths": {
-      "ng-shopping-cart": ["../src/index.ts"]
-    }
+    ]
   },
   "files": [
     "test.ts"
