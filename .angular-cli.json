@@ -59,8 +59,7 @@
       "assets": [
         "assets",
         "favicon.ico",
-        ".nojekyll",
-        "404.html"
+        ".nojekyll"
       ],
       "index": "index.html",
       "main": "main.ts",
