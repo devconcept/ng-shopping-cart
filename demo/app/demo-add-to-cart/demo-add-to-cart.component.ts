@@ -33,7 +33,7 @@ export class DemoAddToCartComponent {
       cost: 14.5,
       description: 'Test description',
       country: 'US',
-      photo: 'assets/laptop.jpg'
+      photo: 'http://lorempixel.com/400/400/food'
     });
   }
 
