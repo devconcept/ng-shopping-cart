@@ -5,7 +5,7 @@
   </div>
   <div class="cart-button-container" (click)="addToCart($event)">
     <ng-container *ngIf="!custom">
-      <button type="button" [ngClass]="buttonClass">
+      <button type="button" [ngClass]="buttonClass" [disabled]="!item">
         {{buttonText}}
       </button>
     </ng-container>

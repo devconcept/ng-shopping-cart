@@ -6,7 +6,7 @@ import { ShowcaseItem } from '../interfaces/showcase-item';
 import { CartItem } from '../classes/cart-item';
 
 /**
- * A directive to render items for the showcase component
+ * A directive to create dynamic item components for the showcase component
  * @ignore
  */
 @Directive({
