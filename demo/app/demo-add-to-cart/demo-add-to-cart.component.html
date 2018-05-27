@@ -10,19 +10,24 @@
       <div class="form-row">
         <div class="form-group col-12 col-md-6">
           <label for="itemName">Name</label>
-          <input id="itemName" name="itemName" type="text" class="form-control" [(ngModel)]="cartItem.label">
+          <input id="itemName" name="itemName" #name="ngModel" type="text" class="form-control"
+                 [(ngModel)]="itemName" required [ngClass]="{'is-invalid': name.invalid && name.touched}">
         </div>
         <div class="form-group col-12 col-md-6">
           <label for="itemPrice">Price</label>
-          <input id="itemPrice" name="itemPrice" type="number" class="form-control" [(ngModel)]="cartItem.cost">
+          <input id="itemPrice" name="itemPrice" #price="ngModel" type="number" class="form-control"
+                 [(ngModel)]="itemPrice" required [ngClass]="{'is-invalid': price.invalid && price.touched}">
         </div>
         <div class="form-group col-12 col-md-6">
           <label for="itemImage">Image url</label>
-          <input id="itemImage" name="itemImage" type="text" class="form-control" [(ngModel)]="cartItem.photo">
+          <input id="itemImage" name="itemImage" #img="ngModel" type="url" class="form-control"
+                 [(ngModel)]="itemImage" required [ngClass]="{'is-invalid': img.invalid && img.touched}">
         </div>
         <div class="form-group col-12 col-md-6">
           <label for="itemQuantity">Quantity</label>
-          <input id="itemQuantity" name="itemQuantity" type="number" class="form-control" [(ngModel)]="cartItem.amount">
+          <input id="itemQuantity" name="itemQuantity" #qnt="ngModel" type="number" class="form-control"
+                 [(ngModel)]="itemQuantity" required
+                 [ngClass]="{'is-invalid': qnt.invalid && qnt.touched}">
         </div>
       </div>
     </form>

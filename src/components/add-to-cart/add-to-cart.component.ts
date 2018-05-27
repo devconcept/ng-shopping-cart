@@ -58,7 +58,7 @@ export class AddToCartComponent implements OnInit, OnChanges {
    */
   @Input() custom = false;
   /**
-   * This input is required. The item that will be added to the cart on click.
+   * The item that will be added to the cart on click. If no item is provided the button will be disabled.
    * If you specify an editor using the type input the quantity of the item might be modified prior to insertion in the service.
    */
   @Input() item: CartItem;
