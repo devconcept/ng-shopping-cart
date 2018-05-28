@@ -2,7 +2,6 @@ import {BrowserModule} from '@angular/platform-browser';
 import {NgModule} from '@angular/core';
 
 import {ShoppingCartModule} from '../../src/shopping-cart.module';
-import {DemoComponent} from './demo.component';
 import {DemoAddToCartComponent} from './demo-add-to-cart/demo-add-to-cart.component';
 import {DemoCheckoutComponent} from './demo-cart-checkout/demo-cart-checkout.component';
 import {CartSummaryDemoComponent} from './demo-cart-summary/demo-cart-summary.component';
@@ -13,10 +12,11 @@ import {CartShowcaseDemoComponent} from './demo-cart-showcase/demo-cart-showcase
 import {DemoCartItem} from './demo-cart-item';
 import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
 import {DemoShowcaseItemComponent} from './demo-showcase-item-component/demo-showcase-item.component';
+import {DemoAppComponent} from './demo-app/demo-app.component';
 
 @NgModule({
   declarations: [
-    DemoComponent,
+    DemoAppComponent,
     DemoAddToCartComponent,
     DemoCheckoutComponent,
     CartSummaryDemoComponent,
@@ -35,7 +35,7 @@ import {DemoShowcaseItemComponent} from './demo-showcase-item-component/demo-sho
     }),
     NgbModule.forRoot(),
   ],
-  bootstrap: [DemoComponent],
+  bootstrap: [DemoAppComponent],
   entryComponents: [DemoShowcaseItemComponent]
 })
 export class AppModule {
