@@ -10,3 +10,16 @@
 
   }
 }
+
+.repo-button {
+  display: inline-block;
+  margin: 0 5px;
+
+  &:first-of-type {
+    margin: 0 5px 0 0;
+  }
+
+  &:last-of-type {
+    margin: 0 0 0 5px;
+  }
+}
