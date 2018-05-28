@@ -57,6 +57,16 @@ $cart-view-responsive-price: #ffffff !default;
 $cart-view-image-width: 100px !default;
 /* Image height for cart-views displaying as tables  */
 $cart-view-image-height: 100px !default;
+/* Border to divide table rows */
+$cart-view-divider: solid 1px #dee2e6 !default;
+/* Quantity button background color */
+$cart-view-button-bg: #ffffff !default;
+/* Quantity button text color */
+$cart-view-button-text: #000000 !default;
+/* Quantity button border */
+$cart-view-button-border: solid 1px #9e9e9e !default;
+/* Quantity button border radius */
+$cart-view-button-radius: 3px !default;
 
 // CartShowcase
 /* Maximum combination of ratios starting from 1 to this value */

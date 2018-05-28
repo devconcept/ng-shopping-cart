@@ -40,7 +40,7 @@
         text-align: right;
         @include rem-fallback('padding', 0.75);
         vertical-align: middle;
-        border-top: solid 1px #dee2e6;
+        border-top: $cart-view-divider;
         white-space: nowrap;
 
         &.cart-list-name-value {
@@ -74,11 +74,12 @@
   }
 
   .cart-increase-button {
-    background-color: #ffffff;
+    background-color: $cart-view-button-bg;
+    color: $cart-view-button-text;
     vertical-align: middle;
     padding: 2px 6px;
-    border-radius: 3px;
-    border: solid 1px #9e9e9e;
+    border-radius: $cart-view-button-radius;
+    border: $cart-view-button-border;
   }
 
   .cart-list-quantity-content {
@@ -86,11 +87,12 @@
   }
 
   .cart-decrease-button {
-    background-color: #ffffff;
+    background-color: $cart-view-button-bg;
+    color: $cart-view-button-text;
     vertical-align: middle;
     padding: 2px 8px;
-    border-radius: 3px;
-    border: solid 1px #9e9e9e;
+    border-radius: $cart-view-button-radius;
+    border: $cart-view-button-border;
   }
 
   &.responsive-display .cart-list-view.no-images {
