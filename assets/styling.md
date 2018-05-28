@@ -65,7 +65,7 @@ This will target only cart buttons who are the children of an element with the c
 The previous example worked because you added classes using the global styles of your app. The same cannot be said when you try to customize one particular library component inside one of your own components. The culprit is the Angular's view encapsulation. Let's say we added this in the template of your component:
 
 ```html
-<!-- my-component.ts file -->
+<!-- my-component.html file -->
 <div class="my-class">
   <add-to-cart></add-to-cart>
 </div>
@@ -138,22 +138,21 @@ Some popular frameworks use CSS preprocessor variables to perform quick customiz
 
 The current grid system uses a `12` column layout, the same as other popular CSS frameworks like Bootstrap or Foundation. If you need, for example, five items arranged in a row, the current grid system would not be able to help you because `12` is not divisible by `5` and you will get a chunk of space at the end that is not filled by any item. You could change the number of columns of the grid but remember this will generate a new file and will affect all components of this type.
 
-First create a `.scss` file and write this
+First create a new `scss` file and write this
 
 ```scss
 // cart.scss
-@import "../node_modules/ng-shopping-cart/styles/scss/variables"; // Add the variables first
+$columns: 15; // <-- Change all the variables you need before including the library styles
 
-$columns: 15; // <-- here you change all the variables you need
-
-@import "../node_modules/ng-shopping-cart/styles/scss/lib"; // Add the rest of the library styles
+@import "../node_modules/ng-shopping-cart/styles/scss/_lib.scss"; // <-- Add the library styles
+//  @import "../node_modules/ng-shopping-cart/styles/scss/index"; <-- You could also use the index file instead.
 ```
 
-All you need to do is locate the `variables` and `lib` scss files changing the values after you imported the variables file. The `lib` file will compile to CSS with your values instead of the defaults and now you have a grid with `15` columns which can fit your five items.
+All you need to do is locate the `_lib` scss file changing the values before you imported it, then it will compile to CSS with your values instead of the library defaults and now you have a grid with `15` columns which can fit your five items. This is possible because all included variables are marked with the `!default` flag.
 
-Your app still doesn't know how to use that file though, so you need to add the created file using imports or the styles array in the `angular-cli.json`. If you are using scss just add the file or compile it to css first and then include the generated file; either way should work. If you previously included the library styles in the cli remove the old reference and use your new file. The final step is to change the `[columns]` input in all `<cart-showcase>` instances because now all grids use `15` columns instead of the default value `12`.
+Your app still doesn't know how to use that file though, so you need to add the created file using imports or the styles array in the `angular-cli.json`. If you are using scss just add the file or compile it to css first and then include the generated file; either way should work. If you previously included the library styles in the cli remove the old reference and use your new file. The final step is to change the `[columns]` input in all `<cart-showcase>` instances because now all grids use `15` columns instead of the default value `12` so all the components know how to correctly compute their CSS classes.
 
 > So far only the SASS language is supported. Other languages will be included in a future release.
 
-You can also configure breakpoints for different screen sizes or the available combinations of all `<cart-showcase>` aspect ratios. By default styles are generated for ratios from `1` to `4`, that is `1:1`, `1:2`, `1:3` up to `4:3`. Changing the `$ratios` variable generates more or less combinations. Make sure you use values that were generated using this formula or your components will not behave as you expected.
+You can also configure breakpoints for different screen sizes or the available combinations of all `<cart-showcase>` aspect ratios. By default styles are generated for ratios from `1` to `4`, that is `1:1`, `1:2`, `1:3` up to `4:3`. Changing the `$ratios` variable generates more or less combinations. Make sure you use values that were generated using this formula or your components will not behave as you expected. Also take into account that combinations are generated.
 
