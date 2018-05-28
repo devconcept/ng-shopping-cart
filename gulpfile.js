@@ -47,26 +47,26 @@ gulp.task('docs:generate', (cb) => {
   exec('npm run docs', {windowsHide: true}, cb);
 });
 
-gulp.task('docs:compile', ['docs:generate'], (cb) => {
+gulp.task('docs:compile', (cb) => {
   exec('npm run docs:build', {windowsHide: true}, cb);
 });
 
-gulp.task('docs:checkout', ['docs:compile'], () => {
+gulp.task('docs:checkout', () => {
   return git.checkout('gh-pages');
 });
 
-gulp.task('docs:clean', ['docs:checkout'], () => {
+gulp.task('docs:clean', () => {
   return del(['*.js', '*.css', '*.html', './assets/*', '3rdpartylicenses.txt', '.nojekyll', 'favicon.ico']);
 });
 
-gulp.task('docs:update', ['docs:clean'], (cb) => {
+gulp.task('docs:update', (cb) => {
   pump([
-    gulp.src('./docs-dist/**/*'),
+    gulp.src(['./docs-dist/**/*', './docs-dist/**/.*']),
     gulp.dest('./')
   ], cb);
 });
 
-gulp.task('docs:index', ['docs:update'], (cb) => {
+gulp.task('docs:index', (cb) => {
   pump([
     gulp.src('./index.html'),
     rename('404.html'),
@@ -74,22 +74,32 @@ gulp.task('docs:index', ['docs:update'], (cb) => {
   ], cb);
 });
 
-gulp.task('docs:commit', ['docs:index'], () => {
+gulp.task('docs:commit', () => {
   const msg = `Updating docs version ${pkg.version}`;
   return git.exec({args: 'add ./* -A'})
     .then(() => git.exec({args: `commit -a --message="${msg}"`}))
 });
 
 
-gulp.task('docs:finish', ['docs:commit'], () => {
+gulp.task('docs:finish', () => {
   return git.checkout('develop');
 });
 
-gulp.task('docs:cleanup', ['docs:finish'], () => {
+gulp.task('docs:cleanup', () => {
   return del(['./docs-dist', './docs-build']);
 });
 
-gulp.task('docs', ['docs:cleanup']);
+gulp.task('docs', gulp.series(
+  'docs:generate',
+  'docs:compile',
+  'docs:checkout',
+  'docs:clean',
+  'docs:update',
+  'docs:index',
+  'docs:commit',
+  'docs:finish',
+  'docs:cleanup'
+));
 
 gulp.task('lib', ['lib:sass', 'lib:css']);
 
