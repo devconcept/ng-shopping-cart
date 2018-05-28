@@ -51,12 +51,11 @@ gulp.task('docs:compile', (cb) => {
   exec('npm run docs:build', {windowsHide: true}, cb);
 });
 
-gulp.task('docs:checkout', () => {
-  return git.checkout('gh-pages');
-});
-
 gulp.task('docs:clean', () => {
-  return del(['*.js', '*.css', '*.html', './assets/*', '3rdpartylicenses.txt', '.nojekyll', 'favicon.ico']);
+  return git.checkout('gh-pages')
+    .then(() => {
+      return del(['*.js', '*.css', '*.html', './assets/*', '3rdpartylicenses.txt', '.nojekyll', 'favicon.ico'])
+    });
 });
 
 gulp.task('docs:update', (cb) => {
@@ -78,11 +77,7 @@ gulp.task('docs:commit', () => {
   const msg = `Updating docs version ${pkg.version}`;
   return git.exec({args: 'add ./* -A'})
     .then(() => git.exec({args: `commit -a --message="${msg}"`}))
-});
-
-
-gulp.task('docs:finish', () => {
-  return git.checkout('develop');
+    .then(() => git.checkout('develop'))
 });
 
 gulp.task('docs:cleanup', () => {
@@ -92,12 +87,10 @@ gulp.task('docs:cleanup', () => {
 gulp.task('docs', gulp.series(
   'docs:generate',
   'docs:compile',
-  'docs:checkout',
   'docs:clean',
   'docs:update',
   'docs:index',
   'docs:commit',
-  'docs:finish',
   'docs:cleanup'
 ));
 
