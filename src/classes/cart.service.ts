@@ -102,8 +102,7 @@ export abstract class CartService<T extends CartItem> {
   }
 
   /**
-   * Returns an object with all the cart information in it
-   * Useful for serialization of the cart
+   * Returns an object with all the cart information in it, useful for serialization of the cart.
    */
   public toObject(): any {
     return {

@@ -66,7 +66,7 @@ This will target only cart buttons who are the children of an element with the c
 The previous example worked because you added classes using the global styles of your app. The same cannot be said when you try to customize one particular library component inside one of your own components. The culprit is the Angular's view encapsulation. Let's say we added this in the template of your component:
 
 ```html
-<!-- my-component.ts file -->
+<!-- my-component.html file -->
 <div class="my-class">
   <add-to-cart></add-to-cart>
 </div>
@@ -155,4 +155,4 @@ Your app still doesn't know how to use that file though, so you need to add the 
 
 > So far only the SASS language is supported. Other languages will be included in a future release.
 
-You can also configure breakpoints for different screen sizes or the available combinations of all `<cart-showcase>` aspect ratios. By default styles are generated for ratios from `1` to `4`, that is `1:1`, `1:2`, `1:3` up to `4:3`. Changing the `$ratios` variable generates more or less combinations. Make sure you use values that were generated using this formula or your components will not behave as you expected.
+You can also configure breakpoints for different screen sizes or the available combinations of all `<cart-showcase>` aspect ratios. By default styles are generated for ratios from `1` to `4`, that is `1:1`, `1:2`, `1:3` up to `4:3`. Changing the `$ratios` variable generates more or less combinations. Make sure you use values that were generated using this formula or your components will not behave as you expected. Also take into account that combinations are generated.

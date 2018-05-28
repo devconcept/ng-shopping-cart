@@ -16,7 +16,7 @@ module.exports = exports = new Package('cartBase', [basePkg, jsDocsPkg, njPkg, g
   .processor(require('./processors/copySite'))
   .processor(require('./processors/addGitInfo'))
   .processor(require('./processors/navigationMap'))
-  .processor(require('./processors/removeExtraSpace'))
+  //.processor(require('./processors/removeExtraSpace'))
   .factory(require('./services/customDocs'))
   .factory(require('./services/copyFolder'))
   .factory(require('./services/staticAssets'))

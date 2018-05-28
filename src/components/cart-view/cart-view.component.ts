@@ -53,22 +53,6 @@ import { CartViewDisplay } from '../../types';
  *   </div>
  * </cart-view>
  * ```
- * ```typescript
- * export class MyComponent {
- *   headers = {
- *     empty: 'No items. Add some to the cart',
- *     name: 'Description',
- *     quantity: 'Amount',
- *     price: 'Cost',
- *     total: 'Total x item',
- *   }
- *   footers = {
- *     tax: 'Tax rate',
- *     shipping: 'Shipping cost',
- *     total: 'Total cost'
- *   }
- * }
- * ```
  */
 @Component({
   selector: 'cart-view',
@@ -89,7 +73,7 @@ export class CartViewComponent implements OnInit, OnDestroy {
    */
   @Input() emptyText = 'Your cart is empty';
   /**
-   * When set to `true` and the cart is empty displays whatever is in the component projected content.
+   * When set to `true` and the cart is empty displays the projected content of the component as the empty content.
    */
   @Input() customEmptyContent = false;
   /**

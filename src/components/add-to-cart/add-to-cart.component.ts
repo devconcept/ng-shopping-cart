@@ -17,7 +17,7 @@ import {CartItem} from '../../classes/cart-item';
  *
  * @howToUse "With different text and classes"
  * ```html
- * <add-to-cart [item]="item" [buttonText]="'Add item'" buttonClass="'my-custom-class'">
+ * <add-to-cart [item]="item" [buttonText]="'Add item'" [buttonClass]="'my-custom-class'">
  * </add-to-cart>
  * ```
  *
@@ -54,11 +54,12 @@ export class AddToCartComponent implements OnInit, OnChanges {
   horizontalEditor = true;
   editorPrecedence: 'before' | 'after' = 'before';
   /**
-   * If true displays a default button provided by the component, otherwise projects the contents of the component to be used as a button.
+   * If false displays a default button provided by the component, otherwise projects the contents of the component to be used as a button.
    */
   @Input() custom = false;
   /**
-   * The item that will be added to the cart on click. If no item is provided the button will be disabled.
+   * The item that will be added to the cart on click. If no item is provided the button will be disabled unless you use custom buttons.
+   *
    * If you specify an editor using the type input the quantity of the item might be modified prior to insertion in the service.
    */
   @Input() item: CartItem;
@@ -72,16 +73,16 @@ export class AddToCartComponent implements OnInit, OnChanges {
   @Input() buttonClass = 'add-to-cart-button';
   /**
    * Renders a button or a button with an editor to select the quantity of the item that will be added in the cart. When it has a value
-   * other than 'button' an editor is displayed depending on the selected [type]; it can be a `select`, or a text or a number `input`.
+   * other than `'button'` an editor is displayed depending on the selected `[type]`; it can be a `select`, or a text or a number `input`.
    */
   @Input() type: AddToCartType = 'button';
   /**
-   * Sets the position where the editor will be placed. If the [type] is set to 'button' no editor is displayed and this setting has
+   * Sets the position where the editor will be placed. If the `[type]` is set to `'button'` no editor is displayed and this setting has
    * no effect.
    */
   @Input() position: AddToCartPosition = 'left';
   /**
-   * If [type] is set 'dropdown' it can be used to set the options of the rendered `select` editor. Is an array of objects with label and
+   * If `[type]` is set 'dropdown' it can be used to set the options of the rendered `select` editor. Is an array of objects with label and
    * a value properties used to populate the select's `option` elements.
    */
   @Input() dropdown: DropdownValue[] = [
@@ -92,7 +93,7 @@ export class AddToCartComponent implements OnInit, OnChanges {
   /**
    * If you use this binding you can easily override the quantity that will be added to the cart when the button is clicked.
    *
-   * > When the [type] is **not** set to 'button' this binding is ignored and the value from the editor is used instead.
+   * > When the `[type]` is **not** set to `'button'` this binding is ignored and the value from the editor is used instead.
    */
   @Input() quantity: number;
   /**

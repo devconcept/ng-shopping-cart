@@ -21,22 +21,26 @@ import {ShowcaseItem} from '../../interfaces/showcase-item';
  *
  * @howToUse "Using a different item component"
  * ```html
+ * <!-- my-component.html -->
  * <cart-showcase [items]="items" [itemComponent]="itemComponent">
  * </cart-showcase>
  * ```
  * ```typescript
- * @Component({
- *  selector: 'my-component',
- *  template: '<div class="item-class">{{item.getName()}}</div>'
- * })
+ * // my-component.ts
  * export class MyComponent {
  *   itemComponent = MyCustomItemComponent;
  * }
-
+ *
+ * // my-custom-item-component.ts
+ * @Component({
+ *  selector: 'my-custom-item-component',
+ *  template: '<div class="item-class">{{item.getName()}}</div>'
+ * })
  * export class MyCustomItemComponent implements ShowcaseItem  {
  *   item: CartItem;
  * }
  *
+ * // app.module.ts
  * @NgModule({
  *   // .....
  *   entryComponents: [MyCustomItemComponent],

@@ -12,13 +12,13 @@ import {CheckoutHttpSettings} from '../../interfaces/checkout-http-settings';
  * @howToUse "With a custom button or projected content"
  * ```html
  * <cart-checkout [custom]="true">
- *    <button type="button" class="my-custom-class">Add item</button>
+ *    <button type="button" class="my-custom-class">Do checkout</button>
  * </cart-checkout>
  * ```
  *
  * @howToUse "With different text and classes"
  * ```html
- * <cart-checkout [buttonText]="'Add item'" buttonClass="'my-custom-class'">
+ * <cart-checkout [buttonText]="'Add item'" [buttonClass]="'my-custom-class'">
  * </cart-checkout>
  * ```
  *
@@ -70,7 +70,7 @@ export class CartCheckoutComponent implements OnChanges, OnInit, OnDestroy {
   httpSettings: CheckoutHttpSettings;
   paypalSettings: CheckoutPaypalSettings;
   /**
-   *  If true displays a default button provided by the component. When false projects the contents of the component.
+   *  If false displays a default button provided by the component. When set to true projects the contents of the component.
    */
   @Input() custom = false;
   /**
@@ -91,11 +91,11 @@ export class CartCheckoutComponent implements OnChanges, OnInit, OnDestroy {
    */
   @Input() settings: CheckoutSettings = null;
   /**
-   * Emits the result of the checkout operation. When [service] is set to `'paypal'` this event is never emitted.
+   * Emits the result of the checkout operation. When `[service]` is set to `'paypal'` this event is never emitted.
    */
   @Output() checkout = new EventEmitter<any>();
   /**
-   * When the [service] is set to `'http'` and the checkout operation fails the error thrown can be captured using this output.
+   * When the `[service]` is set to `'http'` and the checkout operation fails the error thrown can be captured using this output.
    */
   @Output() error = new EventEmitter<any>();
 
