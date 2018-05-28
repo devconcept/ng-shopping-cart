@@ -32,15 +32,19 @@ yarn add ng-shopping-cart
 
 # Documentation
 
-Documentation is available at http://devconcept.github.io/ng-shopping-cart
+Documentation is available at http://devconcept.github.io/ng-shopping-cart/
+
+Dgeni is used to automatically generate documentation from the source code. If you spot an error please consider [reporting it](https://github.com/devconcept/ng-shopping-cart/issues).
 
 # Demo
 
-To view a demo of the components of the library:
+You can find a demo of the library in the url http://devconcept.github.io/ng-shopping-cart/demo/. 
+
+The demo is also available if you:
 
 - Clone the repository
 - Install it's dependencies with `npm install`
-- Run the main npm script with `npm start` or `ng serve --app=1`
+- Run `npm start` or `ng run demo`
 
 ## License
 
