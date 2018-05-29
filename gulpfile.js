@@ -66,7 +66,7 @@ gulp.task('styles:light:min', (cb) => {
 gulp.task('styles:light', gulp.series('styles:light:compile', 'styles:light:min'));
 
 gulp.task('docs:generate', (cb) => {
-  exec('npm run docs', {windowsHide: true}, cb);
+  exec('npm run docs:generate', {windowsHide: true}, cb);
 });
 
 gulp.task('docs:compile', cb => {
