@@ -47,7 +47,12 @@
         <div class="form-group col-12 col-md-4">
           <label for="showCaseRatio">Aspect ratio</label>
           <select id="showCaseRatio" name="showCaseRatio" [(ngModel)]="aspectRatio" class="form-control">
-            <option *ngFor="let ratio of ratios" [value]="ratio">{{ratio}}</option>
+            <optgroup label="Default ratios">
+              <option *ngFor="let ratio of ratios" [value]="ratio">{{ratio}}</option>
+            </optgroup>
+            <optgroup label="Custom ratios">
+              <option [value]="'16:9'">16:9</option>
+            </optgroup>
           </select>
         </div>
         <div class="form-group col-12 col-md-4">

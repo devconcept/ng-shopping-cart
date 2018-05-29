@@ -43,7 +43,6 @@
       "prefix": "demo",
       "styles": [
         "../node_modules/bootstrap/dist/css/bootstrap.css",
-        "../src/styles/sass/index.scss",
         "styles.scss"
       ],
       "scripts": [],
@@ -72,7 +71,6 @@
         "../node_modules/bootstrap/dist/css/bootstrap.css",
         "../node_modules/prismjs/themes/prism-okaidia.css",
         "../node_modules/octicons/build/build.css",
-        "../src/styles/sass/index.scss",
         "../demo/styles.scss",
         "styles.scss"
       ],
