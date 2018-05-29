@@ -147,6 +147,8 @@ $columns: 15; // <-- Change all the variables you need before including the libr
 
 @import "../node_modules/ng-shopping-cart/styles/scss/_lib.scss"; // <-- Add the library styles
 //  @import "../node_modules/ng-shopping-cart/styles/scss/index"; <-- You could also use the index file instead.
+
+// Include mixins and other classes that depends of library styles after importing it
 ```
 
 All you need to do is locate the `_lib` scss file changing the values before you imported it, then it will compile to CSS with your values instead of the library defaults and now you have a grid with `15` columns which can fit your five items. This is possible because all included variables are marked with the `!default` flag.
@@ -155,4 +157,16 @@ Your app still doesn't know how to use that file though, so you need to add the 
 
 > So far only the SASS language is supported. Other languages will be included in a future release.
 
-You can also configure breakpoints for different screen sizes or the available combinations of all `<cart-showcase>` aspect ratios. By default styles are generated for ratios from `1` to `4`, that is `1:1`, `1:2`, `1:3` up to `4:3`. Changing the `$ratios` variable generates more or less combinations. Make sure you use values that were generated using this formula or your components will not behave as you expected. Also take into account that combinations are generated.
+Other usual targets for customization are the breakpoints for different screen sizes or the available combinations of all `<cart-showcase>` aspect ratios. The aspect ratios are generated from values `1` to `4`, that is `1:1`, `1:2`, `1:3` up to `4:3`. Changing the `$ratios` variable generates more or less combinations. Make sure you use values that were generated using this formula or your components will not behave as you expected. Values that can be simplified are ignored, eg: `4:4` is equivalent to `1:1` therefore including those styles will only bloat your application. Also take into account that combinations are generated in a loop in exponential order because it includes <code>$ratios<sup>2</sup></code> multiplied by the number of breakpoints (`=5`) multiplied by the grid columns (usually `12`). If you want to use a high value and don't want to slow down the development process or to considerably increase the size of the styles bundle you can use the mixin `showcase-ratio` which takes two parameters, width and height proportions, and generates the required classes. This example uses a ratio of `16:9` without changing the `$ratios` value.
+
+```scss
+// cart.scss
+// Instead of $ratios:16 just generate the desired values
+@include showcase-ratio(16, 9);
+```
+```html
+<!-- This now works -->
+<cart-showcase [aspectRatio]="'16:9'"></cart-showcase>
+```
+
+If you plan on using only square items, the library also includes a smaller css file, the `ng-shopping-cart-light.css` with all other ratios removed. You can use this file directly to get rid of a large portion of CSS that would otherwise be included in your app.
