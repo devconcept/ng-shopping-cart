@@ -50,8 +50,8 @@
       @include rem-fallback('right', 0.5);
       @include rem-fallback('top', 0.5);
       @include rem-fallback('bottom', 0.5);
-      background: transparent no-repeat center;
-      background-size: contain;
+      background: $image-bg no-repeat center;
+      background-size: $image-fit;
 
       .default-showcase-item-description {
         @include rem-fallback('padding', 1);
