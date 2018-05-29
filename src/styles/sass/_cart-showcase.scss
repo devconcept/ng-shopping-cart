@@ -5,38 +5,13 @@
   @include contain-margins();
   @include clearfix();
 
-  & > .showcase-item-container {
+  & > .sc-item-container {
     float: left;
     position: relative;
     height: 0;
     margin: 0;
 
-    @each $name, $value in $breakpoints {
-      @media (min-width: $value) {
-        @for $i from 1 through $columns {
-          &.showcase-container-#{$name}-#{$i} {
-            width: percentage($i / $columns);
-            padding: percentage($i / $columns) 0 0;
-            box-sizing: border-box;
-
-            $used: ();
-            @for $r from 1 through $ratios {
-              @for $ir from 1 through $ratios {
-                $ratio: $r/$ir;
-                @if (index($used, $ratio) == null) {
-                  $used: append($used, $ratio);
-                  &.showcase-ratio-#{$r}-#{$ir} {
-                    padding: percentage($i / $columns * ($ir/$r)) 0 0;
-                  }
-                }
-              }
-            }
-          }
-        }
-      }
-    }
-
-    .showcase-item-wrapper {
+    .sc-item-wrapper {
       position: absolute;
       left: 0;
       right: 0;
@@ -44,7 +19,7 @@
       bottom: 0;
     }
 
-    .default-showcase-item {
+    .default-sc-item {
       position: absolute;
       @include rem-fallback('left', 0.5);
       @include rem-fallback('right', 0.5);
@@ -53,7 +28,7 @@
       background: $image-bg no-repeat center;
       background-size: $image-fit;
 
-      .default-showcase-item-description {
+      .default-sc-description {
         @include rem-fallback('padding', 1);
         position: absolute;
         bottom: 0;
@@ -64,7 +39,7 @@
         max-height: 50%;
         @include rem-fallback('min-height', 3);
 
-        .default-showcase-item-name {
+        .default-sc-name {
           @include rem-fallback('font-size', 2);
           position: absolute;
           transform: translateY(-50%);
@@ -72,7 +47,7 @@
           @include rem-fallback('left', 1);
         }
 
-        .default-showcase-item-price {
+        .default-sc-price {
           @include rem-fallback('font-size', 2);
           position: absolute;
           transform: translateY(-50%);
@@ -83,14 +58,25 @@
     }
 
     @for $r from 2 through length($ratios) {
-      &.showcase-ratio-#{$r}-1 {
-        .default-showcase-item {
-          .default-showcase-item-description {
+      &.sc-ratio-#{$r}-1 {
+        .default-sc-item {
+          .default-sc-description {
             max-height: if($r > 3, 20%, 30%);
             @include rem-fallback('padding', if($r > 2, 0, 1));
           }
         }
       }
+    }
+  }
+}
+
+$used: ();
+@for $r from 1 through $ratios {
+  @for $ir from 1 through $ratios {
+    $ratio: $r/$ir;
+    @if (index($used, $ratio) == null) {
+      $used: append($used, $ratio);
+      @include showcase-ratio($r, $ir)
     }
   }
 }

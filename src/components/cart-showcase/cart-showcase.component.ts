@@ -62,12 +62,12 @@ import {ShowcaseItem} from '../../interfaces/showcase-item';
   templateUrl: './cart-showcase.component.html',
 })
 export class CartShowcaseComponent implements OnChanges {
-  xsClass = 'showcase-container-xs-12';
-  sClass = 'showcase-container-s-6';
-  mClass = 'showcase-container-m-4';
-  lClass = 'showcase-container-l-4';
-  xlClass = 'showcase-container-xl-3';
-  ratioClass = 'showcase-ratio-1-1';
+  xsClass = 'sc-container-xs-12';
+  sClass = 'sc-container-s-6';
+  mClass = 'sc-container-m-4';
+  lClass = 'sc-container-l-4';
+  xlClass = 'sc-container-xl-3';
+  ratioClass = 'sc-ratio-1-1';
   /**
    * The number of columns to display when the screen size matches phone devices.
    */
@@ -120,14 +120,14 @@ export class CartShowcaseComponent implements OnChanges {
       if (changes['columns'] || colChanges) {
         const prefix = classPrefix[i];
         const size = this.getColumnSize(this[prop]);
-        this[`${prefix}Class`] = `showcase-container-${prefix}-${size}`;
+        this[`${prefix}Class`] = `sc-container-${prefix}-${size}`;
       }
     }
     if (changes['aspectRatio']) {
       const newRatio = changes['aspectRatio'].currentValue;
       const values = newRatio.split(':');
       if (values.length === 2) {
-        this.ratioClass = `showcase-ratio-${values[0]}-${values[1]}`;
+        this.ratioClass = `sc-ratio-${values[0]}-${values[1]}`;
       }
     }
   }

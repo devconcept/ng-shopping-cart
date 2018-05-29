@@ -61,3 +61,29 @@
     @content;
   }
 }
+
+@mixin showcase-ratio($width, $height, $generate: $generate-ratios) {
+  .cart-showcase > .sc-item-container {
+    @each $name, $value in $breakpoints {
+      @media (min-width: $value) {
+        @for $i from 1 through $columns {
+          &.sc-container-#{$name}-#{$i} {
+            $size: percentage($i / $columns);
+            width: $size;
+            padding: $size 0 0;
+            box-sizing: border-box;
+
+            // If you turned off ratio generation and want to generate just a few of your own
+            // pass true in the last parameter to override the global variable
+            @if ($generate) {
+              $ratio: $width/$height;
+              &.sc-ratio-#{$width}-#{$height} {
+                padding: percentage($i / $columns * ($height/$width)) 0 0;
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}

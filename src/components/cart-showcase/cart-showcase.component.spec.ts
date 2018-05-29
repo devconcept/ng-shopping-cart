@@ -74,7 +74,7 @@ describe('CartShowcaseComponent', () => {
       expect(component).toBeTruthy();
       component.items = [new BaseCartItem({id: 1, name: 'Test item 1', price: 14.55})];
       fixture.detectChanges();
-      let containers = fixture.debugElement.queryAll(By.css('.showcase-item-container'));
+      let containers = fixture.debugElement.queryAll(By.css('.sc-item-container'));
       expect(containers.length).toEqual(1);
       const container = containers[0];
       expect(container.nativeElement.classList.contains('showcase-ratio-1-1')).toEqual(true);
@@ -83,13 +83,13 @@ describe('CartShowcaseComponent', () => {
       expect(container.nativeElement.classList.contains('showcase-container-m-4')).toEqual(true);
       expect(container.nativeElement.classList.contains('showcase-container-l-4')).toEqual(true);
       expect(container.nativeElement.classList.contains('showcase-container-xl-3')).toEqual(true);
-      const item = fixture.debugElement.query(By.css('.showcase-item.default-showcase-item'));
+      const item = fixture.debugElement.query(By.css('.showcase-item.default-sc-item'));
       expect(item).toBeTruthy();
       expect(item.query(By.css('.default-showcase-item-name')).nativeElement.innerText).toEqual('Test item 1');
-      expect(item.query(By.css('.default-showcase-item-price')).nativeElement.innerText).toEqual('$14.55');
+      expect(item.query(By.css('.default-sc-price')).nativeElement.innerText).toEqual('$14.55');
       component.items.push(new BaseCartItem({id: 2, name: 'Test item 2', price: 16}));
       fixture.detectChanges();
-      containers = fixture.debugElement.queryAll(By.css('.showcase-item-container'));
+      containers = fixture.debugElement.queryAll(By.css('.sc-item-container'));
       expect(containers.length).toEqual(2);
     });
   });
@@ -107,7 +107,7 @@ describe('CartShowcaseComponent', () => {
       component.items = [new BaseCartItem({id: 1, name: 'Test item 1', price: 14.55})];
       component.aspectRatio = '2:1';
       fixture.detectChanges();
-      const container = fixture.debugElement.query(By.css('.showcase-item-container'));
+      const container = fixture.debugElement.query(By.css('.sc-item-container'));
       expect(container.nativeElement.classList.contains('showcase-ratio-2-1')).toEqual(true);
     });
 
@@ -115,7 +115,7 @@ describe('CartShowcaseComponent', () => {
       component.items = [new BaseCartItem({id: 1, name: 'Test item 1', price: 14.55})];
       component.aspectRatio = '2';
       fixture.detectChanges();
-      const container = fixture.debugElement.query(By.css('.showcase-item-container'));
+      const container = fixture.debugElement.query(By.css('.sc-item-container'));
       expect(container.nativeElement.classList.contains('showcase-ratio-1-1')).toEqual(true);
     });
   });
@@ -138,7 +138,7 @@ describe('CartShowcaseComponent', () => {
       component.lCols = 3;
       component.xlCols = 4;
       fixture.detectChanges();
-      const container = fixture.debugElement.query(By.css('.showcase-item-container'));
+      const container = fixture.debugElement.query(By.css('.sc-item-container'));
       expect(container.nativeElement.classList.contains('showcase-container-xs-24')).toEqual(true);
       expect(container.nativeElement.classList.contains('showcase-container-s-12')).toEqual(true);
       expect(container.nativeElement.classList.contains('showcase-container-m-8')).toEqual(true);

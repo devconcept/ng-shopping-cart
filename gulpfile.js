@@ -35,13 +35,35 @@ gulp.task('styles:css:min', (cb) => {
     gulp.src('./dist/styles/css/ng-shopping-cart.css'),
     rename('ng-shopping-cart.min.css'),
     sourceMaps.init(),
-    cleanCss({compatibility: 'ie10'}),
+    cleanCss({compatibility: '*'}),
     sourceMaps.write('.'),
     gulp.dest('./dist/styles/css'),
   ], cb);
 });
 
 gulp.task('styles:css', gulp.series('styles:css:compile', 'styles:css:min'));
+
+gulp.task('styles:light:compile', (cb) => {
+  pump([
+    gulp.src('./src/styles/sass/lightweight.scss'),
+    sass(),
+    rename('ng-shopping-cart-light.css'),
+    gulp.dest('./dist/styles/css'),
+  ], cb);
+});
+
+gulp.task('styles:light:min', (cb) => {
+  pump([
+    gulp.src('./dist/styles/css/ng-shopping-cart-light.css'),
+    rename('ng-shopping-cart-light.min.css'),
+    sourceMaps.init(),
+    cleanCss({compatibility: '*'}),
+    sourceMaps.write('.'),
+    gulp.dest('./dist/styles/css'),
+  ], cb);
+});
+
+gulp.task('styles:light', gulp.series('styles:light:compile', 'styles:light:min'));
 
 gulp.task('docs:generate', (cb) => {
   exec('npm run docs', {windowsHide: true}, cb);
@@ -98,6 +120,7 @@ gulp.task('styles', gulp.series(
   'styles:clean',
   gulp.parallel(
     'styles:css',
+    'styles:light',
     'styles:sass'
   ))
 );
