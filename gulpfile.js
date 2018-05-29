@@ -14,14 +14,14 @@ gulp.task('lib:clean', () => {
   return del('./dist/styles');
 });
 
-gulp.task('lib:sass', ['lib:clean'], (cb) => {
+gulp.task('lib:sass', (cb) => {
   pump([
     gulp.src('./src/styles/sass/*.*'),
     gulp.dest('./dist/styles/sass'),
   ], cb);
 });
 
-gulp.task('lib:css:compile', ['lib:clean'], (cb) => {
+gulp.task('lib:css:compile', (cb) => {
   pump([
     gulp.src('./src/styles/sass/index.scss'),
     sass(),
@@ -30,7 +30,7 @@ gulp.task('lib:css:compile', ['lib:clean'], (cb) => {
   ], cb);
 });
 
-gulp.task('lib:css:min', ['lib:css:compile'], (cb) => {
+gulp.task('lib:css:min', (cb) => {
   pump([
     gulp.src('./dist/styles/css/ng-shopping-cart.css'),
     rename('ng-shopping-cart.min.css'),
@@ -41,7 +41,7 @@ gulp.task('lib:css:min', ['lib:css:compile'], (cb) => {
   ], cb);
 });
 
-gulp.task('lib:css', ['lib:css:min']);
+gulp.task('lib:css', gulp.series('lib:css:compile', 'lib:css:min'));
 
 gulp.task('docs:generate', (cb) => {
   exec('npm run docs', {windowsHide: true}, cb);
@@ -94,6 +94,12 @@ gulp.task('docs', gulp.series(
   'docs:cleanup'
 ));
 
-gulp.task('lib', ['lib:sass', 'lib:css']);
+gulp.task('lib', gulp.series(
+  'lib:clean',
+  gulp.parallel(
+    'lib:css',
+    'lib:sass'
+  ))
+);
 
-gulp.task('default', ['lib']);
+gulp.task('default', gulp.series('lib'));
