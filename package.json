@@ -33,14 +33,16 @@
     "test:ci": "ng test --single-run --no-progress --browser=ChromeNoSandbox",
     "test:demo": "ng test --app=1",
     "lint": "ng lint",
-    "docs": "dgeni ./docs/index.js",
+    "docs": "gulp docs",
+    "docs:generate": "dgeni ./docs/index.js",
     "docs:run": "ng serve --app=2 --serve-path=ng-shopping-cart",
     "docs:lint": "eslint ./docs",
     "docs:build": "ng build --aot --prod --app=2",
     "e2e": "ng e2e",
     "e2e:ci": "ng e2e --no-progress --config=protractor-ci.conf.js",
     "e2e:demo": "ng e2e --app=1",
-    "pack": "ng-packagr -p ng-package.json && gulp"
+    "pack": "ng-packagr -p ng-package.json",
+    "update": "ng lint && gulp"
   },
   "private": false,
   "peerDependencies": {

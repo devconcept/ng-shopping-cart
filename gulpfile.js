@@ -10,18 +10,18 @@ const pkg = require('./package.json');
 const {exec} = require('child_process');
 const pump = require('pump');
 
-gulp.task('lib:clean', () => {
+gulp.task('styles:clean', () => {
   return del('./dist/styles');
 });
 
-gulp.task('lib:sass', (cb) => {
+gulp.task('styles:sass', (cb) => {
   pump([
     gulp.src('./src/styles/sass/*.*'),
     gulp.dest('./dist/styles/sass'),
   ], cb);
 });
 
-gulp.task('lib:css:compile', (cb) => {
+gulp.task('styles:css:compile', (cb) => {
   pump([
     gulp.src('./src/styles/sass/index.scss'),
     sass(),
@@ -30,7 +30,7 @@ gulp.task('lib:css:compile', (cb) => {
   ], cb);
 });
 
-gulp.task('lib:css:min', (cb) => {
+gulp.task('styles:css:min', (cb) => {
   pump([
     gulp.src('./dist/styles/css/ng-shopping-cart.css'),
     rename('ng-shopping-cart.min.css'),
@@ -41,20 +41,20 @@ gulp.task('lib:css:min', (cb) => {
   ], cb);
 });
 
-gulp.task('lib:css', gulp.series('lib:css:compile', 'lib:css:min'));
+gulp.task('styles:css', gulp.series('styles:css:compile', 'styles:css:min'));
 
 gulp.task('docs:generate', (cb) => {
   exec('npm run docs', {windowsHide: true}, cb);
 });
 
-gulp.task('docs:compile', (cb) => {
+gulp.task('docs:compile', cb => {
   exec('npm run docs:build', {windowsHide: true}, cb);
 });
 
 gulp.task('docs:clean', () => {
   return git.checkout('gh-pages')
     .then(() => {
-      return del(['*.js', '*.css', '*.html', './assets/*', '3rdpartylicenses.txt', '.nojekyll', 'favicon.ico'])
+      return del(['*.js', '*.css', '*.html', './assets/*', '3rdpartylicenses.txt', '.nojekyll', 'favicon.ico']);
     });
 });
 
@@ -94,12 +94,16 @@ gulp.task('docs', gulp.series(
   'docs:cleanup'
 ));
 
-gulp.task('lib', gulp.series(
-  'lib:clean',
+gulp.task('styles', gulp.series(
+  'styles:clean',
   gulp.parallel(
-    'lib:css',
-    'lib:sass'
+    'styles:css',
+    'styles:sass'
   ))
 );
 
-gulp.task('default', gulp.series('lib'));
+gulp.task('pack', cb => {
+  return exec('npm run pack', {windowsHide: true}, cb);
+});
+
+gulp.task('default', gulp.series('pack', 'styles'));
