@@ -4,7 +4,7 @@
 
 An Angular component library to create shopping carts. Based on it's [predecessor][ng-cart] for Angular.js with tons of improvements.
 
-# Features
+## Features
 
 - All the previous components with more features.
 - An extra `CartShowcaseComponent` to help e-commerce applications to quickly build screens to display their available products.
@@ -15,7 +15,7 @@ An Angular component library to create shopping carts. Based on it's [predecesso
 
 > This library is compatible with Angular version >=5
 
-# Installation
+## Installation
 
 Using `npm`
 
@@ -30,13 +30,13 @@ yarn add ng-shopping-cart
 ```
 
 
-# Documentation
+## Documentation
 
 Documentation is available at http://devconcept.github.io/ng-shopping-cart/
 
 Dgeni is used to automatically generate documentation from the source code. If you spot an error please consider [reporting it](https://github.com/devconcept/ng-shopping-cart/issues).
 
-# Demo
+## Demo
 
 You can find a demo of the library in the url http://devconcept.github.io/ng-shopping-cart/demo/. 
 
@@ -45,6 +45,16 @@ The demo is also available if you:
 - Clone the repository
 - Install it's dependencies with `npm install`
 - Run `npm start` or `ng run demo`
+
+## Upcoming features
+
+```
+[ ] Less and stylus support
+
+[ ] Built-in service for storing cart items in a remote server
+
+[ ] Stripe checkout support
+```
 
 ## License
 
