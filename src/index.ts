@@ -20,7 +20,6 @@ import { BrowserStorageServiceConfiguration } from './interfaces/browser-storage
 import { CartViewComponent } from './components/cart-view/cart-view.component';
 import { CartItem } from './classes/cart-item';
 import { BaseCartItem } from './classes/base-cart-item';
-import {I18nPlurals} from './interfaces/i18n-plurals';
 
 export {
   /* Components */
@@ -54,7 +53,6 @@ export {
   ShowcaseItem,
   CartModuleOptions,
   BrowserStorageServiceConfiguration,
-  I18nPlurals,
   /* Classes */
   CartItem,
   BaseCartItem,

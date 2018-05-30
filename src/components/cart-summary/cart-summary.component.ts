@@ -1,6 +1,5 @@
-import { Component, OnInit, OnDestroy, Input } from '@angular/core';
-import { CartService } from '../../classes/cart.service';
-import {I18nPlurals} from '../../interfaces/i18n-plurals';
+import {Component, OnInit, OnDestroy, Input} from '@angular/core';
+import {CartService} from '../../classes/cart.service';
 
 /**
  * Renders a summary of the contents of the cart.
@@ -35,7 +34,7 @@ export class CartSummaryComponent implements OnInit, OnDestroy {
    * The component uses the i18nPlural pipe to translate the number of items of the cart according to locale rules using the ICU format.
    * You can use this binding to internationalize you app or to change how values are converted into words.
    */
-  @Input() totalPlurals: I18nPlurals = { '=0': 'No items', '=1': 'One item', 'other': '# items' };
+  @Input() totalPlurals: { [k: string]: string } = {'=0': 'No items', '=1': 'One item', 'other': '# items'};
   totalItems = 0;
   totalCost = 0;
 
