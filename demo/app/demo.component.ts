@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import {Component} from '@angular/core';
 import {CartItem} from '../../src/classes/cart-item';
 
 @Component({

@@ -4,9 +4,10 @@ module.exports = function copySite(copyFolder, staticAssets) {
     $runAfter: ['writing-files'],
     $runBefore: ['files-written'],
     $process: function () {
-      staticAssets.getAssets().forEach(asset => {
-        copyFolder(asset.from, asset.to);
-      });
+      return Promise.all(staticAssets
+        .getAssets()
+        .map(asset => copyFolder(asset.from, asset.to))
+      );
     }
   };
 };

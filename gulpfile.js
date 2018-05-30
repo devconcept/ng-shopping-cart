@@ -116,6 +116,12 @@ gulp.task('docs', gulp.series(
   'docs:cleanup'
 ));
 
+gulp.task('docs:dry', gulp.series(
+  'docs:cleanup',
+  'docs:generate',
+  'docs:compile',
+));
+
 gulp.task('styles', gulp.series(
   'styles:clean',
   gulp.parallel(

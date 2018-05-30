@@ -12,11 +12,11 @@ import {CartShowcaseDemoComponent} from './demo-cart-showcase/demo-cart-showcase
 import {DemoCartItem} from './demo-cart-item';
 import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
 import {DemoShowcaseItemComponent} from './demo-showcase-item-component/demo-showcase-item.component';
-import {DemoAppComponent} from './demo-app/demo-app.component';
+import {DemoComponent} from './demo.component';
 
 @NgModule({
   declarations: [
-    DemoAppComponent,
+    DemoComponent,
     DemoAddToCartComponent,
     DemoCheckoutComponent,
     CartSummaryDemoComponent,
@@ -35,7 +35,7 @@ import {DemoAppComponent} from './demo-app/demo-app.component';
     }),
     NgbModule.forRoot(),
   ],
-  bootstrap: [DemoAppComponent],
+  bootstrap: [DemoComponent],
   entryComponents: [DemoShowcaseItemComponent]
 })
 export class AppModule {

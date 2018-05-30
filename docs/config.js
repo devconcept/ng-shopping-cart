@@ -7,6 +7,8 @@ const SOURCE = join(BASE, '/src');
 const OUTPUT = join(BASE, OUT);
 const APP = join(BASE, OUT, '/app');
 const SITE = join(BASE, '/docs/base-package/site');
+const DEMO = join(BASE, '/demo/app');
+const DEMO_OUTPUT = join(APP, '/demo');
 const ASSETS = join(BASE, OUT, '/assets');
 const API_OUTPUT = 'api';
 const GUIDE_SOURCE = join(BASE, '/docs/guide-package/guide/*.md');
@@ -34,6 +36,8 @@ module.exports = exports = {
   OUTPUT,
   SOURCE,
   APP,
+  DEMO,
+  DEMO_OUTPUT,
   SITE,
   ASSETS,
   TYPESCRIPT_SOURCES,

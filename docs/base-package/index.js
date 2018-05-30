@@ -4,7 +4,7 @@ const jsDocsPkg = require('dgeni-packages/jsdoc');
 const njPkg = require('dgeni-packages/nunjucks');
 const gitPkg = require('dgeni-packages/git');
 
-const {OUTPUT, APP, BASE, TEMPLATES, SITE, ASSETS} = require('../config');
+const {OUTPUT, APP, DEMO, DEMO_OUTPUT, BASE, TEMPLATES, SITE, ASSETS} = require('../config');
 
 module.exports = exports = new Package('cartBase', [basePkg, jsDocsPkg, njPkg, gitPkg])
   .processor({name: 'adding-modules', $runAfter: ['adding-extra-docs'], $runBefore: ['extra-docs-added']})
@@ -139,5 +139,6 @@ module.exports = exports = new Package('cartBase', [basePkg, jsDocsPkg, njPkg, g
   })
   .config(function (staticAssets) {
     staticAssets.add(SITE, OUTPUT);
+    // staticAssets.add(DEMO, DEMO_OUTPUT);
   });
 
