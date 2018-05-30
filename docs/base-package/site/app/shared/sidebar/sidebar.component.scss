@@ -1,15 +1,5 @@
 .sidebar {
-  padding: 20px 0;
-
-  @media screen and (min-width: 768px)  {
-    padding: 20px 5px;
-  }
-
-  h5 {
-    padding-left: 0;
-
-    @media screen and (min-width: 768px)  {
-      padding-left: 15px;
-    }
+  .no-items {
+    list-style: none;
   }
 }

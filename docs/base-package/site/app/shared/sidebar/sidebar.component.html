@@ -1,13 +1,16 @@
 <div class="sidebar">
-  <ng-container>
-    <h5>Topics</h5>
-    <ol>
-      <li *ngFor="let item of sidebarItems">
-        <a [href]="'/ng-shopping-cart' + sidebarPath + '#' + item.path" class="text-secondary">
-          {{item.name}}
-        </a>
-      </li>
-    </ol>
-  </ng-container>
+  <h5>Topics</h5>
+  <ol *ngIf="sidebarItems.length" class="pl-3 pl-md-4">
+    <li *ngFor="let item of sidebarItems">
+      <a [href]="'/ng-shopping-cart' + sidebarPath + '#' + item.path" class="text-secondary">
+        {{item.name}}
+      </a>
+    </li>
+  </ol>
+  <ul *ngIf="!sidebarItems.length" class="no-items pl-0 pl-md-1">
+    <li>
+      <i>No topics available</i>
+    </li>
+  </ul>
 </div>
 

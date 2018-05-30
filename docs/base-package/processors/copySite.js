@@ -1,8 +1,7 @@
 module.exports = function copySite(copyFolder, staticAssets) {
   return {
     name: 'copySite',
-    $runAfter: ['writing-files'],
-    $runBefore: ['files-written'],
+    $runBefore: ['writing-files'],
     $process: function (docs) {
       return Promise.all(staticAssets
         .getAssets()
