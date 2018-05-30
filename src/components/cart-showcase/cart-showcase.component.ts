@@ -1,4 +1,4 @@
-import {Component, Input, OnChanges, SimpleChanges, Type} from '@angular/core';
+import {Component, Injector, Input, NgModuleFactory, OnChanges, SimpleChanges, Type} from '@angular/core';
 import {CartItem} from '../../classes/cart-item';
 import {CartShowcaseItemComponent} from '../../components/cart-showcase-item/cart-showcase-item.component';
 import {ShowcaseItem} from '../../interfaces/showcase-item';
@@ -98,9 +98,17 @@ export class CartShowcaseComponent implements OnChanges {
    */
   @Input() items: CartItem[];
   /**
-   * The component to render for each item. This type means any component that implements the interface `ShowcaseItem`
+   * The component to render for each item. This type means any component that implements the interface `ShowcaseItem`.
    */
   @Input() itemComponent: Type<ShowcaseItem> = CartShowcaseItemComponent;
+  /**
+   * Optional injector for the dynamic item components. Used when you want to replace the default inherited injector for the component.
+   */
+  @Input() injector: Injector;
+  /**
+   * Optional module factory for the dynamic components. You usually get one when you manually compile modules.
+   */
+  @Input() moduleFactory: NgModuleFactory<any>;
   /**
    * The aspect ratio of the container of the items. A value of `1:1` means square items, `2:1` means two times wider, `1:2` two times
    * taller and so on.
