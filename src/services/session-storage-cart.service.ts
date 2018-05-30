@@ -12,7 +12,7 @@ import { CART_SERVICE_CONFIGURATION } from './service-configuration.token';
 @Injectable()
 export class SessionStorageCartService<T extends CartItem> extends BrowserStorageCartService<T> {
   constructor(@Inject(CART_ITEM_CLASS) itemClass,  @Inject(CART_SERVICE_CONFIGURATION) configuration: BrowserStorageServiceConfiguration) {
-    super(itemClass, configuration);
+    super(itemClass, configuration) /* istanbul ignore next */;
     this.storage = window.sessionStorage;
     this.restore();
   }
