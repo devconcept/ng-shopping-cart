@@ -1,31 +1,58 @@
+/* eslint-disable no-template-curly-in-string */
+/* eslint-disable prefer-arrow-callback */
+
 const {Package} = require('dgeni');
 const basePkg = require('dgeni-packages/base');
 const jsDocsPkg = require('dgeni-packages/jsdoc');
 const njPkg = require('dgeni-packages/nunjucks');
 const gitPkg = require('dgeni-packages/git');
 
-const {OUTPUT, APP, DEMO, DEMO_OUTPUT, BASE, TEMPLATES, SITE, ASSETS} = require('../config');
+const {OUTPUT, APP, BASE, TEMPLATES, SITE, ASSETS} = require('../config');
 
 module.exports = exports = new Package('cartBase', [basePkg, jsDocsPkg, njPkg, gitPkg])
-  .processor({name: 'adding-modules', $runAfter: ['adding-extra-docs'], $runBefore: ['extra-docs-added']})
-  .processor({name: 'modules-added', $runAfter: ['adding-modules'], $runBefore: ['extra-docs-added']})
-  .processor({name: 'adding-routes', $runAfter: ['modules-added'], $runBefore: ['extra-docs-added']})
-  .processor({name: 'routes-added', $runAfter: ['adding-routes'], $runBefore: ['extra-docs-added']})
-  .processor({name: 'adding-navigation', $runAfter: ['routes-added'], $runBefore: ['extra-docs-added']})
-  .processor({name: 'navigation-added', $runAfter: ['adding-navigation'], $runBefore: ['extra-docs-added']})
+  .processor({
+    name: 'adding-modules',
+    $runAfter: ['adding-extra-docs'],
+    $runBefore: ['extra-docs-added'],
+  })
+  .processor({
+    name: 'modules-added',
+    $runAfter: ['adding-modules'],
+    $runBefore: ['extra-docs-added'],
+  })
+  .processor({
+    name: 'adding-routes',
+    $runAfter: ['modules-added'],
+    $runBefore: ['extra-docs-added'],
+  })
+  .processor({
+    name: 'routes-added',
+    $runAfter: ['adding-routes'],
+    $runBefore: ['extra-docs-added'],
+  })
+  .processor({
+    name: 'adding-navigation',
+    $runAfter: ['routes-added'],
+    $runBefore: ['extra-docs-added'],
+  })
+  .processor({
+    name: 'navigation-added',
+    $runAfter: ['adding-navigation'],
+    $runBefore: ['extra-docs-added'],
+  })
   .processor(require('./processors/copySite'))
   .processor(require('./processors/addGitInfo'))
   .processor(require('./processors/navigationMap'))
-  //.processor(require('./processors/removeExtraSpace'))
+  // .processor(require('./processors/removeExtraSpace'))
   .factory(require('./services/customDocs'))
   .factory(require('./services/copyFolder'))
   .factory(require('./services/staticAssets'))
-  .config(function (readFilesProcessor, writeFilesProcessor) {
+  .config(function(readFilesProcessor, writeFilesProcessor) {
     readFilesProcessor.basePath = BASE;
     readFilesProcessor.sourceFiles = [];
     writeFilesProcessor.outputFolder = APP;
   })
-  .config(function (templateFinder, templateEngine, computePathsProcessor, getInjectables) {
+  .config(function(templateFinder, templateEngine, computePathsProcessor, getInjectables) {
     templateFinder.templateFolders = TEMPLATES;
     templateFinder.templatePatterns = [
       '${doc.template}',
@@ -34,11 +61,11 @@ module.exports = exports = new Package('cartBase', [basePkg, jsDocsPkg, njPkg, g
       '${doc.docType}.md',
       '${doc.docType}.html',
       '${doc.docType}.ts',
-      'common.ts'
+      'common.ts',
     ];
     templateEngine.config.tags = {
       variableStart: '{$',
-      variableEnd: '$}'
+      variableEnd: '$}',
     };
     templateEngine.filters = templateEngine.filters.concat(getInjectables([
       require('./rendering/escapeHtml'),
@@ -50,80 +77,78 @@ module.exports = exports = new Package('cartBase', [basePkg, jsDocsPkg, njPkg, g
       {
         docTypes: ['function', 'var', 'let', 'enum', 'value-module'],
         outputPathTemplate: 'api/${docType}/${computedName}.html',
-        pathTemplate: '${docType}.html'
+        pathTemplate: '${docType}.html',
       },
       {
         docTypes: ['ngModule', 'ngRoute'],
-        getOutputPath: function (doc) {
+        getOutputPath(doc) {
           if (doc.location) {
             if (doc.docType === 'ngModule') {
-              return `${doc.pkg}/${doc.location}/${doc.file}.ts`
+              return `${doc.pkg}/${doc.location}/${doc.file}.ts`;
             }
             return `${doc.pkg}/${doc.location}/routes.ts`;
           }
           if (doc.docType === 'ngModule') {
-            return `${doc.pkg}/${doc.file}.ts`
+            return `${doc.pkg}/${doc.file}.ts`;
           }
           return `${doc.pkg}/routes.ts`;
         },
-        pathTemplate: '${ngType}.ts'
+        pathTemplate: '${ngType}.ts',
       },
       {
         docTypes: ['ngComponent'],
-        getOutputPath: function (doc) {
+        getOutputPath(doc) {
           if (doc.location) {
-            return `${doc.pkg}/${doc.location}/routes/${doc.computedName}.component.ts`
+            return `${doc.pkg}/${doc.location}/routes/${doc.computedName}.component.ts`;
           }
-          return `${doc.pkg}/routes/${doc.computedName}.component.ts`
+          return `${doc.pkg}/routes/${doc.computedName}.component.ts`;
         },
-        pathTemplate: '${ngType}.ts'
+        pathTemplate: '${ngType}.ts',
       },
       {
         docTypes: ['toc'],
         outputPathTemplate: 'shared/services/toc.data.ts',
-        pathTemplate: '${docType}.ts'
+        pathTemplate: '${docType}.ts',
       },
       {
         docTypes: ['info-service'],
         outputPathTemplate: 'shared/services/info-service.ts',
-        pathTemplate: '${docType}.ts'
+        pathTemplate: '${docType}.ts',
       },
       {
         docTypes: ['ngTemplate'],
-        getOutputPath: function (doc) {
+        getOutputPath(doc) {
           const {location, pkg} = doc.component;
-          const folder = location ? '/' + location : '';
-          return `${pkg}${folder}/routes/${doc.computedName}.component.html`
+          const folder = location ? `/${location}` : '';
+          return `${pkg}${folder}/routes/${doc.computedName}.component.html`;
         },
-        pathTemplate: '${docType}.html'
+        pathTemplate: '${docType}.html',
       },
       {
         docTypes: ['md-file'],
-        getOutputPath: function (doc) {
-          return `${ASSETS}/${doc.computedName}.md`
+        getOutputPath(doc) {
+          return `${ASSETS}/${doc.computedName}.md`;
         },
-        pathTemplate: '${docType}.md'
-      }
+        pathTemplate: '${docType}.md',
+      },
     ];
   })
-  .config(function (parseTagsProcessor, getInjectables) {
-    parseTagsProcessor.tagDefinitions = parseTagsProcessor.tagDefinitions.concat(getInjectables([
-      require('./tag-defs/order')
-    ]));
+  .config(function(parseTagsProcessor, getInjectables) {
+    parseTagsProcessor.tagDefinitions = parseTagsProcessor.tagDefinitions.concat(getInjectables([require('./tag-defs/order')]));
   })
-  .config(function (computeIdsProcessor, gitData, packageInfo) {
-    gitData.package = packageInfo;
+  .config(function(computeIdsProcessor, gitData, packageInfo) {
+    gitData['package'] = packageInfo;
     computeIdsProcessor.idTemplates.push({
       docTypes: ['ngModule', 'ngRoute', 'ngComponent', 'toc', 'info-service', 'search-service'],
-      getId: function (doc) {
-        return doc.name
+      getId(doc) {
+        return doc.name;
       },
-      getAliases: function (doc) {
+      getAliases(doc) {
         return [doc.id];
-      }
+      },
     });
   })
-  .config(function (customDocs) {
+  .config(function(customDocs) {
     customDocs.addDocs([
       require('./docs/guideDoc'),
       require('./docs/ngTemplate'),
@@ -137,8 +162,7 @@ module.exports = exports = new Package('cartBase', [basePkg, jsDocsPkg, njPkg, g
       require('./docs/searchServiceDoc'),
     ]);
   })
-  .config(function (staticAssets) {
+  .config(function(staticAssets) {
     staticAssets.add(SITE, OUTPUT);
-    // staticAssets.add(DEMO, DEMO_OUTPUT);
   });
 

@@ -3,11 +3,12 @@ module.exports = exports = function generateMarkdownFiles(customDocs) {
     name: 'generateMarkdownFiles',
     $runAfter: ['routes-added'],
     $runBefore: ['adding-navigation'],
-    $process: function (docs) {
+    $process(docs) {
+      let currentDocs = docs;
       const GuideMarkdownDoc = customDocs.getDoc('GuideMarkdownDoc');
       const files = docs.filter(d => d.docType === 'markdown').map(d => new GuideMarkdownDoc(d));
-      docs = docs.concat(files);
-      return docs;
-    }
+      currentDocs = currentDocs.concat(files);
+      return currentDocs;
+    },
   };
 };

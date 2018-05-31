@@ -5,10 +5,10 @@ module.exports = function filterUnusedDocs() {
     name: 'filterUnusedDocs',
     $runAfter: ['docs-processed'],
     $runBefore: ['adding-modules'],
-    $process: function (docs) {
+    $process(docs) {
       const tokenRegExp = /^\s*new\s+InjectionToken/;
       return docs.filter(doc => types.indexOf(doc.docType) !== -1
         && (doc.docType !== 'const' || tokenRegExp.test(doc.type)));
-    }
+    },
   };
 };

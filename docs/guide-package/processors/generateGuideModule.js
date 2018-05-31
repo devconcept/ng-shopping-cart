@@ -1,14 +1,15 @@
-const {upperFirst, startCase} = require('lodash');
+const {upperFirst} = require('lodash');
 
 module.exports = exports = function generateGuideModule(customDocs) {
   return {
     name: 'generateGuideModule',
     $runAfter: ['adding-modules'],
     $runBefore: ['modules-added'],
-    $process: function (docs) {
+    $process(docs) {
+      let currentDocs = docs;
       const [NgModuleDoc, NgTemplateDoc] = customDocs.getDocs(['NgModuleDoc', 'NgTemplateDoc']);
       const mdDocs = docs.filter(d => d.docType === 'markdown');
-      const dependencies = mdDocs.map(d => {
+      const dependencies = mdDocs.map((d) => {
         let next = null;
         if (d.next) {
           const docRoute = d.next.split('/');
@@ -16,7 +17,7 @@ module.exports = exports = function generateGuideModule(customDocs) {
           if (nextDoc) {
             next = {
               title: upperFirst(nextDoc.computedName.replace(/-/g, ' ')),
-              url: d.next
+              url: d.next,
             };
           }
         }
@@ -32,11 +33,11 @@ module.exports = exports = function generateGuideModule(customDocs) {
         name: 'guide',
         location: '',
         dependencies,
-        pkg: 'guide'
+        pkg: 'guide',
       });
       const templates = ngModule.dependencies.map(d => new NgTemplateDoc(d));
-      docs = docs.concat(ngModule, ...templates);
-      return docs;
-    }
+      currentDocs = currentDocs.concat(ngModule, ...templates);
+      return currentDocs;
+    },
   };
 };

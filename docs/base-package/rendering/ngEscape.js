@@ -1,8 +1,8 @@
 module.exports = function ngEscape() {
   return {
     name: 'ngEscape',
-    process: function(str) {
+    process(str) {
       return str.replace(/([{}<>])/g, '{{\'$1\'}}');
-    }
+    },
   };
 };

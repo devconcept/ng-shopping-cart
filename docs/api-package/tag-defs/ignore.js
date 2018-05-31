@@ -1,8 +1,8 @@
 module.exports = function() {
   return {
     name: 'ignore',
-    transforms: function () {
+    transforms() {
       return true;
-    }
+    },
   };
 };

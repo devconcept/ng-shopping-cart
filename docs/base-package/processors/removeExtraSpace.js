@@ -3,8 +3,8 @@ module.exports = function removeExtraSpace() {
     name: 'removeExtraSpace',
     $runAfter: ['docs-rendered'],
     $runBefore: ['writing-files'],
-    $process: function (docs) {
-      docs.forEach(function (doc) {
+    $process(docs) {
+      docs.forEach((doc) => {
         if (doc.docType !== 'md-file') {
           doc.renderedContent = doc.renderedContent
             .replace(/\n+/g, '\n')
@@ -12,6 +12,6 @@ module.exports = function removeExtraSpace() {
             .replace(/(\r\n)+/g, '\r\n');
         }
       });
-    }
+    },
   };
 };

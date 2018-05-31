@@ -3,11 +3,11 @@ module.exports = function copySite(copyFolder, staticAssets) {
     name: 'copySite',
     $runAfter: ['docs-rendered'],
     $runBefore: ['writing-files'],
-    $process: function (docs) {
+    $process(docs) {
       return Promise.all(staticAssets
         .getAssets()
         .map(asset => copyFolder(asset.from, asset.to)))
         .then(() => docs);
-    }
+    },
   };
 };

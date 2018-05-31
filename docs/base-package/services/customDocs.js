@@ -1,23 +1,23 @@
 module.exports = exports = function customDocs() {
   let docs = [];
   return {
-    addDoc: function (doc) {
+    addDoc(doc) {
       docs.push({
         name: doc.name,
-        doc
-      })
+        doc,
+      });
     },
-    addDocs: function (newDocs) {
+    addDocs(newDocs) {
       docs = docs.concat(newDocs);
     },
-    getDoc: function (name) {
+    getDoc(name) {
       const doc = docs.find(d => d.name === name);
       if (!doc) {
         throw new Error(`The document '${name}' could not be found`);
       }
       return doc;
     },
-    getDocs: function (names) {
+    getDocs(names) {
       let found = 0;
       const toReturn = names.length;
       const res = docs.reduce((curr, doc) => {
@@ -35,9 +35,9 @@ module.exports = exports = function customDocs() {
           }
           return curr;
         }, []);
-        throw new Error(`The documents [${missing.join(',')}] could not be found`)
+        throw new Error(`The documents [${missing.join(',')}] could not be found`);
       }
       return res;
-    }
+    },
   };
 };

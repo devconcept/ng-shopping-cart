@@ -1,7 +1,7 @@
-module.exports = exports = function () {
+module.exports = exports = function() {
   return {
     name: 'order',
-    transforms: function (doc, tag, tagDescription) {
+    transforms(doc, tag, tagDescription) {
       const orderRegExp = /^(\d+)/;
       const value = orderRegExp.exec(tagDescription);
       if (value) {
@@ -9,6 +9,6 @@ module.exports = exports = function () {
         return Number.isNaN(order) ? 0 : order;
       }
       return 0;
-    }
+    },
   };
 };

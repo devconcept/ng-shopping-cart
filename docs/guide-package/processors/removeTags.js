@@ -3,8 +3,8 @@ module.exports = exports = function removeTags() {
     name: 'removeTags',
     $runAfter: ['tags-extracted'],
     $runBefore: ['processing-docs'],
-    $process: function (docs) {
-      docs.forEach(function (doc) {
+    $process(docs) {
+      docs.forEach((doc) => {
         if (doc.docType === 'markdown') {
           let stopParsing = false;
           let current = 0;
@@ -22,6 +22,6 @@ module.exports = exports = function removeTags() {
           doc.content = lines.slice(current).join('\r\n');
         }
       });
-    }
+    },
   };
 };

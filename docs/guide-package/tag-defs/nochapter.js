@@ -1,8 +1,6 @@
-module.exports = exports = function () {
+module.exports = exports = function() {
   return {
     name: 'nochapter',
-    transforms: function () {
-      return true;
-    }
+    transforms: () => true,
   };
 };

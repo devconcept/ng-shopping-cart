@@ -16,18 +16,20 @@ const GUIDE_OUTPUT = 'guide';
 const TEMPLATES = ['./docs/templates/'];
 
 const TYPESCRIPT_SOURCES = [
-  {include: './components/**/*.ts', exclude: './**/*.spec.ts'},
-  {include: './services/**/*.ts', exclude: './**/test/*.ts'},
+  {include: './components/**/*.ts',
+    exclude: './**/*.spec.ts'},
+  {include: './services/**/*.ts',
+    exclude: './**/test/*.ts'},
   './classes/**/*.ts',
   './interfaces/**/*.ts',
-  './types.ts'
-].map(s => {
+  './types.ts',
+].map((s) => {
   if (typeof s === 'string') {
     return resolve(SOURCE, s);
   }
   return {
     include: resolve(SOURCE, s.include),
-    exclude: resolve(SOURCE, s.exclude)
+    exclude: resolve(SOURCE, s.exclude),
   };
 });
 
@@ -44,5 +46,5 @@ module.exports = exports = {
   API_OUTPUT,
   TEMPLATES,
   GUIDE_SOURCE,
-  GUIDE_OUTPUT
+  GUIDE_OUTPUT,
 };

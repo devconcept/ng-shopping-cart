@@ -1,8 +1,8 @@
 module.exports = function escapeQuotes() {
   return {
     name: 'escapeQuotes',
-    process: function(str) {
+    process(str) {
       return str.replace(/`/g, '\\`');
-    }
+    },
   };
 };

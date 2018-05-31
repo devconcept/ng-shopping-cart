@@ -65,25 +65,23 @@ gulp.task('styles:light:min', (cb) => {
 
 gulp.task('styles:light', gulp.series('styles:light:compile', 'styles:light:min'));
 
-gulp.task('docs:generate', (cb) => {
-  exec('npm run docs:generate', {windowsHide: true}, cb);
+gulp.task('docs:generate', () => {
+  return exec('npm run docs:generate', {windowsHide: true});
 });
 
-gulp.task('docs:compile', cb => {
-  exec('npm run docs:build', {windowsHide: true}, cb);
+gulp.task('docs:compile', () => {
+  return exec('npm run docs:build', {windowsHide: true});
 });
 
-gulp.task('docs:clean', () => {
-  return git.checkout('gh-pages')
-    .then(() => {
-      return del(['*.js', '*.css', '*.html', './assets/*', '3rdpartylicenses.txt', '.nojekyll', 'favicon.ico']);
-    });
+gulp.task('docs:clean', async() => {
+  await git.checkout('gh-pages');
+  return del(['*.js', '*.css', '*.html', './assets/*', '3rdpartylicenses.txt', '.nojekyll', 'favicon.ico']);
 });
 
 gulp.task('docs:update', (cb) => {
   pump([
     gulp.src(['./docs-dist/**/*', './docs-dist/**/.*']),
-    gulp.dest('./')
+    gulp.dest('./'),
   ], cb);
 });
 
@@ -95,11 +93,11 @@ gulp.task('docs:index', (cb) => {
   ], cb);
 });
 
-gulp.task('docs:commit', () => {
+gulp.task('docs:commit', async() => {
   const msg = `Updating docs version ${pkg.version}`;
-  return git.exec({args: 'add ./* -A'})
-    .then(() => git.exec({args: `commit -a --message="${msg}"`}))
-    .then(() => git.checkout('develop'))
+  await git.exec({args: 'add ./* -A'});
+  await git.exec({args: `commit -a --message="${msg}"`});
+  return git.checkout('develop');
 });
 
 gulp.task('docs:cleanup', () => {
@@ -119,7 +117,7 @@ gulp.task('docs', gulp.series(
 gulp.task('docs:dry', gulp.series(
   'docs:cleanup',
   'docs:generate',
-  'docs:compile',
+  'docs:compile'
 ));
 
 gulp.task('styles', gulp.series(
@@ -128,11 +126,11 @@ gulp.task('styles', gulp.series(
     'styles:css',
     'styles:light',
     'styles:sass'
-  ))
-);
+  )
+));
 
-gulp.task('pack', cb => {
-  return exec('npm run pack', {windowsHide: true}, cb);
+gulp.task('pack', () => {
+  return exec('npm run pack', {windowsHide: true});
 });
 
 gulp.task('default', gulp.series('pack', 'styles'));

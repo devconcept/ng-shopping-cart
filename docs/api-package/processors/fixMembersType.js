@@ -5,11 +5,11 @@ module.exports = function fixMembersType() {
     name: 'fixMembersType',
     $runAfter: ['docs-processed'],
     $runBefore: ['filterUnusedDocs'],
-    $process: function (docs) {
-      docs.forEach(doc => {
+    $process(docs) {
+      docs.forEach((doc) => {
         if (doc.docType === 'class' && doc.members && doc.members.length) {
-          doc.members.forEach(m => {
-            const type = m.type;
+          doc.members.forEach((m) => {
+            const {type} = m;
             m.typeInfo = type;
             const implicit = get(m, 'declaration.initializer.text');
             m.initialValue = undefined;
@@ -36,6 +36,6 @@ module.exports = function fixMembersType() {
           });
         }
       });
-    }
+    },
   };
 };

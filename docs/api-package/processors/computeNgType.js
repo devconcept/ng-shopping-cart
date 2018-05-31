@@ -3,8 +3,8 @@ module.exports = function computeNgType(getTypeFolder) {
     name: 'computeNgType',
     $runAfter: ['generateKebabNames'],
     $runBefore: ['adding-modules'],
-    $process: function (docs) {
-      docs.forEach(function (doc) {
+    $process(docs) {
+      docs.forEach((doc) => {
         if (doc.docType !== 'markdown' && doc.docType !== 'ngTemplate') {
           doc.ngType = undefined;
           if (doc.decorators && doc.decorators.length && doc.docType === 'class') {
@@ -18,7 +18,7 @@ module.exports = function computeNgType(getTypeFolder) {
             const component = doc.decorators.find(d => d.name === 'Component');
             if (component) {
               doc.ngType = 'component';
-              doc.template = doc.ngType + '.html';
+              doc.template = `${doc.ngType}.html`;
               doc.ngSelector = component.argumentInfo[0].selector.replace(/'/g, '');
               doc.inputs = doc.members.reduce((curr, m) => {
                 if (m.decorators && m.decorators.findIndex(d => d.name === 'Input') !== -1) {
@@ -33,7 +33,7 @@ module.exports = function computeNgType(getTypeFolder) {
                   curr.push(m);
                 }
                 return curr;
-              }, [])
+              }, []);
             }
           }
           if (doc.docType === 'const') {
@@ -42,6 +42,6 @@ module.exports = function computeNgType(getTypeFolder) {
           doc.location = getTypeFolder(doc);
         }
       });
-    }
+    },
   };
 };

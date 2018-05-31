@@ -5,9 +5,9 @@ module.exports = function filterIgnoredFiles() {
     name: 'filterIgnoredFiles',
     $runAfter: ['modules-added'],
     $runBefore: ['computing-ids'],
-    $process: function (docs) {
+    $process(docs) {
       return docs.filter(doc => types.indexOf(doc.docType) === -1
         || !doc.tags.tags.length || !doc.tags.getTag('ignore'));
-    }
+    },
   };
 };

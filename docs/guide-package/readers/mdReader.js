@@ -4,9 +4,9 @@ module.exports = function mdReader(customDocs) {
   return {
     name: 'mdReader',
     defaultPattern: /\.md$/,
-    getDocs: function (fileInfo) {
+    getDocs(fileInfo) {
       const guideDoc = new GuideDoc(fileInfo);
       return [guideDoc];
-    }
+    },
   };
 };

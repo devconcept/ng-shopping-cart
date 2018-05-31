@@ -5,10 +5,10 @@ module.exports = exports = class SearchServiceDoc {
     this.name = 'SearchService';
     this.docType = 'search-service';
 
-    this.sources = docs.map(doc => {
+    this.sources = docs.map((doc) => {
       let name = doc.computedName;
       if (doc.ngType === 'component') {
-        name = '<' + doc.computedName.replace(/-component/, '') + '>';
+        name = `<${doc.computedName.replace(/-component/, '')}>`;
       }
       if (doc.ngType === 'token') {
         name = doc.name;
@@ -30,7 +30,7 @@ module.exports = exports = class SearchServiceDoc {
         type,
         description: doc.description,
         path: `/${doc.chapter}/${doc.location}/${doc.computedName}`,
-        source: [doc.computedName, doc.description, members].map(s => s.toLowerCase())
+        source: [doc.computedName, doc.description, members].map(s => s.toLowerCase()),
       };
     });
   }

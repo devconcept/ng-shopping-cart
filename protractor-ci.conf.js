@@ -1,10 +1,10 @@
-const config = require('./protractor.conf').config;
+const {config} = require('./protractor.conf');
 
 config.capabilities = {
   browserName: 'chrome',
   chromeOptions: {
-    args: ['--no-sandbox']
-  }
+    args: ['--no-sandbox'],
+  },
 };
 
 exports.config = config;

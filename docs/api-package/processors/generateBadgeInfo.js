@@ -5,8 +5,8 @@ module.exports = function generateBadgeInfo() {
     name: 'generateBadgeInfo',
     $runAfter: ['computeNgType'],
     $runBefore: ['adding-modules'],
-    $process: function (docs) {
-      docs.forEach(function (doc) {
+    $process(docs) {
+      docs.forEach((doc) => {
         if (doc.docType !== 'markdown' && doc.docType !== 'ngTemplate') {
           if (doc.ngType) {
             doc.badgeType = doc.ngType === 'token' ? 'Injection token' : upperFirst(doc.ngType);
@@ -15,6 +15,6 @@ module.exports = function generateBadgeInfo() {
           }
         }
       });
-    }
+    },
   };
 };

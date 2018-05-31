@@ -3,13 +3,13 @@ module.exports = function addTypeParameters() {
     name: 'addTypeParameters',
     $runAfter: ['tags-extracted'],
     $runBefore: ['extra-docs-added'],
-    $process: function (docs) {
-      docs.forEach(doc => {
+    $process(docs) {
+      docs.forEach((doc) => {
         if (doc.typeParams) {
-          const types = doc.declaration.typeParameters.map(t => {
+          const types = doc.declaration.typeParameters.map((t) => {
             let constraint = '';
             if (t.constraint) {
-              constraint = ' extends ' + t.constraint.typeName.escapedText;
+              constraint = ` extends ${t.constraint.typeName.escapedText}`;
             }
             return t.name.escapedText + constraint;
           }).join(',');
@@ -20,6 +20,6 @@ module.exports = function addTypeParameters() {
           doc.typeParameters = doc.type.replace(tokenRegExp, '');
         }
       });
-    }
+    },
   };
 };

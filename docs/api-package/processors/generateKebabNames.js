@@ -5,12 +5,12 @@ module.exports = function generateKebabNames() {
     name: 'generateKebabNames',
     $runAfter: ['docs-processed'],
     $runBefore: ['adding-modules'],
-    $process: function (docs) {
-      docs.forEach(function (doc) {
+    $process(docs) {
+      docs.forEach((doc) => {
         if (doc.docType !== 'markdown' && doc.docType !== 'ngTemplate') {
           doc.computedName = kebabCase(doc.name);
         }
       });
-    }
+    },
   };
 };

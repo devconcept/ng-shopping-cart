@@ -3,8 +3,8 @@ module.exports = function fixHeritageInfo() {
     name: 'fixHeritageInfo',
     $runAfter: ['docs-processed'],
     $runBefore: ['adding-modules'],
-    $process: function (docs) {
-      docs.forEach(doc => {
+    $process(docs) {
+      docs.forEach((doc) => {
         if (doc.docType === 'class' && doc.extendsClauses && doc.extendsClauses.length) {
           const extendsFrom = doc.extendsClauses[0];
           if (!extendsFrom.doc) {
@@ -15,6 +15,6 @@ module.exports = function fixHeritageInfo() {
           }
         }
       });
-    }
+    },
   };
 };

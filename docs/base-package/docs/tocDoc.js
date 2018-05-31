@@ -11,29 +11,31 @@ module.exports = exports = class TocDoc {
         ? upperFirst(lowerCase(computedName))
         : startCase(computedName).replace(/ /g, '');
       let menu = doc.docType !== 'const' ? title : doc.name;
-      const getPath = (name) => (name.toLowerCase().replace(/ /g, '-'));
+      const getPath = name => (name.toLowerCase().replace(/ /g, '-'));
 
       if (doc.ngType === 'component') {
-        menu = '<' + doc.computedName.replace(/-component$/, '') + '>';
+        menu = `<${doc.computedName.replace(/-component$/, '')}>`;
       }
       if (['markdown', 'type-alias', 'const'].indexOf(doc.docType) === -1) {
         extra = {
-          topics: doc.members.reduce((curr, m) => {
+          topics: doc.members.reduce((c, m) => {
             if (m.description) {
-              curr.push({name: m.name, path: getPath(m.name)})
+              c.push({name: m.name,
+                path: getPath(m.name)});
             }
-            return curr;
-          }, [])
+            return c;
+          }, []),
         };
       } else if (doc.docType === 'markdown') {
         const topics = doc.content
           .split(/\r\n|\r|\n/)
-          .reduce((curr, line) => {
+          .reduce((c, line) => {
             const match = /^#{3,5}\s+([A-Za-z0-9_ ]+)$/.exec(line);
             if (match) {
-              curr.push({name: match[1], path: getPath(match[1])});
+              c.push({name: match[1],
+                path: getPath(match[1])});
             }
-            return curr;
+            return c;
           }, []);
         extra = {topics};
       }
@@ -45,7 +47,7 @@ module.exports = exports = class TocDoc {
         chapter: nochapter ? '' : upperFirst(chapter),
         section: doc.location || '',
         url: doc.location ? `/${chapter}/${doc.location}/${computedName}` : `/${chapter}/${computedName}`,
-        ...extra
+        ...extra,
       };
       if (!order) {
         curr.push(contentItem);
@@ -54,13 +56,13 @@ module.exports = exports = class TocDoc {
           && t.section === contentItem.section
           && t.order > contentItem.order);
         if (following === -1) {
-          curr.push(contentItem)
+          curr.push(contentItem);
         } else {
-          curr.splice(following !== 0 ? following : 0, 0, contentItem)
+          curr.splice(following !== 0 ? following : 0, 0, contentItem);
         }
       }
       return curr;
     }, []);
-    this.template = 'toc-data.ts'
+    this.template = 'toc-data.ts';
   }
 };

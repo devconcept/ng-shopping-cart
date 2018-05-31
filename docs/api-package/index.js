@@ -1,8 +1,11 @@
+/* eslint-disable no-template-curly-in-string */
+/* eslint-disable prefer-arrow-callback */
+
 const {Package} = require('dgeni');
 const tsPkg = require('dgeni-packages/typescript');
 const cartBasePkg = require('../base-package/index');
 
-const {TYPESCRIPT_SOURCES, ASSETS} = require('../config');
+const {TYPESCRIPT_SOURCES} = require('../config');
 
 module.exports = exports = new Package('cartApi', [cartBasePkg, tsPkg])
   .processor(require('./processors/filterUnusedDocs'))
@@ -18,7 +21,7 @@ module.exports = exports = new Package('cartApi', [cartBasePkg, tsPkg])
   .processor(require('./processors/generateSearchService'))
   .processor(require('./processors/generateBadgeInfo'))
   .factory(require('./services/getTypeFolder'))
-  .config(function (parseTagsProcessor, getInjectables) {
+  .config(function(parseTagsProcessor, getInjectables) {
     parseTagsProcessor.tagDefinitions = parseTagsProcessor.tagDefinitions.concat(getInjectables([
       require('./tag-defs/ignore'),
       require('./tag-defs/means'),
@@ -27,35 +30,35 @@ module.exports = exports = new Package('cartApi', [cartBasePkg, tsPkg])
       require('./tag-defs/howToUse'),
     ]));
   })
-  .config(function (unescapeCommentsProcessor, readTypeScriptModules, templateEngine, getInjectables) {
+  .config(function(unescapeCommentsProcessor, readTypeScriptModules, templateEngine, getInjectables) {
     readTypeScriptModules.sourceFiles = TYPESCRIPT_SOURCES;
     unescapeCommentsProcessor.$enabled = false;
     templateEngine.filters = templateEngine.filters.concat(getInjectables([
       require('./rendering/emitterType'),
-      require('./rendering/backTicks')
+      require('./rendering/backTicks'),
     ]));
   })
-  .config(function (computePathsProcessor) {
+  .config(function(computePathsProcessor) {
     computePathsProcessor.pathTemplates = computePathsProcessor.pathTemplates.concat([
       {
         docTypes: ['class', 'interface', 'type-alias', 'const'],
-        getOutputPath: function (doc) {
+        getOutputPath(doc) {
           const {location} = doc;
-          const folder = location ? '/' + location : '';
+          const folder = location ? `/${location}` : '';
           const file = doc.ngType === 'component' ? doc.computedName.replace(/-component/, '') : doc.computedName;
-          return `api${folder}/routes/${file}.component.html`
+          return `api${folder}/routes/${file}.component.html`;
         },
-        getPath: function (doc) {
+        getPath(doc) {
           if (doc.ngType) {
             return `${doc.ngType}.html`;
           }
-          return `${doc.docType}.html`
-        }
+          return `${doc.docType}.html`;
+        },
       },
       {
         docTypes: ['search-service'],
         outputPathTemplate: 'api/search-service.ts',
-        pathTemplate: '${docType}.ts'
+        pathTemplate: '${docType}.ts',
       },
     ]);
   });

@@ -3,7 +3,8 @@ module.exports = exports = function generateApiRoutes(customDocs) {
     name: 'generateApiRoutes',
     $runAfter: ['adding-routes'],
     $runBefore: ['routes-added'],
-    $process: function (docs) {
+    $process(docs) {
+      let currentDocs = docs;
       const [NgRouteDoc, NgLazyRoute, NgComponentDoc] = customDocs
         .getDocs(['NgRouteDoc', 'NgLazyRoute', 'NgComponentDoc']);
 
@@ -14,15 +15,17 @@ module.exports = exports = function generateApiRoutes(customDocs) {
         name: 'ApiModule',
         location: '',
         pkg,
-        dependencies: [new NgComponentDoc({
-          name: 'SearchComponent',
-          computedName: 'search',
-          route: 'search'
-        })],
+        dependencies: [
+          new NgComponentDoc({
+            name: 'SearchComponent',
+            computedName: 'search',
+            route: 'search',
+          }),
+        ],
       }, modules.map(m => new NgLazyRoute(m)));
-      docs.push(apiRoute);
-      docs = docs.concat(ngRoutes);
-      return docs;
-    }
+      currentDocs.push(apiRoute);
+      currentDocs = currentDocs.concat(ngRoutes);
+      return currentDocs;
+    },
   };
 };

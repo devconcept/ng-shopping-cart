@@ -5,8 +5,8 @@ module.exports = function addGitInfo(customDocs) {
     name: 'copySite',
     $runAfter: ['routes-added'],
     $runBefore: ['extra-docs-added'],
-    $process: function (docs) {
-      docs.push(new InfoServiceDoc())
-    }
+    $process(docs) {
+      docs.push(new InfoServiceDoc());
+    },
   };
 };
