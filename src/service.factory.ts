@@ -7,8 +7,9 @@ import {Provider} from '@angular/core';
 import {CART_ITEM_CLASS} from './services/item-class.token';
 import {CART_SERVICE_TYPE} from './services/service-type.token';
 import {CART_SERVICE_CONFIGURATION} from './services/service-configuration.token';
+import {CartService} from './classes/cart.service';
 
-export function serviceFactory<T extends CartItem>(serviceType, itemClass, configuration) {
+export function serviceFactory<T extends CartItem>(serviceType, itemClass, configuration): CartService<T> {
   switch (serviceType) {
     case 'localStorage':
       return new LocalStorageCartService<T>(itemClass, configuration);
