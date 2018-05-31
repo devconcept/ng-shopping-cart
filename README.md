@@ -34,7 +34,8 @@ yarn add ng-shopping-cart
 
 Documentation is available at http://devconcept.github.io/ng-shopping-cart/
 
-Dgeni is used to automatically generate documentation from the source code. If you spot an error please consider [reporting it](https://github.com/devconcept/ng-shopping-cart/issues).
+
+[Dgeni][dgeni-github] is used to automatically generate documentation from the source code. If you spot an error please consider [reporting it](https://github.com/devconcept/ng-shopping-cart/issues).
 
 ## Demo
 
@@ -48,13 +49,17 @@ The demo is also available if you:
 
 ## Upcoming features
 
-```
-[ ] Less and stylus support
+- [ ] Less and stylus support
 
-[ ] Built-in service for storing cart items in a remote server
+- [ ] Built-in service for storing cart items in a remote server
 
-[ ] Stripe checkout support
-```
+- [ ] Stripe checkout support
+
+- [ ] Aria enabled components
+
+- [ ] Flexbox and CSS grid support
+
+Suggestions and ideas are welcome. You can also contribute. Check the contribution guidelines.
 
 ## License
 
@@ -67,6 +72,7 @@ The demo is also available if you:
 [coveralls-image]: https://coveralls.io/repos/github/devconcept/ng-shopping-cart/badge.svg?branch=master "Coverage report"
 [version-image]:https://img.shields.io/npm/v/ng-shopping-cart.svg "Npm version"
 [downloads-image]: https://img.shields.io/npm/dm/ng-shopping-cart.svg "Monthly downloads"
+[dgeni-github]: https://github.com/angular/dgeni "Dgeni"
 
 
 
