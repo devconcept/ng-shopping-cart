@@ -63,7 +63,7 @@ The demo is also available if you:
 
 - [ ] Reactive components?
 
-Ideas and suggestions are always welcome. You can also contribute. Check the contribution guidelines.
+Ideas and suggestions are always welcome. You can also contribute. Check the [contribution guidelines](https://github.com/devconcept/ng-shopping-cart/blob/master/CONTRIBUTING.md).
 
 ## License
 
