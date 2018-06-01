@@ -7,7 +7,8 @@ import {CartItem} from '../classes/cart-item';
 import {BrowserStorageServiceConfiguration} from '../interfaces/browser-storage-service-configuration';
 
 /**
- * The base class for all CartService implementations that use the browser storage
+ * The base class for all CartService implementations that use the Storage interface of the Web Storage API like LocalStorage and
+ * SessionStorage.
  * @order 4
  */
 export abstract class BrowserStorageCartService<T extends CartItem> extends MemoryCartService<T> {

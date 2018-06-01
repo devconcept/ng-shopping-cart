@@ -4,7 +4,7 @@ import {EventEmitter} from '@angular/core';
 /**
  * The base class for storing items in your cart
  *
- * @note {warning} Do not modify the items id after its added to the cart. Doing so could end up with duplicates which can cause
+ * @note {warning} Do not modify the items `id` after they are added to the cart. Doing so could result in duplicates which can cause
  * undefined behaviour
  * @order 2
  */

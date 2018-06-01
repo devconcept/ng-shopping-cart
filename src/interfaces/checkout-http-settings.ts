@@ -3,7 +3,8 @@
  */
 export interface CheckoutHttpSettings {
   /**
-   * The HTTP method to use to perform the request
+   * The HTTP method to use to perform the request. The body is used to send the contents of the cart so using get or delete verbs will
+   * not work
    */
   method: string;
   /**
@@ -11,7 +12,7 @@ export interface CheckoutHttpSettings {
    */
   url: string;
   /**
-   * Headers and other options for the checkout http request.
+   * Headers and other options for the checkout http request. Check the `HttpRequest` class in Angular documentation.
    */
   options?: any;
 }

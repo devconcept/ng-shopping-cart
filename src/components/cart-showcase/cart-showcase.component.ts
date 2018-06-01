@@ -4,7 +4,7 @@ import {CartShowcaseItemComponent} from '../../components/cart-showcase-item/car
 import {ShowcaseItem} from '../../interfaces/showcase-item';
 
 /**
- * Renders items arranged in columns using a dynamic component for the item useful for getting started with e-commerce applications.
+ * Renders items arranged in columns using a dynamic component for the item. Useful for getting started with e-commerce applications.
  *
  * @order 4
  * @howToUse "Using wider items"
@@ -49,12 +49,12 @@ import {ShowcaseItem} from '../../interfaces/showcase-item';
  * }
  * ```
  *
- * @note If you change the `[columns]` input you must also change the SASS variable that controls the component grid and vice-versa.
- * A similar procedure is required to create aspect ratios with values greater than four eg: '1:5'.
+ * @note If you change the `[columns]` input you must also change the sass variable that controls the component grid and vice-versa.
+ * A similar procedure is required to create aspect ratios with values greater than four eg: `'1:5'`.
  * Check the styling guide for more information.
  *
- * @note The aspect ratio is the width/height proportion of the items therefore a ratio of "2:2" is equivalent to "1:1". Redundant ratios
- * like these are removed from the source so don't try to use them.
+ * @note The aspect ratio is the width/height proportion of the items therefore a ratio of `'2:2'` is equivalent to `'1:1'`. Redundant
+ * ratios like these are removed from the source so don't try to use them.
  *
  */
 @Component({
@@ -90,7 +90,7 @@ export class CartShowcaseComponent implements OnChanges {
   @Input() xlCols = 4;
   /**
    * The number of columns in the grid.
-   * Only update this value if you changed the columns SASS variable in the library styles following the Styling guide.
+   * Only update this value if you changed the columns sass variable in the library styles following the Styling guide.
    */
   @Input() columns = 12;
   /**

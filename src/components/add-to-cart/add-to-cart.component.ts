@@ -39,8 +39,8 @@ import {CartItem} from '../../classes/cart-item';
  * </add-to-cart>
  * ```
  *
- * @note {warning} This component captures click events that bubble from its projected content if you are using [custom]=true therefore if
- * you have other html content other than buttons inside you must stop the event propagation unless the click originated in the button that
+ * @note {warning} This component captures click events that bubble from its projected content if you are using `[custom]=true` therefore if
+ * you have html content other than buttons inside you must stop the event propagation unless the click originated in the button that
  * add the items to the cart.
  */
 @Component({
@@ -54,7 +54,8 @@ export class AddToCartComponent implements OnInit, OnChanges {
   horizontalEditor = true;
   editorPrecedence: 'before' | 'after' = 'before';
   /**
-   * If false displays a default button provided by the component, otherwise projects the contents of the component to be used as a button.
+   * If `false` displays a default button provided by the component, otherwise projects the contents of the component to be used as a
+   * button.
    */
   @Input() custom = false;
   /**
@@ -74,6 +75,9 @@ export class AddToCartComponent implements OnInit, OnChanges {
   /**
    * Renders a button or a button with an editor to select the quantity of the item that will be added in the cart. When it has a value
    * other than `'button'` an editor is displayed depending on the selected `[type]`; it can be a `select`, or a text or a number `input`.
+   *
+   * > Do not confuse this input with the html attribute `type`. The default button is always generated with this attribute set to
+   * `button` to prevent accidental form submissions.
    */
   @Input() type: AddToCartType = 'button';
   /**
@@ -82,8 +86,8 @@ export class AddToCartComponent implements OnInit, OnChanges {
    */
   @Input() position: AddToCartPosition = 'left';
   /**
-   * If `[type]` is set 'dropdown' it can be used to set the options of the rendered `select` editor. Is an array of objects with label and
-   * a value properties used to populate the select's `option` elements.
+   * If `[type]` is set to `'dropdown'` it can be used to set the options of the rendered `select` editor. Is an array of objects with
+   * label and a value properties used to populate the select's `option` elements.
    */
   @Input() dropdown: DropdownValue[] = [
     {label: '1 item', value: 1},

@@ -3,7 +3,8 @@ import { ShowcaseItem } from '../../interfaces/showcase-item';
 import { CartItem } from '../../classes/cart-item';
 
 /**
- * The default implementation of a showcase item
+ * The default implementation of a showcase item. This component is only intended to be used as a template for you to create your own
+ * components either by pure css customization or by providing an actually working sample to serve as a guide for more complex cases.
  *
  * @order 5
  */
