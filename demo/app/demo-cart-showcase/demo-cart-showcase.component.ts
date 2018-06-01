@@ -28,7 +28,7 @@ export class CartShowcaseDemoComponent {
       identifier: 1,
       label: 'Item1',
       cost: 10,
-      photo: 'http://lorempixel.com/400/400/food/1',
+      photo: 'https://picsum.photos/400?random',
       amount: 1
     }),
   ];
@@ -62,7 +62,7 @@ export class CartShowcaseDemoComponent {
 
   addItem() {
     this.lastItemId++;
-    const photo = this.item.photo || 'http://lorempixel.com/400/400/food';
+    const photo = this.item.photo || 'https://picsum.photos/400/?random';
     const {label, amount, cost} = this.item;
     const toAdd = new DemoCartItem({
       identifier: this.lastItemId,

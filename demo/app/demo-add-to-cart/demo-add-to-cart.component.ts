@@ -83,7 +83,7 @@ export class DemoAddToCartComponent {
     this.itemName = 'Test';
     this.itemPrice = 14.5;
     this.itemQuantity = 1;
-    this.itemImage = 'http://lorempixel.com/400/400/food';
+    this.itemImage = 'https://picsum.photos/400?random';
   }
 
   checkValues() {
