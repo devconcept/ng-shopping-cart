@@ -55,11 +55,15 @@ The demo is also available if you:
 
 - [ ] Stripe checkout support
 
+- [ ] Enhanced PayPal support
+
 - [ ] Aria enabled components
 
 - [ ] Flexbox and CSS grid support
 
-Suggestions and ideas are welcome. You can also contribute. Check the contribution guidelines.
+- [ ] Reactive components?
+
+Ideas and suggestions are always welcome. You can also contribute. Check the contribution guidelines.
 
 ## License
 
