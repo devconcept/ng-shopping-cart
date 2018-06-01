@@ -1,16 +1,16 @@
 .item-container {
   position: absolute;
-  left: 2px;
-  top: 2px;
-  right: 2px;
-  bottom: 2px;
-  padding: 1rem;
+  left: 0;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  padding: 0;
   border: solid 1px lightgrey;
 
   .item-image {
     height: 80%;
     background: transparent no-repeat center;
-    background-size: contain;
+    background-size: cover;
   }
 
   .item-price {
@@ -25,6 +25,7 @@
   }
 
   .item-name {
+    margin: 0;
     position: absolute;
     top: 50%;
     left: 50%;
@@ -39,5 +40,8 @@
     border-top: solid 1px lightgrey;
     text-align: center;
     padding: 5px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
   }
 }
