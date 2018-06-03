@@ -169,6 +169,7 @@
         display: block;
         position: relative;
         border: solid 1px #dee2e6;
+        @include rem-fallback('margin-bottom', 0.5);
         width: 100%;
         padding: 100% 0 0;
 
@@ -178,6 +179,7 @@
           border: none 0 transparent;
           width: auto;
           padding: 0;
+          margin-bottom: 0;
         }
 
         & > .cart-list-value {
@@ -209,10 +211,10 @@
             background-size: $image-fit;
             width: auto;
             height: auto;
-            @include rem-fallback('left', 0.5);
-            @include rem-fallback('right', 0.5);
-            @include rem-fallback('top', 0.5);
-            @include rem-fallback('bottom', 0.5);
+            left: 0;
+            right: 0;
+            top: 0;
+            bottom: 0;
 
             @include media-up('s') {
               @include rem-fallback('padding', 0.75);
