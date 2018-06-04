@@ -31,7 +31,7 @@ import {CheckoutHttpSettings} from '../../interfaces/checkout-http-settings';
  * ```typescript
  * export class MyComponent {
  *   settings: CheckoutHttpSettings = {
- *     method: 'post',
+ *     method: 'POST',
  *     url: 'http://myapi.com/',
  *     options: { headers: { Authorization: 'Bearer my-auth-token' } }
  *   };
@@ -104,7 +104,7 @@ export class CartCheckoutComponent implements OnChanges, OnInit, OnDestroy {
   /**
    * When the `[service]` is set to `'http'` and the checkout operation fails the thrown error can be captured using this output.
    *
-   * The emitted value is the complete HttpErrorResponse object returned by HttpClient so you can inspect other properties like status
+   * The emitted value is the complete `HttpErrorResponse` object returned by `HttpClient` so you can inspect other properties like status
    * codes, headers, messages, etc.
    */
   @Output() error = new EventEmitter<any>();
