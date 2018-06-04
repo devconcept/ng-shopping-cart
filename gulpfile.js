@@ -73,6 +73,10 @@ gulp.task('docs:compile', () => {
   return exec('npm run docs:build', {windowsHide: true});
 });
 
+gulp.task('docs:run', () => {
+  return exec('npm run docs:run', {windowsHide: true});
+});
+
 gulp.task('docs:clean', async() => {
   await git.checkout('gh-pages');
   return del(['*.js', '*.css', '*.html', './assets/*', '3rdpartylicenses.txt', '.nojekyll', 'favicon.ico']);
@@ -111,13 +115,14 @@ gulp.task('docs', gulp.series(
   'docs:update',
   'docs:index',
   'docs:commit',
-  'docs:cleanup'
+  'docs:cleanup',
 ));
 
 gulp.task('docs:dry', gulp.series(
   'docs:cleanup',
   'docs:generate',
-  'docs:compile'
+  'docs:compile',
+  'docs:run',
 ));
 
 gulp.task('styles', gulp.series(
@@ -125,7 +130,7 @@ gulp.task('styles', gulp.series(
   gulp.parallel(
     'styles:css',
     'styles:light',
-    'styles:sass'
+    'styles:sass',
   )
 ));
 
