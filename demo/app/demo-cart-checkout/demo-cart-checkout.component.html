@@ -6,19 +6,49 @@
     </button>
   </div>
   <div class="card-body" [ngbCollapse]="settingsCollapsed">
-    <form class="form-inline">
-      <div class="form-group mr-3" *ngIf="!custom">
-        <label for="addToCartLabel" class="mr-1">Label</label>
-        <input id="addToCartLabel" name="addToCartLabel" class="form-control" [(ngModel)]="label" type="text">
+    <form>
+      <div class="form-row">
+        <div class="form-group col-12 col-md-3" *ngIf="!custom && service !== 'paypal'">
+          <label for="cartCheckoutLabel" class="mr-1">Label</label>
+          <input id="cartCheckoutLabel" name="cartCheckoutLabel" class="form-control" [(ngModel)]="label" type="text">
+        </div>
+        <div class="form-group col-12 col-md-3">
+          <label for="cartCheckoutService" class="mr-1">Service</label>
+          <select id="cartCheckoutService" name="cartCheckoutService" class="form-control" [(ngModel)]="service">
+            <option value="log">Log</option>
+            <option value="http">Http</option>
+            <option value="paypal">PayPal</option>
+          </select>
+        </div>
+        <ng-container *ngIf="service === 'http'">
+          <div class="form-group col-12 col-md-3">
+            <label for="cartCheckoutUrl" class="mr-1">Url</label>
+            <input id="cartCheckoutUrl" name="cartCheckoutUrl" class="form-control" [(ngModel)]="httpConfig.url">
+          </div>
+          <div class="form-group col-12 col-md-3">
+            <label for="cartCheckoutMethod" class="mr-1">Method</label>
+            <select id="cartCheckoutMethod" name="cartCheckoutMethod" class="form-control"
+                    [(ngModel)]="httpConfig.method">
+              <option value="POST">POST</option>
+              <option value="PUT">PUT</option>
+              <option value="PATCH">PATCH</option>
+            </select>
+          </div>
+        </ng-container>
       </div>
-      <div class="form-check form-check-inline">
-        <input id="addToCartContents" name="addToCartContents" type="checkbox" class="form-check-input"
-               [(ngModel)]="custom">
-        <label for="addToCartContents" class="form-check-label">Custom</label>
+      <div class="form-row">
+        <div class="form-group col mb-0">
+          <div class="form-check">
+            <input id="cartCheckoutContents" name="cartCheckoutContents" type="checkbox" class="form-check-input"
+                   [(ngModel)]="custom">
+            <label for="cartCheckoutContents" class="form-check-label">Custom</label>
+          </div>
+        </div>
       </div>
     </form>
     <hr>
-    <small>Checkout and inspect the console to view the contents of the cart</small>
+    <small *ngIf="service === 'log'">Checkout and inspect the console to view the contents of the cart</small>
+    <small *ngIf="service === 'http'">Cors must be enabled on the server for the request to be sent</small>
   </div>
 </div>
 <div class="card">
@@ -28,7 +58,9 @@
     </button>
   </div>
   <div class="card-body" [ngbCollapse]="resultsCollapsed">
-    <cart-checkout [custom]="custom" [buttonText]="label || 'Checkout'">
+    <cart-checkout [custom]="custom" [buttonText]="label || 'Checkout'" [service]="service"
+                   [settings]="service === 'http' ? httpConfig : paypalConfig" (checkout)="onSuccess($event)"
+                   (error)="onError($event)">
       <button type="button" [disabled]="disabled" class="custom-checkout-button">
         Start checkout
       </button>
