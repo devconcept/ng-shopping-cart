@@ -8,10 +8,6 @@
   <div class="card-body" [ngbCollapse]="settingsCollapsed">
     <form>
       <div class="form-row">
-        <div class="form-group col-12 col-md-3" *ngIf="!custom && service !== 'paypal'">
-          <label for="cartCheckoutLabel" class="mr-1">Label</label>
-          <input id="cartCheckoutLabel" name="cartCheckoutLabel" class="form-control" [(ngModel)]="label" type="text">
-        </div>
         <div class="form-group col-12 col-md-3">
           <label for="cartCheckoutService" class="mr-1">Service</label>
           <select id="cartCheckoutService" name="cartCheckoutService" class="form-control" [(ngModel)]="service">
@@ -19,6 +15,10 @@
             <option value="http">Http</option>
             <option value="paypal">PayPal</option>
           </select>
+        </div>
+        <div class="form-group col-12 col-md-3" *ngIf="!custom && service !== 'paypal'">
+          <label for="cartCheckoutLabel" class="mr-1">Label</label>
+          <input id="cartCheckoutLabel" name="cartCheckoutLabel" class="form-control" [(ngModel)]="label" type="text">
         </div>
         <ng-container *ngIf="service === 'http'">
           <div class="form-group col-12 col-md-3">
@@ -35,8 +35,38 @@
             </select>
           </div>
         </ng-container>
+        <ng-container *ngIf="service === 'paypal'">
+          <div class="form-group col-12 col-md-3">
+            <label for="cartCheckoutBusiness" class="mr-1">Business</label>
+            <input id="cartCheckoutBusiness" name="cartCheckoutBusiness" class="form-control"
+                   [(ngModel)]="paypalConfig.business">
+          </div>
+          <div class="form-group col-12 col-md-3">
+            <label for="cartCheckoutCurrency" class="mr-1">Currency</label>
+            <input id="cartCheckoutCurrency" name="cartCheckoutCurrency" class="form-control"
+                   [(ngModel)]="paypalConfig.currencyCode">
+          </div>
+          <div class="form-group col-12 col-md-3">
+            <label for="cartCheckoutName" class="mr-1">Item name</label>
+            <input id="cartCheckoutName" name="cartCheckoutName" class="form-control"
+                   [(ngModel)]="paypalConfig.itemName">
+          </div>
+          <div class="form-group col-12 col-md-3">
+            <label for="cartCheckoutNumber" class="mr-1">Item number</label>
+            <input id="cartCheckoutNumber" name="cartCheckoutNumber" class="form-control"
+                   [(ngModel)]="paypalConfig.itemNumber">
+          </div>
+          <div class="form-group col-12 col-md-3">
+            <label for="cartCheckoutNoNote" class="mr-1">No note</label>
+            <select id="cartCheckoutNoNote" name="cartCheckoutNoNote" class="form-control"
+                    [(ngModel)]="paypalConfig.noNote">
+              <option value="0">0</option>
+              <option value="1">1</option>
+            </select>
+          </div>
+        </ng-container>
       </div>
-      <div class="form-row">
+      <div class="form-row" *ngIf="service !== 'paypal'">
         <div class="form-group col mb-0">
           <div class="form-check">
             <input id="cartCheckoutContents" name="cartCheckoutContents" type="checkbox" class="form-check-input"
@@ -48,7 +78,8 @@
     </form>
     <hr>
     <small *ngIf="service === 'log'">Checkout and inspect the console to view the contents of the cart</small>
-    <small *ngIf="service === 'http'">Cors must be enabled on the server for the request to be sent</small>
+    <small *ngIf="service === 'http'">CORS must be enabled on the server for the request to be sent</small>
+    <small *ngIf="service === 'paypal'">A new page will open in the PayPal service</small>
   </div>
 </div>
 <div class="card">
