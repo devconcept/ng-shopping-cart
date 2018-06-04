@@ -1,5 +1,5 @@
 <div class="sidebar">
-  <h5>Topics</h5>
+  <h5 class="sidebar-title">Topics</h5>
   <ol *ngIf="sidebarItems.length" class="pl-3 pl-md-4">
     <li *ngFor="let item of sidebarItems">
       <a [href]="'/ng-shopping-cart' + sidebarPath + '#' + item.path" class="text-secondary">
