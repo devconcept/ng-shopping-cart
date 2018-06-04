@@ -21,7 +21,7 @@ export abstract class BrowserStorageCartService<T extends CartItem> extends Memo
     @Inject(CART_ITEM_CLASS) itemClass: CartItem,
     @Inject(CART_SERVICE_CONFIGURATION) configuration: BrowserStorageServiceConfiguration
   ) {
-    super();
+    super() /* istanbul ignore next */;
     this.storageKey = configuration && configuration.storageKey ? configuration.storageKey : 'NgShoppingCart';
     this.clearOnError = configuration && configuration.clearOnError !== undefined ? configuration.clearOnError : true;
     this.itemClass = itemClass;
