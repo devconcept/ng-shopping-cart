@@ -1,4 +1,4 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, OnInit, OnDestroy} from '@angular/core';
 import {ActivatedRoute, Router} from '@angular/router';
 
 import {SearchService} from '../search-service';
@@ -8,7 +8,8 @@ import {SearchService} from '../search-service';
   templateUrl: './search.component.html',
   styleUrls: ['./search.component.scss'],
 })
-export class SearchComponent implements OnInit {
+export class SearchComponent implements OnInit, OnDestroy {
+  private _subscription: any;
   private _defaultOrder = ['name', 'description', 'members'];
   private _sort1 = 'name';
   private _sort2 = 'description';
@@ -63,21 +64,22 @@ export class SearchComponent implements OnInit {
   }
 
   ngOnInit() {
-    const params = this.activatedRoute.snapshot.queryParams;
-    if (params && params.q) {
-      this._q = params.q;
-      if (params.sort) {
-        const sort = params.sort;
-        if (!Array.isArray(sort) || sort.length !== 3 || sort.find(s => this._defaultOrder.indexOf(s) === -1)) {
-          this.routerNavigate({q: this._q});
-          return;
+    this._subscription = this.activatedRoute.queryParams.subscribe(params => {
+      if (params && params.q) {
+        this._q = params.q;
+        if (params.sort) {
+          const sort = params.sort;
+          if (!Array.isArray(sort) || sort.length !== 3 || sort.find(s => this._defaultOrder.indexOf(s) === -1)) {
+            this.routerNavigate({q: this._q});
+            return;
+          }
+          this.sort1 = sort[0];
+          this.sort2 = sort[1];
+          this.sort3 = sort[2];
         }
-        this.sort1 = sort[0];
-        this.sort2 = sort[1];
-        this.sort3 = sort[2];
+        this.searchInDocs();
       }
-      this.searchInDocs();
-    }
+    });
   }
 
   onSearch() {
@@ -93,11 +95,7 @@ export class SearchComponent implements OnInit {
   }
 
   routerNavigate(queryParams) {
-    this.router.navigate(['/api/search'], {queryParams}).then(navigated => {
-      if (navigated) {
-        this.searchInDocs();
-      }
-    });
+    this.router.navigate(['/api/search'], {queryParams});
   }
 
   searchInDocs() {
@@ -118,9 +116,14 @@ export class SearchComponent implements OnInit {
   }
 
   updateButton() {
-    const params = this.activatedRoute.snapshot.queryParams;
-    const {sort = this.sorts, q = ''} = params;
+    const params = this.activatedRoute.snapshot.queryParamMap;
+    const q = params.get('q') || '';
+    const sort = params.get('sort') || this.sorts;
     this.canSearch = this.q !== q ||
       sort.length !== 3 || sort[0] !== this.sort1 || sort[1] !== this.sort2 || sort[2] !== this.sort3;
+  }
+
+  ngOnDestroy() {
+    this._subscription.unsubscribe();
   }
 }

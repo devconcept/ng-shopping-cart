@@ -50,7 +50,8 @@ export class NavbarComponent implements OnInit, OnDestroy {
 
   search(q) {
     if (q) {
-      this.router.navigate(['/api/search'], {queryParams: { q }})
+      this.router.navigate(['/api/search'], {queryParams: { q }});
+      this.navbarOpen = false;
     }
   }
 
