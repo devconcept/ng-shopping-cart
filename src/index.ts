@@ -20,6 +20,7 @@ import { BrowserStorageServiceConfiguration } from './interfaces/browser-storage
 import { CartViewComponent } from './components/cart-view/cart-view.component';
 import { CartItem } from './classes/cart-item';
 import { BaseCartItem } from './classes/base-cart-item';
+import {HttpOptions} from './interfaces/http-options';
 
 export {
   /* Components */
@@ -53,6 +54,7 @@ export {
   ShowcaseItem,
   CartModuleOptions,
   BrowserStorageServiceConfiguration,
+  HttpOptions,
   /* Classes */
   CartItem,
   BaseCartItem,

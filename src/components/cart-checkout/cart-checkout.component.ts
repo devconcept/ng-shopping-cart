@@ -1,7 +1,8 @@
 import {Component, EventEmitter, Input, OnChanges, OnDestroy, OnInit, Output, SimpleChanges} from '@angular/core';
+import {HttpClient, HttpParams, HttpRequest} from '@angular/common/http';
+
 import {CheckoutSettings, CheckoutType} from '../../types';
 import {CartService} from '../../classes/cart.service';
-import {HttpClient, HttpRequest} from '@angular/common/http';
 import {CheckoutPaypalSettings} from '../../interfaces/checkout-paypal-settings';
 import {CheckoutHttpSettings} from '../../interfaces/checkout-http-settings';
 
@@ -56,6 +57,9 @@ import {CheckoutHttpSettings} from '../../interfaces/checkout-http-settings';
  *
  * @note {warning} This component captures clicks events bubbling from its projected content. Make sure the event keeps bubbling only when
  * you want the checkout operation to start.
+ *
+ * @note {warning} When the `[service]` is set to `paypal` an actual PayPal button is rendered. None of the inputs `custom`, `buttonText`
+ * or `buttonClass` have any effect.
  */
 @Component({
   selector: 'cart-checkout',
@@ -70,7 +74,7 @@ export class CartCheckoutComponent implements OnChanges, OnInit, OnDestroy {
   httpSettings: CheckoutHttpSettings;
   paypalSettings: CheckoutPaypalSettings;
   /**
-   *  If false displays a default button provided by the component. When set to true projects the contents of the component.
+   * If `false` displays a default button provided by the component. When set to `true` projects the contents of the component.
    */
   @Input() custom = false;
   /**
@@ -91,11 +95,17 @@ export class CartCheckoutComponent implements OnChanges, OnInit, OnDestroy {
    */
   @Input() settings: CheckoutSettings = null;
   /**
-   * Emits the result of the checkout operation. When `[service]` is set to `'paypal'` this event is never emitted.
+   * Emits the result of the checkout operation. If the service is set to `'log'` it emits the entire cart object including tax rates and
+   * shipping info. If is set to `'http'` it emits an `HttpResponse` object with body, headers, etc as it was received by the remote server.
+   *
+   * > When `[service]` is set to `'paypal'` this event is never emitted.
    */
   @Output() checkout = new EventEmitter<any>();
   /**
-   * When the `[service]` is set to `'http'` and the checkout operation fails the error thrown can be captured using this output.
+   * When the `[service]` is set to `'http'` and the checkout operation fails the thrown error can be captured using this output.
+   *
+   * The emitted value is the complete HttpErrorResponse object returned by HttpClient so you can inspect other properties like status
+   * codes, headers, messages, etc.
    */
   @Output() error = new EventEmitter<any>();
 
@@ -116,7 +126,7 @@ export class CartCheckoutComponent implements OnChanges, OnInit, OnDestroy {
   }
 
   doCheckout() {
-    const body = this.cartService.toObject();
+    let body: any = this.cartService.toObject();
     switch (this.service) {
       case 'log':
         console.log(body);
@@ -126,9 +136,20 @@ export class CartCheckoutComponent implements OnChanges, OnInit, OnDestroy {
         if (!this.settings) {
           throw new Error('Missing settings configuration');
         }
-        const {url, method, options} = this.httpSettings;
+        const verbs = ['POST', 'PUT', 'PATCH'];
+        const {url, method = 'POST', options} = this.httpSettings;
+        const methodUpper = method.toUpperCase();
+        if (verbs.indexOf(methodUpper) === -1) {
+          throw new Error(`Invalid http verb found in method setting. Expected one of ${verbs.join(' ')} and got ${method}`);
+        }
+        if (options && options.headers && options.headers.has('Content-Type')) {
+          const contentType = options.headers.get('Content-Type');
+          if (contentType.startsWith('application/x-www-form-urlencoded')) {
+            body = new HttpParams({fromObject: body});
+          }
+        }
         this.httpClient
-          .request(new HttpRequest(method, url, body, options))
+          .request(new HttpRequest(methodUpper, url, body, options))
           .toPromise()
           .then(response => {
             this.checkout.emit(response);
@@ -141,12 +162,18 @@ export class CartCheckoutComponent implements OnChanges, OnInit, OnDestroy {
   }
 
   ngOnChanges(changes: SimpleChanges): void {
-    if (changes['settings'] && changes['settings'].currentValue && changes['settings'].currentValue.itemName) {
-      this.paypalSettings = changes['settings'].currentValue;
+
+    if (changes['settings'] && changes['settings'].currentValue) {
+      const hasOwn = Object.prototype.hasOwnProperty;
+      const value = changes['settings'].currentValue;
+      if (hasOwn.call(value, 'itemName')) {
+        this.paypalSettings = changes['settings'].currentValue;
+      }
+      if (hasOwn.call(value, 'url')) {
+        this.httpSettings = changes['settings'].currentValue;
+      }
     }
-    if (changes['settings'] && changes['settings'].currentValue && changes['settings'].currentValue.url) {
-      this.httpSettings = changes['settings'].currentValue;
-    }
+
   }
 
   ngOnDestroy(): void {

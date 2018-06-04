@@ -2,11 +2,11 @@ import {async, ComponentFixture, fakeAsync, TestBed, tick} from '@angular/core/t
 
 import {CartCheckoutComponent} from './cart-checkout.component';
 import {BaseCartItem, CartService, MemoryCartService} from '../../';
-import {HttpClient, HttpClientModule, HttpEvent, HttpResponse} from '@angular/common/http';
+import {HttpClient, HttpClientModule, HttpHeaders, HttpParams} from '@angular/common/http';
+import {HttpClientTestingModule, HttpTestingController} from '@angular/common/http/testing';
 import {By} from '@angular/platform-browser';
 import {Component} from '@angular/core';
 import {CheckoutSettings, CheckoutType} from '../../types';
-import {Observable} from 'rxjs/Observable';
 
 // region Test setup
 const TEST_CUSTOM_BUTTON_TEMPLATE = '<cart-checkout [custom]="custom"><div class="test"></div></cart-checkout>';
@@ -29,6 +29,7 @@ class TestServiceComponent {
   service: CheckoutType;
   settings: CheckoutSettings;
 }
+
 // endregion
 
 describe('CartCheckoutComponent', () => {
@@ -39,7 +40,7 @@ describe('CartCheckoutComponent', () => {
     TestBed
       .configureTestingModule({
         declarations: [CartCheckoutComponent, TestCustomButtonComponent, TestServiceComponent],
-        imports: [HttpClientModule],
+        imports: [HttpClientModule, HttpClientTestingModule],
         providers: [
           {provide: CartService, useClass: MemoryCartService},
         ]
@@ -138,11 +139,14 @@ describe('CartCheckoutComponent', () => {
     let component: TestServiceComponent;
     let fixture: ComponentFixture<TestServiceComponent>;
     let httpClient: HttpClient;
+    let controller: HttpTestingController;
+    const response = {fake: 1};
 
     beforeEach(() => {
       fixture = TestBed.createComponent(TestServiceComponent);
       component = fixture.componentInstance;
       httpClient = TestBed.get(HttpClient);
+      controller = TestBed.get(HttpTestingController);
     });
 
     it('should throw an error of there is no configuration', fakeAsync(() => {
@@ -156,11 +160,6 @@ describe('CartCheckoutComponent', () => {
     }));
 
     it('should perform an http request with the contents of the cart', fakeAsync(() => {
-      const response = new HttpResponse({body: 1});
-      const httpReqSpy = spyOn(httpClient, 'request').and.returnValue(new Observable<HttpEvent<any>>(observer => {
-        observer.next(response);
-        observer.complete();
-      }));
       service.addItem(new BaseCartItem({id: 1, name: 'Test item', quantity: 1, price: 1}));
       service.setShipping(20);
       service.setTaxRate(10);
@@ -176,26 +175,88 @@ describe('CartCheckoutComponent', () => {
       const button = fixture.debugElement.query(By.css('button'));
       button.nativeElement.click();
       tick();
-      expect(httpReqSpy).toHaveBeenCalledTimes(1);
-      const lastCall = httpReqSpy.calls.mostRecent();
-      expect(lastCall.args.length).toEqual(1);
-      expect(lastCall.args[0].method).toEqual('POST');
-      expect(lastCall.args[0].url).toEqual('http://fakeserver.com');
-      expect(lastCall.args[0].body).toBeTruthy();
-      expect(lastCall.args[0].body.items).toEqual(service.getItems());
-      expect(lastCall.args[0].body.taxRate).toEqual(10);
-      expect(lastCall.args[0].body.shipping).toEqual(20);
+      const req = controller.expectOne('http://fakeserver.com');
+      expect(req.request.method).toEqual('POST');
+      expect(req.request.body).toBeTruthy();
+      expect(req.request.body.items).toEqual(service.getItems());
+      expect(req.request.body.taxRate).toEqual(10);
+      expect(req.request.body.shipping).toEqual(20);
+      req.flush(response);
+      tick();
       expect(checkoutSpy).toHaveBeenCalledTimes(1);
-      expect(checkoutSpy).toHaveBeenCalledWith(response);
       expect(consoleSpy).not.toHaveBeenCalled();
     }));
 
+    it('should change the body format if a content-type header with form-urlencoded value is found', fakeAsync(() => {
+      service.addItem(new BaseCartItem({id: 1, name: 'Test item', quantity: 1, price: 1}));
+      service.addItem(new BaseCartItem({id: 2, name: 'Test item 2', quantity: 1, price: 10}));
+      service.setShipping(20);
+      service.setTaxRate(10);
+      component.service = 'http';
+      const headers = new HttpHeaders({'Content-Type': 'application/x-www-form-urlencoded;charset=UTF-8'});
+      component.settings = {method: 'POST', url: 'http://fakeserver.com', options: {headers}};
+      fixture.detectChanges();
+      const button = fixture.debugElement.query(By.css('button'));
+      button.nativeElement.click();
+      tick();
+      const req = controller.expectOne('http://fakeserver.com');
+      expect(req.request.method).toEqual('POST');
+      expect(req.request.headers.get('Content-Type')).toEqual('application/x-www-form-urlencoded;charset=UTF-8');
+      expect(req.request.body instanceof HttpParams).toEqual(true);
+      expect(req.request.body.getAll('items').length).toEqual(2);
+      expect(req.request.body.get('taxRate')).toEqual(10);
+      expect(req.request.body.get('shipping')).toEqual(20);
+      req.flush(response);
+    }));
+
+    it('should preserve the body if a content-type different from form-urlencoded is found', fakeAsync(() => {
+      service.addItem(new BaseCartItem({id: 1, name: 'Test item', quantity: 1, price: 1}));
+      component.service = 'http';
+      const headers = new HttpHeaders({'Content-Type': 'application/json'});
+      component.settings = {method: 'POST', url: 'http://fakeserver.com', options: {headers}};
+      fixture.detectChanges();
+      const button = fixture.debugElement.query(By.css('button'));
+      button.nativeElement.click();
+      tick();
+      const req = controller.expectOne('http://fakeserver.com');
+      expect(req.request.method).toEqual('POST');
+      expect(req.request.headers.get('Content-Type')).toEqual('application/json');
+      expect(req.request.body instanceof HttpParams).toEqual(false);
+      expect(req.request.body).toBeTruthy();
+      expect(req.request.body.items).toEqual(service.getItems());
+      req.flush(response);
+    }));
+
+    it('should send a POST request if no method is provided', fakeAsync(() => {
+      service.addItem(new BaseCartItem({id: 1, name: 'Test item', quantity: 1, price: 1}));
+      service.addItem(new BaseCartItem({id: 2, name: 'Test item 2', quantity: 1, price: 10}));
+      service.setShipping(20);
+      service.setTaxRate(10);
+      component.service = 'http';
+      component.settings = {url: 'http://fakeserver.com'};
+      fixture.detectChanges();
+      const button = fixture.debugElement.query(By.css('button'));
+      button.nativeElement.click();
+      tick();
+      const req = controller.expectOne('http://fakeserver.com');
+      expect(req.request.method).toEqual('POST');
+      req.flush(response);
+    }));
+
+    it('should throw an error if an unsupported verb is provided', () => {
+      service.addItem(new BaseCartItem({id: 1, name: 'Test item', quantity: 1, price: 1}));
+      component.service = 'http';
+      component.settings = {url: 'http://fakeserver.com', method: 'GET'};
+      fixture.detectChanges();
+      const comp = fixture.debugElement.query(By.css('cart-checkout'));
+      expect(comp.componentInstance instanceof CartCheckoutComponent).toEqual(true);
+      const compInstance: CartCheckoutComponent = comp.componentInstance;
+      expect(compInstance.doCheckout.bind(compInstance))
+        .toThrowError('Invalid http verb found in method setting. Expected one of POST PUT PATCH and got GET');
+    });
+
     it('should emit an error if the call fails', fakeAsync(() => {
-      const err = new Error('Response error');
-      const httpReqSpy = spyOn(httpClient, 'request').and.returnValue(new Observable<HttpEvent<any>>(observer => {
-        observer.error(err);
-        observer.complete();
-      }));
+      const err = 'Response error';
       service.addItem(new BaseCartItem({id: 1, name: 'Test item', quantity: 1, price: 1}));
       component.service = 'http';
       component.settings = {method: 'POST', url: 'http://fakeserver.com'};
@@ -206,10 +267,16 @@ describe('CartCheckoutComponent', () => {
       const button = fixture.debugElement.query(By.css('button'));
       button.nativeElement.click();
       tick();
-      expect(httpReqSpy).toHaveBeenCalled();
+      const req = controller.expectOne('http://fakeserver.com');
+      expect(req.request.method).toEqual('POST');
+      req.flush(err, {status: 400, statusText: 'Bad request'});
+      tick();
       expect(errorSpy).toHaveBeenCalledTimes(1);
-      expect(errorSpy).toHaveBeenCalledWith(err);
+      const httpError = errorSpy.calls.first();
+      expect(httpError.args[0].error).toEqual(err);
     }));
+
+    afterEach(() => controller.verify());
   });
 
   describe('Paypal service', () => {
