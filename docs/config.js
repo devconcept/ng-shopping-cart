@@ -19,10 +19,11 @@ const TYPESCRIPT_SOURCES = [
   {include: './components/**/*.ts',
     exclude: './**/*.spec.ts'},
   {include: './services/**/*.ts',
-    exclude: './**/test/*.ts'},
+    exclude: './**/*.spec.ts'},
   './classes/**/*.ts',
   './interfaces/**/*.ts',
   './types.ts',
+  './*.module.ts',
 ].map((s) => {
   if (typeof s === 'string') {
     return resolve(SOURCE, s);

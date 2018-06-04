@@ -17,23 +17,31 @@ module.exports = exports = class TocDoc {
         menu = `<${doc.computedName.replace(/-component$/, '')}>`;
       }
       if (['markdown', 'type-alias', 'const'].indexOf(doc.docType) === -1) {
-        extra = {
-          topics: doc.members.reduce((c, m) => {
-            if (m.description) {
-              c.push({name: m.name,
-                path: getPath(m.name)});
-            }
-            return c;
-          }, []),
-        };
+        if (doc.ngType === 'module') {
+          extra = {topics: [{name: 'imports', path: 'imports'}, {name: 'exports', path: 'exports'}]}
+        } else {
+          extra = {
+            topics: doc.members.reduce((c, m) => {
+              if (m.description) {
+                c.push({
+                  name: m.name,
+                  path: getPath(m.name),
+                });
+              }
+              return c;
+            }, []),
+          };
+        }
       } else if (doc.docType === 'markdown') {
         const topics = doc.content
           .split(/\r\n|\r|\n/)
           .reduce((c, line) => {
             const match = /^#{3,5}\s+([A-Za-z0-9_ ]+)$/.exec(line);
             if (match) {
-              c.push({name: match[1],
-                path: getPath(match[1])});
+              c.push({
+                name: match[1],
+                path: getPath(match[1])
+              });
             }
             return c;
           }, []);

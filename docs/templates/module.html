@@ -1,0 +1,52 @@
+{% extends 'layout.html' %}
+{% block body %}
+<h2>{$ doc.name $}</h2>
+<p>
+  <span class="badge badge-warning">{$ doc.badgeType $}</span>
+</p>
+<markdown>{$ doc.description | ngEscape $}</markdown>
+{% include 'notes.html' -%}
+<h4 id="imports">
+  <span [innerHtml]="link"></span>
+  Imports
+</h4>
+<p>This module has the following dependencies</p>
+{% for import in doc.imports %}
+<p>
+  <code>{$ import $}</code>
+</p>
+{% endfor %}
+<h4 id="exports">
+  <span [innerHtml]="link"></span>
+  Exports
+</h4>
+<p>This module exports the following symbols</p>
+{% for export in doc.exports %}
+<p>
+  {% if export.location and not export.ignore %}
+  <a [routerLink]="['{$ '/api/' + export.location + '/' + export.computedName $}']">
+    <code>{$ export.name $}</code>
+  </a>
+  {% elseif export.ignore %}
+  <code>{$ export.name $} (internal)</code>
+  {% else %}
+  <a href="https://angular.io/api?query={$ export.name $}">
+    <code>{$ export.name $}</code>
+  </a>
+  {% endif %}
+</p>
+{% if export.description %}
+<markdown>
+  {$ export.description | ngEscape $}
+</markdown>
+{% else %}
+<p>
+  The <code>{$ export.name $}</code> does not belong to this library. Is re-exported so you don't have to import it
+  again.
+</p>
+<p>
+  You can find information about it in the Angular documentation.
+</p>
+{% endif %}
+{% endfor %}
+{% endblock %}

@@ -35,6 +35,20 @@ module.exports = function computeNgType(getTypeFolder) {
                 return curr;
               }, []);
             }
+            const module = doc.decorators.find(d => d.name === 'NgModule');
+            if (module) {
+              doc.ngType = 'module';
+              doc.template = `${doc.ngType}.html`;
+              doc.declarations = module.argumentInfo[0].declarations || [];
+              doc.imports = module.argumentInfo[0].imports || [];
+              doc.exports = (module.argumentInfo[0].exports || []).map(e => {
+                const ref = docs.find(d => d.name === e) || {name: e};
+                const {computedName, name, description, location, ignore} = ref;
+                const cName = computedName ? computedName : name;
+                return {name, description, location, computedName: cName, ignore};
+              });
+              doc.entryComponents = module.argumentInfo[0].entryComponents || [];
+            }
           }
           if (doc.docType === 'const') {
             doc.ngType = 'token';
