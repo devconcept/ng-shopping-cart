@@ -45,17 +45,6 @@
     <form>
       <div class="form-row">
         <div class="form-group col-12 col-md-4">
-          <label for="showCaseRatio">Aspect ratio</label>
-          <select id="showCaseRatio" name="showCaseRatio" [(ngModel)]="aspectRatio" class="form-control">
-            <optgroup label="Default ratios">
-              <option *ngFor="let ratio of ratios" [value]="ratio">{{ratio}}</option>
-            </optgroup>
-            <optgroup label="Custom ratios">
-              <option [value]="'16:9'">16:9</option>
-            </optgroup>
-          </select>
-        </div>
-        <div class="form-group col-12 col-md-4">
           <label for="xsCols">Phone columns</label>
           <select id="xsCols" name="xsCols" [(ngModel)]="xsCols" class="form-control">
             <option *ngFor="let col of columns" [value]="col">{{col}} columns</option>
@@ -83,6 +72,20 @@
           <label for="xlCols">Extra large cols</label>
           <select id="xlCols" name="xlCols" [(ngModel)]="xlCols" class="form-control">
             <option *ngFor="let col of columns" [value]="col">{{col}} columns</option>
+          </select>
+        </div>
+      </div>
+      <hr>
+      <div class="form-row">
+        <div class="form-group col-12 col-md-4">
+          <label for="showCaseRatio">Aspect ratio</label>
+          <select id="showCaseRatio" name="showCaseRatio" [(ngModel)]="aspectRatio" class="form-control">
+            <optgroup label="Default ratios">
+              <option *ngFor="let ratio of ratios" [value]="ratio">{{ratio}}</option>
+            </optgroup>
+            <optgroup label="Custom ratios">
+              <option [value]="'16:9'">16:9</option>
+            </optgroup>
           </select>
         </div>
         <div class="form-group col-12 col-md-4">
