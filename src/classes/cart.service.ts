@@ -48,7 +48,7 @@ export abstract class CartService<T extends CartItem> {
   public abstract itemCount(): number;
 
   /**
-   * Returns the number of item including each item's quantity
+   * Returns the number of items including each item's quantity
    */
   public abstract entries(): number;
 
@@ -91,7 +91,7 @@ export abstract class CartService<T extends CartItem> {
    * Returns the tax computation of the shopping cart
    */
   public getTax(): number {
-    return this.cost() / 100 * this.getTaxRate();
+    return this.cost() * (this.getTaxRate() / 100);
   }
 
   /**
