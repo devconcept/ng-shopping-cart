@@ -35,7 +35,9 @@ yarn add ng-shopping-cart
 Documentation is available at http://devconcept.github.io/ng-shopping-cart/
 
 
-[Dgeni][dgeni-github] is used to automatically generate documentation from the source code. If you spot an error please consider [reporting it](https://github.com/devconcept/ng-shopping-cart/issues).
+[Dgeni][dgeni-github] is used to automatically generate documentation from the source code. 
+
+If you spot an error please consider [reporting it](https://github.com/devconcept/ng-shopping-cart/issues).
 
 ## Demo
 
