@@ -23,6 +23,16 @@ export abstract class CartService<T extends CartItem> {
   public onItemsChanged: EventEmitter<number> = new EventEmitter<number>();
 
   /**
+   * Emits an event every time taxes for the cart are changed
+   */
+  public onTaxChange: EventEmitter<number> = new EventEmitter<number>();
+
+  /**
+   * Emits an event every time shipping costs for the cart are changed
+   */
+  public onShippingChange: EventEmitter<number> = new EventEmitter<number>();
+
+  /**
    * Finds an item by id
    */
   public abstract getItem(id: any): T;

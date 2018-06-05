@@ -25,7 +25,7 @@ import {CartService} from '../../classes/cart.service';
   templateUrl: './cart-summary.component.html',
 })
 export class CartSummaryComponent implements OnInit, OnDestroy {
-  private cartSubscription: any;
+  private _itemsSubscription: any;
   /**
    * The url of an icon to show on the summary. Use this to replace the default icon which is an svg with the image of a shopping cart.
    */
@@ -49,14 +49,13 @@ export class CartSummaryComponent implements OnInit, OnDestroy {
 
   ngOnInit(): void {
     this.updateComponent();
-    this.cartSubscription = this.cartService.onItemsChanged.subscribe(() => {
+    this._itemsSubscription = this.cartService.onItemsChanged.subscribe(() => {
       this.updateComponent();
     });
   }
 
   ngOnDestroy(): void {
-    this.cartSubscription.unsubscribe();
-    this.cartSubscription = null;
+    this._itemsSubscription.unsubscribe();
   }
 
 }

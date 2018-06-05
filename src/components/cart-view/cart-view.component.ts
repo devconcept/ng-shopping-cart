@@ -59,7 +59,9 @@ import { CartViewDisplay } from '../../types';
   templateUrl: './cart-view.component.html',
 })
 export class CartViewComponent implements OnInit, OnDestroy {
-  private serviceSubscription: any;
+  private _itemsSubscription: any;
+  private _taxSubscription: any;
+  private _shippingSubscription: any;
   /**
    * Changes the appearance how the cart view displays in different screen sizes
    */
@@ -140,13 +142,21 @@ export class CartViewComponent implements OnInit, OnDestroy {
 
   ngOnInit(): void {
     this.update();
-    this.serviceSubscription = this.cartService.onItemsChanged.subscribe(() => {
+    this._itemsSubscription = this.cartService.onItemsChanged.subscribe(() => {
+      this.update();
+    });
+    this._shippingSubscription = this.cartService.onShippingChange.subscribe(() => {
+      this.update();
+    });
+    this._taxSubscription = this.cartService.onTaxChange.subscribe(() => {
       this.update();
     });
   }
 
   ngOnDestroy(): void {
-    this.serviceSubscription.unsubscribe();
+    this._itemsSubscription.unsubscribe();
+    this._shippingSubscription.unsuscribe();
+    this._taxSubscription.unsuscribe();
   }
 
 }

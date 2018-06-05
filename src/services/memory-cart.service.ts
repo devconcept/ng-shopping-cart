@@ -70,6 +70,7 @@ export class MemoryCartService<T extends CartItem> extends CartService<T> {
 
   public setShipping(shipping: number): void {
     this._shipping = shipping;
+    this.onShippingChange.emit(this._shipping);
   }
 
   public getTaxRate(): number {
@@ -78,6 +79,7 @@ export class MemoryCartService<T extends CartItem> extends CartService<T> {
 
   public setTaxRate(taxRate: number): void {
     this._taxRate = taxRate;
+    this.onTaxChange.emit(this._taxRate);
   }
 
   public isEmpty(): boolean {
