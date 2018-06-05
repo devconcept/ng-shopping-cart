@@ -42,15 +42,15 @@
   <div class="card-body" [ngbCollapse]="settingsCollapsed">
     <form>
       <div class="form-row">
-        <div class="form-group col-12 col-md-4" *ngIf="!custom">
-          <label for="addToCartLabel">Label</label>
-          <input id="addToCartLabel" name="addToCartLabel" class="form-control" [(ngModel)]="label" type="text">
-        </div>
         <div class="form-group col-12 col-md-4">
           <label for="addToCartType">Type</label>
           <select id="addToCartType" name="addToCartType" class="form-control" [(ngModel)]="editor">
             <option *ngFor="let editor of editorTypes" [value]="editor">{{editor|titlecase}}</option>
           </select>
+        </div>
+        <div class="form-group col-12 col-md-4" *ngIf="!custom">
+          <label for="addToCartLabel">Label</label>
+          <input id="addToCartLabel" name="addToCartLabel" class="form-control" [(ngModel)]="label" type="text">
         </div>
         <div class="form-group col-12 col-md-4" *ngIf="editor !== 'button'">
           <label for="addToCartPosition">Position</label>
