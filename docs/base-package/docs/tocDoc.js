@@ -18,7 +18,17 @@ module.exports = exports = class TocDoc {
       }
       if (['markdown', 'type-alias', 'const'].indexOf(doc.docType) === -1) {
         if (doc.ngType === 'module') {
-          extra = {topics: [{name: 'imports', path: 'imports'}, {name: 'exports', path: 'exports'}]}
+          extra = {
+            topics: [
+              {
+                name: 'imports',
+                path: 'imports',
+              }, {
+                name: 'exports',
+                path: 'exports',
+              },
+            ],
+          };
         } else {
           extra = {
             topics: doc.members.reduce((c, m) => {
@@ -40,7 +50,7 @@ module.exports = exports = class TocDoc {
             if (match) {
               c.push({
                 name: match[1],
-                path: getPath(match[1])
+                path: getPath(match[1]),
               });
             }
             return c;

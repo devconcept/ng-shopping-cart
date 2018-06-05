@@ -4,7 +4,6 @@ module.exports = exports = function generateApiRoutes(customDocs) {
     $runAfter: ['adding-routes'],
     $runBefore: ['routes-added'],
     $process(docs) {
-      let currentDocs = docs;
       const [NgRouteDoc, NgLazyRoute, NgComponentDoc] = customDocs
         .getDocs(['NgRouteDoc', 'NgLazyRoute', 'NgComponentDoc']);
 
@@ -23,9 +22,7 @@ module.exports = exports = function generateApiRoutes(customDocs) {
           }),
         ],
       }, modules.map(m => new NgLazyRoute(m)));
-      currentDocs.push(apiRoute);
-      currentDocs = currentDocs.concat(ngRoutes);
-      return currentDocs;
+      return [...docs, apiRoute, ...ngRoutes];
     },
   };
 };

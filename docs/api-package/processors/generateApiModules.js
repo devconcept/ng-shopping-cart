@@ -14,7 +14,6 @@ module.exports = exports = function generateApiModules(getTypeFolder, customDocs
     $runAfter: ['adding-modules'],
     $runBefore: ['modules-added'],
     $process(docs) {
-      let currentDocs = docs;
       const NgModuleDoc = customDocs.getDoc('NgModuleDoc');
       const types = docs.reduce((curr, doc) => {
         const ignore = ['markdown', 'ngTemplate', 'ngModule', 'ngComponent'];
@@ -35,8 +34,7 @@ module.exports = exports = function generateApiModules(getTypeFolder, customDocs
         });
       });
       const dependencies = flatten(ngModules.map(m => m.dependencies));
-      currentDocs = currentDocs.concat(ngModules, dependencies);
-      return currentDocs;
+      return [...docs, ...ngModules, ...dependencies];
     },
   };
 };
