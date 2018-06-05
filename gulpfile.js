@@ -7,8 +7,11 @@ const cleanCss = require('gulp-clean-css');
 const pify = require('pify');
 const git = pify(require('gulp-git'));
 const pkg = require('./package.json');
-const {exec} = require('child_process');
+const {spawn} = require('child_process');
 const pump = require('pump');
+
+const checkout = 'develop';
+const spawnOpts = {stdio: 'inherit', shell: true};
 
 gulp.task('styles:clean', () => {
   return del('./dist/styles');
@@ -66,18 +69,14 @@ gulp.task('styles:light:min', (cb) => {
 gulp.task('styles:light', gulp.series('styles:light:compile', 'styles:light:min'));
 
 gulp.task('docs:generate', () => {
-  return exec('npm run docs:generate', {windowsHide: true});
+  return spawn('npm run docs:generate', spawnOpts);
 });
 
 gulp.task('docs:compile', () => {
-  return exec('npm run docs:build', {windowsHide: true});
+  return spawn('npm run docs:build', spawnOpts);
 });
 
-gulp.task('docs:run', () => {
-  return exec('npm run docs:run', {windowsHide: true});
-});
-
-gulp.task('docs:clean', async() => {
+gulp.task('docs:clean', async () => {
   await git.checkout('gh-pages');
   return del(['*.js', '*.css', '*.html', './assets/*', '3rdpartylicenses.txt', '.nojekyll', 'favicon.ico']);
 });
@@ -97,11 +96,11 @@ gulp.task('docs:index', (cb) => {
   ], cb);
 });
 
-gulp.task('docs:commit', async() => {
+gulp.task('docs:commit', async () => {
   const msg = `Updating docs version ${pkg.version}`;
   await git.exec({args: 'add ./* -A'});
   await git.exec({args: `commit -a --message="${msg}"`});
-  return git.checkout('develop');
+  return git.checkout(checkout);
 });
 
 gulp.task('docs:cleanup', () => {
@@ -122,7 +121,6 @@ gulp.task('docs:dry', gulp.series(
   'docs:cleanup',
   'docs:generate',
   'docs:compile',
-  'docs:run',
 ));
 
 gulp.task('styles', gulp.series(
@@ -135,7 +133,7 @@ gulp.task('styles', gulp.series(
 ));
 
 gulp.task('pack', () => {
-  return exec('npm run pack', {windowsHide: true});
+  return spawn('npm run pack', spawnOpts);
 });
 
 gulp.task('default', gulp.series('pack', 'styles'));
