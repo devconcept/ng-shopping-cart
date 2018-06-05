@@ -166,7 +166,12 @@ export class AddToCartComponent implements OnInit, OnChanges {
   }
 
   computeClass() {
-    this.containerClass = ['add-to-cart-' + this.type, this.horizontalEditor ? 'editor-position-horizontal' : 'editor-position-vertical'];
+    this.containerClass = [
+      'add-to-cart-' + this.type,
+      this.horizontalEditor ?
+        'editor-position-horizontal' :
+        'editor-position-vertical'
+    ];
   }
 
 }
