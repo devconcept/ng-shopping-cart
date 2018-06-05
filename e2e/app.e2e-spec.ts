@@ -1,14 +1,16 @@
-import { AppPage } from './app.po';
+import {AppPage} from './app.po';
 
-describe('ng-shopping-cart App', () => {
+describe('NgShoppingCart demo', () => {
   let page: AppPage;
 
   beforeEach(() => {
     page = new AppPage();
   });
 
-  it('should display welcome message', () => {
+  it('should display one demo element for component', () => {
     page.navigateTo();
-    expect(page.getHeaderText()).toEqual('NgShoppingCart Demo');
+    return page.getDemoElements().then(el => {
+      expect(el.length).toEqual(5);
+    });
   });
 });

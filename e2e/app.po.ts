@@ -1,11 +1,11 @@
-import { browser, by, element } from 'protractor';
+import { browser, $$ } from 'protractor';
 
 export class AppPage {
   navigateTo() {
     return browser.get('/');
   }
 
-  getHeaderText() {
-    return element(by.css('demo-root .container h1')).getText();
+  getDemoElements() {
+    return $$('demo-root .container .demo-section');
   }
 }
