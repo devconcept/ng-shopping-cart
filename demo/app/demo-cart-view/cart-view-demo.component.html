@@ -6,24 +6,51 @@
     </button>
   </div>
   <div class="card-body" [ngbCollapse]="settingsCollapsed">
-    <form class="form-inline">
-      <div class="form-group mr-3">
-        <label for="cartViewDisplay" class="mr-1">Label</label>
-        <select id="cartViewDisplay" name="cartViewDisplay" class="form-control" [(ngModel)]="display">
-          <option value="table">Table</option>
-          <option value="responsive">Responsive</option>
-          <option value="responsive-table">Responsive table</option>
-        </select>
+    <form>
+      <div class="form-row">
+        <div class="form-group col-12 col-md-4">
+          <label for="cartViewDisplay" class="mr-1">Label</label>
+          <select id="cartViewDisplay" name="cartViewDisplay" class="form-control" [(ngModel)]="display">
+            <option value="table">Table</option>
+            <option value="responsive">Responsive</option>
+            <option value="responsive-table">Responsive table</option>
+          </select>
+        </div>
+        <div class="form-group col-12 col-md-4">
+          <label for="cartViewTax" class="mr-1">Tax rate</label>
+          <div class="form-row">
+            <div class="form-group col">
+              <input id="cartViewTax" name="cartViewTax" class="form-control" type="number" [(ngModel)]="tax">
+            </div>
+            <div class="form-group col-auto">
+              <button type="button" class="btn btn-info" (click)="setTaxRate()">Set</button>
+            </div>
+          </div>
+        </div>
+        <div class="form-group col-12 col-md-4">
+          <label for="cartViewShipping" class="mr-1">Shipping</label>
+          <div class="form-row">
+            <div class="form-group col">
+              <input id="cartViewShipping" name="cartViewShipping" class="form-control" type="number"
+                     [(ngModel)]="shipping">
+            </div>
+            <div class="form-group col-auto">
+              <button type="button" class="btn btn-info" (click)="setShipping()">Set</button>
+            </div>
+          </div>
+        </div>
       </div>
-      <div class="form-check form-check-inline">
-        <input type="checkbox" id="cartViewImages" name="cartViewImages" class="form-check-input"
-               [(ngModel)]="showImages">
-        <label for="cartViewImages" class="form-check-label">Show images</label>
-      </div>
-      <div class="form-check form-check-inline">
-        <input type="checkbox" id="cartViewCustom" name="cartViewCustom" class="form-check-input"
-               [(ngModel)]="useCustom">
-        <label for="cartViewCustom" class="form-check-label">Use custom empty content</label>
+      <div class="form-inline">
+        <div class="form-check form-check-inline">
+          <input type="checkbox" id="cartViewImages" name="cartViewImages" class="form-check-input"
+                 [(ngModel)]="showImages">
+          <label for="cartViewImages" class="form-check-label">Show images</label>
+        </div>
+        <div class="form-check form-check-inline">
+          <input type="checkbox" id="cartViewCustom" name="cartViewCustom" class="form-check-input"
+                 [(ngModel)]="useCustom">
+          <label for="cartViewCustom" class="form-check-label">Use custom empty content</label>
+        </div>
       </div>
     </form>
     <hr>
