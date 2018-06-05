@@ -123,14 +123,14 @@ import {Component, ViewEncapsulation} from '@angular/core';
   selector: 'my-component',
   templateUrl: './my-component.html',
   styleUrls: ['./my-component.css'],
-  encapsulation: ViewEncapsulation.None
+  encapsulation: ViewEncapsulation.None // <-- Set the encapsulation mode in the component metadata
 })
 export class MyComponent {
 
 }
 ``` 
 
-Using this technique also works because now Angular doesn't add the attribute to your classes but you'll lose **styling modularity** and every class selector you write will leak to other components.
+Using this technique also works because now Angular doesn't add the attribute to your classes but you'll lose **styling modularity** and every css selector you write will leak to other components.
 
 #### Using css preprocessors
 
@@ -174,7 +174,7 @@ Another great target for customization is the available combinations of all `<ca
 <cart-showcase [aspectRatio]="'16:9'"></cart-showcase>
 ```
 
-If you plan on using only square items, the library also includes a smaller css file, the `ng-shopping-cart-light.css` with all other ratios removed. You can use this file directly to get rid of a large portion of CSS that otherwise would be included in your app.
+If you plan on using only square items, the library also includes a smaller css file, the `ng-shopping-cart-light.css` with all other ratios removed. You can use this file directly to get rid of a large portion of css that otherwise would be included in your app.
 
-> The variable `$generate-ratios` also disables ratio generation for values different from `1:1`. If you set it to false and want to generate a custom ratio you have to pass a last argument `true` to the mixin `@include showcase-ratio(16, 9, true);` 
+> The variable `$generate-ratios` also disables ratio generation for values different from `1:1`. If you set it to `false` and want to generate a custom ratio you have to pass a last argument `true` to the mixin `@include showcase-ratio(16, 9, true)` 
 
