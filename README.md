@@ -1,8 +1,22 @@
-# NgShoppingCart
+<h1 align="center">NgShoppingCart</h1>
+<p align="center">
+  <img alt="Shopping cart" width="500" src="https://github.com/devconcept/ng-shopping-cart/blob/master/src/cart.svg">
+</p>
+<p align="center">
+  <a href="https://travis-ci.org/devconcept/ng-shopping-cart">
+    <img alt="Build status" src="https://travis-ci.org/devconcept/ng-shopping-cart.svg?branch=master">
+  </a>
+  <a href="https://coveralls.io/github/devconcept/ng-shopping-cart?branch=master">
+    <img alt="Code coverage" src="https://coveralls.io/repos/github/devconcept/ng-shopping-cart/badge.svg?branch=master">
+  </a> 
+  <img alt="Npm version" src="https://img.shields.io/npm/v/ng-shopping-cart.svg">
+  <img alt="Monthly downloads" src="https://img.shields.io/npm/dm/ng-shopping-cart.svg">
+</p>
 
-[![Build Status][travis-image]][travis-url] [![Coverage Status][coveralls-image]][coveralls-url] ![Npm version][version-image] ![Downloads][downloads-image]
+<p align="center">
+An Angular component library to create shopping carts. Based on it's <a href="http://ngcart.snapjay.com/" alt="ngCart">predecessor</a> for Angular.js with tons of improvements.
+</p>
 
-An Angular component library to create shopping carts. Based on it's [predecessor][ng-cart] for Angular.js with tons of improvements.
 
 ## Features
 
@@ -71,13 +85,6 @@ Ideas and suggestions are always welcome. You can also contribute. Check the [co
 
 [MIT](https://github.com/devconcept/ng-shopping-cart/blob/master/LICENSE)
 
-[ng-cart]: http://ngcart.snapjay.com/ "ngCart"
-[travis-url]: https://travis-ci.org/devconcept/ng-shopping-cart
-[travis-image]: https://travis-ci.org/devconcept/ng-shopping-cart.svg?branch=master "Build status"
-[coveralls-url]: https://coveralls.io/github/devconcept/ng-shopping-cart?branch=master
-[coveralls-image]: https://coveralls.io/repos/github/devconcept/ng-shopping-cart/badge.svg?branch=master "Coverage report"
-[version-image]:https://img.shields.io/npm/v/ng-shopping-cart.svg "Npm version"
-[downloads-image]: https://img.shields.io/npm/dm/ng-shopping-cart.svg "Monthly downloads"
 [dgeni-github]: https://github.com/angular/dgeni "Dgeni"
 
 
