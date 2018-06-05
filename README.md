@@ -1,6 +1,6 @@
 <h1 align="center">NgShoppingCart</h1>
 <p align="center">
-  <img alt="Shopping cart" width="500" src="https://github.com/devconcept/ng-shopping-cart/blob/master/src/cart.svg">
+  <img alt="Shopping cart" width="400" src="https://github.com/devconcept/ng-shopping-cart/blob/master/src/cart.svg">
 </p>
 <p align="center">
   <a href="https://travis-ci.org/devconcept/ng-shopping-cart">
