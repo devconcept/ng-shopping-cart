@@ -21,38 +21,38 @@
 
     .default-sc-item {
       position: absolute;
-      @include rem-fallback('left', 0.5);
-      @include rem-fallback('right', 0.5);
-      @include rem-fallback('top', 0.5);
-      @include rem-fallback('bottom', 0.5);
+      @include use('left', $sc-item-padding);
+      @include use('right', $sc-item-padding);
+      @include use('top', $sc-item-padding);
+      @include use('bottom', $sc-item-padding);
       background: $image-bg no-repeat center;
       background-size: $image-fit;
 
       .default-sc-description {
-        @include rem-fallback('padding', 1);
+        @include use('padding', 1);
         position: absolute;
         bottom: 0;
         left: 0;
         right: 0;
-        background-color: rgba(0, 0, 0, 0.6);
-        color: white;
-        max-height: 50%;
-        @include rem-fallback('min-height', 3);
+        background-color: $sc-description-bg;
+        color: $sc-description-text;
+        @include use('max-height', $sc-description-max-height);
+        @include use('min-height', $sc-description-min-height);
 
         .default-sc-name {
-          @include rem-fallback('font-size', 2);
+          @include use('font-size', 2);
           position: absolute;
           transform: translateY(-50%);
           top: 50%;
-          @include rem-fallback('left', 1);
+          @include use('left', $sc-description-margin);
         }
 
         .default-sc-price {
-          @include rem-fallback('font-size', 2);
+          @include use('font-size', 2);
           position: absolute;
           transform: translateY(-50%);
           top: 50%;
-          @include rem-fallback('right', 1);
+          @include use('right', $sc-description-margin);
         }
       }
     }
@@ -62,7 +62,7 @@
         .default-sc-item {
           .default-sc-description {
             max-height: if($r > 3, 20%, 30%);
-            @include rem-fallback('padding', if($r > 2, 0, 1));
+            @include use('padding', if($r > 2, 0, 1));
           }
         }
       }

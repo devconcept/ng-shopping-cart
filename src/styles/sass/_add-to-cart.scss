@@ -54,13 +54,13 @@ add-to-cart {
 
   .add-to-cart-input {
     padding: $add-to-cart-editor-padding;
-    @include rem-fallback('border-radius', $input-radius);
+    @include use('border-radius', $input-radius);
     border: $add-to-cart-editor-border;
   }
 
   .add-to-cart-select {
     padding: $add-to-cart-editor-padding;
-    @include rem-fallback('border-radius', $input-radius);
+    @include use('border-radius', $input-radius);
     border: $add-to-cart-editor-border;
   }
 }

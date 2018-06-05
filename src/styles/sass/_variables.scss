@@ -1,4 +1,5 @@
 /* General */
+// Default unitless values are considered to be expressed in rems
 // The base font to calculate the fallback size in pixels of properties specified in rem units
 $base-font: 14 !default;
 // Generate all ratios for showcase components
@@ -74,6 +75,18 @@ $cart-view-button-radius: 3px !default;
 // Maximum combination of ratios starting from 1 to this value
 // Bigger values generate more combinations in exponential order so use with caution
 $ratios: 4 !default;
+// The distance from the border for showcase items in rems
+$sc-item-padding: 0.5 !default;
+// Background color for descriptions in showcase items
+$sc-description-bg: rgba(0, 0, 0, 0.6) !default;
+// Text color for descriptions in showcase items
+$sc-description-text: #ffffff !default;
+// The minimum height of the description element in showcase items
+$sc-description-min-height: 3 !default;
+// The maximum height of the description element in showcase items
+$sc-description-max-height: 50% !default;
+// Margin in both sides for the text inside the description element in showcase items
+$sc-description-margin: 1 !default;
 
 /* CartSummary */
 $cart-summary-icon-size: 32px !default;

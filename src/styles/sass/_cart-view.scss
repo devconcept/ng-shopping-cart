@@ -23,7 +23,7 @@
         text-align: right;
         font-weight: bold;
 
-        @include rem-fallback('padding', 0.75);
+        @include use('padding', 0.75);
         white-space: normal;
 
         &.cart-list-name-header {
@@ -38,7 +38,7 @@
       & > .cart-list-value {
         display: table-cell;
         text-align: right;
-        @include rem-fallback('padding', 0.75);
+        @include use('padding', 0.75);
         vertical-align: middle;
         border-top: $cart-view-divider;
         white-space: nowrap;
@@ -48,7 +48,7 @@
         }
 
         &.cart-list-image-value {
-          @include rem-fallback('padding', 0.75);
+          @include use('padding', 0.75);
           width: $cart-view-image-width;
           height: $cart-view-image-height;
           min-width: $cart-view-image-width;
@@ -67,7 +67,7 @@
           display: table-cell;
           text-align: right;
           white-space: nowrap;
-          @include rem-fallback('padding', 0.25);
+          @include use('padding', 0.25);
         }
       }
     }
@@ -110,7 +110,7 @@
       @include media-up('s') {
         left: auto;
         top: auto;
-        @include rem-fallback('padding', 0.75);
+        @include use('padding', 0.75);
         transform: none;
         background-color: transparent;
         color: inherit;
@@ -169,7 +169,7 @@
         display: block;
         position: relative;
         border: solid 1px #dee2e6;
-        @include rem-fallback('margin-bottom', 0.5);
+        @include use('margin-bottom', 0.5);
         width: 100%;
         padding: 100% 0 0;
 
@@ -194,7 +194,7 @@
             position: static;
             display: table-cell;
             text-align: right;
-            @include rem-fallback('padding', 0.75);
+            @include use('padding', 0.75);
             vertical-align: middle;
             border-top: solid 1px #dee2e6;
             white-space: nowrap;
@@ -217,7 +217,7 @@
             bottom: 0;
 
             @include media-up('s') {
-              @include rem-fallback('padding', 0.75);
+              @include use('padding', 0.75);
               z-index: auto;
               display: table-cell;
               left: auto;
@@ -233,18 +233,18 @@
           &.cart-list-name-value {
             background-color: rgba(0, 0, 0, 0.6);
             color: white;
-            @include rem-fallback('padding', 1);
+            @include use('padding', 1);
             position: absolute;
             left: 0;
             bottom: 0;
             right: 0;
-            @include rem-fallback('font-size', 2);
+            @include use('font-size', 2);
 
             @include media-up('s') {
               background-color: transparent;
               color: inherit;
               position: static;
-              @include rem-fallback('padding', 0.75);
+              @include use('padding', 0.75);
               z-index: auto;
               display: table-cell;
               left: auto;
@@ -261,13 +261,13 @@
             top: 10px;
             background-color: $cart-view-responsive-price-bg;
             color: $cart-view-responsive-price;
-            @include rem-fallback('padding', 0.50);
+            @include use('padding', 0.50);
 
             @include media-up('s') {
               background-color: transparent;
               color: inherit;
               position: static;
-              @include rem-fallback('padding', 0.75);
+              @include use('padding', 0.75);
               z-index: auto;
               display: table-cell;
               left: auto;
@@ -281,7 +281,7 @@
           &.cart-list-quantity-value {
             background-color: transparent;
             color: inherit;
-            @include rem-fallback('padding', 0.50);
+            @include use('padding', 0.50);
             position: absolute;
             top: 10px;
             left: 0;
@@ -290,7 +290,7 @@
               background-color: transparent;
               color: inherit;
               position: static;
-              @include rem-fallback('padding', 0.75);
+              @include use('padding', 0.75);
               z-index: auto;
               display: table-cell;
               left: auto;
@@ -301,7 +301,7 @@
           &.cart-list-total-value {
             background-color: transparent;
             color: white;
-            @include rem-fallback('padding', 1);
+            @include use('padding', 1);
             position: absolute;
             bottom: 0;
             right: 0;
@@ -311,7 +311,7 @@
               background-color: transparent;
               color: inherit;
               position: static;
-              @include rem-fallback('padding', 0.75);
+              @include use('padding', 0.75);
               z-index: auto;
               display: table-cell;
               left: auto;
@@ -327,7 +327,7 @@
 
       .cart-list-footer {
         display: block;
-        @include rem-fallback('padding-top', 1);
+        @include use('padding-top', 1);
 
         @include media-up('s') {
           display: table-footer-group;
@@ -344,7 +344,7 @@
 
             @include media-up('s') {
               display: table-cell;
-              @include rem-fallback('padding', 0.25);
+              @include use('padding', 0.25);
             }
           }
 
@@ -353,7 +353,7 @@
 
             @include media-up('s') {
               display: table-cell;
-              @include rem-fallback('padding', 0.25);
+              @include use('padding', 0.25);
             }
           }
         }
@@ -365,7 +365,7 @@
     .cart-list-header {
       .cart-list-header-value {
         text-align: right;
-        @include rem-fallback('padding', 0.75);
+        @include use('padding', 0.75);
         white-space: normal;
 
         &.cart-list-name-header {
@@ -376,7 +376,7 @@
 
     .cart-list-value {
       text-align: right;
-      @include rem-fallback('padding', 0.75);
+      @include use('padding', 0.75);
       vertical-align: middle;
       border-top: solid 1px #dee2e6;
 
@@ -398,7 +398,7 @@
       text-align: right;
 
       & td {
-        @include rem-fallback('padding', 0.25);
+        @include use('padding', 0.25);
       }
     }
   }
@@ -410,7 +410,7 @@
   font: $cart-view-empty-font;
   border: $cart-view-empty-border;
   text-align: center;
-  @include rem-fallback('padding', $cart-view-empty-padding);
+  @include use('padding', $cart-view-empty-padding);
 }
 
 

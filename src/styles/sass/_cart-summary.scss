@@ -14,6 +14,6 @@
   .cart-summary-contents {
     padding-left: 5px;
     float: left;
-    @include rem-fallback('font-size', 0.75);
+    @include use('font-size', 0.75);
   }
 }
