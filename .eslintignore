@@ -1,3 +1,7 @@
 /dist/*
 /coverage/*
 /docs-dist/*
+/docs-build/*
+/e2e/*
+/demo/*
+/src/*
