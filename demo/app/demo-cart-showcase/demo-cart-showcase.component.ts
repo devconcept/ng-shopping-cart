@@ -9,7 +9,7 @@ import {DemoCartItem} from '../demo-cart-item';
   selector: 'demo-cart-showcase',
   templateUrl: './demo-cart-showcase.component.html',
 })
-export class CartShowcaseDemoComponent {
+export class DemoCartShowcaseComponent {
   private _itemType = 'default';
   itemComponent: Type<ShowcaseItem> = CartShowcaseItemComponent;
   item = {label: '', cost: 1, photo: '', amount: 1};

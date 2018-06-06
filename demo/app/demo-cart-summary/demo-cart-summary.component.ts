@@ -4,6 +4,6 @@ import {Component} from '@angular/core';
   selector: 'demo-cart-summary',
   templateUrl: './demo-cart-summary.component.html',
 })
-export class CartSummaryDemoComponent {
+export class DemoCartSummaryComponent {
   resultsCollapsed = false;
 }

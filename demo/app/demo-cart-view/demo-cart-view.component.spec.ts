@@ -1,22 +1,25 @@
 import {async, ComponentFixture, TestBed} from '@angular/core/testing';
 
-import {CartViewDemoComponent} from './cart-view-demo.component';
+import {DemoCartViewComponent} from './demo-cart-view.component';
 import {FormsModule} from '@angular/forms';
 import {CommonModule} from '@angular/common';
-import {CartViewComponent} from '../../../src/components/cart-view/cart-view.component';
 import {CartService} from '../../../src/classes/cart.service';
 import {MemoryCartService} from '../../../src/services/memory-cart.service';
+import {ShoppingCartModule} from '../../../src/shopping-cart.module';
+import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
 
 describe('CartViewDemoComponent', () => {
-  let component: CartViewDemoComponent;
-  let fixture: ComponentFixture<CartViewDemoComponent>;
+  let component: DemoCartViewComponent;
+  let fixture: ComponentFixture<DemoCartViewComponent>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [CartViewDemoComponent, CartViewComponent],
+      declarations: [DemoCartViewComponent],
       imports: [
         CommonModule,
         FormsModule,
+        ShoppingCartModule,
+        NgbModule,
       ],
       providers: [
         {provide: CartService, useClass: MemoryCartService}
@@ -26,7 +29,7 @@ describe('CartViewDemoComponent', () => {
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(CartViewDemoComponent);
+    fixture = TestBed.createComponent(DemoCartViewComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

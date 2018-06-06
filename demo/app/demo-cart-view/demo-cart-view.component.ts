@@ -5,10 +5,10 @@ import {DemoCartItem} from '../demo-cart-item';
 
 @Component({
   selector: 'demo-cart-view',
-  templateUrl: './cart-view-demo.component.html',
-  styleUrls: ['./cart-view-demo.component.scss']
+  templateUrl: './demo-cart-view.component.html',
+  styleUrls: ['./demo-cart-view.component.scss']
 })
-export class CartViewDemoComponent {
+export class DemoCartViewComponent {
   display: CartViewDisplay = 'responsive-table';
   tax = 0;
   shipping = 0;

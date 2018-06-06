@@ -1,10 +1,12 @@
 import {async, ComponentFixture, TestBed} from '@angular/core/testing';
 
 import {DemoCheckoutComponent} from './demo-cart-checkout.component';
-import {CartCheckoutComponent} from '../../../src/components/cart-checkout/cart-checkout.component';
 import {CartService} from '../../../src/classes/cart.service';
 import {MemoryCartService} from '../../../src/services/memory-cart.service';
 import {HttpClientModule} from '@angular/common/http';
+import {ShoppingCartModule} from '../../../src/shopping-cart.module';
+import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
+import {FormsModule} from '@angular/forms';
 
 describe('DemoCheckoutComponent', () => {
   let component: DemoCheckoutComponent;
@@ -13,8 +15,13 @@ describe('DemoCheckoutComponent', () => {
   beforeEach(async(() => {
     TestBed
       .configureTestingModule({
-        declarations: [DemoCheckoutComponent, CartCheckoutComponent],
-        imports: [HttpClientModule],
+        declarations: [DemoCheckoutComponent],
+        imports: [
+          HttpClientModule,
+          ShoppingCartModule,
+          FormsModule,
+          NgbModule
+        ],
         providers: [
           {provide: CartService, useClass: MemoryCartService}
         ]

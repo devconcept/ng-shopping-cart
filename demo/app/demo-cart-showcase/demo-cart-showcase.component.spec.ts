@@ -1,20 +1,22 @@
 import {async, ComponentFixture, TestBed} from '@angular/core/testing';
 
-import {CartShowcaseDemoComponent} from './demo-cart-showcase.component';
+import {DemoCartShowcaseComponent} from './demo-cart-showcase.component';
 import {FormsModule} from '@angular/forms';
 import {CommonModule} from '@angular/common';
 import {ShoppingCartModule} from '../../../src/shopping-cart.module';
+import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
 
 describe('CartShowcaseDemoComponent', () => {
-  let component: CartShowcaseDemoComponent;
-  let fixture: ComponentFixture<CartShowcaseDemoComponent>;
+  let component: DemoCartShowcaseComponent;
+  let fixture: ComponentFixture<DemoCartShowcaseComponent>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [CartShowcaseDemoComponent],
+      declarations: [DemoCartShowcaseComponent],
       imports: [
         CommonModule,
         FormsModule,
+        NgbModule,
         ShoppingCartModule,
       ],
     })
@@ -22,7 +24,7 @@ describe('CartShowcaseDemoComponent', () => {
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(CartShowcaseDemoComponent);
+    fixture = TestBed.createComponent(DemoCartShowcaseComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });
