@@ -155,8 +155,8 @@ export class CartViewComponent implements OnInit, OnDestroy {
 
   ngOnDestroy(): void {
     this._itemsSubscription.unsubscribe();
-    this._shippingSubscription.unsuscribe();
-    this._taxSubscription.unsuscribe();
+    this._shippingSubscription.unsubscribe();
+    this._taxSubscription.unsubscribe();
   }
 
 }
