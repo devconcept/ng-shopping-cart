@@ -39,6 +39,16 @@ describe('MemoryCartService', () => {
     expect(service.isEmpty()).toBe(true);
   });
 
+  it('should not remove items if the id is not found', () => {
+    const item = new BaseCartItem({ id: 1, name: 'Test item', price: 10, photo: '', quantity: 10 });
+    service.addItem(item);
+    expect(service.itemCount()).toBe(1);
+    expect(service.isEmpty()).toBe(false);
+    service.removeItem(2);
+    expect(service.itemCount()).toBe(1);
+    expect(service.isEmpty()).toBe(false);
+  });
+
   it('should count single items', () => {
     const item = new BaseCartItem({ id: 1, name: 'Test item', price: 10, photo: '', quantity: 10 });
     service.addItem(item);
