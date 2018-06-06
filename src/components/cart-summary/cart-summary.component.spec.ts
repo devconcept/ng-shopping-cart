@@ -1,7 +1,7 @@
 import {async, ComponentFixture, TestBed} from '@angular/core/testing';
 
 import {CartSummaryComponent} from './cart-summary.component';
-import {CartService} from '../../classes/cart.service';
+import {CartService} from '../../services/cart.service';
 import {BaseCartItem} from '../../classes/base-cart-item';
 import {MemoryCartService} from '../../services/memory-cart.service';
 import {By} from '@angular/platform-browser';

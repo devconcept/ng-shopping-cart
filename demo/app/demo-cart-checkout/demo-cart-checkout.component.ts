@@ -1,5 +1,5 @@
 import {Component, EventEmitter, OnDestroy, OnInit} from '@angular/core';
-import {CartService} from '../../../src/classes/cart.service';
+import {CartService} from '../../../src/services/cart.service';
 import {CheckoutType} from '../../../src/types';
 import {DemoCartItem} from '../demo-cart-item';
 import {CheckoutHttpSettings} from '../../../src/interfaces/checkout-http-settings';

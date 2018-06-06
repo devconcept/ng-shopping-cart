@@ -1,6 +1,6 @@
 import {Component} from '@angular/core';
 import {AddToCartType, AddToCartPosition} from '../../../src/types';
-import {CartService} from '../../../src/classes/cart.service';
+import {CartService} from '../../../src/services/cart.service';
 import {DemoCartItem} from '../demo-cart-item';
 
 @Component({

@@ -1,7 +1,7 @@
 import {Component, EventEmitter, Input, OnChanges, OnInit, Output, SimpleChanges} from '@angular/core';
 import {DropdownValue} from '../../interfaces/dropdown-value';
 import {AddToCartPosition, AddToCartType} from '../../types';
-import {CartService} from '../../classes/cart.service';
+import {CartService} from '../../services/cart.service';
 import {CartItem} from '../../classes/cart-item';
 
 /**

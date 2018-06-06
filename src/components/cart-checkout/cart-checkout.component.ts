@@ -2,7 +2,7 @@ import {Component, EventEmitter, Input, OnChanges, OnDestroy, OnInit, Output, Si
 import {HttpClient, HttpParams, HttpRequest} from '@angular/common/http';
 
 import {CheckoutSettings, CheckoutType} from '../../types';
-import {CartService} from '../../classes/cart.service';
+import {CartService} from '../../services/cart.service';
 import {CheckoutPaypalSettings} from '../../interfaces/checkout-paypal-settings';
 import {CheckoutHttpSettings} from '../../interfaces/checkout-http-settings';
 

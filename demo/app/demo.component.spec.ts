@@ -6,7 +6,7 @@ import {DemoCheckoutComponent} from './demo-cart-checkout/demo-cart-checkout.com
 import {FormsModule} from '@angular/forms';
 import {CommonModule} from '@angular/common';
 import {ShoppingCartModule} from '../../src/shopping-cart.module';
-import {CartService} from '../../src/classes/cart.service';
+import {CartService} from '../../src/services/cart.service';
 import {MemoryCartService} from '../../src/services/memory-cart.service';
 import {DemoCartViewComponent} from './demo-cart-view/demo-cart-view.component';
 import {DemoCartShowcaseComponent} from './demo-cart-showcase/demo-cart-showcase.component';

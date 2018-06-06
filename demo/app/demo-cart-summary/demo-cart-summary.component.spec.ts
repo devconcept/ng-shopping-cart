@@ -1,7 +1,7 @@
 import {async, ComponentFixture, TestBed} from '@angular/core/testing';
 
 import {DemoCartSummaryComponent} from './demo-cart-summary.component';
-import {CartService} from '../../../src/classes/cart.service';
+import {CartService} from '../../../src/services/cart.service';
 import {MemoryCartService} from '../../../src/services/memory-cart.service';
 import {ShoppingCartModule} from '../../../src/shopping-cart.module';
 import {NgbModule} from '@ng-bootstrap/ng-bootstrap';

@@ -3,7 +3,7 @@ import {async, ComponentFixture, TestBed} from '@angular/core/testing';
 import {DemoCartViewComponent} from './demo-cart-view.component';
 import {FormsModule} from '@angular/forms';
 import {CommonModule} from '@angular/common';
-import {CartService} from '../../../src/classes/cart.service';
+import {CartService} from '../../../src/services/cart.service';
 import {MemoryCartService} from '../../../src/services/memory-cart.service';
 import {ShoppingCartModule} from '../../../src/shopping-cart.module';
 import {NgbModule} from '@ng-bootstrap/ng-bootstrap';

@@ -1,5 +1,5 @@
 import {Component, OnInit, OnDestroy, Input} from '@angular/core';
-import {CartService} from '../../classes/cart.service';
+import {CartService} from '../../services/cart.service';
 
 /**
  * Renders a summary of the contents of the cart.

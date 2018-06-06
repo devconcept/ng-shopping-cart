@@ -2,7 +2,7 @@ import {async, ComponentFixture, TestBed} from '@angular/core/testing';
 import {Component} from '@angular/core';
 import {By} from '@angular/platform-browser';
 import {CartViewComponent} from './cart-view.component';
-import {CartService} from '../../classes/cart.service';
+import {CartService} from '../../services/cart.service';
 import {MemoryCartService} from '../../services/memory-cart.service';
 import {BaseCartItem} from '../../classes/base-cart-item';
 import {toArray} from 'lodash';

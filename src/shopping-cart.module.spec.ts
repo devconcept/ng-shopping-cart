@@ -1,6 +1,6 @@
 import {ShoppingCartModule} from './shopping-cart.module';
 import {SessionStorageCartService} from './services/session-storage-cart.service';
-import {CartService} from './classes/cart.service';
+import {CartService} from './services/cart.service';
 import {TestBed} from '@angular/core/testing';
 import {CART_ITEM_CLASS} from './services/item-class.token';
 import {BaseCartItem} from './classes/base-cart-item';

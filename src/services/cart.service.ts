@@ -1,6 +1,6 @@
 import {EventEmitter} from '@angular/core';
 
-import {CartItem} from './cart-item';
+import {CartItem} from '../classes/cart-item';
 import {CartChangeEvent} from '../interfaces/cart-change-event';
 
 /**

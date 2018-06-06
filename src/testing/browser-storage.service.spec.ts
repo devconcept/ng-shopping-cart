@@ -1,6 +1,6 @@
 import {BaseCartItem} from '../classes/base-cart-item';
 import {TestCartItem} from '../testing/test-cart-item';
-import {CartService} from '../classes/cart.service';
+import {CartService} from '../services/cart.service';
 
 export function browserStorageSuite(browserStorage: any, cartService: any) {
   describe(cartService.name, () => {

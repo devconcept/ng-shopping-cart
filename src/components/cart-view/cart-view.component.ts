@@ -1,6 +1,6 @@
 import { Component, OnInit, OnDestroy, Input } from '@angular/core';
 import { CartItem } from '../../classes/cart-item';
-import { CartService } from '../../classes/cart.service';
+import { CartService } from '../../services/cart.service';
 import { CartViewDisplay } from '../../types';
 
 /**
