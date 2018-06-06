@@ -11,7 +11,10 @@ const {spawn} = require('child_process');
 const pump = require('pump');
 
 const checkout = 'develop';
-const spawnOpts = {stdio: 'inherit', shell: true};
+const spawnOpts = {
+  stdio: 'inherit',
+  shell: true,
+};
 
 gulp.task('styles:clean', () => {
   return del('./dist/styles');
@@ -76,7 +79,7 @@ gulp.task('docs:compile', () => {
   return spawn('npm run docs:build', spawnOpts);
 });
 
-gulp.task('docs:clean', async () => {
+gulp.task('docs:clean', async() => {
   await git.checkout('gh-pages');
   return del(['*.js', '*.css', '*.html', './assets/*', '3rdpartylicenses.txt', '.nojekyll', 'favicon.ico']);
 });
@@ -96,7 +99,7 @@ gulp.task('docs:index', (cb) => {
   ], cb);
 });
 
-gulp.task('docs:commit', async () => {
+gulp.task('docs:commit', async() => {
   const msg = `Updating docs version ${pkg.version}`;
   await git.exec({args: 'add ./* -A'});
   await git.exec({args: `commit -a --message="${msg}"`});

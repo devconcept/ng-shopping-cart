@@ -49,12 +49,12 @@ import {ShowcaseItem} from '../../interfaces/showcase-item';
  * }
  * ```
  *
- * @note {warning} If you change the `[columns]` input you must also change the sass variable that controls the component grid and vice-versa.
- * A similar procedure is required to create aspect ratios with values greater than four eg: `'1:5'`.
- * Check the styling guide for more information.
+ * @note {warning} If you change the `[columns]` input you must also change the sass variable that controls the component grid and
+ * vice-versa. A similar procedure is required to create aspect ratios with values greater than four eg: `'1:5'`. Check the styling guide
+ * for more information.
  *
- * @note {danger} The aspect ratio is the width/height proportion of the items therefore a ratio of `'2:2'` is equivalent to `'1:1'`. Redundant
- * ratios like these are removed from the source so don't try to use them.
+ * @note {danger} The aspect ratio is the width/height proportion of the items therefore a ratio of `'2:2'` is equivalent to `'1:1'`.
+ * Redundant ratios like these are removed from the source so don't try to use them.
  *
  */
 @Component({
