@@ -5,5 +5,6 @@
 <p>
   Type: <code>{$ doc.typeParameters | escapeHtml $}</code>
 </p>
+{% include 'notes.html' -%}
 <markdown>{$ doc.description | ngEscape $}</markdown>
 {% endblock %}

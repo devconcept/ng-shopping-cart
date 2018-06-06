@@ -2,7 +2,7 @@
 {% block body %}
 {% include 'header.html' -%}
 <p>
-  Selector: <code>{$ doc.ngSelector $}</code>
+  Selector: <code>&lt;{$ doc.ngSelector $}&gt;</code>
 </p>
 <markdown>{$ doc.description | ngEscape $}</markdown>
 {% include 'notes.html' -%}

@@ -20,7 +20,7 @@ import {CartService} from '../../services/cart.service';
  * }
  * ```
  *
- * @note {warning} To use the default icon when you are using the `[icon]` input just set it to a falsy value, eg: null, undefined, '', etc
+ * @note {info} To use the default icon when you are using the `[icon]` input just set it to a falsy value, eg: null, undefined, '', etc
  */
 @Component({
   selector: 'cart-summary',

@@ -3,6 +3,7 @@
 <h2>{$ doc.name $}</h2>
 <p><span class="badge badge-warning">Type</span></p>
 <markdown>{$ doc.description | ngEscape $}</markdown>
+{% include 'notes.html' -%}
 <p>
   Values: {$ doc.typeDefinition | backTicks $}
 </p>

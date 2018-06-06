@@ -84,6 +84,16 @@ a.nav-item-link {
   margin: 20px 0;
   color: #000000;
   font-size: 1rem;
+
+  &.danger {
+    background-color: #fad7d4;
+    border-left: 9px #f08a81 solid;
+  }
+
+  &.info {
+    background-color: #ebeef04d;
+    border-left: 9px #00bcd4 solid;
+  }
 }
 
 blockquote.note, .note {

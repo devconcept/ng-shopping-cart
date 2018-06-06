@@ -21,7 +21,9 @@ If you plan on using the default styles unchanged or make the modifications on y
 
 Your styles must be added later so you can use specificity to easily override properties in the component classes.
 
-> When specificity is equal to any of the multiple declarations, the last declaration found in the CSS is applied to the element
+<blockquote class="note info">
+When specificity is equal to any of the multiple declarations, the last declaration found in the CSS is applied to the element
+</blockquote>
 
 #### Styling components
 
@@ -59,7 +61,9 @@ and the corresponding html
 
 This will target only cart buttons who are the children of an element with the class `.my-class` to be styled with the color blue.
 
-> Always prefer using global styles to change the appearance of the library components. Other techniques are harder or present inconveniences that makes them less suitable for the task.
+<blockquote class="note danger">
+Always prefer using global styles to change the appearance of the library components. Other techniques are harder or present inconveniences that makes them less suitable for the task.
+</blockquote>
 
 #### Component encapsulation
 
@@ -157,7 +161,9 @@ Your app still doesn't know how to use that file though, so you need to add the 
 
 If you previously included the library styles in the cli remove the old reference and use your new file. The final step is to change the `[columns]` input in all `<cart-showcase>` instances because now all grids use `15` columns instead of the default value `12` so all the components know how to correctly compute their CSS classes.
 
-> So far only the SASS language is supported. Other languages will be included in a future release.
+<blockquote class="note info">
+So far only the SASS language is supported. Other languages will be included in a future release.
+</blockquote>
 
 #### Advanced usage
 

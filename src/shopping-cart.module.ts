@@ -21,7 +21,7 @@ import {serviceFactory, setItemClass, setServiceConfiguration, setupService} fro
  * The main exported library module. It includes `forRoot` and `forChild` static methods to support angular feature modules and singleton
  * services.
  *
- * @note {warning} Only the `forRoot` method will configure providers for you. If you use the module without it you must configure the
+ * @note {danger} Only the `forRoot` method will configure providers for you. If you use the module without it you must configure the
  * library providers yourself.
  */
 @NgModule({
