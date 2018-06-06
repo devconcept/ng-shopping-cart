@@ -89,4 +89,7 @@ $sc-description-max-height: 50% !default;
 $sc-description-margin: 1 !default;
 
 /* CartSummary */
+// The size for the cart summary svg or image
 $cart-summary-icon-size: 32px !default;
+// The font-size for the text in the cart-summary
+$cart-summary-font-size: 0.75 !default;
