@@ -206,8 +206,7 @@ describe('AddToCartComponent', () => {
 
     it('should add the item implicit quantity', () => {
       expect(service.itemCount()).toEqual(0);
-      const item = new BaseCartItem({id: 1, name: 'Test item', quantity: 10, price: 10});
-      component.item = item;
+      component.item = new BaseCartItem({id: 1, name: 'Test item', quantity: 10, price: 10});
       fixture.detectChanges();
       const button = fixture.debugElement.query(By.css('button'));
       button.nativeElement.click();
@@ -218,8 +217,7 @@ describe('AddToCartComponent', () => {
 
     it('should use the component quantity instead if is specified', () => {
       expect(service.itemCount()).toEqual(0);
-      const item = new BaseCartItem({id: 1, name: 'Test item', quantity: 10, price: 10});
-      component.item = item;
+      component.item = new BaseCartItem({id: 1, name: 'Test item', quantity: 10, price: 10});
       component.quantity = 5;
       fixture.detectChanges();
       const button = fixture.debugElement.query(By.css('button'));
@@ -275,6 +273,17 @@ describe('AddToCartComponent', () => {
       const content = fixture.debugElement.query(By.css('.test'));
       content.nativeElement.click();
       expect(spy).toHaveBeenCalled();
+    });
+
+    it('should not invoke the addToCart method when the item binding is not set', () => {
+      const service = TestBed.get(CartService);
+      fixture.detectChanges();
+      const comp = fixture.debugElement.query(By.css('add-to-cart'));
+      expect(comp.componentInstance instanceof AddToCartComponent).toEqual(true);
+      const spy = spyOn(service, 'addItem').and.callThrough();
+      const content = fixture.debugElement.query(By.css('.test'));
+      content.nativeElement.click();
+      expect(spy).not.toHaveBeenCalled();
     });
   });
 
