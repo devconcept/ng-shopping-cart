@@ -67,13 +67,15 @@ The demo is also available if you:
 
 - [ ] Less and stylus support
 
+- [ ] Aria enabled components
+
+- [ ] Support for object keys in cart items
+
 - [ ] Built-in service for storing cart items in a remote server
 
 - [ ] Stripe checkout support
 
 - [ ] Enhanced PayPal support
-
-- [ ] Aria enabled components
 
 - [ ] Flexbox and CSS grid support
 
