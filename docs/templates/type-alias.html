@@ -1,7 +1,7 @@
 {% extends 'layout.html' %}
 {% block body %}
 <h2>{$ doc.name $}</h2>
-<span class="badge badge-warning">Type</span>
+<p><span class="badge badge-warning">Type</span></p>
 <markdown>{$ doc.description | ngEscape $}</markdown>
 <p>
   Values: {$ doc.typeDefinition | backTicks $}
