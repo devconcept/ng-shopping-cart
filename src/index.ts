@@ -15,6 +15,7 @@ import { DropdownValue } from './interfaces/dropdown-value';
 import { ShowcaseItem } from './interfaces/showcase-item';
 import { CART_ITEM_CLASS } from './services/item-class.token';
 import { CART_SERVICE_CONFIGURATION } from './services/service-configuration.token';
+import {CART_SERVICE_TYPE} from './services/service-type.token';
 import { CartModuleOptions } from './interfaces/cart-module-options';
 import { BrowserStorageServiceConfiguration } from './interfaces/browser-storage-service-configuration';
 import { CartViewComponent } from './components/cart-view/cart-view.component';
@@ -35,6 +36,7 @@ export {
   /* Tokens*/
   CART_ITEM_CLASS,
   CART_SERVICE_CONFIGURATION,
+  CART_SERVICE_TYPE,
   /* Services */
   CartService,
   MemoryCartService,
