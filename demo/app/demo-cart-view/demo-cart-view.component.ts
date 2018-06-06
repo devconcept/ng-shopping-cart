@@ -1,4 +1,4 @@
-import {Component} from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {CartViewDisplay} from '../../../src/types';
 import {CartService} from '../../../src/classes/cart.service';
 import {DemoCartItem} from '../demo-cart-item';
@@ -8,7 +8,7 @@ import {DemoCartItem} from '../demo-cart-item';
   templateUrl: './demo-cart-view.component.html',
   styleUrls: ['./demo-cart-view.component.scss']
 })
-export class DemoCartViewComponent {
+export class DemoCartViewComponent implements OnInit {
   display: CartViewDisplay = 'responsive-table';
   tax = 0;
   shipping = 0;
@@ -22,6 +22,11 @@ export class DemoCartViewComponent {
 
   }
 
+  ngOnInit(): void {
+    this.tax = this.cartService.getTaxRate();
+    this.shipping = this.cartService.getShipping();
+  }
+
   setTaxRate() {
     const val = parseFloat(this.tax.toString());
     this.cartService.setTaxRate(val);
@@ -33,4 +38,5 @@ export class DemoCartViewComponent {
     this.cartService.setShipping(val);
     this.shipping = this.cartService.getShipping();
   }
+
 }
