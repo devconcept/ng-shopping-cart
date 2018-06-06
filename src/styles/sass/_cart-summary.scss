@@ -9,6 +9,7 @@
     float: left;
     width: $cart-summary-icon-size;
     height: $cart-summary-icon-size;
+    object-fit: $image-fit;
   }
 
   .cart-summary-contents {
