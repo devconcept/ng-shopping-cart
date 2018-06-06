@@ -66,7 +66,7 @@ import {CheckoutHttpSettings} from '../../interfaces/checkout-http-settings';
   templateUrl: './cart-checkout.component.html',
 })
 export class CartCheckoutComponent implements OnChanges, OnInit, OnDestroy {
-  private _itemsSubscription: any;
+  private _cartChangeSubscription: any;
   empty = true;
   cost = 0;
   taxRate = 0;
@@ -115,7 +115,7 @@ export class CartCheckoutComponent implements OnChanges, OnInit, OnDestroy {
 
   ngOnInit(): void {
     this.updateCart();
-    this._itemsSubscription = this.cartService.onItemsChanged.subscribe(() => this.updateCart());
+    this._cartChangeSubscription = this.cartService.onChange.subscribe(() => this.updateCart());
   }
 
   updateCart() {
@@ -175,6 +175,6 @@ export class CartCheckoutComponent implements OnChanges, OnInit, OnDestroy {
   }
 
   ngOnDestroy(): void {
-    this._itemsSubscription.unsubscribe();
+    this._cartChangeSubscription.unsubscribe();
   }
 }

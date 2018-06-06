@@ -1,6 +1,7 @@
 <div class="cart-summary">
   <div class="cart-summary-icon">
-    <svg *ngIf="!icon" version="1.1" class="summary-icon" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 32 32">
+    <svg *ngIf="!icon" version="1.1" class="summary-icon" xmlns="http://www.w3.org/2000/svg"
+         xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 32 32">
       <path stroke="currentColor" stroke-width="2" stroke-linecap="round" fill="none" stroke-linejoin="round"
             d="M2,4 L6,4 L10,20 L21,20 L25,10 L8,10 M13,10 L13,20 M18,20 L18,10 M10,15 L23,15"/>
       <circle fill="currentColor" cx="11" cy="24" r="2"/>
@@ -9,7 +10,7 @@
     <img *ngIf="icon" [src]="icon" class="summary-icon" alt="cart-summary-icon">
   </div>
   <div class="cart-summary-contents">
-    <div class="cart-summary-items">{{ totalItems | i18nPlural: totalPlurals }}</div>
+    <div class="cart-summary-items">{{totalItems | i18nPlural: totalPlurals}}</div>
     <div class="cart-summary-cost">{{totalCost | currency }}</div>
   </div>
 </div>

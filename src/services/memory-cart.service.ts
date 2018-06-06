@@ -21,6 +21,7 @@ export class MemoryCartService<T extends CartItem> extends CartService<T> {
     }
     this.onItemAdded.emit(item);
     this.onItemsChanged.emit(this._items.length);
+    this.onChange.emit({change: 'items', value: this.getItems()});
   }
 
   protected _removeItem(id: any): void {
@@ -29,6 +30,7 @@ export class MemoryCartService<T extends CartItem> extends CartService<T> {
       const removed = this._items.splice(idx, 1);
       this.onItemRemoved.emit(removed[0]);
       this.onItemsChanged.emit(this._items.length);
+      this.onChange.emit({change: 'items', value: this.getItems()});
     }
   }
 
@@ -37,7 +39,7 @@ export class MemoryCartService<T extends CartItem> extends CartService<T> {
   }
 
   public getItems(): T[] {
-    return this._items.slice(0);
+    return this._items.slice();
   }
 
   public itemCount(): number {
@@ -62,6 +64,8 @@ export class MemoryCartService<T extends CartItem> extends CartService<T> {
 
   public clear() {
     this._items = [];
+    this.onItemsChanged.emit(this._items.length);
+    this.onChange.emit({change: 'items', value: this.getItems()});
   }
 
   public getShipping(): number {
@@ -71,6 +75,7 @@ export class MemoryCartService<T extends CartItem> extends CartService<T> {
   public setShipping(shipping: number): void {
     this._shipping = shipping;
     this.onShippingChange.emit(this._shipping);
+    this.onChange.emit({change: 'shipping', value: this._shipping});
   }
 
   public getTaxRate(): number {
@@ -80,6 +85,7 @@ export class MemoryCartService<T extends CartItem> extends CartService<T> {
   public setTaxRate(taxRate: number): void {
     this._taxRate = taxRate;
     this.onTaxChange.emit(this._taxRate);
+    this.onChange.emit({change: 'taxRate', value: this._taxRate});
   }
 
   public isEmpty(): boolean {

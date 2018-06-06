@@ -1,5 +1,7 @@
-import {CartItem} from './cart-item';
 import {EventEmitter} from '@angular/core';
+
+import {CartItem} from './cart-item';
+import {CartChangeEvent} from '../interfaces/cart-change-event';
 
 /**
  * The base class for storing items in your cart
@@ -10,11 +12,18 @@ import {EventEmitter} from '@angular/core';
  */
 export abstract class CartService<T extends CartItem> {
   /**
+   * Emits an event every time items, tax or shipping cost are changed in the cart.
+   */
+  public onChange: EventEmitter<CartChangeEvent> = new EventEmitter<CartChangeEvent>();
+  /**
    * Emits an event every time an item is added to the cart
    */
   public onItemAdded: EventEmitter<T> = new EventEmitter<T>();
   /**
    * Emits an event every time an item is removed from the cart
+   *
+   * > This event only fires when a single item is removed by id. If you want to be notified of any removal (eg: clearing the cart) listen
+   * to the `onChange` or the `onItemsChanged` event instead
    */
   public onItemRemoved: EventEmitter<T> = new EventEmitter<T>();
   /**
