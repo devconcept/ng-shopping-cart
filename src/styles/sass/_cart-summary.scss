@@ -9,7 +9,12 @@
     float: left;
     width: $cart-summary-icon-size;
     height: $cart-summary-icon-size;
-    object-fit: $image-fit;
+
+    img.summary-icon {
+      width: 100%;
+      height: 100%;
+      object-fit: $image-fit;
+    }
   }
 
   .cart-summary-contents {
