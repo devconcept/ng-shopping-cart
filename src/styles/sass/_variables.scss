@@ -1,6 +1,8 @@
 /* General */
-// Default unitless values are considered to be expressed in rems
-// The base font to calculate the fallback size in pixels of properties specified in rem units
+// Note: Default unitless values are considered to be expressed in rems
+
+// The base font to calculate the fallback size in pixels of properties specified in rem units. A unitless value is
+// expected and its supposed to be expressed in pixels, eg: 16 means 16 pixels.
 $base-font: 14 !default;
 // Generate all ratios for showcase components
 $generate-ratios: true !default;
