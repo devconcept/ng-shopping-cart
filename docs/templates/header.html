@@ -2,4 +2,9 @@
 <p>
   {% if doc.typeParams %}<span class="badge badge-primary">Generic</span>{% endif %}
   <span class="badge badge-warning">{$ doc.badgeType $}</span>
+  {% if doc.ngType === 'service' and not doc.injectable  %}
+  <span class="badge badge-danger">Not injectable</span>
+  {% elseif doc.ngType === 'service' %}
+  <span class="badge badge-success">Injectable</span>
+  {% endif %}
 </p>

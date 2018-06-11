@@ -3,7 +3,7 @@ import {CartItem} from './cart-item';
 /**
  * A default implementation for CartItem
  *
- * @order 3
+ * @order 2
  *
  * @howToUse "Using properties and methods"
  * ```typescript

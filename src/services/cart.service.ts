@@ -6,9 +6,10 @@ import {CartChangeEvent} from '../interfaces/cart-change-event';
 /**
  * The base class for storing items in your cart
  *
+ * @service
  * @note {warning} Do not modify the items `id` after they are added to the cart. Doing so could result in duplicates which can cause
  * undefined behaviour
- * @order 2
+ * @order 1
  */
 export abstract class CartService<T extends CartItem> {
   /**

@@ -8,11 +8,11 @@ module.exports = function generateBadgeInfo() {
     $process(docs) {
       docs.forEach((doc) => {
         if (doc.docType !== 'markdown' && doc.docType !== 'ngTemplate') {
-          if (doc.ngType) {
+          if (doc.ngType && !(doc.ngType === 'service' && !doc.injectable)) {
             doc.badgeType = doc.ngType === 'token' ? 'Injection token' : upperFirst(doc.ngType);
-          } else {
-            doc.badgeType = doc.docType === 'class' && doc.isAbstract ? 'Abstract class' : upperFirst(doc.docType);
+            return;
           }
+          doc.badgeType = doc.docType === 'class' && doc.isAbstract ? 'Abstract class' : upperFirst(doc.docType);
         }
       });
     },

@@ -28,6 +28,7 @@ module.exports = exports = new Package('cartApi', [cartBasePkg, tsPkg])
       require('./tag-defs/note'),
       require('./tag-defs/example'),
       require('./tag-defs/howToUse'),
+      require('./tag-defs/service'),
     ]));
   })
   .config(function(unescapeCommentsProcessor, readTypeScriptModules, templateEngine, getInjectables) {

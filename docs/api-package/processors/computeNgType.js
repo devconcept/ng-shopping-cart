@@ -7,10 +7,11 @@ module.exports = function computeNgType(getTypeFolder) {
       docs.forEach((doc) => {
         if (doc.docType !== 'markdown' && doc.docType !== 'ngTemplate') {
           doc.ngType = undefined;
-          if (doc.decorators && doc.decorators.length && doc.docType === 'class') {
-            const injectable = doc.decorators.find(d => d.name === 'Injectable');
-            if (injectable) {
+          if (doc.docType === 'class' && (doc.service || (doc.decorators && doc.decorators.length))) {
+            const injectable = doc.decorators ? doc.decorators.find(d => d.name === 'Injectable') : false;
+            if (injectable || doc.service) {
               doc.ngType = 'service';
+              doc.injectable = Boolean(injectable);
               doc.template = doc.ngType;
               doc.location = getTypeFolder(doc);
               return;

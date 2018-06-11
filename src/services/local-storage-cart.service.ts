@@ -7,7 +7,7 @@ import {CART_SERVICE_CONFIGURATION} from './service-configuration.token';
 
 /**
  * An implementation of the cart service using localStorage to store items
- * @order 2
+ * @order 5
  */
 @Injectable()
 export class LocalStorageCartService<T extends CartItem> extends BrowserStorageCartService<T> {
