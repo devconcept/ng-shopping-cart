@@ -16,29 +16,6 @@
             <option value="responsive-table">Responsive table</option>
           </select>
         </div>
-        <div class="form-group col-12 col-md-4">
-          <label for="cartViewTax" class="mr-1">Tax rate</label>
-          <div class="form-row">
-            <div class="form-group col">
-              <input id="cartViewTax" name="cartViewTax" class="form-control" type="number" [(ngModel)]="tax">
-            </div>
-            <div class="form-group col-auto">
-              <button type="button" class="btn btn-info" (click)="setTaxRate()">Set</button>
-            </div>
-          </div>
-        </div>
-        <div class="form-group col-12 col-md-4">
-          <label for="cartViewShipping" class="mr-1">Shipping</label>
-          <div class="form-row">
-            <div class="form-group col">
-              <input id="cartViewShipping" name="cartViewShipping" class="form-control" type="number"
-                     [(ngModel)]="shipping">
-            </div>
-            <div class="form-group col-auto">
-              <button type="button" class="btn btn-info" (click)="setShipping()">Set</button>
-            </div>
-          </div>
-        </div>
       </div>
       <div class="form-inline">
         <div class="form-check form-check-inline">

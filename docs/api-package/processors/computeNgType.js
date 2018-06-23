@@ -36,6 +36,13 @@ module.exports = function computeNgType(getTypeFolder) {
                 return curr;
               }, []);
             }
+            const pipe = doc.decorators.find(d => d.name === 'Pipe');
+            if (pipe) {
+              doc.ngType = 'pipe';
+              doc.template = `${doc.ngType}.html`;
+              doc.pipeName = pipe.argumentInfo[0].name.replace(/'/g, '');
+              doc.pure = pipe.argumentInfo[0].pure !== 'false';
+            }
             const module = doc.decorators.find(d => d.name === 'NgModule');
             if (module) {
               doc.ngType = 'module';

@@ -5,7 +5,7 @@ export interface CartChangeEvent {
   /**
    * The cart element where the change took place
    */
-  change: 'items' | 'taxRate' | 'shipping';
+  change: 'items' | 'taxRate' | 'shipping' | 'currency';
   /**
    * The value in the cart after the update
    */

@@ -16,10 +16,18 @@ const GUIDE_OUTPUT = 'guide';
 const TEMPLATES = ['./docs/templates/'];
 
 const TYPESCRIPT_SOURCES = [
-  {include: './components/**/*.ts',
-    exclude: './**/*.spec.ts'},
-  {include: './services/**/*.ts',
-    exclude: './**/*.spec.ts'},
+  {
+    include: './components/**/*.ts',
+    exclude: './**/*.spec.ts',
+  },
+  {
+    include: './services/**/*.ts',
+    exclude: './**/*.spec.ts',
+  },
+  {
+    include: './pipes/**/*.ts',
+    exclude: './**/*.spec.ts',
+  },
   './classes/**/*.ts',
   './interfaces/**/*.ts',
   './types.ts',

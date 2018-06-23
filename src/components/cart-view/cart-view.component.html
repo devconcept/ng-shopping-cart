@@ -41,10 +41,10 @@
             </button>
           </div>
           <div class="cart-list-value cart-list-price-value">
-            {{cartItem.getPrice() | currency}}
+            {{cartItem.getPrice() | cartCurrency:format}}
           </div>
           <div class="cart-list-value cart-list-total-value">
-            {{cartItem.total() | currency}}
+            {{cartItem.total() | cartCurrency:format}}
           </div>
         </div>
         <div class="cart-list-footer">
@@ -54,7 +54,7 @@
             <div class="cart-empty-summary"></div>
             <div class="cart-empty-summary"></div>
             <div class="cart-tax-summary">
-              {{taxFooterText}}: ({{taxRate}}%) {{tax | currency}}
+              {{taxFooterText}}: ({{taxRate}}%) {{tax | cartCurrency:format}}
             </div>
           </div>
           <div class="cart-list-summary">
@@ -63,7 +63,7 @@
             <div class="cart-empty-summary"></div>
             <div class="cart-empty-summary"></div>
             <div class="cart-shipping-summary">
-              {{shippingFooterText}}: {{shipping | currency}}
+              {{shippingFooterText}}: {{shipping | cartCurrency:format}}
             </div>
           </div>
           <div class="cart-list-summary">
@@ -72,7 +72,7 @@
             <div class="cart-empty-summary"></div>
             <div class="cart-empty-summary"></div>
             <div class="cart-total-summary">
-              {{totalFooterText}}: {{cost | currency}}
+              {{totalFooterText}}: {{cost | cartCurrency:format}}
             </div>
           </div>
         </div>
@@ -105,27 +105,27 @@
             -
           </button>
         </td>
-        <td class="cart-list-value cart-list-price-value">{{cartItem.getPrice() | currency}}</td>
-        <td class="cart-list-value cart-list-total-value">{{cartItem.total() | currency}}</td>
+        <td class="cart-list-value cart-list-price-value">{{cartItem.getPrice() | cartCurrency:format}}</td>
+        <td class="cart-list-value cart-list-total-value">{{cartItem.total() | cartCurrency:format}}</td>
       </tr>
       </tbody>
       <tfoot class="cart-list-footer">
       <tr class="cart-list-summary">
         <td [attr.colspan]="images ? 4 : 3" class="cart-empty-summary"></td>
         <td class="cart-tax-summary">
-          {{taxFooterText}}: ({{taxRate}}%) {{tax | currency}}
+          {{taxFooterText}}: ({{taxRate}}%) {{tax | cartCurrency:format}}
         </td>
       </tr>
       <tr class="cart-list-summary">
         <td [attr.colspan]="images ? 4 : 3" class="cart-empty-summary"></td>
         <td class="cart-shipping-summary">
-          {{shippingFooterText}}: {{shipping | currency}}
+          {{shippingFooterText}}: {{shipping | cartCurrency:format}}
         </td>
       </tr>
       <tr class="cart-list-summary">
         <td [attr.colspan]="images ? 4 : 3" class="cart-empty-summary"></td>
         <td class="cart-total-summary">
-          {{totalFooterText}}: {{cost | currency}}
+          {{totalFooterText}}: {{cost | cartCurrency:format}}
         </td>
       </tr>
       </tfoot>

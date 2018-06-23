@@ -1,11 +1,12 @@
 import {async, ComponentFixture, TestBed} from '@angular/core/testing';
-import {Component} from '@angular/core';
+import {Component, DebugElement} from '@angular/core';
 import {By} from '@angular/platform-browser';
 import {CartViewComponent} from './cart-view.component';
 import {CartService} from '../../services/cart.service';
 import {MemoryCartService} from '../../services/memory-cart.service';
 import {BaseCartItem} from '../../classes/base-cart-item';
 import {toArray} from 'lodash';
+import {CartCurrencyPipe} from '../../pipes/cart-currency.pipe';
 
 // region Test setup
 const TEST_CUSTOM_EMPTY_TEMPLATE = '<cart-view [customEmptyContent]="true"><div class="test"></div></cart-view>';
@@ -17,13 +18,24 @@ const TEST_CUSTOM_EMPTY_TEMPLATE = '<cart-view [customEmptyContent]="true"><div 
 class TestCustomEmptyComponent {
 
 }
+
+const TEST_CURRENCY_VIEW_TEMPLATE = '<cart-view [currencyFormat]="currencyFormat"></cart-view>';
+
+@Component({
+  selector: 'cart-test-currency-cart-view',
+  template: TEST_CURRENCY_VIEW_TEMPLATE
+})
+class TestCurrencyCartViewComponent {
+  currencyFormat: string;
+}
+
 // endregion
 
 describe('CartViewComponent', () => {
   beforeEach(async(() => {
     TestBed
       .configureTestingModule({
-        declarations: [CartViewComponent, TestCustomEmptyComponent],
+        declarations: [CartViewComponent, TestCustomEmptyComponent, TestCurrencyCartViewComponent, CartCurrencyPipe],
         providers: [
           {provide: CartService, useClass: MemoryCartService}
         ]
@@ -116,7 +128,8 @@ describe('CartViewComponent', () => {
       fixture.detectChanges();
       const footerContainer = fixture.debugElement.query(By.css('.cart-list-footer'));
       expect(footerContainer).toBeTruthy();
-      const cartListFooters = fixture.debugElement.queryAll(By.css('.cart-list-footer .cart-list-summary :not(.cart-empty-summary)'));
+      const cartListFooters = fixture.debugElement
+        .queryAll(By.css('.cart-list-footer .cart-list-summary :not(.cart-empty-summary)'));
       expect(cartListFooters).toBeTruthy();
       const footers = cartListFooters
         .map(f => f.nativeElement.innerText);
@@ -170,6 +183,61 @@ describe('CartViewComponent', () => {
       expect(comp).toBeTruthy();
       fixture.detectChanges();
       expect(comp.query(By.css('.test'))).toBeTruthy();
+    });
+  });
+
+  describe('Currency format', () => {
+    let component: TestCurrencyCartViewComponent;
+    let fixture: ComponentFixture<TestCurrencyCartViewComponent>;
+    let service: CartService<BaseCartItem>;
+
+    beforeEach(() => {
+      fixture = TestBed.createComponent(TestCurrencyCartViewComponent);
+      component = fixture.componentInstance;
+      service = TestBed.get(CartService);
+      service.setTaxRate(10);
+      service.setShipping(10);
+    });
+
+    it('should use the service format by default', () => {
+      service.addItem(new BaseCartItem({id: 1, name: 'Test item', quantity: 1, price: 10}));
+      fixture.detectChanges();
+      const componentFooters = fixture.debugElement
+        .queryAll(By.css('.cart-list-footer .cart-list-summary :not(.cart-empty-summary)'));
+      let footers = componentFooters.map(el => el.nativeElement.innerText);
+      expect(footers[0]).toBe('Tax: (10%) $1.00');
+      expect(footers[1]).toBe('Shipping: $10.00');
+      expect(footers[2]).toBe('Total: $21.00');
+      service.setCurrencyFormat('€');
+      fixture.detectChanges();
+      footers = componentFooters.map(el => el.nativeElement.innerText);
+      expect(footers[0]).toBe('Tax: (10%) €1.00');
+      expect(footers[1]).toBe('Shipping: €10.00');
+      expect(footers[2]).toBe('Total: €21.00');
+    });
+
+    it('should allow to override the format at component level', () => {
+      service.addItem(new BaseCartItem({id: 1, name: 'Test item', quantity: 1, price: 10}));
+      service.setCurrencyFormat('€');
+      fixture.detectChanges();
+      const componentFooters = fixture.debugElement
+        .queryAll(By.css('.cart-list-footer .cart-list-summary :not(.cart-empty-summary)'));
+      let footers = componentFooters.map(el => el.nativeElement.innerText);
+      expect(footers[0]).toBe('Tax: (10%) €1.00');
+      expect(footers[1]).toBe('Shipping: €10.00');
+      expect(footers[2]).toBe('Total: €21.00');
+      component.currencyFormat = '￥';
+      fixture.detectChanges();
+      footers = componentFooters.map(el => el.nativeElement.innerText);
+      expect(footers[0]).toBe('Tax: (10%) ￥1.00');
+      expect(footers[1]).toBe('Shipping: ￥10.00');
+      expect(footers[2]).toBe('Total: ￥21.00');
+      service.addItem(new BaseCartItem({id: 2, name: 'Test item', quantity: 1, price: 1}));
+      fixture.detectChanges();
+      footers = componentFooters.map(el => el.nativeElement.innerText);
+      expect(footers[0]).toBe('Tax: (10%) ￥1.10');
+      expect(footers[1]).toBe('Shipping: ￥10.00');
+      expect(footers[2]).toBe('Total: ￥22.10');
     });
   });
 });

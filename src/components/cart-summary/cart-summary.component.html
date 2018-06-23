@@ -11,6 +11,6 @@
   </div>
   <div class="cart-summary-contents">
     <div class="cart-summary-items">{{totalItems | i18nPlural: summaryPlurals}}</div>
-    <div class="cart-summary-cost">{{totalCost | currency }}</div>
+    <div class="cart-summary-cost">{{totalCost | cartCurrency:format}}</div>
   </div>
 </div>

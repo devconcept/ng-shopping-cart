@@ -16,6 +16,7 @@ import {CART_ITEM_CLASS} from './services/item-class.token';
 import {CART_SERVICE_CONFIGURATION} from './services/service-configuration.token';
 import {CART_SERVICE_TYPE} from './services/service-type.token';
 import {serviceFactory, setItemClass, setServiceConfiguration, setupService} from './service.factory';
+import {CartCurrencyPipe} from './pipes/cart-currency.pipe';
 
 /**
  * The main exported library module. It includes `forRoot` and `forChild` static methods to support angular feature modules and singleton
@@ -34,6 +35,7 @@ import {serviceFactory, setItemClass, setServiceConfiguration, setupService} fro
     CartViewComponent,
     ShowcaseOutletDirective,
     CartShowcaseItemComponent,
+    CartCurrencyPipe,
   ],
   imports: [
     CommonModule,
@@ -47,6 +49,7 @@ import {serviceFactory, setItemClass, setServiceConfiguration, setupService} fro
     CartShowcaseComponent,
     CartViewComponent,
     CartShowcaseItemComponent,
+    CartCurrencyPipe,
     CommonModule,
     HttpClientModule
   ],

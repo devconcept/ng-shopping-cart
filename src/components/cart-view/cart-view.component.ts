@@ -1,7 +1,7 @@
-import { Component, OnInit, OnDestroy, Input } from '@angular/core';
-import { CartItem } from '../../classes/cart-item';
-import { CartService } from '../../services/cart.service';
-import { CartViewDisplay } from '../../types';
+import {Component, OnInit, OnDestroy, Input, OnChanges, SimpleChanges} from '@angular/core';
+import {CartItem} from '../../classes/cart-item';
+import {CartService} from '../../services/cart.service';
+import {CartViewDisplay} from '../../types';
 
 /**
  * Renders a view of the cart.
@@ -58,7 +58,7 @@ import { CartViewDisplay } from '../../types';
   selector: 'cart-view',
   templateUrl: './cart-view.component.html',
 })
-export class CartViewComponent implements OnInit, OnDestroy {
+export class CartViewComponent implements OnInit, OnChanges, OnDestroy {
   private _cartChangeSubscription: any;
   /**
    * Changes the appearance how the cart view displays in different screen sizes
@@ -104,6 +104,11 @@ export class CartViewComponent implements OnInit, OnDestroy {
    * The text to display in the total section of the footer.
    */
   @Input() totalFooterText = 'Total';
+  /**
+   * Changes currency display format for the component. Overrides the value set from the service using `setCurrencyFormat`.
+   */
+  @Input() currencyFormat: string;
+  format: string;
   empty = true;
   items: CartItem[];
   taxRate = 0;
@@ -122,6 +127,9 @@ export class CartViewComponent implements OnInit, OnDestroy {
     this.tax = this.cartService.getTax();
     this.shipping = this.cartService.getShipping();
     this.cost = this.cartService.totalCost();
+    if (!this.currencyFormat) {
+      this.format = this.cartService.getCurrencyFormat();
+    }
   }
 
   increase(item: CartItem) {
@@ -145,8 +153,13 @@ export class CartViewComponent implements OnInit, OnDestroy {
     });
   }
 
+  ngOnChanges(changes: SimpleChanges): void {
+    if (changes['currencyFormat']) {
+      this.format = this.currencyFormat || this.cartService.getCurrencyFormat();
+    }
+  }
+
   ngOnDestroy(): void {
     this._cartChangeSubscription.unsubscribe();
   }
-
 }

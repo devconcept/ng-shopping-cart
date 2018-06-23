@@ -6,10 +6,11 @@ import {BaseCartItem} from '../../classes/base-cart-item';
 import {MemoryCartService} from '../../services/memory-cart.service';
 import {By} from '@angular/platform-browser';
 import {Component, DebugElement} from '@angular/core';
+import {CartCurrencyPipe} from '../../pipes/cart-currency.pipe';
 
 // region Test setup
 const TEST_SUMMARY_TEMPLATE = `
-  <cart-summary [icon]="icon" [totalPlurals]="totalPlurals"></cart-summary>
+  <cart-summary [icon]="icon" [totalPlurals]="totalPlurals" [currencyFormat]="currencyFormat"></cart-summary>
 `;
 
 @Component({
@@ -19,6 +20,7 @@ const TEST_SUMMARY_TEMPLATE = `
 class CartTestSummaryComponent {
   icon: string;
   totalPlurals: { [k: string]: string };
+  currencyFormat: string;
 }
 
 // endregion
@@ -27,7 +29,7 @@ describe('CartSummaryComponent', () => {
   beforeEach(async(() => {
     TestBed
       .configureTestingModule({
-        declarations: [CartSummaryComponent, CartTestSummaryComponent],
+        declarations: [CartSummaryComponent, CartTestSummaryComponent, CartCurrencyPipe],
         providers: [
           {provide: CartService, useClass: MemoryCartService}
         ]
@@ -152,6 +154,42 @@ describe('CartSummaryComponent', () => {
       component.icon = 'http://fakeurl.com';
       fixture.detectChanges();
       expect(instance.summaryPlurals).toEqual(plurals);
+    });
+  });
+
+  describe('Currency format', () => {
+    let component: CartTestSummaryComponent;
+    let fixture: ComponentFixture<CartTestSummaryComponent>;
+    let service: CartService<BaseCartItem>;
+    let totalCost: DebugElement;
+
+    beforeEach(() => {
+      fixture = TestBed.createComponent(CartTestSummaryComponent);
+      component = fixture.componentInstance;
+      service = TestBed.get(CartService);
+      totalCost = fixture.debugElement.query(By.css('.cart-summary-cost'));
+    });
+
+    it('should use the service format by default', () => {
+      service.addItem(new BaseCartItem({id: 1, name: 'Test item', quantity: 1, price: 10.49}));
+      fixture.detectChanges();
+      expect(totalCost.nativeElement.innerText).toBe('$10.49');
+      service.setCurrencyFormat('€');
+      fixture.detectChanges();
+      expect(totalCost.nativeElement.innerText).toBe('€10.49');
+    });
+
+    it('should allow to override the format at component level', () => {
+      service.addItem(new BaseCartItem({id: 1, name: 'Test item', quantity: 1, price: 10.49}));
+      service.setCurrencyFormat('€');
+      fixture.detectChanges();
+      expect(totalCost.nativeElement.innerText).toBe('€10.49');
+      component.currencyFormat = '￥';
+      fixture.detectChanges();
+      expect(totalCost.nativeElement.innerText).toBe('￥10.49');
+      service.addItem(new BaseCartItem({id: 2, name: 'Test item', quantity: 1, price: 1}));
+      fixture.detectChanges();
+      expect(totalCost.nativeElement.innerText).toBe('￥11.49');
     });
   });
 });

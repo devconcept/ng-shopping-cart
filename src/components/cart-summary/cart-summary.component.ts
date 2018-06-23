@@ -20,7 +20,7 @@ import {CartService} from '../../services/cart.service';
  * }
  * ```
  *
- * @note {info} To use the default icon when you are using the `[icon]` input just set it to a falsy value, eg: null, undefined, '', etc
+ * @note {warning} The component display a total cost of `0` until you add items to the cart.
  */
 @Component({
   selector: 'cart-summary',
@@ -32,15 +32,23 @@ export class CartSummaryComponent implements OnInit, OnChanges, OnDestroy {
   public summaryPlurals: { [k: string]: string };
   /**
    * The url of an icon to show on the summary. Use this to replace the default icon which is an svg with the image of a shopping cart.
+   *
+   * To use the default icon when you are using the `[icon]` input just set it to a falsy value, eg: `null`, `undefined`, `''`, etc
    */
   @Input() icon: string;
   /**
    * The component uses the i18nPlural pipe to translate the number of items of the cart according to locale rules using the ICU format.
+   *
    * You can use this binding to internationalize you app or to change how values are converted into words.
    */
   @Input() totalPlurals: { [k: string]: string };
+  /**
+   * Changes currency display format for the component. Overrides the value set from the service using `setCurrencyFormat`.
+   */
+  @Input() currencyFormat: string;
   totalItems = 0;
   totalCost = 0;
+  format: string;
 
   constructor(private cartService: CartService<any>) {
 
@@ -48,7 +56,10 @@ export class CartSummaryComponent implements OnInit, OnChanges, OnDestroy {
 
   private updateComponent() {
     this.totalItems = this.cartService.itemCount();
-    this.totalCost = this.cartService.totalCost();
+    this.totalCost = !this.cartService.isEmpty() ? this.cartService.totalCost() : 0;
+    if (!this.currencyFormat) {
+      this.format = this.cartService.getCurrencyFormat();
+    }
   }
 
   ngOnInit(): void {
@@ -65,6 +76,9 @@ export class CartSummaryComponent implements OnInit, OnChanges, OnDestroy {
     if (changes['totalPlurals']) {
       const value = changes['totalPlurals'].currentValue;
       this.summaryPlurals = value || this._defaultPlurals;
+    }
+    if (changes['currencyFormat']) {
+      this.format = this.currencyFormat || this.cartService.getCurrencyFormat();
     }
   }
 
