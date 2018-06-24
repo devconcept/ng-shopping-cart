@@ -8,7 +8,7 @@ module.exports = exports = function customDocs() {
       });
     },
     addDocs(newDocs) {
-      docs = docs.concat(newDocs);
+      docs = [...docs, ...newDocs];
     },
     getDoc(name) {
       const doc = docs.find(d => d.name === name);

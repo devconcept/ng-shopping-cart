@@ -99,9 +99,13 @@ export class SearchComponent implements OnInit, OnDestroy {
   }
 
   searchInDocs() {
-    this.results = this.searchService.doSearch(this._q, [this.sort1, this.sort2, this.sort3]);
-    this.searched = true;
-    this.updateButton();
+    this.searchService
+      .search(this._q, [this.sort1, this.sort2, this.sort3])
+      .then((res) => {
+        this.results = res;
+        this.searched = true;
+        this.updateButton();
+      });
   }
 
   checkSorts(changed, value, previous): void {

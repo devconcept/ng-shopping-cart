@@ -54,9 +54,9 @@
   <ul class="results">
     <li *ngFor="let res of results" class="result-item">
       <a [routerLink]="res.path" class="row justify-content-between align-items-center">
-        <div class="col-12 col-md-auto">
+        <div class="col-12 col-md result-content">
           <div class="result-title">{{res.name}}</div>
-          <small>{{res.description}}</small>
+          <small>{{res.description | firstLine}}</small>
         </div>
         <div class="col-12 col-md-auto">
           <span class="badge badge-warning">{{res.type}}</span>

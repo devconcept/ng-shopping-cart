@@ -9,6 +9,12 @@
     margin: 1em 0;
     border: solid 1px lightgrey;
 
+    .result-content {
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+    }
+
     .result-title {
       font-size: 1.2em;
     }

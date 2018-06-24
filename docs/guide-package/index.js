@@ -13,15 +13,19 @@ module.exports = exports = new Package('cartGuide', [cartBasePkg])
   .processor(require('./processors/removeTags'))
   .factory(require('./readers/mdReader'))
   .config(function(parseTagsProcessor, getInjectables) {
-    parseTagsProcessor.tagDefinitions = parseTagsProcessor.tagDefinitions.concat(getInjectables([
-      require('./tag-defs/next'),
-      require('./tag-defs/nochapter'),
-    ]));
+    parseTagsProcessor.tagDefinitions = [
+      ...parseTagsProcessor.tagDefinitions,
+      ...getInjectables([
+        require('./tag-defs/next'),
+        require('./tag-defs/nochapter'),
+      ]),
+    ];
   })
   .config(function(readFilesProcessor, computePathsProcessor, mdReader) {
-    readFilesProcessor.sourceFiles = readFilesProcessor.sourceFiles.concat(GUIDE_SOURCE);
+    readFilesProcessor.sourceFiles = [...readFilesProcessor.sourceFiles, GUIDE_SOURCE];
     readFilesProcessor.fileReaders.push(mdReader);
-    computePathsProcessor.pathTemplates = computePathsProcessor.pathTemplates.concat([
+    computePathsProcessor.pathTemplates = [
+      ...computePathsProcessor.pathTemplates,
       {
         docTypes: ['markdown'],
         getOutputPath(doc) {
@@ -29,7 +33,7 @@ module.exports = exports = new Package('cartGuide', [cartBasePkg])
         },
         pathTemplate: '${docType}.ts',
       },
-    ]);
+    ];
   })
   .config(function(computeIdsProcessor) {
     computeIdsProcessor.idTemplates.push({

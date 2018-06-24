@@ -4,9 +4,11 @@ module.exports = exports = function generateSearchService(customDocs) {
     $runAfter: ['routes-added'],
     $runBefore: ['extra-docs-added'],
     $process(docs) {
-      const SearchServiceDoc = customDocs.getDoc('SearchServiceDoc');
+      const [SearchServiceDoc, SearchDataDoc] = customDocs.getDocs(['SearchServiceDoc', 'SearchDataDoc']);
       const searchable = ['class', 'type-alias', 'interface', 'const'];
-      const searchService = new SearchServiceDoc(docs.filter(d => !d.ignore && searchable.indexOf(d.docType) !== -1));
+      const searchData = new SearchDataDoc(docs.filter(d => !d.ignore && searchable.indexOf(d.docType) !== -1));
+      const searchService = new SearchServiceDoc(searchData);
+      docs.push(searchData);
       docs.push(searchService);
     },
   };

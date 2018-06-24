@@ -1,13 +1,30 @@
-import { Injectable } from '@angular/core';
-import { flatten } from 'lodash';
+import {Injectable} from '@angular/core';
+import {flatten} from 'lodash';
+import {HttpClient} from '@angular/common/http';
 
 @Injectable()
 export class SearchService {
-  data = [
-  {% for d in doc.sources %}
-    {$ d | json $},
-  {% endfor %}
-  ];
+  data: any[];
+
+  constructor(private httpClient: HttpClient) {
+
+  }
+
+  loadData(): Promise<any> {
+    return this.httpClient
+      .get('assets/search.json')
+      .toPromise();
+  }
+
+  search(term, order): Promise<any[]> {
+    if (!this.data) {
+      return this.loadData().then((data) => {
+        this.data = data;
+        return this.doSearch(term, order);
+      });
+    }
+    return Promise.resolve(this.doSearch(term, order));
+  }
 
   doSearch(term, order): any[] {
     const toSearch = term.toLowerCase();

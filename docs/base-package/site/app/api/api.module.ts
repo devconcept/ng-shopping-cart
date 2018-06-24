@@ -8,6 +8,7 @@ import {SharedModule} from '../shared/shared.module';
 import {routes} from './routes';
 import { SearchComponent } from './routes/search.component';
 import {SearchService} from './search-service'
+import {FirstLinePipe} from './pipes/first-line.pipe';
 
 
 @NgModule({
@@ -17,7 +18,7 @@ import {SearchService} from './search-service'
     NgbModule,
     FormsModule,
   ],
-  declarations: [SearchComponent],
+  declarations: [SearchComponent, FirstLinePipe],
   providers: [SearchService],
   exports: []
 })

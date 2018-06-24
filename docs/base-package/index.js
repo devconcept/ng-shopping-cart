@@ -61,18 +61,22 @@ module.exports = exports = new Package('cartBase', [basePkg, jsDocsPkg, njPkg, g
       '${doc.docType}.md',
       '${doc.docType}.html',
       '${doc.docType}.ts',
+      '${doc.docType}.json',
       'common.ts',
     ];
     templateEngine.config.tags = {
       variableStart: '{$',
       variableEnd: '$}',
     };
-    templateEngine.filters = templateEngine.filters.concat(getInjectables([
-      require('./rendering/escapeHtml'),
-      require('./rendering/ngEscape'),
-      require('./rendering/escapeQuotes'),
-      require('./rendering/pathName'),
-    ]));
+    templateEngine.filters = [
+      ...templateEngine.filters,
+      ...getInjectables([
+        require('./rendering/escapeHtml'),
+        require('./rendering/ngEscape'),
+        require('./rendering/escapeQuotes'),
+        require('./rendering/pathName'),
+      ]),
+    ];
     computePathsProcessor.pathTemplates = [
       {
         docTypes: ['function', 'var', 'let', 'enum', 'value-module'],
@@ -134,12 +138,15 @@ module.exports = exports = new Package('cartBase', [basePkg, jsDocsPkg, njPkg, g
     ];
   })
   .config(function(parseTagsProcessor, getInjectables) {
-    parseTagsProcessor.tagDefinitions = parseTagsProcessor.tagDefinitions.concat(getInjectables([require('./tag-defs/order')]));
+    parseTagsProcessor.tagDefinitions = [
+      ...parseTagsProcessor.tagDefinitions,
+      ...getInjectables([require('./tag-defs/order')]),
+    ];
   })
   .config(function(computeIdsProcessor, gitData, packageInfo) {
     gitData['package'] = packageInfo;
     computeIdsProcessor.idTemplates.push({
-      docTypes: ['ngModule', 'ngRoute', 'ngComponent', 'toc', 'info-service', 'search-service'],
+      docTypes: ['ngModule', 'ngRoute', 'ngComponent', 'toc', 'info-service', 'search-service', 'search-data'],
       getId(doc) {
         return doc.name;
       },
@@ -160,6 +167,7 @@ module.exports = exports = new Package('cartBase', [basePkg, jsDocsPkg, njPkg, g
       require('./docs/tocDoc'),
       require('./docs/infoServiceDoc'),
       require('./docs/searchServiceDoc'),
+      require('./docs/searchDataDoc'),
     ]);
   })
   .config(function(staticAssets) {

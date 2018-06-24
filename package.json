@@ -34,7 +34,7 @@
     "test:demo": "ng test --app=1",
     "lint": "npm run lint:ts && npm run lint:js",
     "lint:ts": "ng lint",
-    "lint:js": "eslint ./",
+    "lint:js": "eslint ./ --fix",
     "docs": "gulp docs",
     "docs:generate": "dgeni ./docs/index.js",
     "docs:run": "ng serve --app=2 --serve-path=ng-shopping-cart",

@@ -5,7 +5,7 @@ const {Package} = require('dgeni');
 const tsPkg = require('dgeni-packages/typescript');
 const cartBasePkg = require('../base-package/index');
 
-const {TYPESCRIPT_SOURCES} = require('../config');
+const {TYPESCRIPT_SOURCES, ASSETS} = require('../config');
 
 module.exports = exports = new Package('cartApi', [cartBasePkg, tsPkg])
   .processor(require('./processors/filterUnusedDocs'))
@@ -22,25 +22,32 @@ module.exports = exports = new Package('cartApi', [cartBasePkg, tsPkg])
   .processor(require('./processors/generateBadgeInfo'))
   .factory(require('./services/getTypeFolder'))
   .config(function(parseTagsProcessor, getInjectables) {
-    parseTagsProcessor.tagDefinitions = parseTagsProcessor.tagDefinitions.concat(getInjectables([
-      require('./tag-defs/ignore'),
-      require('./tag-defs/means'),
-      require('./tag-defs/note'),
-      require('./tag-defs/example'),
-      require('./tag-defs/howToUse'),
-      require('./tag-defs/service'),
-    ]));
+    parseTagsProcessor.tagDefinitions = [
+      ...parseTagsProcessor.tagDefinitions,
+      ...getInjectables([
+        require('./tag-defs/ignore'),
+        require('./tag-defs/means'),
+        require('./tag-defs/note'),
+        require('./tag-defs/example'),
+        require('./tag-defs/howToUse'),
+        require('./tag-defs/service'),
+      ]),
+    ];
   })
   .config(function(unescapeCommentsProcessor, readTypeScriptModules, templateEngine, getInjectables) {
     readTypeScriptModules.sourceFiles = TYPESCRIPT_SOURCES;
     unescapeCommentsProcessor.$enabled = false;
-    templateEngine.filters = templateEngine.filters.concat(getInjectables([
-      require('./rendering/emitterType'),
-      require('./rendering/backTicks'),
-    ]));
+    templateEngine.filters = [
+      ...templateEngine.filters,
+      ...getInjectables([
+        require('./rendering/emitterType'),
+        require('./rendering/backTicks'),
+      ]),
+    ];
   })
   .config(function(computePathsProcessor) {
-    computePathsProcessor.pathTemplates = computePathsProcessor.pathTemplates.concat([
+    computePathsProcessor.pathTemplates = [
+      ...computePathsProcessor.pathTemplates,
       {
         docTypes: ['class', 'interface', 'type-alias', 'const'],
         getOutputPath(doc) {
@@ -61,5 +68,12 @@ module.exports = exports = new Package('cartApi', [cartBasePkg, tsPkg])
         outputPathTemplate: 'api/search-service.ts',
         pathTemplate: '${docType}.ts',
       },
-    ]);
+      {
+        docTypes: ['search-data'],
+        getOutputPath(doc) {
+          return `${ASSETS}/${doc.filename}`;
+        },
+        pathTemplate: '${docType}.json',
+      },
+    ];
   });
