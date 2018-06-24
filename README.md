@@ -20,12 +20,15 @@ An Angular component library to create shopping carts. Based on it's <a href="ht
 
 ## Features
 
-- All the previous components with more features.
-- An extra `CartShowcaseComponent` to help e-commerce applications to quickly build screens to display their available products.
-- Generic services to use your own data structures for cart items. Only a few required methods needs to be implemented to interop with the library.
-- A default `CartItem` class ready to go, easy to replace.
-- Several built-in `CartService` implementations to persist cart information in different ways.
-- Easily customizable styles with `Sass` variables
+- Generic and abstract services to manipulate cart items however you want
+- Several components to add items, checkout or view a summary of the cart
+- A component to display items arranged in a grid for your e-commerce application
+- Easily replace the item component used to display items on the grid
+- Any object data structure for cart items
+- Simple module configuration
+- Different currency formats for the whole app or a single component
+- Easy styling of one or all components of the same type
+- Support for CSS Preprocessors to customize styles with variables
 
 > This library is compatible with Angular version >=5
 
