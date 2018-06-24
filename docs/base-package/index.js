@@ -40,7 +40,7 @@ module.exports = exports = new Package('cartBase', [basePkg, jsDocsPkg, njPkg, g
     $runAfter: ['adding-navigation'],
     $runBefore: ['extra-docs-added'],
   })
-  .processor(require('./processors/copySite'))
+  .processor(require('./processors/copyAssets'))
   .processor(require('./processors/addGitInfo'))
   .processor(require('./processors/navigationMap'))
   // .processor(require('./processors/removeExtraSpace'))

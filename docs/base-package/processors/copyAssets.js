@@ -1,6 +1,6 @@
-module.exports = function copySite(copyFolder, staticAssets) {
+module.exports = function copyAssets(copyFolder, staticAssets) {
   return {
-    name: 'copySite',
+    name: 'copyAssets',
     $runAfter: ['docs-rendered'],
     $runBefore: ['writing-files'],
     $process(docs) {
