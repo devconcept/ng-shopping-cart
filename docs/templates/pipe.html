@@ -13,6 +13,7 @@
   Name: <code>{$ doc.pipeName $}</code>
 </p>
 <markdown>{$ doc.description | ngEscape $}</markdown>
+<markdown>{$ doc.summary | ngEscape $}</markdown>
 {% include 'notes.html' -%}
 {% include 'how-to-use.html' -%}
 {% endblock %}

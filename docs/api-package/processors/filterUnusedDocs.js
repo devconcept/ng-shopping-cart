@@ -1,4 +1,4 @@
-const types = ['class', 'interface', 'type-alias', 'markdown', 'const'];
+const types = ['class', 'interface', 'type-alias', 'markdown', 'const', 'demo-source'];
 
 module.exports = function filterUnusedDocs() {
   return {

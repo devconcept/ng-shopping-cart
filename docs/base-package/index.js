@@ -62,7 +62,7 @@ module.exports = exports = new Package('cartBase', [basePkg, jsDocsPkg, njPkg, g
       '${doc.docType}.html',
       '${doc.docType}.ts',
       '${doc.docType}.json',
-      'common.ts',
+      'common',
     ];
     templateEngine.config.tags = {
       variableStart: '{$',

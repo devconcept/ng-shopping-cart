@@ -31,6 +31,7 @@ module.exports = exports = new Package('cartApi', [cartBasePkg, tsPkg])
         require('./tag-defs/example'),
         require('./tag-defs/howToUse'),
         require('./tag-defs/service'),
+        require('./tag-defs/summary'),
       ]),
     ];
   })

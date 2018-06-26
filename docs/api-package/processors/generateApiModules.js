@@ -16,7 +16,7 @@ module.exports = exports = function generateApiModules(getTypeFolder, customDocs
     $process(docs) {
       const NgModuleDoc = customDocs.getDoc('NgModuleDoc');
       const types = docs.reduce((curr, doc) => {
-        const ignore = ['markdown', 'ngTemplate', 'ngModule', 'ngComponent'];
+        const ignore = ['markdown', 'ngTemplate', 'ngModule', 'ngComponent', 'demo-source'];
         if (ignore.indexOf(doc.docType) === -1 && !doc.ignore) {
           const type = getTypeFolder(doc);
           pushDoc(curr, type, doc);

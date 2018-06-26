@@ -8,6 +8,11 @@ const OUTPUT = join(BASE, OUT);
 const APP = join(BASE, OUT, '/app');
 const SITE = join(BASE, '/docs/base-package/site');
 const DEMO = join(BASE, '/demo/app');
+const DEMO_SOURCE = {
+  include: [join(DEMO, '/**/*.*')],
+  exclude: [join(DEMO, '/**/*.spec.ts'), join(DEMO, '/demo.module.ts')],
+};
+const DEMO_EXTRA = join(BASE, '/docs/demo-package/extra');
 const DEMO_OUTPUT = join(APP, '/demo');
 const ASSETS = join(BASE, OUT, '/assets');
 const API_OUTPUT = 'api';
@@ -48,6 +53,8 @@ module.exports = exports = {
   SOURCE,
   APP,
   DEMO,
+  DEMO_SOURCE,
+  DEMO_EXTRA,
   DEMO_OUTPUT,
   SITE,
   ASSETS,

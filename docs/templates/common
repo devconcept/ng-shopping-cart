@@ -1,0 +1,5 @@
+{% if doc.renderedContent %}
+{$ doc.renderedContent $}
+{% else %}
+{$ doc.content $}
+{% endif %}

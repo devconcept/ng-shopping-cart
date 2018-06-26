@@ -48,7 +48,7 @@ export class DemoServiceComponent implements OnInit {
       return;
     }
     this.format = this.currency + ':' + this.symbolDisplay + ':' + this.digitInfo + ':' + this.locale;
-    this.cartService.setCurrencyFormat(this.format);
+    this.cartService.setLocaleFormat(this.format);
     this.cartService.setShipping(shipping);
     this.shipping = this.cartService.getShipping();
     this.cartService.setTaxRate(tax);
