@@ -70,6 +70,7 @@ import {parseLocaleFormat} from '../../locales';
 })
 export class CartCheckoutComponent implements OnChanges, OnInit, OnDestroy {
   private _cartChangeSubscription: any;
+  private getLocaleCurrencyName: any;
   empty = true;
   cost = 0;
   taxRate = 0;
@@ -120,7 +121,7 @@ export class CartCheckoutComponent implements OnChanges, OnInit, OnDestroy {
   @Output() error = new EventEmitter<any>();
 
   constructor(private cartService: CartService<any>, private httpClient: HttpClient, @Inject(LOCALE_ID) private locale: string) {
-
+    this.getLocaleCurrencyName = getLocaleCurrencyName;
   }
 
   ngOnInit(): void {
@@ -150,7 +151,7 @@ export class CartCheckoutComponent implements OnChanges, OnInit, OnDestroy {
   }
 
   private getCurrency(locale) {
-    const currencyCode = getLocaleCurrencyName(locale);
+    const currencyCode = this.getLocaleCurrencyName(locale);
     if (!currencyCode) {
       return 'USD';
     }

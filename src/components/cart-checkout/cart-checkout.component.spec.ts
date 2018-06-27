@@ -7,6 +7,7 @@ import {HttpClientTestingModule, HttpTestingController} from '@angular/common/ht
 import {By} from '@angular/platform-browser';
 import {Component} from '@angular/core';
 import {CheckoutSettings, CheckoutType} from '../../types';
+import {getLocaleCurrencyName} from '@angular/common';
 
 // region Test setup
 const TEST_CUSTOM_BUTTON_TEMPLATE = '<cart-checkout [custom]="custom"><div class="test"></div></cart-checkout>';
@@ -19,7 +20,7 @@ class TestCustomButtonComponent {
   custom = true;
 }
 
-const TEST_SERVICE_TEMPLATE = '<cart-checkout [service]="service" [settings]="settings"></cart-checkout>';
+const TEST_SERVICE_TEMPLATE = '<cart-checkout [service]="service" [settings]="settings" [localeFormat]="localeFormat"></cart-checkout>';
 
 @Component({
   selector: 'cart-test-service-checkout',
@@ -28,6 +29,7 @@ const TEST_SERVICE_TEMPLATE = '<cart-checkout [service]="service" [settings]="se
 class TestServiceComponent {
   service: CheckoutType;
   settings: CheckoutSettings;
+  localeFormat: string;
 }
 
 // endregion
@@ -360,6 +362,77 @@ describe('CartCheckoutComponent', () => {
       expect(shipping.properties.value).toEqual(service.getShipping().toString());
       const buildNotation = inputs.find(i => i.attributes.name === 'bn');
       expect(buildNotation).toBeFalsy();
+    });
+  });
+
+  describe('Locale format', () => {
+    let component: TestServiceComponent;
+    let fixture: ComponentFixture<TestServiceComponent>;
+
+    beforeEach(() => {
+      fixture = TestBed.createComponent(TestServiceComponent);
+      component = fixture.componentInstance;
+      service = TestBed.get(CartService);
+    });
+
+    it('should use the service format by default', () => {
+      service.setLocaleFormat('EUR:code:1.3-4:en-DE');
+      fixture.detectChanges();
+      const comp = fixture.debugElement.query(By.css('cart-checkout'));
+      const instance = comp.componentInstance;
+      expect(instance.format.currencyCode).toBe('EUR');
+      expect(instance.format.symbolDisplay).toBe('code');
+      expect(instance.format.digitsInfo).toBe('1.3-4');
+      expect(instance.paypalLocale).toBe('en');
+      expect(instance.currency).toBe('EUR');
+    });
+
+    it('should allow to override the format at component level', () => {
+      service.setLocaleFormat('EUR:code:1.3-4:es');
+      fixture.detectChanges();
+      const comp = fixture.debugElement.query(By.css('cart-checkout'));
+      const instance = comp.componentInstance;
+      component.localeFormat = 'USD:symbol-narrow:3.2-2:fr';
+      fixture.detectChanges();
+      expect(instance.format.currencyCode).toBe('USD');
+      expect(instance.format.symbolDisplay).toBe('symbol-narrow');
+      expect(instance.format.digitsInfo).toBe('3.2-2');
+      expect(instance.format.locale).toBe('fr');
+      expect(instance.paypalLocale).toBe('fr');
+      expect(instance.currency).toBe('USD');
+    });
+
+    it('should return USD if the main locale cannot be found', () => {
+      fixture.detectChanges();
+      const comp = fixture.debugElement.query(By.css('cart-checkout'));
+      const instance = comp.componentInstance;
+      const spy = spyOn(instance, 'getLocaleCurrencyName').and.returnValue(null);
+      service.setLocaleFormat('auto');
+      fixture.detectChanges();
+      expect(spy).toHaveBeenCalledWith('en-US');
+      expect(instance.currency).toBe('USD');
+    });
+
+    it('should use the locale provided by Angular on version > 6', () => {
+      fixture.detectChanges();
+      const comp = fixture.debugElement.query(By.css('cart-checkout'));
+      const instance = comp.componentInstance;
+      const spy = spyOn(instance, 'getLocaleCurrencyName').and.returnValue('CAD');
+      service.setLocaleFormat('auto');
+      fixture.detectChanges();
+      expect(spy).toHaveBeenCalledWith('en-US');
+      expect(instance.currency).toBe('CAD');
+    });
+
+    it('should parse correctly the currency on locales that write symbol after the numbers', () => {
+      fixture.detectChanges();
+      const comp = fixture.debugElement.query(By.css('cart-checkout'));
+      const instance = comp.componentInstance;
+      const spy = spyOn(instance, 'getLocaleCurrencyName').and.returnValue('Canadian Dollar');
+      service.setLocaleFormat('auto:auto:auto:fr');
+      fixture.detectChanges();
+      expect(spy).toHaveBeenCalledWith('fr');
+      expect(instance.currency).toBe('USD');
     });
   });
 
