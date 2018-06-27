@@ -51,6 +51,8 @@ describe('CartCheckoutComponent', () => {
   beforeEach(() => {
     service = TestBed.get(CartService);
     service.clear();
+    service.setShipping(0);
+    service.setTaxRate(0);
   });
 
   describe('Default component', () => {
@@ -276,6 +278,48 @@ describe('CartCheckoutComponent', () => {
       expect(httpError.args[0].error).toEqual(err);
     }));
 
+    it('should attach additional properties to the body of the request ', fakeAsync(() => {
+      service.addItem(new BaseCartItem({id: 1, name: 'Test item', quantity: 1, price: 1}));
+      service.setTaxRate(10);
+      service.setShipping(20);
+      component.service = 'http';
+      component.settings = {url: 'http://fakeserver.com', body: {test: 1}};
+      fixture.detectChanges();
+      const button = fixture.debugElement.query(By.css('button'));
+      button.nativeElement.click();
+      tick();
+      const req = controller.expectOne('http://fakeserver.com');
+      expect(req.request.body.items).toBeTruthy();
+      expect(req.request.body.taxRate).toBe(10);
+      expect(req.request.body.shipping).toBe(20);
+      expect(req.request.body.test).toBe(1);
+      req.flush(response);
+    }));
+
+    it('should modify the body of the request if the body property is a funtions', fakeAsync(() => {
+      service.addItem(new BaseCartItem({id: 1, name: 'Test item', quantity: 1, price: 1}));
+      service.setTaxRate(10);
+      service.setShipping(20);
+      component.service = 'http';
+      component.settings = {
+        url: 'http://fakeserver.com',
+        body: (cart) => {
+          cart.test = 1;
+          return cart;
+        }
+      };
+      fixture.detectChanges();
+      const button = fixture.debugElement.query(By.css('button'));
+      button.nativeElement.click();
+      tick();
+      const req = controller.expectOne('http://fakeserver.com');
+      expect(req.request.body.items).toBeTruthy();
+      expect(req.request.body.taxRate).toBe(10);
+      expect(req.request.body.shipping).toBe(20);
+      expect(req.request.body.test).toBe(1);
+      req.flush(response);
+    }));
+
     afterEach(() => controller.verify());
   });
 
@@ -290,7 +334,7 @@ describe('CartCheckoutComponent', () => {
 
     it('should render a paypal form', () => {
       component.service = 'paypal';
-      const setting = {business: 'Test business', currencyCode: 'USD', itemName: 'Test item', itemNumber: '1', noNote: '0'};
+      const setting = {business: 'test@business.com', itemName: 'Test item', itemNumber: '1'};
       component.settings = setting;
       fixture.detectChanges();
       const paypalEl = fixture.debugElement.query(By.css('cart-checkout'));
@@ -306,16 +350,16 @@ describe('CartCheckoutComponent', () => {
       expect(itemName.properties.value).toEqual(setting.itemName);
       const itemNumber = inputs.find(i => i.attributes.name === 'item_number');
       expect(itemNumber.properties.value).toEqual(setting.itemNumber);
+      const currency = inputs.find(i => i.attributes.name === 'currency_code');
+      expect(currency.properties.value).toEqual('USD');
       const cost = inputs.find(i => i.attributes.name === 'amount');
       expect(cost.properties.value).toEqual(service.totalCost().toString());
-      const currencyCode = inputs.find(i => i.attributes.name === 'currency_code');
-      expect(currencyCode.properties.value).toEqual(setting.currencyCode);
-      const noNote = inputs.find(i => i.attributes.name === 'no_note');
-      expect(noNote.properties.value).toEqual(setting.noNote);
       const taxRate = inputs.find(i => i.attributes.name === 'tax_rate');
       expect(taxRate.properties.value).toEqual(service.getTaxRate().toString());
       const shipping = inputs.find(i => i.attributes.name === 'shipping');
       expect(shipping.properties.value).toEqual(service.getShipping().toString());
+      const buildNotation = inputs.find(i => i.attributes.name === 'bn');
+      expect(buildNotation).toBeFalsy();
     });
   });
 

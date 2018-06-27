@@ -7,6 +7,9 @@ import {CartShowcaseComponent} from './cart-showcase.component';
 import {ShowcaseOutletDirective} from '../../directives/showcase-outlet';
 import {CartItem} from '../../classes/cart-item';
 import {BaseCartItem, CartShowcaseItemComponent} from '../../';
+import {CartCurrencyPipe} from '../../pipes/cart-currency.pipe';
+import {MemoryCartService} from '../../services/memory-cart.service';
+import {CartService} from '../../services/cart.service';
 
 // region Test setup
 const TEST_RATIO_TEMPLATE = '<cart-showcase [items]="items" [aspectRatio]="aspectRatio"></cart-showcase>';
@@ -25,7 +28,7 @@ const TEST_COLUMNS_TEMPLATE = '<cart-showcase ' +
   '</cart-showcase>';
 
 @Component({
-  selector: 'cart-test-showcase',
+  selector: 'cart-test-showcase-columns',
   template: TEST_COLUMNS_TEMPLATE
 })
 class TestShowcaseColumnsComponent {
@@ -36,6 +39,17 @@ class TestShowcaseColumnsComponent {
   lCols: number;
   xlCols: number;
   columns: number;
+}
+
+const TEST_FORMAT_TEMPLATE = '<cart-showcase [items]="items" [localeFormat]="localeFormat"></cart-showcase>';
+
+@Component({
+  selector: 'cart-test-showcase-format',
+  template: TEST_FORMAT_TEMPLATE
+})
+class TestShowcaseLocaleComponent {
+  items: CartItem[];
+  localeFormat: string;
 }
 // endregion
 
@@ -49,7 +63,12 @@ describe('CartShowcaseComponent', () => {
           ShowcaseOutletDirective,
           TestShowcaseRatioComponent,
           TestShowcaseColumnsComponent,
+          TestShowcaseLocaleComponent,
           CartShowcaseItemComponent,
+          CartCurrencyPipe,
+        ],
+        providers: [
+          {provide: CartService, useClass: MemoryCartService},
         ]
       })
       .overrideModule(BrowserDynamicTestingModule, {
@@ -144,6 +163,58 @@ describe('CartShowcaseComponent', () => {
       expect(container.nativeElement.classList.contains('sc-container-m-8')).toEqual(true);
       expect(container.nativeElement.classList.contains('sc-container-l-8')).toEqual(true);
       expect(container.nativeElement.classList.contains('sc-container-xl-6')).toEqual(true);
+    });
+  });
+
+  describe('Locale format', () => {
+    let component: TestShowcaseLocaleComponent;
+    let fixture: ComponentFixture<TestShowcaseLocaleComponent>;
+    let service: CartService<BaseCartItem>;
+
+    beforeEach(() => {
+      fixture = TestBed.createComponent(TestShowcaseLocaleComponent);
+      component = fixture.componentInstance;
+      service = TestBed.get(CartService);
+    });
+
+    it('should use the service format by default', () => {
+      component.items = [new BaseCartItem({id: 1, name: 'Test item', quantity: 1, price: 10.})];
+      fixture.detectChanges();
+      const item = fixture.debugElement.query(By.css('.showcase-item.default-sc-item'));
+      expect(item).toBeTruthy();
+      const price = item.query(By.css('.default-sc-price'));
+      expect(price.nativeElement.innerText).toEqual('$10.00');
+      service.setLocaleFormat('EUR');
+      fixture.detectChanges();
+      expect(price.nativeElement.innerText).toBe('€10.00');
+    });
+
+    it('should allow to override the format at component level', () => {
+      component.items = [new BaseCartItem({id: 1, name: 'Test item', quantity: 1, price: 10.})];
+      fixture.detectChanges();
+      const item = fixture.debugElement.query(By.css('.showcase-item.default-sc-item'));
+      expect(item).toBeTruthy();
+      const price = item.query(By.css('.default-sc-price'));
+      expect(price.nativeElement.innerText).toEqual('$10.00');
+      component.localeFormat = 'EUR';
+      fixture.detectChanges();
+      expect(price.nativeElement.innerText).toBe('€10.00');
+    });
+
+    it('should not fallback to service level when the service changes with events different than format', () => {
+      component.items = [new BaseCartItem({id: 1, name: 'Test item', quantity: 1, price: 10})];
+      service.setLocaleFormat('EUR');
+      fixture.detectChanges();
+      const item = fixture.debugElement.query(By.css('.showcase-item.default-sc-item'));
+      expect(item).toBeTruthy();
+      const price = item.query(By.css('.default-sc-price'));
+      expect(price.nativeElement.innerText).toEqual('€10.00');
+      component.localeFormat = 'CAD';
+      fixture.detectChanges();
+      expect(price.nativeElement.innerText).toBe('CA$10.00');
+      service.addItem(new BaseCartItem({id: 2, name: 'Test item 2', quantity: 1, price: 10}));
+      fixture.detectChanges();
+      expect(price.nativeElement.innerText).toBe('CA$10.00');
     });
   });
 });

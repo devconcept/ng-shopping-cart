@@ -6,11 +6,10 @@ import {BaseCartItem} from '../../classes/base-cart-item';
 import {MemoryCartService} from '../../services/memory-cart.service';
 import {By} from '@angular/platform-browser';
 import {Component, DebugElement} from '@angular/core';
-import {CartCurrencyPipe} from '../../pipes/cart-currency.pipe';
 
 // region Test setup
 const TEST_SUMMARY_TEMPLATE = `
-  <cart-summary [icon]="icon" [totalPlurals]="totalPlurals" [currencyFormat]="currencyFormat"></cart-summary>
+  <cart-summary [icon]="icon" [totalPlurals]="totalPlurals" [localeFormat]="localeFormat"></cart-summary>
 `;
 
 @Component({
@@ -20,7 +19,7 @@ const TEST_SUMMARY_TEMPLATE = `
 class CartTestSummaryComponent {
   icon: string;
   totalPlurals: { [k: string]: string };
-  currencyFormat: string;
+  localeFormat: string;
 }
 
 // endregion
@@ -29,7 +28,7 @@ describe('CartSummaryComponent', () => {
   beforeEach(async(() => {
     TestBed
       .configureTestingModule({
-        declarations: [CartSummaryComponent, CartTestSummaryComponent, CartCurrencyPipe],
+        declarations: [CartSummaryComponent, CartTestSummaryComponent],
         providers: [
           {provide: CartService, useClass: MemoryCartService}
         ]
@@ -157,7 +156,7 @@ describe('CartSummaryComponent', () => {
     });
   });
 
-  describe('Currency format', () => {
+  describe('Locale format', () => {
     let component: CartTestSummaryComponent;
     let fixture: ComponentFixture<CartTestSummaryComponent>;
     let service: CartService<BaseCartItem>;
@@ -174,17 +173,17 @@ describe('CartSummaryComponent', () => {
       service.addItem(new BaseCartItem({id: 1, name: 'Test item', quantity: 1, price: 10.49}));
       fixture.detectChanges();
       expect(totalCost.nativeElement.innerText).toBe('$10.49');
-      service.setCurrencyFormat('€');
+      service.setLocaleFormat('EUR');
       fixture.detectChanges();
       expect(totalCost.nativeElement.innerText).toBe('€10.49');
     });
 
     it('should allow to override the format at component level', () => {
       service.addItem(new BaseCartItem({id: 1, name: 'Test item', quantity: 1, price: 10.49}));
-      service.setCurrencyFormat('€');
+      service.setLocaleFormat('EUR');
       fixture.detectChanges();
       expect(totalCost.nativeElement.innerText).toBe('€10.49');
-      component.currencyFormat = '￥';
+      component.localeFormat = '￥';
       fixture.detectChanges();
       expect(totalCost.nativeElement.innerText).toBe('￥10.49');
       service.addItem(new BaseCartItem({id: 2, name: 'Test item', quantity: 1, price: 1}));

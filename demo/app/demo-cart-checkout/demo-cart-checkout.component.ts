@@ -11,7 +11,7 @@ import {CheckoutPaypalSettings} from '../../../src/interfaces/checkout-paypal-se
   styleUrls: ['./demo-cart-checkout.component.scss'],
 })
 export class DemoCheckoutComponent implements OnInit, OnDestroy {
-  private serviceSubstription: EventEmitter<any>;
+  private serviceSubscription: EventEmitter<any>;
   custom = false;
   label = 'Checkout';
   service: CheckoutType = 'log';
@@ -19,7 +19,7 @@ export class DemoCheckoutComponent implements OnInit, OnDestroy {
   resultsCollapsed = false;
   disabled = false;
   httpConfig: CheckoutHttpSettings = {url: '', method: 'POST'};
-  paypalConfig: CheckoutPaypalSettings = {business: '', currencyCode: 'USD', itemName: '', itemNumber: '0', noNote: '0'};
+  paypalConfig: CheckoutPaypalSettings = {business: '', itemName: '', itemNumber: '', serviceName: 'NgShoppingCart', country: 'US'};
 
   constructor(private cartService: CartService<DemoCartItem>) {
 
@@ -27,7 +27,7 @@ export class DemoCheckoutComponent implements OnInit, OnDestroy {
 
   ngOnInit(): void {
     this.checkService();
-    this.serviceSubstription = this.cartService.onItemsChanged.subscribe(() => {
+    this.serviceSubscription = this.cartService.onItemsChanged.subscribe(() => {
       this.checkService();
     });
   }
@@ -47,7 +47,7 @@ export class DemoCheckoutComponent implements OnInit, OnDestroy {
   }
 
   ngOnDestroy(): void {
-    this.serviceSubstription.unsubscribe();
+    this.serviceSubscription.unsubscribe();
   }
 
 }

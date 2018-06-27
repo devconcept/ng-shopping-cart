@@ -16,7 +16,11 @@ import {CartItem} from '../../classes/cart-item';
 })
 export class CartShowcaseItemComponent implements ShowcaseItem {
   /**
-   * The required member from the interface `ShowcaseItem`
+   * Inherited from the interface `ShowcaseItem`
    */
   item: CartItem;
+  /**
+   * Inherited from the interface `ShowcaseItem`
+   */
+  format: string;
 }

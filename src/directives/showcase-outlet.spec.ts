@@ -32,12 +32,13 @@ class ShowcaseTestAdvancedComponent {
 }
 
 const TEST_CMP_MODULE_TEMPLATE =
-  `<ng-template *cartShowcaseOutlet="itemComponent;item:item;ngModuleFactory:moduleFactory"></ng-template>`;
+  `<ng-template *cartShowcaseOutlet="itemComponent;item:item;format:format;ngModuleFactory:moduleFactory"></ng-template>`;
 
 @Component({selector: 'cart-showcase-test-module-cmp', template: TEST_CMP_MODULE_TEMPLATE})
 class ShowcaseTestModuleComponent {
   itemComponent: Type<any>;
   item: CartItem;
+  format: string;
   moduleFactory: NgModuleFactory<any>;
 
   @ViewChild(ShowcaseOutletDirective) ngComponentOutlet: ShowcaseOutletDirective;
@@ -48,15 +49,18 @@ class ShowcaseTestModuleComponent {
 @Component({selector: 'cart-showcase-item-test-cmp', template: '{{item.getName()}}'})
 class ShowcaseItemTestComponent implements ShowcaseItem {
   item: CartItem;
+  format: string;
 }
 
 @Component({selector: 'cart-showcase-item-test-module-cmp', template: '{{item.getId()}}'})
 class ShowcaseItemTestModuleComponent implements ShowcaseItem {
   item: CartItem;
+  format: string;
 }
 @Component({selector: 'cart-showcase-item-test-additional-module-cmp', template: '{{item.getId()}} {{item.getName()}}'})
 class ShowcaseItemTestAdditionalModuleComponent implements ShowcaseItem {
   item: CartItem;
+  format: string;
 }
 
 @NgModule({
@@ -189,6 +193,36 @@ describe('ShowcaseOutletDirective', () => {
     component.itemComponent = ShowcaseItemTestAdditionalModuleComponent;
     fixture.detectChanges();
     expect(fixture.nativeElement.innerText).toEqual('1 test-item');
+  }));
+
+  it('should not re-create the component when only the format changed', async(() => {
+    const compiler = TestBed.get(Compiler) as Compiler;
+    const fixture = TestBed.createComponent(ShowcaseTestModuleComponent);
+    const component = fixture.componentInstance;
+    component.moduleFactory = compiler.compileModuleSync(ShowcaseTestModule);
+    component.itemComponent = ShowcaseItemTestModuleComponent;
+    component.item = new BaseCartItem({id: 1, name: 'test-item'});
+    fixture.detectChanges();
+    expect(fixture.nativeElement.innerText).toEqual('1');
+    const componentRef = component.ngComponentOutlet['_componentRef'];
+    component.format = 'EUR';
+    fixture.detectChanges();
+    expect(componentRef).toBe(component.ngComponentOutlet['_componentRef']);
+  }));
+
+  it('should do nothing if there is no component and the format changed', async(() => {
+    const compiler = TestBed.get(Compiler) as Compiler;
+    const fixture = TestBed.createComponent(ShowcaseTestModuleComponent);
+    const component = fixture.componentInstance;
+    component.moduleFactory = compiler.compileModuleSync(ShowcaseTestModule);
+    component.item = new BaseCartItem({id: 1, name: 'test-item'});
+    fixture.detectChanges();
+    expect(fixture.nativeElement.innerText).toEqual('');
+    const componentRef = component.ngComponentOutlet['_componentRef'];
+    component.format = 'EUR';
+    fixture.detectChanges();
+    expect(fixture.nativeElement.innerText).toEqual('');
+    expect(componentRef).toBe(component.ngComponentOutlet['_componentRef']);
   }));
 });
 

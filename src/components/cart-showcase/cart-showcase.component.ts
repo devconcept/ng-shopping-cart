@@ -1,7 +1,8 @@
-import {Component, Injector, Input, NgModuleFactory, OnChanges, SimpleChanges, Type} from '@angular/core';
+import {Component, Injector, Input, NgModuleFactory, OnChanges, OnDestroy, OnInit, SimpleChanges, Type} from '@angular/core';
 import {CartItem} from '../../classes/cart-item';
 import {CartShowcaseItemComponent} from '../../components/cart-showcase-item/cart-showcase-item.component';
 import {ShowcaseItem} from '../../interfaces/showcase-item';
+import {CartService} from '../../services/cart.service';
 
 /**
  * Renders items arranged in columns using a dynamic component for the item. Useful for getting started with e-commerce applications.
@@ -61,7 +62,9 @@ import {ShowcaseItem} from '../../interfaces/showcase-item';
   selector: 'cart-showcase',
   templateUrl: './cart-showcase.component.html',
 })
-export class CartShowcaseComponent implements OnChanges {
+export class CartShowcaseComponent implements OnChanges, OnInit, OnDestroy {
+  private _cartChangeSubscription: any;
+  format: string;
   xsClass = 'sc-container-xs-12';
   sClass = 'sc-container-s-6';
   mClass = 'sc-container-m-4';
@@ -114,9 +117,17 @@ export class CartShowcaseComponent implements OnChanges {
    * taller and so on.
    */
   @Input() aspectRatio = '1:1';
+  /**
+   * Changes currency display format for the component. Overrides the value set from the service using `setLocaleFormat`.
+   */
+  @Input() localeFormat: string;
 
   private getColumnSize(value) {
     return Math.floor(this.columns / value);
+  }
+
+  constructor(private cartService: CartService<any>) {
+
   }
 
   ngOnChanges(changes: SimpleChanges): void {
@@ -138,5 +149,21 @@ export class CartShowcaseComponent implements OnChanges {
         this.ratioClass = `sc-ratio-${values[0]}-${values[1]}`;
       }
     }
+    if (changes['localeFormat']) {
+      this.format = this.localeFormat || <string>this.cartService.getLocaleFormat();
+    }
+  }
+
+  ngOnInit(): void {
+    this.format = this.localeFormat || <string>this.cartService.getLocaleFormat();
+    this._cartChangeSubscription = this.cartService.onChange.subscribe((evt) => {
+      if (evt.change === 'format' && !this.localeFormat) {
+        this.format = <string>this.cartService.getLocaleFormat();
+      }
+    });
+  }
+
+  ngOnDestroy(): void {
+    this._cartChangeSubscription.unsubscribe();
   }
 }

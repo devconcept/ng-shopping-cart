@@ -1,5 +1,7 @@
 import {Component, OnInit, OnDestroy, Input, OnChanges, SimpleChanges} from '@angular/core';
 import {CartService} from '../../services/cart.service';
+import {LocaleFormat} from '../../interfaces/locale-format';
+import {parseLocaleFormat} from '../../locales';
 
 /**
  * Renders a summary of the contents of the cart.
@@ -45,10 +47,10 @@ export class CartSummaryComponent implements OnInit, OnChanges, OnDestroy {
   /**
    * Changes currency display format for the component. Overrides the value set from the service using `setCurrencyFormat`.
    */
-  @Input() currencyFormat: string;
+  @Input() localeFormat: string;
   totalItems = 0;
   totalCost = 0;
-  format: string;
+  format: LocaleFormat;
 
   constructor(private cartService: CartService<any>) {
 
@@ -57,8 +59,8 @@ export class CartSummaryComponent implements OnInit, OnChanges, OnDestroy {
   private updateComponent() {
     this.totalItems = this.cartService.itemCount();
     this.totalCost = !this.cartService.isEmpty() ? this.cartService.totalCost() : 0;
-    if (!this.currencyFormat) {
-      this.format = this.cartService.getCurrencyFormat();
+    if (!this.localeFormat) {
+      this.format = <LocaleFormat>this.cartService.getLocaleFormat(true);
     }
   }
 
@@ -77,8 +79,10 @@ export class CartSummaryComponent implements OnInit, OnChanges, OnDestroy {
       const value = changes['totalPlurals'].currentValue;
       this.summaryPlurals = value || this._defaultPlurals;
     }
-    if (changes['currencyFormat']) {
-      this.format = this.currencyFormat || this.cartService.getCurrencyFormat();
+    if (changes['localeFormat']) {
+      this.format = this.localeFormat ?
+        parseLocaleFormat(this.localeFormat) :
+        <LocaleFormat>this.cartService.getLocaleFormat(true);
     }
   }
 

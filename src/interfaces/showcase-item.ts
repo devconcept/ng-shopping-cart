@@ -10,4 +10,8 @@ export interface ShowcaseItem {
    * This field will receive the `CartItem` object for the component instance.
    */
   item: CartItem;
+  /**
+   * This field will receive the locale format as received from the parent component.
+   */
+  format: string;
 }

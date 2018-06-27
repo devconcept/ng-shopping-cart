@@ -6,7 +6,7 @@
     </button>
   </div>
   <div class="card-body" [ngbCollapse]="settingsCollapsed">
-    <form>
+    <form #frm="ngForm">
       <div class="form-row">
         <div class="form-group col-12 col-md-3">
           <label for="cartCheckoutService" class="mr-1">Service</label>
@@ -35,36 +35,6 @@
             </select>
           </div>
         </ng-container>
-        <ng-container *ngIf="service === 'paypal'">
-          <div class="form-group col-12 col-md-3">
-            <label for="cartCheckoutBusiness" class="mr-1">Business</label>
-            <input id="cartCheckoutBusiness" name="cartCheckoutBusiness" class="form-control"
-                   [(ngModel)]="paypalConfig.business">
-          </div>
-          <div class="form-group col-12 col-md-3">
-            <label for="cartCheckoutCurrency" class="mr-1">Currency</label>
-            <input id="cartCheckoutCurrency" name="cartCheckoutCurrency" class="form-control"
-                   [(ngModel)]="paypalConfig.currencyCode">
-          </div>
-          <div class="form-group col-12 col-md-3">
-            <label for="cartCheckoutName" class="mr-1">Item name</label>
-            <input id="cartCheckoutName" name="cartCheckoutName" class="form-control"
-                   [(ngModel)]="paypalConfig.itemName">
-          </div>
-          <div class="form-group col-12 col-md-3">
-            <label for="cartCheckoutNumber" class="mr-1">Item number</label>
-            <input id="cartCheckoutNumber" name="cartCheckoutNumber" class="form-control"
-                   [(ngModel)]="paypalConfig.itemNumber">
-          </div>
-          <div class="form-group col-12 col-md-3">
-            <label for="cartCheckoutNoNote" class="mr-1">No note</label>
-            <select id="cartCheckoutNoNote" name="cartCheckoutNoNote" class="form-control"
-                    [(ngModel)]="paypalConfig.noNote">
-              <option value="0">0</option>
-              <option value="1">1</option>
-            </select>
-          </div>
-        </ng-container>
       </div>
       <div class="form-row" *ngIf="service !== 'paypal'">
         <div class="form-group col mb-0">
@@ -73,6 +43,46 @@
                    [(ngModel)]="custom">
             <label for="cartCheckoutContents" class="form-check-label">Custom</label>
           </div>
+        </div>
+      </div>
+      <div class="form-row" *ngIf="service === 'paypal'">
+        <div class="form-group col-12 col-md-3">
+          <label for="cartCheckoutBusiness" class="mr-1">Business</label>
+          <input id="cartCheckoutBusiness" name="cartCheckoutBusiness" class="form-control"
+                 [(ngModel)]="paypalConfig.business">
+        </div>
+        <div class="form-group col-12 col-md-3">
+          <label for="cartCheckoutName" class="mr-1">Item name</label>
+          <input id="cartCheckoutName" name="cartCheckoutName" class="form-control"
+                 [(ngModel)]="paypalConfig.itemName">
+        </div>
+        <div class="form-group col-12 col-md-3">
+          <label for="cartCheckoutNumber" class="mr-1">Item number</label>
+          <input id="cartCheckoutNumber" name="cartCheckoutNumber" class="form-control"
+                 [(ngModel)]="paypalConfig.itemNumber">
+        </div>
+        <div class="form-group col-12 col-md-3">
+          <label for="cartCheckoutServiceName" class="mr-1">Service name</label>
+          <input id="cartCheckoutServiceName" name="cartCheckoutServiceName" class="form-control"
+                 [(ngModel)]="paypalConfig.serviceName" required #serviceInput="ngModel"
+                 [ngClass]="{'is-invalid': serviceInput.invalid && serviceInput.touched}">
+          <small class="text-danger" [hidden]="serviceInput.valid || serviceInput.pristine">
+            The service name is required
+          </small>
+        </div>
+        <div class="form-group col-12 col-md-3">
+          <label for="cartCheckoutCountry" class="mr-1">Country</label>
+          <input id="cartCheckoutCountry" name="cartCheckoutCountry" class="form-control"
+                 [(ngModel)]="paypalConfig.country" minlength="2" maxlength="2" required #countryInput="ngModel"
+                 [ngClass]="{'is-invalid': countryInput.invalid && countryInput.touched}">
+          <small class="text-danger"
+                 [hidden]="countryInput.valid || countryInput.pristine || !countryInput.errors['required']">
+            The country is required
+          </small>
+          <small class="text-danger"
+                 [hidden]="countryInput.valid || countryInput.pristine || !countryInput.errors['minlength']">
+            The country must be 2 characters long
+          </small>
         </div>
       </div>
     </form>

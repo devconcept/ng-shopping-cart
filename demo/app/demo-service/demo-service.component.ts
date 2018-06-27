@@ -12,14 +12,14 @@ export class DemoServiceComponent implements OnInit {
   tax = 0;
   shipping = 0;
   currency = 'auto';
-  currencies = ['auto', '$', '€', '￥'];
+  currencies = ['auto', 'USD', 'EUR', 'CAD'];
   symbolDisplay = 'auto';
   symbolsDisplay = ['auto', 'code', 'symbol', 'symbol-narrow'];
   digitInfo = 'auto';
   digitsInfo = ['auto', '2.1-3', '5.0-0', '2.5-7'];
-  locale = 'en-US';
-  locales = ['auto', 'en-US', 'fr-FR'];
-  format = 'auto:auto:auto:en-US';
+  locale = 'auto';
+  locales = ['auto', 'en-US', 'fr'];
+  format = 'auto:auto:auto:auto';
   settingsCollapsed = false;
 
   constructor(public cartService: CartService<DemoCartItem>) {

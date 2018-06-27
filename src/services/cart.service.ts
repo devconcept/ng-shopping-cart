@@ -2,7 +2,8 @@ import {EventEmitter} from '@angular/core';
 
 import {CartItem} from '../classes/cart-item';
 import {CartChangeEvent} from '../interfaces/cart-change-event';
-import {parseCurrencyFormat} from '../currencies';
+import {parseLocaleFormat} from '../locales';
+import {LocaleFormat} from '../interfaces/locale-format';
 
 /**
  * The base class for storing items in your cart
@@ -13,7 +14,8 @@ import {parseCurrencyFormat} from '../currencies';
  * @order 1
  */
 export abstract class CartService<T extends CartItem> {
-  private currencyFormat = 'auto';
+  private localeFormat: LocaleFormat = parseLocaleFormat('auto');
+  private format = 'auto';
   /**
    * Emits an event every time items, tax, shipping cost or currency formats are changed in the cart.
    */
@@ -128,17 +130,17 @@ export abstract class CartService<T extends CartItem> {
    *
    * Check the Angular `CurrencyPipe` and the Internationalization guide for more info.
    */
-  public setCurrencyFormat(format: string) {
-    parseCurrencyFormat(format);
-    this.currencyFormat = format;
-    this.onChange.emit({change: 'currency', value: this.currencyFormat});
+  public setLocaleFormat(format: string) {
+    this.localeFormat = parseLocaleFormat(format);
+    this.format = format;
+    this.onChange.emit({change: 'format', value: this.format});
   }
 
   /**
    * Returns the currency format as set with `setCurrencyFormat` or `'auto'` if no value is set.
    */
-  public getCurrencyFormat() {
-    return this.currencyFormat;
+  public getLocaleFormat(object: boolean = false): string | LocaleFormat {
+    return object ? this.localeFormat : this.format;
   }
 
   /**

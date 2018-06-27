@@ -7,21 +7,25 @@ export interface CheckoutPaypalSettings {
    */
   business: string;
   /**
-   * Description of item being sold. If you are collecting aggregate payments, the value can be a summary of all items purchased, a
-   * tracking number, or a generic term such as, subscription. If you omit this variable, buyers see a field in which they can enter the
-   * item name.
+   * Description of item being sold.
+   *
+   * If you omit this variable, buyers enter their own name during checkout.
    */
-  itemName: string;
+  itemName?: string;
   /**
    * Pass-through variable for you to track product or service purchased or the contribution made.
    */
-  itemNumber: string;
+  itemNumber?: string;
   /**
-   * The currency of the payment
+   * The name of the service that creates the button. This is usually a reference to the name of your site or application.
+   *
+   * This is a fragment of what is know as build notation.
    */
-  currencyCode: string;
+  serviceName?: string;
   /**
-   * Do not prompt buyers to include a note with their payments. Valid values are "0" and "1"
+   * The country fragment of the build notation.
+   *
+   * If you don't provide both the `serviceName` and the `country` no build notation is used.
    */
-  noNote: string;
+  country?: string;
 }

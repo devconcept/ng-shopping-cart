@@ -2,6 +2,8 @@ import {Component, OnInit, OnDestroy, Input, OnChanges, SimpleChanges} from '@an
 import {CartItem} from '../../classes/cart-item';
 import {CartService} from '../../services/cart.service';
 import {CartViewDisplay} from '../../types';
+import {LocaleFormat} from '../../interfaces/locale-format';
+import {parseLocaleFormat} from '../../locales';
 
 /**
  * Renders a view of the cart.
@@ -107,8 +109,8 @@ export class CartViewComponent implements OnInit, OnChanges, OnDestroy {
   /**
    * Changes currency display format for the component. Overrides the value set from the service using `setCurrencyFormat`.
    */
-  @Input() currencyFormat: string;
-  format: string;
+  @Input() localeFormat: string;
+  format: LocaleFormat;
   empty = true;
   items: CartItem[];
   taxRate = 0;
@@ -123,12 +125,12 @@ export class CartViewComponent implements OnInit, OnChanges, OnDestroy {
   update() {
     this.empty = this.cartService.isEmpty();
     this.items = this.cartService.getItems();
-    this.taxRate = this.cartService.getTaxRate();
+    this.taxRate = this.cartService.getTaxRate() / 100;
     this.tax = this.cartService.getTax();
     this.shipping = this.cartService.getShipping();
     this.cost = this.cartService.totalCost();
-    if (!this.currencyFormat) {
-      this.format = this.cartService.getCurrencyFormat();
+    if (!this.localeFormat) {
+      this.format = <LocaleFormat>this.cartService.getLocaleFormat(true);
     }
   }
 
@@ -154,8 +156,10 @@ export class CartViewComponent implements OnInit, OnChanges, OnDestroy {
   }
 
   ngOnChanges(changes: SimpleChanges): void {
-    if (changes['currencyFormat']) {
-      this.format = this.currencyFormat || this.cartService.getCurrencyFormat();
+    if (changes['localeFormat']) {
+      this.format = this.localeFormat ?
+        parseLocaleFormat(this.localeFormat) :
+        <LocaleFormat>this.cartService.getLocaleFormat(true);
     }
   }
 

@@ -3,7 +3,7 @@
   </div>
   <h3 class="item-name">{{item.getName()}}</h3>
   <div class="item-price">
-    {{item.getPrice() | currency}}
+    {{item.getPrice() | cartCurrency:format}}
   </div>
   <div class="item-buttons">
     <add-to-cart [item]="item" [custom]="true" [type]="'dropdown'">

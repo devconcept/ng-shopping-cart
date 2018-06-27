@@ -1,10 +1,11 @@
 import {Inject, LOCALE_ID, Pipe, PipeTransform} from '@angular/core';
 import {CurrencyPipe} from '@angular/common';
-import {parseCurrencyFormat} from '../currencies';
+import {parseLocaleFormat} from '../locales';
 
 /**
  * A pipe that wraps the `CurrencyPipe` to set currency value display using a string rather than several arguments for easy configuration.
  *
+ * @summary
  * It takes a string as a single parameter in the format `'currencyCode:symbolDisplay:digitsInfo:locale'`. You can also use the special
  * value `'auto'` which will set the default used by Angular in that specific configuration.
  *
@@ -25,7 +26,7 @@ import {parseCurrencyFormat} from '../currencies';
  * ```typescript
  * export class MyComponent {
  *   value = 10;
- *   format = '€';
+ *   format = 'EUR';
  * }
  * ```
  *
@@ -67,7 +68,7 @@ export class CartCurrencyPipe implements PipeTransform {
     if (!value && value !== 0) {
       return null;
     }
-    const {currencyCode, symbolDisplay, digitsInfo, locale} = parseCurrencyFormat(format);
+    const {currencyCode, symbolDisplay, digitsInfo, locale} = parseLocaleFormat(format);
     return this.currencyFormatter.transform(value, currencyCode, symbolDisplay, digitsInfo, locale);
   }
 }

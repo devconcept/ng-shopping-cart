@@ -1,6 +1,7 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { CartShowcaseItemComponent } from './cart-showcase-item.component';
 import { BaseCartItem } from '../../classes/base-cart-item';
+import {CartCurrencyPipe} from '../../pipes/cart-currency.pipe';
 
 describe('DefaultShowcaseItemComponent', () => {
   let component: CartShowcaseItemComponent;
@@ -8,7 +9,7 @@ describe('DefaultShowcaseItemComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [CartShowcaseItemComponent]
+      declarations: [CartShowcaseItemComponent, CartCurrencyPipe]
     })
       .compileComponents();
   }));

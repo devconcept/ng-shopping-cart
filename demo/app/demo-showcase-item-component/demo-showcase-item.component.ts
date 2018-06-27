@@ -9,4 +9,5 @@ import {CartItem} from '../../../src/classes/cart-item';
 })
 export class DemoShowcaseItemComponent implements ShowcaseItem {
   item: CartItem;
+  format: string;
 }

@@ -2,8 +2,8 @@ import {
   ComponentFactoryResolver, ComponentRef, Directive, Injector, Input, NgModuleFactory, NgModuleRef, OnChanges, OnDestroy, SimpleChanges,
   Type, ViewContainerRef
 } from '@angular/core';
-import { ShowcaseItem } from '../interfaces/showcase-item';
-import { CartItem } from '../classes/cart-item';
+import {ShowcaseItem} from '../interfaces/showcase-item';
+import {CartItem} from '../classes/cart-item';
 
 /**
  * A directive to create dynamic item components for the showcase component
@@ -29,6 +29,10 @@ export class ShowcaseOutletDirective implements OnChanges, OnDestroy {
    * The CartItem information to pass into the component
    */
   @Input() cartShowcaseOutletItem: CartItem;
+  /**
+   * The locale format received from the parent component
+   */
+  @Input() cartShowcaseOutletFormat: string;
 
   private _componentRef: ComponentRef<any> | null = null;
   private _moduleRef: NgModuleRef<any> | null = null;
@@ -43,32 +47,40 @@ export class ShowcaseOutletDirective implements OnChanges, OnDestroy {
   }
 
   ngOnChanges(changes: SimpleChanges) {
-    this.viewContainerRef.clear();
-    this._componentRef = null;
+    const templateChange = Object.keys(changes).length !== 1 || !changes['cartShowcaseOutletFormat'];
+    if (templateChange) {
+      this.viewContainerRef.clear();
+      this._componentRef = null;
 
-    if (this.cartShowcaseOutlet) {
-      const elInjector = this.cartShowcaseOutletInjector || this.viewContainerRef.parentInjector;
+      if (this.cartShowcaseOutlet) {
+        const elInjector = this.cartShowcaseOutletInjector || this.viewContainerRef.parentInjector;
 
-      if (changes['cartShowcaseOutletNgModuleFactory']) {
-        this.cleanModule();
+        if (changes['cartShowcaseOutletNgModuleFactory']) {
+          this.cleanModule();
 
-        if (this.cartShowcaseOutletNgModuleFactory) {
-          const parentModule = elInjector.get(NgModuleRef);
-          this._moduleRef = this.cartShowcaseOutletNgModuleFactory.create(parentModule.injector);
-        } else {
-          this._moduleRef = null;
+          if (this.cartShowcaseOutletNgModuleFactory) {
+            const parentModule = elInjector.get(NgModuleRef);
+            this._moduleRef = this.cartShowcaseOutletNgModuleFactory.create(parentModule.injector);
+          } else {
+            this._moduleRef = null;
+          }
         }
+
+        const componentFactoryResolver = this._moduleRef ? this._moduleRef.componentFactoryResolver :
+          elInjector.get(ComponentFactoryResolver);
+
+        const componentFactory =
+          componentFactoryResolver.resolveComponentFactory(this.cartShowcaseOutlet);
+
+        this._componentRef = this.viewContainerRef.createComponent(componentFactory, this.viewContainerRef.length, elInjector);
+        const instance = this._componentRef.instance;
+        instance.item = this.cartShowcaseOutletItem;
+        instance.format = this.cartShowcaseOutletFormat;
       }
-
-      const componentFactoryResolver = this._moduleRef ? this._moduleRef.componentFactoryResolver :
-        elInjector.get(ComponentFactoryResolver);
-
-      const componentFactory =
-        componentFactoryResolver.resolveComponentFactory(this.cartShowcaseOutlet);
-
-      this._componentRef = this.viewContainerRef.createComponent(componentFactory, this.viewContainerRef.length, elInjector);
-      this._componentRef.instance.item = this.cartShowcaseOutletItem;
-
+    } else {
+      if (this._componentRef) {
+        this._componentRef.instance.format = this.cartShowcaseOutletFormat;
+      }
     }
   }
 

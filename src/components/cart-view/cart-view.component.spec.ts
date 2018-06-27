@@ -19,14 +19,14 @@ class TestCustomEmptyComponent {
 
 }
 
-const TEST_CURRENCY_VIEW_TEMPLATE = '<cart-view [currencyFormat]="currencyFormat"></cart-view>';
+const TEST_CURRENCY_VIEW_TEMPLATE = '<cart-view [localeFormat]="localeFormat"></cart-view>';
 
 @Component({
   selector: 'cart-test-currency-cart-view',
   template: TEST_CURRENCY_VIEW_TEMPLATE
 })
 class TestCurrencyCartViewComponent {
-  currencyFormat: string;
+  localeFormat: string;
 }
 
 // endregion
@@ -186,7 +186,7 @@ describe('CartViewComponent', () => {
     });
   });
 
-  describe('Currency format', () => {
+  describe('Locale format', () => {
     let component: TestCurrencyCartViewComponent;
     let fixture: ComponentFixture<TestCurrencyCartViewComponent>;
     let service: CartService<BaseCartItem>;
@@ -208,7 +208,7 @@ describe('CartViewComponent', () => {
       expect(footers[0]).toBe('Tax: (10%) $1.00');
       expect(footers[1]).toBe('Shipping: $10.00');
       expect(footers[2]).toBe('Total: $21.00');
-      service.setCurrencyFormat('€');
+      service.setLocaleFormat('€');
       fixture.detectChanges();
       footers = componentFooters.map(el => el.nativeElement.innerText);
       expect(footers[0]).toBe('Tax: (10%) €1.00');
@@ -218,7 +218,7 @@ describe('CartViewComponent', () => {
 
     it('should allow to override the format at component level', () => {
       service.addItem(new BaseCartItem({id: 1, name: 'Test item', quantity: 1, price: 10}));
-      service.setCurrencyFormat('€');
+      service.setLocaleFormat('€');
       fixture.detectChanges();
       const componentFooters = fixture.debugElement
         .queryAll(By.css('.cart-list-footer .cart-list-summary :not(.cart-empty-summary)'));
@@ -226,7 +226,7 @@ describe('CartViewComponent', () => {
       expect(footers[0]).toBe('Tax: (10%) €1.00');
       expect(footers[1]).toBe('Shipping: €10.00');
       expect(footers[2]).toBe('Total: €21.00');
-      component.currencyFormat = '￥';
+      component.localeFormat = '￥';
       fixture.detectChanges();
       footers = componentFooters.map(el => el.nativeElement.innerText);
       expect(footers[0]).toBe('Tax: (10%) ￥1.00');

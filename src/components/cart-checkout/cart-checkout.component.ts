@@ -1,10 +1,13 @@
-import {Component, EventEmitter, Input, OnChanges, OnDestroy, OnInit, Output, SimpleChanges} from '@angular/core';
+import {Component, EventEmitter, Inject, Input, LOCALE_ID, OnChanges, OnDestroy, OnInit, Output, SimpleChanges} from '@angular/core';
+import {CurrencyPipe, getLocaleCurrencyName} from '@angular/common';
 import {HttpClient, HttpParams, HttpRequest} from '@angular/common/http';
 
 import {CheckoutSettings, CheckoutType} from '../../types';
 import {CartService} from '../../services/cart.service';
 import {CheckoutPaypalSettings} from '../../interfaces/checkout-paypal-settings';
 import {CheckoutHttpSettings} from '../../interfaces/checkout-http-settings';
+import {LocaleFormat} from '../../interfaces/locale-format';
+import {parseLocaleFormat} from '../../locales';
 
 /**
  * Renders a button to initiate checkout of the cart.
@@ -49,8 +52,8 @@ import {CheckoutHttpSettings} from '../../interfaces/checkout-http-settings';
  *    business: 'myaccount@paypal.com',
  *    itemName: 'myMarketplaceAppCart',
  *    itemNumber: '1234',
- *    currencyCode: 'USD',
- *    noNote: '1'
+ *    serviceName: 'MyBusiness',
+ *    country: 'US'
  *  };
  * }
  * ```
@@ -73,6 +76,9 @@ export class CartCheckoutComponent implements OnChanges, OnInit, OnDestroy {
   shipping = 0;
   httpSettings: CheckoutHttpSettings;
   paypalSettings: CheckoutPaypalSettings;
+  format: LocaleFormat;
+  currency = 'USD';
+  paypalLocale = 'en';
   /**
    * If `false` displays a default button provided by the component. When set to `true` projects the contents of the component.
    */
@@ -95,6 +101,10 @@ export class CartCheckoutComponent implements OnChanges, OnInit, OnDestroy {
    */
   @Input() settings: CheckoutSettings = null;
   /**
+   * Changes currency display format for the component. Overrides the value set from the service using `setCurrencyFormat`.
+   */
+  @Input() localeFormat: string;
+  /**
    * Emits the result of the checkout operation. If the service is set to `'log'` it emits the entire cart object including tax rates and
    * shipping info. If is set to `'http'` it emits an `HttpResponse` object with body, headers, etc as it was received by the remote server.
    *
@@ -109,47 +119,80 @@ export class CartCheckoutComponent implements OnChanges, OnInit, OnDestroy {
    */
   @Output() error = new EventEmitter<any>();
 
-  constructor(private cartService: CartService<any>, private httpClient: HttpClient) {
+  constructor(private cartService: CartService<any>, private httpClient: HttpClient, @Inject(LOCALE_ID) private locale: string) {
 
   }
 
   ngOnInit(): void {
-    this.updateCart();
-    this._cartChangeSubscription = this.cartService.onChange.subscribe(() => this.updateCart());
+    this.updateCart(true);
+    this._cartChangeSubscription = this.cartService
+      .onChange
+      .subscribe((evt) => this.updateCart(evt.change === 'format'));
   }
 
-  updateCart() {
+  private updateCart(formatChange) {
     this.empty = this.cartService.isEmpty();
     this.cost = this.cartService.cost();
     this.taxRate = this.cartService.getTaxRate();
     this.shipping = this.cartService.getShipping();
+    if (formatChange) {
+      this.updateLocale();
+    }
+  }
+
+  private updateLocale() {
+    this.format = this.localeFormat ?
+      parseLocaleFormat(this.localeFormat) :
+      <LocaleFormat>this.cartService.getLocaleFormat(true);
+    const loc = this.format.locale || this.locale;
+    this.paypalLocale = loc.substring(0, 2);
+    this.currency = this.format.currencyCode || this.getCurrency(loc);
+  }
+
+  private getCurrency(locale) {
+    const currencyCode = getLocaleCurrencyName(locale);
+    if (!currencyCode) {
+      return 'USD';
+    }
+    if (currencyCode.length === 3) {
+      return currencyCode;
+    }
+    // Angular <= 6 return "US Dollar" instead of "USD" so we have to hack the code using the currency pipe
+    // You will also get USD on locales where you should get EUR so for those versions currencyCode must be used
+    const fmt = new CurrencyPipe(locale);
+    const val = fmt.transform(0, undefined, 'code', '1.0-0', locale);
+    const pre = val.startsWith('0');
+    return val.substr(pre ? -3 : 0, 3);
   }
 
   doCheckout() {
-    let body: any = this.cartService.toObject();
+    let cart: any = this.cartService.toObject();
     switch (this.service) {
       case 'log':
-        console.log(body);
-        this.checkout.emit(body);
+        console.log(cart);
+        this.checkout.emit(cart);
         break;
       case 'http':
         if (!this.settings) {
           throw new Error('Missing settings configuration');
         }
         const verbs = ['POST', 'PUT', 'PATCH'];
-        const {url, method = 'POST', options} = this.httpSettings;
+        const {url, method = 'POST', options, body} = this.httpSettings;
         const methodUpper = method.toUpperCase();
         if (verbs.indexOf(methodUpper) === -1) {
           throw new Error(`Invalid http verb found in method setting. Expected one of ${verbs.join(' ')} and got ${method}`);
         }
+        if (body) {
+          cart = typeof body === 'function' ? body(cart) : Object.assign({}, cart, body);
+        }
         if (options && options.headers && options.headers.has('Content-Type')) {
           const contentType = options.headers.get('Content-Type');
           if (contentType.startsWith('application/x-www-form-urlencoded')) {
-            body = new HttpParams({fromObject: body});
+            cart = new HttpParams({fromObject: cart});
           }
         }
         this.httpClient
-          .request(new HttpRequest(methodUpper, url, body, options))
+          .request(new HttpRequest(methodUpper, url, cart, options))
           .toPromise()
           .then(response => {
             this.checkout.emit(response);
@@ -165,12 +208,15 @@ export class CartCheckoutComponent implements OnChanges, OnInit, OnDestroy {
     if (changes['settings'] && changes['settings'].currentValue) {
       const hasOwn = Object.prototype.hasOwnProperty;
       const value = changes['settings'].currentValue;
-      if (hasOwn.call(value, 'itemName')) {
+      if (hasOwn.call(value, 'business')) {
         this.paypalSettings = changes['settings'].currentValue;
       }
       if (hasOwn.call(value, 'url')) {
         this.httpSettings = changes['settings'].currentValue;
       }
+    }
+    if (changes['localeFormat']) {
+      this.updateLocale();
     }
   }
 

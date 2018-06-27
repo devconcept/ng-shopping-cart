@@ -156,43 +156,37 @@ describe('MemoryCartService', () => {
   it('should change the currency format', () => {
     let changeEvent = null;
 
-    expect(service.getCurrencyFormat()).toEqual('auto');
+    expect(service.getLocaleFormat()).toEqual('auto');
     subscriptions.push(service.onChange.subscribe(evt => changeEvent = evt));
-    service.setCurrencyFormat('auto:auto');
-    expect(service.getCurrencyFormat()).toEqual('auto:auto');
+    service.setLocaleFormat('auto:auto');
+    expect(service.getLocaleFormat()).toEqual('auto:auto');
     expect(changeEvent).toBeTruthy();
-    expect(changeEvent.change).toEqual('currency');
+    expect(changeEvent.change).toEqual('format');
     expect(changeEvent.value).toEqual('auto:auto');
   });
 
   it('should throw an error if a invalid currency format is set', () => {
     let changeEvent = null;
 
-    expect(service.getCurrencyFormat()).toEqual('auto');
+    expect(service.getLocaleFormat()).toEqual('auto');
     subscriptions.push(service.onChange.subscribe(evt => changeEvent = evt));
 
     const testFn1 = function () {
-      service.setCurrencyFormat('');
+      service.setLocaleFormat('');
     };
     const emptyFormatErr = 'Invalid format for currency. Expected a non empty string';
 
     const testFn2 = function () {
-      service.setCurrencyFormat('auto:auto:auto:auto:auto');
+      service.setLocaleFormat('auto:auto:auto:auto:auto');
     };
     const invalidFormatErr = 'Invalid format for currency.' +
       ' Expected a value in the form currencyCode:symbolDisplay:digitsInfo:locale anf got auto:auto:auto:auto:auto';
 
-    const testFn3 = function () {
-      service.setCurrencyFormat('auto:test');
-    };
-    const invalidSymbolErr = 'Invalid symbol display found. Expected any of code,symbol,symbol-narrow,auto and got test';
 
     expect(testFn1).toThrowError(emptyFormatErr);
     expect(testFn2)
       .toThrowError(invalidFormatErr);
-    expect(testFn3)
-      .toThrowError(invalidSymbolErr);
-    expect(service.getCurrencyFormat()).toEqual('auto');
+    expect(service.getLocaleFormat()).toEqual('auto');
     expect(changeEvent).toBeNull();
   });
 
