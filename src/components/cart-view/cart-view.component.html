@@ -41,10 +41,10 @@
             </button>
           </div>
           <div class="cart-list-value cart-list-price-value">
-            {{cartItem.getPrice() | currency:format.currencyCode:format.symbolDisplay:format.digitsInfo:format.locale}}
+            {{cartItem.getPrice() | currency:format.currencyCode:format.display:format.digitsInfo:format.locale}}
           </div>
           <div class="cart-list-value cart-list-total-value">
-            {{cartItem.total() | currency:format.currencyCode:format.symbolDisplay:format.digitsInfo:format.locale}}
+            {{cartItem.total() | currency:format.currencyCode:format.display:format.digitsInfo:format.locale}}
           </div>
         </div>
         <div class="cart-list-footer">
@@ -55,7 +55,7 @@
             <div class="cart-empty-summary"></div>
             <div class="cart-tax-summary">
               {{taxFooterText}}: ({{taxRate | percent:format.digitsInfo:format.locale}})
-              {{tax | currency:format.currencyCode:format.symbolDisplay:format.digitsInfo:format.locale}}
+              {{tax | currency:format.currencyCode:format.display:format.digitsInfo:format.locale}}
             </div>
           </div>
           <div class="cart-list-summary">
@@ -65,7 +65,7 @@
             <div class="cart-empty-summary"></div>
             <div class="cart-shipping-summary">
               {{shippingFooterText}}:
-              {{shipping | currency:format.currencyCode:format.symbolDisplay:format.digitsInfo:format.locale}}
+              {{shipping | currency:format.currencyCode:format.display:format.digitsInfo:format.locale}}
             </div>
           </div>
           <div class="cart-list-summary">
@@ -75,7 +75,7 @@
             <div class="cart-empty-summary"></div>
             <div class="cart-total-summary">
               {{totalFooterText}}:
-              {{cost | currency:format.currencyCode:format.symbolDisplay:format.digitsInfo:format.locale}}
+              {{cost | currency:format.currencyCode:format.display:format.digitsInfo:format.locale}}
             </div>
           </div>
         </div>
@@ -109,10 +109,10 @@
           </button>
         </td>
         <td class="cart-list-value cart-list-price-value">
-          {{cartItem.getPrice() | currency:format.currencyCode:format.symbolDisplay:format.digitsInfo:format.locale}}
+          {{cartItem.getPrice() | currency:format.currencyCode:format.display:format.digitsInfo:format.locale}}
         </td>
         <td class="cart-list-value cart-list-total-value">
-          {{cartItem.total() | currency:format.currencyCode:format.symbolDisplay:format.digitsInfo:format.locale}}
+          {{cartItem.total() | currency:format.currencyCode:format.display:format.digitsInfo:format.locale}}
         </td>
       </tr>
       </tbody>
@@ -121,21 +121,21 @@
         <td [attr.colspan]="images ? 4 : 3" class="cart-empty-summary"></td>
         <td class="cart-tax-summary">
           {{taxFooterText}}: ({{taxRate | percent:format.digitsInfo:format.locale}})
-          {{tax | currency:format.currencyCode:format.symbolDisplay:format.digitsInfo:format.locale}}
+          {{tax | currency:format.currencyCode:format.display:format.digitsInfo:format.locale}}
         </td>
       </tr>
       <tr class="cart-list-summary">
         <td [attr.colspan]="images ? 4 : 3" class="cart-empty-summary"></td>
         <td class="cart-shipping-summary">
           {{shippingFooterText}}:
-          {{shipping | currency:format.currencyCode:format.symbolDisplay:format.digitsInfo:format.locale}}
+          {{shipping | currency:format.currencyCode:format.display:format.digitsInfo:format.locale}}
         </td>
       </tr>
       <tr class="cart-list-summary">
         <td [attr.colspan]="images ? 4 : 3" class="cart-empty-summary"></td>
         <td class="cart-total-summary">
           {{totalFooterText}}:
-          {{cost | currency:format.currencyCode:format.symbolDisplay:format.digitsInfo:format.locale}}
+          {{cost | currency:format.currencyCode:format.display:format.digitsInfo:format.locale}}
         </td>
       </tr>
       </tfoot>

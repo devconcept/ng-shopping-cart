@@ -381,7 +381,7 @@ describe('CartCheckoutComponent', () => {
       const comp = fixture.debugElement.query(By.css('cart-checkout'));
       const instance = comp.componentInstance;
       expect(instance.format.currencyCode).toBe('EUR');
-      expect(instance.format.symbolDisplay).toBe('code');
+      expect(instance.format.display).toBe('code');
       expect(instance.format.digitsInfo).toBe('1.3-4');
       expect(instance.paypalLocale).toBe('en');
       expect(instance.currency).toBe('EUR');
@@ -395,7 +395,7 @@ describe('CartCheckoutComponent', () => {
       component.localeFormat = 'USD:symbol-narrow:3.2-2:fr';
       fixture.detectChanges();
       expect(instance.format.currencyCode).toBe('USD');
-      expect(instance.format.symbolDisplay).toBe('symbol-narrow');
+      expect(instance.format.display).toBe('symbol-narrow');
       expect(instance.format.digitsInfo).toBe('3.2-2');
       expect(instance.format.locale).toBe('fr');
       expect(instance.paypalLocale).toBe('fr');

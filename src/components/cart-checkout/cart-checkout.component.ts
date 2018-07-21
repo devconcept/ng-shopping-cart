@@ -69,7 +69,7 @@ import {parseLocaleFormat} from '../../locales';
   templateUrl: './cart-checkout.component.html',
 })
 export class CartCheckoutComponent implements OnChanges, OnInit, OnDestroy {
-  private _cartChangeSubscription: any;
+  private _serviceSubscription: any;
   private getLocaleCurrencyName: any;
   empty = true;
   cost = 0;
@@ -126,7 +126,7 @@ export class CartCheckoutComponent implements OnChanges, OnInit, OnDestroy {
 
   ngOnInit(): void {
     this.updateCart(true);
-    this._cartChangeSubscription = this.cartService
+    this._serviceSubscription = this.cartService
       .onChange
       .subscribe((evt) => this.updateCart(evt.change === 'format'));
   }
@@ -222,6 +222,6 @@ export class CartCheckoutComponent implements OnChanges, OnInit, OnDestroy {
   }
 
   ngOnDestroy(): void {
-    this._cartChangeSubscription.unsubscribe();
+    this._serviceSubscription.unsubscribe();
   }
 }

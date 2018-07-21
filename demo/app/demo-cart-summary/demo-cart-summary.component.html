@@ -22,24 +22,22 @@
             </div>
           </div>
         </div>
+      </div>
+      <div class="form-row">
         <div class="form-group col-12 col-md-4">
-          <label for="cartSummaryPlurals">Total plurals</label>
-          <div class="form-row">
-            <div class="form-group col">
-              <input id="cartSummaryPlurals" name="cartSummaryPlurals" class="form-control" #plInput type="text">
-              <small class="text-danger" *ngIf="pluralError">
-                Error parsing the expression. It must be an object in ICU format
-              </small>
-              <small class="text-danger" *ngIf="pluralIncomplete">
-                Error parsing the expression. You must provide at least one fallback key that don't start with '='
-              </small>
-            </div>
-            <div class="form-group col-auto">
-              <button type="button" class="btn btn-info" (click)="setPlurals(plInput.value)">
-                Set
-              </button>
-            </div>
-          </div>
+          <label for="cartSummaryNoItems">No items text</label>
+          <input id="cartSummaryNoItems" name="cartSummaryNoItems" [(ngModel)]="noItemsText" class="form-control"
+                 type="text">
+        </div>
+        <div class="form-group col-12 col-md-4">
+          <label for="cartSummaryOneItem">One item text</label>
+          <input id="cartSummaryOneItem" name="cartSummaryOneItem" [(ngModel)]="oneItemText" class="form-control"
+                 type="text">
+        </div>
+        <div class="form-group col-12 col-md-4">
+          <label for="cartSummaryManyItems">Many items text</label>
+          <input id="cartSummaryManyItems" name="cartSummaryManyItems" [(ngModel)]="manyItemsText" class="form-control"
+                 type="text">
         </div>
       </div>
       <hr>
@@ -72,7 +70,9 @@
       </a>
       <ul class="navbar nav">
         <li class="nav-item text-white">
-          <cart-summary [icon]="icon" [totalPlurals]="plurals"></cart-summary>
+          <cart-summary [icon]="icon" [noItemsText]="noItemsText" [oneItemText]="oneItemText"
+                        [manyItemsText]="manyItemsText">
+          </cart-summary>
         </li>
       </ul>
     </nav>
@@ -90,7 +90,9 @@
       </a>
       <ul class="navbar nav">
         <li class="nav-item">
-          <cart-summary [icon]="icon" [totalPlurals]="plurals"></cart-summary>
+          <cart-summary [icon]="icon" [noItemsText]="noItemsText" [oneItemText]="oneItemText"
+                        [manyItemsText]="manyItemsText">
+          </cart-summary>
         </li>
       </ul>
     </nav>
@@ -108,7 +110,9 @@
       </a>
       <ul class="navbar nav">
         <li class="nav-item">
-          <cart-summary [icon]="icon" [totalPlurals]="plurals"></cart-summary>
+          <cart-summary [icon]="icon" [noItemsText]="noItemsText" [oneItemText]="oneItemText"
+                        [manyItemsText]="manyItemsText">
+          </cart-summary>
         </li>
       </ul>
     </nav>

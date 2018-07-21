@@ -10,7 +10,6 @@
     <img alt="Code coverage" src="https://coveralls.io/repos/github/devconcept/ng-shopping-cart/badge.svg?branch=master">
   </a> 
   <img alt="Npm version" src="https://img.shields.io/npm/v/ng-shopping-cart.svg">
-  <img alt="Monthly downloads" src="https://img.shields.io/npm/dm/ng-shopping-cart.svg">
 </p>
 
 <p align="center">
@@ -27,6 +26,7 @@ An Angular component library to create shopping carts. Based on it's <a href="ht
 - Any object data structure for cart items
 - Simple module configuration
 - Different currency formats for the whole app or a single component
+- Internationalization support
 - Easy styling of one or all components of the same type
 - Support for CSS Preprocessors to customize styles with variables
 

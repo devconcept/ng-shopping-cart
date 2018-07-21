@@ -61,7 +61,7 @@ import {parseLocaleFormat} from '../../locales';
   templateUrl: './cart-view.component.html',
 })
 export class CartViewComponent implements OnInit, OnChanges, OnDestroy {
-  private _cartChangeSubscription: any;
+  private _serviceSubscription: any;
   /**
    * Changes the appearance how the cart view displays in different screen sizes
    */
@@ -150,7 +150,7 @@ export class CartViewComponent implements OnInit, OnChanges, OnDestroy {
 
   ngOnInit(): void {
     this.update();
-    this._cartChangeSubscription = this.cartService.onChange.subscribe(() => {
+    this._serviceSubscription = this.cartService.onChange.subscribe(() => {
       this.update();
     });
   }
@@ -164,6 +164,6 @@ export class CartViewComponent implements OnInit, OnChanges, OnDestroy {
   }
 
   ngOnDestroy(): void {
-    this._cartChangeSubscription.unsubscribe();
+    this._serviceSubscription.unsubscribe();
   }
 }

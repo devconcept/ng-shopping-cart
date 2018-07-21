@@ -63,7 +63,7 @@ import {CartService} from '../../services/cart.service';
   templateUrl: './cart-showcase.component.html',
 })
 export class CartShowcaseComponent implements OnChanges, OnInit, OnDestroy {
-  private _cartChangeSubscription: any;
+  private _serviceSubscription: any;
   format: string;
   xsClass = 'sc-container-xs-12';
   sClass = 'sc-container-s-6';
@@ -156,7 +156,7 @@ export class CartShowcaseComponent implements OnChanges, OnInit, OnDestroy {
 
   ngOnInit(): void {
     this.format = this.localeFormat || <string>this.cartService.getLocaleFormat();
-    this._cartChangeSubscription = this.cartService.onChange.subscribe((evt) => {
+    this._serviceSubscription = this.cartService.onChange.subscribe((evt) => {
       if (evt.change === 'format' && !this.localeFormat) {
         this.format = <string>this.cartService.getLocaleFormat();
       }
@@ -164,6 +164,6 @@ export class CartShowcaseComponent implements OnChanges, OnInit, OnDestroy {
   }
 
   ngOnDestroy(): void {
-    this._cartChangeSubscription.unsubscribe();
+    this._serviceSubscription.unsubscribe();
   }
 }

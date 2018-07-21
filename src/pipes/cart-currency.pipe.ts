@@ -68,7 +68,7 @@ export class CartCurrencyPipe implements PipeTransform {
     if (!value && value !== 0) {
       return null;
     }
-    const {currencyCode, symbolDisplay, digitsInfo, locale} = parseLocaleFormat(format);
-    return this.currencyFormatter.transform(value, currencyCode, symbolDisplay, digitsInfo, locale);
+    const {currencyCode, display, digitsInfo, locale} = parseLocaleFormat(format);
+    return this.currencyFormatter.transform(value, currencyCode, display, digitsInfo, locale);
   }
 }

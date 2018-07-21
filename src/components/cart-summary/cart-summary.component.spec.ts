@@ -9,7 +9,9 @@ import {Component, DebugElement} from '@angular/core';
 
 // region Test setup
 const TEST_SUMMARY_TEMPLATE = `
-  <cart-summary [icon]="icon" [totalPlurals]="totalPlurals" [localeFormat]="localeFormat"></cart-summary>
+  <cart-summary [icon]="icon" [localeFormat]="localeFormat"
+  [noItemsText]="noItemsText" [oneItemText]="oneItemText" [manyItemsText]="manyItemsText" >
+  </cart-summary>
 `;
 
 @Component({
@@ -18,7 +20,9 @@ const TEST_SUMMARY_TEMPLATE = `
 })
 class CartTestSummaryComponent {
   icon: string;
-  totalPlurals: { [k: string]: string };
+  noItemsText = 'No items';
+  oneItemText = 'One item';
+  manyItemsText = '# items';
   localeFormat: string;
 }
 
@@ -48,17 +52,6 @@ describe('CartSummaryComponent', () => {
 
       totalCount = fixture.debugElement.query(By.css('.cart-summary-items'));
       totalCost = fixture.debugElement.query(By.css('.cart-summary-cost'));
-    });
-
-    it('should contain default values for plurals', () => {
-      fixture.detectChanges();
-      expect(component).toBeTruthy();
-      const pluralKeys = Object.keys(component.summaryPlurals);
-      expect(pluralKeys.length).toBeGreaterThanOrEqual(3);
-      const emptyPlural = pluralKeys.find(k => k === '=0');
-      expect(emptyPlural).toBeTruthy();
-      const fallBackPlural = pluralKeys.filter(k => !k.startsWith('='));
-      expect(fallBackPlural.length).toEqual(1);
     });
 
     it('should be created with an svg icon an a total amount of 0', () => {
@@ -97,62 +90,52 @@ describe('CartSummaryComponent', () => {
     });
   });
 
-
-  describe('Plural assignment', () => {
+  describe('Items text', () => {
     let component: CartTestSummaryComponent;
     let fixture: ComponentFixture<CartTestSummaryComponent>;
+    let service: CartService<BaseCartItem>;
 
     beforeEach(() => {
       fixture = TestBed.createComponent(CartTestSummaryComponent);
       component = fixture.componentInstance;
+      service = TestBed.get(CartService);
+      service.clear();
     });
 
-    it('should set the default plurals value if the binding is not set', () => {
+    it('should set the correct text value when there are no items in the cart', () => {
       fixture.detectChanges();
-      const summaryElement = fixture.debugElement.query(By.css('cart-summary'));
-      expect(summaryElement).toBeTruthy();
-      const instance = summaryElement.componentInstance;
-      expect(instance.summaryPlurals).toBeTruthy();
-      expect(instance.summaryPlurals).toEqual(instance._defaultPlurals);
+      const summaryText = fixture.debugElement.query(By.css('.cart-summary-items'));
+      component.noItemsText = 'Zero items';
+      fixture.detectChanges();
+      expect(summaryText.nativeElement.innerText).toEqual('Zero items');
+      component.noItemsText = '# items';
+      fixture.detectChanges();
+      expect(summaryText.nativeElement.innerText).toEqual('0 items');
     });
 
-    it('should set the default plurals if a value is not provided', () => {
-      component.totalPlurals = null;
+    it('should set the correct text value when there is only one item in the cart', () => {
+      service.addItem(new BaseCartItem({id: 1, name: 'Test', price: 1, quantity: 1}));
       fixture.detectChanges();
-      const summaryElement = fixture.debugElement.query(By.css('cart-summary'));
-      expect(summaryElement).toBeTruthy();
-      const instance = summaryElement.componentInstance;
-      expect(instance.summaryPlurals).toBeTruthy();
-      expect(instance.summaryPlurals).toEqual(instance._defaultPlurals);
+      const summaryText = fixture.debugElement.query(By.css('.cart-summary-items'));
+      component.oneItemText = 'Only one item';
+      fixture.detectChanges();
+      expect(summaryText.nativeElement.innerText).toEqual('Only one item');
+      component.oneItemText = '# items';
+      fixture.detectChanges();
+      expect(summaryText.nativeElement.innerText).toEqual('1 items');
     });
 
-    it('should set update the plurals value to the provided value or the default', () => {
-      const plurals = {'=0': 'Empty', 'other': '# items'};
-      component.totalPlurals = plurals;
+    it('should set the correct text value when there are multiple items in the cart', () => {
+      service.addItem(new BaseCartItem({id: 1, name: 'Test', price: 1, quantity: 1}));
+      service.addItem(new BaseCartItem({id: 2, name: 'Test 2', price: 1, quantity: 1}));
       fixture.detectChanges();
-      const summaryElement = fixture.debugElement.query(By.css('cart-summary'));
-      const instance = summaryElement.componentInstance;
-      expect(instance.summaryPlurals).toBeTruthy();
-      expect(instance.summaryPlurals).not.toEqual(instance._defaultPlurals);
-      expect(instance.summaryPlurals).toEqual(plurals);
-      component.totalPlurals = null;
+      const summaryText = fixture.debugElement.query(By.css('.cart-summary-items'));
+      component.manyItemsText = 'Many items';
       fixture.detectChanges();
-      expect(instance.summaryPlurals).toEqual(instance._defaultPlurals);
-      expect(instance.summaryPlurals).not.toEqual(plurals);
-    });
-
-    it('should not update the plurals when other bindings are set and the plurals are not modified', () => {
-      const plurals = {'=0': 'Empty', 'other': '# items'};
-      component.totalPlurals = plurals;
+      expect(summaryText.nativeElement.innerText).toEqual('Many items');
+      component.manyItemsText = '# items';
       fixture.detectChanges();
-      const summaryElement = fixture.debugElement.query(By.css('cart-summary'));
-      const instance = summaryElement.componentInstance;
-      expect(instance.summaryPlurals).toBeTruthy();
-      expect(instance.summaryPlurals).not.toEqual(instance._defaultPlurals);
-      expect(instance.summaryPlurals).toEqual(plurals);
-      component.icon = 'http://fakeurl.com';
-      fixture.detectChanges();
-      expect(instance.summaryPlurals).toEqual(plurals);
+      expect(summaryText.nativeElement.innerText).toEqual('2 items');
     });
   });
 

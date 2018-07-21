@@ -10,9 +10,11 @@
     <img *ngIf="icon" [src]="icon" class="summary-icon" alt="cart-summary-icon">
   </div>
   <div class="cart-summary-contents">
-    <div class="cart-summary-items">{{totalItems | i18nPlural: summaryPlurals}}</div>
+    <div class="cart-summary-items">
+      {{itemsText}}
+    </div>
     <div class="cart-summary-cost">
-      {{totalCost | currency:format.currencyCode:format.symbolDisplay:format.digitsInfo:format.locale}}
+      {{totalCost | currency:format.currencyCode:format.display:format.digitsInfo:format.locale}}
     </div>
   </div>
 </div>

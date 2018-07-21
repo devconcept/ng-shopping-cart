@@ -19,7 +19,9 @@ The `CartItem` class is an *abstract class* with 6 *abstract methods* that you m
 
 Ids are compared using strict equality so make sure you use the same data type for all of them and use only primitive values. 
 
-> Using objects as ids might have undesirable side effects.
+<blockquote class="note danger">
+Using objects as ids might have undesirable side effects.
+</blockquote>
 
 #### Default `CartItem`
 

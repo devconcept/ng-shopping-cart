@@ -180,7 +180,7 @@ describe('MemoryCartService', () => {
       service.setLocaleFormat('auto:auto:auto:auto:auto');
     };
     const invalidFormatErr = 'Invalid format for currency.' +
-      ' Expected a value in the form currencyCode:symbolDisplay:digitsInfo:locale anf got auto:auto:auto:auto:auto';
+      ' Expected a value in the form currencyCode:display:digitsInfo:locale and got auto:auto:auto:auto:auto';
 
 
     expect(testFn1).toThrowError(emptyFormatErr);

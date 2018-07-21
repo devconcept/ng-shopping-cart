@@ -138,6 +138,8 @@ export abstract class CartService<T extends CartItem> {
 
   /**
    * Returns the currency format as set with `setCurrencyFormat` or `'auto'` if no value is set.
+   *
+   * Passing true as parameter will return an object instead of a string.
    */
   public getLocaleFormat(object: boolean = false): string | LocaleFormat {
     return object ? this.localeFormat : this.format;
