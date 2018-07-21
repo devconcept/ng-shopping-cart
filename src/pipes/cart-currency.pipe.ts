@@ -6,7 +6,7 @@ import {parseLocaleFormat} from '../locales';
  * A pipe that wraps the `CurrencyPipe` to set currency value display using a string rather than several arguments for easy configuration.
  *
  * @summary
- * It takes a string as a single parameter in the format `'currencyCode:symbolDisplay:digitsInfo:locale'`. You can also use the special
+ * It takes a string as a single parameter in the format `'currencyCode:symbol:digitsInfo:locale'`. You can also use the special
  * value `'auto'` which will set the default used by Angular in that specific configuration.
  *
  * Every configuration is optional and not using any arguments or an argument of `'auto'`is equivalent to how the `CurrencyPipe` works by

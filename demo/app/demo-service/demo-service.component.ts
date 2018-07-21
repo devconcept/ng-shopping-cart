@@ -13,8 +13,8 @@ export class DemoServiceComponent implements OnInit {
   shipping = 0;
   currency = 'auto';
   currencies = ['auto', 'USD', 'EUR', 'CAD'];
-  symbolDisplay = 'auto';
-  symbolsDisplay = ['auto', 'code', 'symbol', 'symbol-narrow'];
+  symbol = 'auto';
+  symbols = ['auto', 'code', 'symbol', 'symbol-narrow'];
   digitInfo = 'auto';
   digitsInfo = ['auto', '2.1-3', '5.0-0', '2.5-7'];
   locale = 'auto';
@@ -47,7 +47,7 @@ export class DemoServiceComponent implements OnInit {
       }
       return;
     }
-    this.format = this.currency + ':' + this.symbolDisplay + ':' + this.digitInfo + ':' + this.locale;
+    this.format = this.currency + ':' + this.symbol + ':' + this.digitInfo + ':' + this.locale;
     this.cartService.setLocaleFormat(this.format);
     this.cartService.setShipping(shipping);
     this.shipping = this.cartService.getShipping();
