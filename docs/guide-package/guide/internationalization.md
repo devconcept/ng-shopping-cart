@@ -47,10 +47,10 @@ Running this command would yield a file like this
 Using different words or a non-English initial language is possible too with this technique. This example uses French as the default language for your translators.
 
 ```html
-<add-to-cart buttonText="Add to cart" i18n-buttonText></add-to-cart>
+<add-to-cart buttonText="Ajouter au panier" i18n-buttonText></add-to-cart>
 ```
 
-After you translate all text nodes and merge the translation file your app will display the target language of your choice and all the library components will update too to display text using that language.
+After you translated all text nodes and merged the translation file following the steps provided in the [internationalization guide](https://angular.io/guide/i18n) your app will display the target language of your choice and all the library components will update too to display text using that language.
 
 
 

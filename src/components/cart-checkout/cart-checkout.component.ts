@@ -158,7 +158,7 @@ export class CartCheckoutComponent implements OnChanges, OnInit, OnDestroy {
     if (currencyCode.length === 3) {
       return currencyCode;
     }
-    // Angular <= 6 return "US Dollar" instead of "USD" so we have to hack the code using the currency pipe
+    // Angular < 6 return "US Dollar" instead of "USD" so we have to hack the code using the currency pipe
     // You will also get USD on locales where you should get EUR so for those versions currencyCode must be used
     const fmt = new CurrencyPipe(locale);
     const val = fmt.transform(0, undefined, 'code', '1.0-0', locale);

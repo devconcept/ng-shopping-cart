@@ -3,7 +3,7 @@
  */
 export interface CartChangeEvent {
   /**
-   * The cart element where the change took place
+   * The location where the change took place
    */
   change: 'items' | 'taxRate' | 'shipping' | 'format';
   /**
