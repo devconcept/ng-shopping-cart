@@ -1,0 +1,323 @@
+[
+  {
+  "name": "<add-to-cart>",
+  "type": "Component",
+  "description": "A component to add items to the cart by pressing a button. Has different built-in editors to select quantity.\n",
+  "path": "/api/components/add-to-cart-component",
+  "source": [
+    "add-to-cart-component",
+    "a component to add items to the cart by pressing a button. has different built-in editors to select quantity.\n",
+    "containerclass  haseditor  horizontaleditor  editorprecedence  custom if `false` displays a default button provided by the component, otherwise projects the contents of the component to be used as a\nbutton. item the item that will be added to the cart on click. if no item is provided the button will be disabled unless you use custom buttons.\n\nif you specify an editor using the type input the quantity of the item might be modified prior to insertion in the service. buttontext changes the default text of the component's button. buttonclass changes the default css class of the component's button. type renders a button or a button with an editor to select the quantity of the item that will be added in the cart. when it has a value\nother than `'button'` an editor is displayed depending on the selected `[type]`; it can be a `select`, or a text or a number `input`.\n\n> do not confuse this input with the html attribute `type`. the default button is always generated with this attribute set to\n`button` to prevent accidental form submissions. position sets the position where the editor will be placed. if the `[type]` is set to `'button'` no editor is displayed and this setting has\nno effect. dropdown if `[type]` is set to `'dropdown'` it can be used to set the options of the rendered `select` editor. is an array of objects with\nlabel and a value properties used to populate the select's `option` elements. quantity if you use this binding you can easily override the quantity that will be added to the cart when the button is clicked.\n\n> when the `[type]` is **not** set to `'button'` this binding is ignored and the value from the editor is used instead. change this event is fired when the component uses an editor and its value is changed by the user. added this event is fired when the item is added to the cart. editorquantity  ngoninit  ngonchanges  addtocart  computeclass "
+  ]
+},{
+  "name": "<cart-checkout>",
+  "type": "Component",
+  "description": "Renders a button to initiate checkout of the cart.\n",
+  "path": "/api/components/cart-checkout-component",
+  "source": [
+    "cart-checkout-component",
+    "renders a button to initiate checkout of the cart.\n",
+    "empty  cost  taxrate  shipping  httpsettings  paypalsettings  format  currency  paypallocale  custom if `false` displays a default button provided by the component. when set to `true` projects the contents of the component. buttontext changes the default text of the component's button. buttonclass changes the default text of the component's button. service sets the type of service to be used when initiating the checkout. settings depending on the type of the service you might need to add some configuration to it. this input allows you to change that\nconfiguration. localeformat changes currency display format for the component. overrides the value set from the service using `setcurrencyformat`. checkout emits the result of the checkout operation. if the service is set to `'log'` it emits the entire cart object including tax rates and\nshipping info. if is set to `'http'` it emits an `httpresponse` object with body, headers, etc as it was received by the remote server.\n\n> when `[service]` is set to `'paypal'` this event is never emitted. error when the `[service]` is set to `'http'` and the checkout operation fails the thrown error can be captured using this output.\n\nthe emitted value is the complete `httperrorresponse` object returned by `httpclient` so you can inspect other properties like status\ncodes, headers, messages, etc. ngoninit  docheckout  ngonchanges  ngondestroy "
+  ]
+},{
+  "name": "<cart-showcase-item>",
+  "type": "Component",
+  "description": "The default implementation of a showcase item.\n",
+  "path": "/api/components/cart-showcase-item-component",
+  "source": [
+    "cart-showcase-item-component",
+    "the default implementation of a showcase item.\n",
+    "item inherited from the interface `showcaseitem` format inherited from the interface `showcaseitem`"
+  ]
+},{
+  "name": "<cart-showcase>",
+  "type": "Component",
+  "description": "Renders items arranged in columns using a dynamic component for the item. Useful for getting started with e-commerce applications.\n",
+  "path": "/api/components/cart-showcase-component",
+  "source": [
+    "cart-showcase-component",
+    "renders items arranged in columns using a dynamic component for the item. useful for getting started with e-commerce applications.\n",
+    "format  xsclass  sclass  mclass  lclass  xlclass  ratioclass  xscols the number of columns to display when the screen size matches phone devices. scols the number of columns to display when the screen matches tablet devices. mcols the number of columns to display when the screen matches desktop devices. lcols the number of columns to display when the screen matches large desktop devices. xlcols the number of columns to display when the screen matches extra large desktop devices. columns the number of columns in the grid.\nonly update this value if you changed the columns sass variable in the library styles following the styling guide. items an array of items to display itemcomponent the component to render for each item. this type means any component that implements the interface `showcaseitem`. injector optional injector for the dynamic item components. used when you want to replace the default inherited injector for the component. modulefactory optional module factory for the dynamic components. you usually get one when you manually compile modules. aspectratio the aspect ratio of the container of the items. a value of `1:1` means square items, `2:1` means two times wider, `1:2` two times\ntaller and so on. localeformat changes currency display format for the component. overrides the value set from the service using `setlocaleformat`. ngonchanges  ngoninit  ngondestroy "
+  ]
+},{
+  "name": "<cart-summary>",
+  "type": "Component",
+  "description": "Renders a summary of the contents of the cart.\n",
+  "path": "/api/components/cart-summary-component",
+  "source": [
+    "cart-summary-component",
+    "renders a summary of the contents of the cart.\n",
+    "icon the url of an icon to show on the summary. use this to replace the default icon which is an svg with the image of a shopping cart.\n\nto use the default icon when you are using the `[icon]` input just set it to a falsy value, eg: `null`, `undefined`, `''`, etc. noitemstext the text to display when there are no items in the cart. oneitemtext the text to display when there is only one item in the cart. manyitemstext the text to display when there are several items in the cart. localeformat changes currency display format for the component. overrides the value set from the service using `setcurrencyformat`. itemstext  totalitems  totalcost  format  ngoninit  ngonchanges  ngondestroy "
+  ]
+},{
+  "name": "<cart-view>",
+  "type": "Component",
+  "description": "Renders a view of the cart.\n",
+  "path": "/api/components/cart-view-component",
+  "source": [
+    "cart-view-component",
+    "renders a view of the cart.\n",
+    "display changes the appearance how the cart view displays in different screen sizes images whether to include images in the cart or not. emptytext the text to show when the cart has no items in it. customemptycontent when set to `true` and the cart is empty displays the projected content of the component as the empty content. nameheadertext the text to display in the header of the name column. quantityheadertext the text to display in the header of the quantity column. priceheadertext the text to display in the header of the price column. totalheadertext the text to display in the header of the total per item column. taxfootertext the text to display in the tax section of the footer. shippingfootertext the text to display in the shipping section of the footer. totalfootertext the text to display in the total section of the footer. localeformat changes currency display format for the component. overrides the value set from the service using `setcurrencyformat`. format  empty  items  taxrate  tax  shipping  cost  update  increase  decrease  ngoninit  ngonchanges  ngondestroy "
+  ]
+},{
+  "name": "browser-storage-cart-service",
+  "type": "Service",
+  "description": "The base class for all CartService implementations that use the Storage interface of the Web Storage API like LocalStorage and\nSessionStorage.",
+  "path": "/api/services/browser-storage-cart-service",
+  "source": [
+    "browser-storage-cart-service",
+    "the base class for all cartservice implementations that use the storage interface of the web storage api like localstorage and\nsessionstorage.",
+    "itemclass  storage  storagekey  clearonerror  save  restore  additem  removeitem  clear  setshipping  settaxrate "
+  ]
+},{
+  "name": "cart-service",
+  "type": "Service",
+  "description": "The base class for storing items in your cart\n",
+  "path": "/api/services/cart-service",
+  "source": [
+    "cart-service",
+    "the base class for storing items in your cart\n",
+    "onchange emits an event every time items, tax, shipping cost or currency formats are changed in the cart. onitemadded emits an event every time an item is added to the cart. onitemremoved emits an event every time an item is removed from the cart.\n\n> this event only fires when a single item is removed by id. if you want to be notified of any removal (eg: clearing the cart) listen\nto the `onchange` or the `onitemschanged` event instead. onitemschanged emits an event every time an item is added or removed from the cart. ontaxchange emits an event every time taxes for the cart are changed. onshippingchange emits an event every time shipping costs for the cart are changed. getitem finds an item by id getitems gets all the items in the cart. additem add a new item to the cart. removeitem remove an item from the cart by id. itemcount returns the number of unique items in the cart. entries returns the number of items including each item's quantity. cost returns the total cost of the shopping cart without shipping and taxes. clear removes all items from the cart. isempty returns if the carts has any items in it. getshipping returns the shipping cost of the shopping cart. setshipping sets the shipping cost of the shopping cart. gettaxrate returns the tax rate of the shopping cart. settaxrate sets the tax rate of the shopping cart. gettax returns the tax computation of the shopping cart. totalcost returns the total cost of the shopping cart including shipping and taxes. setlocaleformat changes the currency symbol and number format for all components associated to this service instance.\n\ncheck the angular `currencypipe` and the internationalization guide for more info. getlocaleformat returns the currency format as set with `setcurrencyformat` or `'auto'` if no value is set.\n\npassing true as parameter will return an object instead of a string. toobject returns an object with all the cart information in it, useful for serialization of the cart."
+  ]
+},{
+  "name": "CART_ITEM_CLASS",
+  "type": "Injection token",
+  "description": "An injection token to resolve the class used to create CartItem instances",
+  "path": "/api/tokens/cart-item-class",
+  "source": [
+    "cart-item-class",
+    "an injection token to resolve the class used to create cartitem instances",
+    ""
+  ]
+},{
+  "name": "local-storage-cart-service",
+  "type": "Service",
+  "description": "An implementation of the cart service using localStorage to store items",
+  "path": "/api/services/local-storage-cart-service",
+  "source": [
+    "local-storage-cart-service",
+    "an implementation of the cart service using localstorage to store items",
+    ""
+  ]
+},{
+  "name": "memory-cart-service",
+  "type": "Service",
+  "description": "An implementation of the CartService using an in-memory array to store items",
+  "path": "/api/services/memory-cart-service",
+  "source": [
+    "memory-cart-service",
+    "an implementation of the cartservice using an in-memory array to store items",
+    "_items  _taxrate  _shipping  _additem  _removeitem  getitem  getitems  itemcount  entries  additem  removeitem  cost  clear  getshipping  setshipping  gettaxrate  settaxrate  isempty "
+  ]
+},{
+  "name": "CART_SERVICE_CONFIGURATION",
+  "type": "Injection token",
+  "description": "An injection token to resolve the configuration of the cart service",
+  "path": "/api/tokens/cart-service-configuration",
+  "source": [
+    "cart-service-configuration",
+    "an injection token to resolve the configuration of the cart service",
+    ""
+  ]
+},{
+  "name": "session-storage-cart-service",
+  "type": "Service",
+  "description": "An implementation of the cart service using sessionStorage to store items",
+  "path": "/api/services/session-storage-cart-service",
+  "source": [
+    "session-storage-cart-service",
+    "an implementation of the cart service using sessionstorage to store items",
+    ""
+  ]
+},{
+  "name": "cart-currency-pipe",
+  "type": "Pipe",
+  "description": "A pipe that wraps the `CurrencyPipe` to set currency value display using a string rather than several arguments for easy configuration.\n",
+  "path": "/api/pipes/cart-currency-pipe",
+  "source": [
+    "cart-currency-pipe",
+    "a pipe that wraps the `currencypipe` to set currency value display using a string rather than several arguments for easy configuration.\n",
+    "transform "
+  ]
+},{
+  "name": "base-cart-item",
+  "type": "Class",
+  "description": "A default implementation for CartItem\n",
+  "path": "/api/classes/base-cart-item",
+  "source": [
+    "base-cart-item",
+    "a default implementation for cartitem\n",
+    "id the id of the item name the name of the item price the price of the item image the url of an image for the item quantity the ordered quantity of the item data any additional data you want to include in the item getid abstract base method implementation to obtain the item id setid sets the current id for the item getname abstract base method implementation to return the name, a small text describing the item setname sets the name of the item getprice abstract base method implementation to know how much the item cost setprice set the price of the item getquantity abstract base method implementation to return how much of the item is ordered setquantity abstract base method implementation to set how much of the item is ordered getimage abstract base method implementation to get the url of an image for the item setimage sets the url of the item's image getdata gets any additional data added to the item setdata sets any additional data to the item"
+  ]
+},{
+  "name": "cart-item",
+  "type": "Abstract class",
+  "description": "The base class for every unit of information stored in the cart service",
+  "path": "/api/classes/cart-item",
+  "source": [
+    "cart-item",
+    "the base class for every unit of information stored in the cart service",
+    "getid returns an unique identifier for your item getname returns the name, a small text describing the item getprice return how much a single unit of the item costs setquantity sets how much of this item is ordered getquantity returns how much of this item is ordered getimage returns the url of an image for the item total return the total cost of the item, that is the price multiplied by the quantity"
+  ]
+},{
+  "name": "browser-storage-service-configuration",
+  "type": "Interface",
+  "description": "The configuration for all CartService implementations that use the browser storage.",
+  "path": "/api/interfaces/browser-storage-service-configuration",
+  "source": [
+    "browser-storage-service-configuration",
+    "the configuration for all cartservice implementations that use the browser storage.",
+    ""
+  ]
+},{
+  "name": "cart-change-event",
+  "type": "Interface",
+  "description": "An interface for the event emitted in the `onChange` emitter.",
+  "path": "/api/interfaces/cart-change-event",
+  "source": [
+    "cart-change-event",
+    "an interface for the event emitted in the `onchange` emitter.",
+    ""
+  ]
+},{
+  "name": "cart-module-options",
+  "type": "Interface",
+  "description": "Configuration options for the NgShoppingCart module in the root module of your application.",
+  "path": "/api/interfaces/cart-module-options",
+  "source": [
+    "cart-module-options",
+    "configuration options for the ngshoppingcart module in the root module of your application.",
+    ""
+  ]
+},{
+  "name": "checkout-http-settings",
+  "type": "Interface",
+  "description": "",
+  "path": "/api/interfaces/checkout-http-settings",
+  "source": [
+    "checkout-http-settings",
+    "",
+    ""
+  ]
+},{
+  "name": "checkout-paypal-settings",
+  "type": "Interface",
+  "description": "The configuration for the checkout operation if the service is set to Paypal",
+  "path": "/api/interfaces/checkout-paypal-settings",
+  "source": [
+    "checkout-paypal-settings",
+    "the configuration for the checkout operation if the service is set to paypal",
+    ""
+  ]
+},{
+  "name": "dropdown-value",
+  "type": "Interface",
+  "description": "An interface to render option elements inside the select in the AddToCart dropdown editor.",
+  "path": "/api/interfaces/dropdown-value",
+  "source": [
+    "dropdown-value",
+    "an interface to render option elements inside the select in the addtocart dropdown editor.",
+    ""
+  ]
+},{
+  "name": "http-options",
+  "type": "Interface",
+  "description": "Angular Http init options for an HTTP request",
+  "path": "/api/interfaces/http-options",
+  "source": [
+    "http-options",
+    "angular http init options for an http request",
+    ""
+  ]
+},{
+  "name": "locale-format",
+  "type": "Interface",
+  "description": "The format used to display currencies as an object equivalent to the `CurrencyPipe` arguments.",
+  "path": "/api/interfaces/locale-format",
+  "source": [
+    "locale-format",
+    "the format used to display currencies as an object equivalent to the `currencypipe` arguments.",
+    ""
+  ]
+},{
+  "name": "showcase-item",
+  "type": "Interface",
+  "description": "An interface that all `CartShowcase` item components must implement to interop with the `cart-showcase` component.\n\nFor each item a new component is generated dynamically.",
+  "path": "/api/interfaces/showcase-item",
+  "source": [
+    "showcase-item",
+    "an interface that all `cartshowcase` item components must implement to interop with the `cart-showcase` component.\n\nfor each item a new component is generated dynamically.",
+    ""
+  ]
+},{
+  "name": "add-to-cart-type",
+  "type": "Type",
+  "description": "The editor to render in the add to cart component",
+  "path": "/api/types/add-to-cart-type",
+  "source": [
+    "add-to-cart-type",
+    "the editor to render in the add to cart component",
+    ""
+  ]
+},{
+  "name": "add-to-cart-position",
+  "type": "Type",
+  "description": "The position where to place the editor if present",
+  "path": "/api/types/add-to-cart-position",
+  "source": [
+    "add-to-cart-position",
+    "the position where to place the editor if present",
+    ""
+  ]
+},{
+  "name": "cart-view-display",
+  "type": "Type",
+  "description": "The used layout to render the cart-view component",
+  "path": "/api/types/cart-view-display",
+  "source": [
+    "cart-view-display",
+    "the used layout to render the cart-view component",
+    ""
+  ]
+},{
+  "name": "checkout-type",
+  "type": "Type",
+  "description": "The service to use when starting the checkout operation",
+  "path": "/api/types/checkout-type",
+  "source": [
+    "checkout-type",
+    "the service to use when starting the checkout operation",
+    ""
+  ]
+},{
+  "name": "checkout-settings",
+  "type": "Type",
+  "description": "The checkout configuration",
+  "path": "/api/types/checkout-settings",
+  "source": [
+    "checkout-settings",
+    "the checkout configuration",
+    ""
+  ]
+},{
+  "name": "cart-module-service-type",
+  "type": "Type",
+  "description": "The CartService implementation used to store items",
+  "path": "/api/types/cart-module-service-type",
+  "source": [
+    "cart-module-service-type",
+    "the cartservice implementation used to store items",
+    ""
+  ]
+},{
+  "name": "shopping-cart-module",
+  "type": "Module",
+  "description": "The main exported library module. It includes `forRoot` and `forChild` static methods to support angular feature modules and singleton\nservices.\n",
+  "path": "/api/modules/shopping-cart-module",
+  "source": [
+    "shopping-cart-module",
+    "the main exported library module. it includes `forroot` and `forchild` static methods to support angular feature modules and singleton\nservices.\n",
+    ""
+  ]
+}
+]
